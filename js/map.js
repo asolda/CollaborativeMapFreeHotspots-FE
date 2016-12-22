@@ -191,6 +191,21 @@ function deleteMarkers() {
 
 function loadMarkers() {
 
+//funzione per caricare i markers da be
+/*
+$.ajax({
+    type: 'GET',
+    url: 'http://127.0.0.1:8081/user/',
+    success: function(data) {
+      var markers = jQuery.parseJSON(data);
+      
+    },
+    error: function(xhr, status, error) {
+      console.log('Error: ' + error.message);
+    }
+  });
+  */
+  //fine funzione per caricare i markers da be
   var image = 'http://marcoaprea.altervista.org/Goopher/golang-logo2.png';
   var markers = {
     mark1: {
