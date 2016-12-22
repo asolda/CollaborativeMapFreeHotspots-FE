@@ -1,12 +1,26 @@
-/* La pagina riempe la finestra */
+/** Indice 
+    1.Regole Generali;
+    2.Drawer & Menu;
+**/
 
+/** 1.Regole Generali **/
 html,
 body {
   margin: 0;
   padding: 0;
 }
 
+/** 2. Drawer & Menu **/
+#logged-user-navigation .mdl-navigation__link{ /** Seleziona le voci del menu **/
+    padding-left: 10px !important; 
+    padding-top: 10px !important;  
+    padding-bottom: 10px !important; /** Le tre regole sovrascrivono quelle di mdl, modificando il padding delle voci **/
+}
+#logged-user-navigation a i{ /** Seleziona le icone delle voci del menu **/
+    padding-right: 10px; /** Padding tra l'icona e il testo della voce del menu **/
+}
 
+/** Mappa **/
 #map {
     height: 100%;
     position: static !important;

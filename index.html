@@ -29,15 +29,17 @@
               </nav>
             </div>
           </header>
-          <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Title</span>
-            <nav class="mdl-navigation">
-              <a class="mdl-navigation__link" href="">Link</a>
-              <a class="mdl-navigation__link" href="">Link</a>
-              <a class="mdl-navigation__link" href="">Link</a>
-              <a class="mdl-navigation__link" href="">Link</a>
+            <!-- Solo l'utente loggato visualizza il menu -->
+          <div id="logged-user-drawer" class="mdl-layout__drawer">
+            <span class="mdl-layout-title">AlwaysConnected</span>
+            <nav id="logged-user-navigation" class="mdl-navigation">
+              <a class="mdl-navigation__link" href=""><i class="material-icons">wifi</i>Le mie reti</a>
+              <a class="mdl-navigation__link" href=""><i class="material-icons">notifications</i>Notifiche</a>
+              <a class="mdl-navigation__link" href=""><i class="material-icons">vpn_key</i>Modifica Password</a>
+              <a class="mdl-navigation__link" href=""><i class="material-icons">delete</i>Elimina Account</a>
             </nav>
           </div>
+            <!-- Contenuto della pagina -->
           <main class="mdl-layout__content">
             <div class="page-content">
                 <div id="map"></div>
