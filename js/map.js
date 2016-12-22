@@ -16,9 +16,10 @@ function initMap() {
 
   //var myLatLng = {lat: 41.060816, lng: 14.334157};
 
-
+    //inizializzazione della mappa, con parametri di configurazione stile, zoom e centro
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16,
+    styles: [{featureType:"road",elementType:"geometry",stylers:[{lightness:100},{visibility:"simplified"}]},{"featureType":"water","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#C6E2FF",}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"color":"#C5E3BF"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#D1D1B8"}]}],
     center: {
       lat: 42.516122,
       lng: 12.513889
