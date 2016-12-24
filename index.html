@@ -2,12 +2,20 @@
 
 <html>
     <head>
-        <!— Material Design —>
+        <meta charset="utf-8">
+        <!-- OpenGraph -->
+        <meta property="og:title" content="AlwaysConnected" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="" />
+        <!-- Meta tag -->
+        <title>AlwaysConnected</title>
+        <meta name="description" content="">
+        <!-- Material Design -->
         <link rel="stylesheet" href="assets/material.min.css">
         <script src="assets/material.min.js"></script>
         <script type="text/javascript" src="js/map.js"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/> 
     </head>
     <body>
         
@@ -21,8 +29,8 @@
               <div class="mdl-layout-spacer"></div>
               <!-- Navigation. We hide it in small screens. -->
               <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="">Accedi</a>
-                <a class="mdl-navigation__link" href="">Registrati</a>
+                <a id="show-login" class="mdl-navigation__link" href="#">Accedi</a>
+                <a id="show-signup" class="mdl-navigation__link" href="#">Registrati</a>
               </nav>
             </div>
           </header>
@@ -43,8 +51,7 @@
             </div>
           </main>
         </div>
-        
-        
+    
         <!-- Snackbar component -->        
         <div class="mdl-js-snackbar mdl-snackbar">
           <div class="mdl-snackbar__text"></div>
@@ -53,5 +60,14 @@
         
         <!-- carica script mappa -->
          <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHsz36Bfu65nOK4F9cnpZv8m--nmi2NcQ&callback=initMap"></script>
+        <!-- carica jquery -->
+        <script src="assets/jquery-3.1.1.min.js"></script>
+        <script src="js/main.js"></script>
+    
+        
+        <script>
+            notLoggedModal();
+        </script>
+
     </body>
 </html>
