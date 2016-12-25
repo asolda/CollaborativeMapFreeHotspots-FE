@@ -34,7 +34,6 @@
               </nav>
             </div>
           </header>
-            <!-- Solo l'utente loggato visualizza il menu -->
           <div id="logged-user-drawer" class="mdl-layout__drawer">
             <span class="mdl-layout-title">AlwaysConnected</span>
             <nav id="logged-user-navigation" class="mdl-navigation">
@@ -43,7 +42,7 @@
               <a class="mdl-navigation__link" href=""><i class="material-icons">vpn_key</i>Modifica Password</a>
               <a class="mdl-navigation__link" href=""><i class="material-icons">delete</i>Elimina Account</a>
             </nav>
-          </div>
+          </div> 
             <!-- Contenuto della pagina -->
           <main class="mdl-layout__content">
             <div class="page-content">
@@ -58,15 +57,24 @@
           <button class="mdl-snackbar__action" type="button"></button>
         </div>
         
+
+
+        
+
+
+
+
+        
+
+        
         <!-- carica script mappa -->
          <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHsz36Bfu65nOK4F9cnpZv8m--nmi2NcQ&callback=initMap"></script>
-        <!-- carica jquery -->
-        <script src="assets/jquery-3.1.1.min.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/notlogged.js"></script>
     
         
         <script>
-            notLoggedModal();
+            //Initialize notLoggedUser
+            notLoggedModal()
         </script>
 
     </body>
