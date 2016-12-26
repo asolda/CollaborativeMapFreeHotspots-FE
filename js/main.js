@@ -1,4 +1,50 @@
-function notLoggedModal(){
+/** Funzione di inizializzazione della pagina per visitatori **/
+function createNotLoggedHome(){
+    //setta l'id all'header
+    $('.mdl-layout__header-row').attr('id','notlogged-header');
+    
+    //costruisce il menu
+    menu = '<nav id="notlogged-menu" class="mdl-navigation">' +
+        '<a id="show-login" class="mdl-navigation__link" href="#">Accedi</a>' +
+        '<a id="show-signup" class="mdl-navigation__link" href="#">Registrati</a>' +
+        '</nav>';
+    
+    //lo aggiunge alla pagina
+    $('.mdl-layout__header-row').append(menu);
+    
+    addNotLoggedModal(); //aggiunge i modali alla pagina
+    
+} //./createNotLoggedHome
+
+
+/** Funzione di inizializzazione della pagina per utenti connessi **/
+function createLoggedHome(){
+    hello = '<span>Ciao, alberto. <a href="#">Esci</a></span>'
+    
+    $('.mdl-layout__header-row').append(hello);
+    
+    menu = '<div id="user-drawer" class="mdl-layout__drawer">' +
+        '<span class="mdl-layout-title">AlwaysConnected</span>' +
+        '<nav id="logged-user-navigation" class="mdl-navigation">' +
+        '<a class="mdl-navigation__link" href=""><i class="material-icons">wifi</i>Le mie reti</a>' +
+        '<a class="mdl-navigation__link" href=""><i class="material-icons">notifications</i><span class="mdl-badge" data-badge="2">Notifiche</span></a>'+
+        '<a class="mdl-navigation__link" href=""><i class="material-icons">vpn_key</i>Modifica Password</a>' +
+        '<a class="mdl-navigation__link" href=""><i class="material-icons">delete</i>Elimina Account</a>' +
+        '</nav>' +
+        '</div>';
+    
+    //aggiunge il menù alla pagina
+    $('.mdl-layout__header').after(menu);
+                          
+          
+} //./createLoggedModal
+
+/** Inizializza i modali di un utente non connesso 
+    +Login
+    +Recupera password 
+    +Registrati
+**/
+function addNotLoggedModal(){
     
     var signup, login, recover;
     
@@ -98,3 +144,4 @@ function notLoggedModal(){
 
     
 } //./notloggedModal
+

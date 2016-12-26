@@ -1,7 +1,9 @@
 /** Indice 
     1.Regole Generali;
-    2.Drawer & Menu;
-    3. Dialog custom style
+    2.Header
+    3.Drawer & Menu;
+    4.Dialog custom style
+    5.Maps
 **/
 
 /** 1.Regole Generali **/
@@ -11,7 +13,16 @@ body {
   padding: 0;
 }
 
-/** 2. Drawer & Menu **/
+/** 2. Header **/
+.mdl-layout__header-row{
+    padding: 0 20px 0 80px !important;
+}
+#notlogged-header{
+    padding: 0 0 0 20px !important;
+} 
+
+
+/** 3. Drawer & Menu **/
 #logged-user-navigation .mdl-navigation__link{ /** Seleziona le voci del menu **/
     padding-left: 10px !important; 
     padding-top: 10px !important;  
@@ -21,9 +32,7 @@ body {
     padding-right: 10px; /** Padding tra l'icona e il testo della voce del menu **/
 }
 
-
-
-/** 3. Dialog custom style **/
+/** 4. Dialog custom style **/
 .mdl-dialog-custom{ /** Stile custom per il componente dialog di mdl **/
     padding: 0 !important;
 }
@@ -52,7 +61,7 @@ form{ /** Elimina il margine a tutti i form **/
     margin: 0px;
 }
 
-/** Mappa **/
+/** 5. Maps **/
 #map {
     height: 100%;
     position: static !important;
