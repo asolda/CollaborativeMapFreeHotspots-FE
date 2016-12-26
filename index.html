@@ -13,6 +13,7 @@
         <!-- Material Design -->
         <link rel="stylesheet" href="assets/material.min.css">
         <script src="assets/material.min.js"></script>
+        <script src="segnalazione.js"></script>
         <script type="text/javascript" src="js/map.js"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/> 
@@ -136,5 +137,12 @@
             createNotLoggedHome();
         </script>
 
+         
+        <script>
+		 $('#invia_segn').click(function(){
+            segnala($('#utente').val(),$('#rete').val(),$('#tipo').val(),$('#dettagli').val());
+          });
+        </script>
+    
     </body>
 </html>
