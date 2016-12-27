@@ -6,10 +6,10 @@ function createNotLoggedHome(){
     
     //costruisce il menu
     menu = '<nav id="notlogged-menu" class="mdl-navigation">' +
-        '<a id="show-login" class="mdl-navigation__link menuHeader" href="#">Accedi</a>' +
-        '<span class="dividerHeader">|</span>' +
-        '<a id="show-signup" class="mdl-navigation__link menuHeader" href="#">Registrati</a>' +
-        '</nav>';
+             '<a id="show-login" class="mdl-navigation__link menuHeader" href="#">Accedi</a>' +
+             '<span class="dividerHeader">|</span>' +
+             '<a id="show-signup" class="mdl-navigation__link menuHeader" href="#">Registrati</a>' +
+           '</nav>';
     
     //lo aggiunge alla pagina
     $('.mdl-layout__header-row').append(menu);
@@ -27,26 +27,33 @@ function createNotLoggedHome(){
 /** Funzione di inizializzazione della pagina per utenti connessi **/
 function createLoggedHome(){
     
-    // Crea la stringa di welcome 
-    hello = '<span class="menuHeader">Ciao, alberto. <a href="#">Esci</a></span>'
+    // Crea il menu con la funzione per uscire
+    hello = '<nav class="mdl-navigation">' +
+              '<a href="#" class="mdl-navigation__link menuHeader">Ciao <span id="name">Utente</span>, esci</a>' +
+            '</nav>'
     
     // Crea il menu 
     menu = '<div id="user-drawer" class="mdl-layout__drawer">' +
-        '<span class="mdl-layout-title">AlwaysConnected</span>' +
-        '<nav id="logged-user-navigation" class="mdl-navigation">' +
-        '<a class="mdl-navigation__link" href=""><i class="material-icons">wifi</i>Le mie reti</a>' +
-        '<a class="mdl-navigation__link" href=""><i class="material-icons">notifications</i><span class="mdl-badge" data-badge="2">Notifiche</span></a>'+
-        '<a id="show-editpassword" class="mdl-navigation__link" href="#"><i class="material-icons">vpn_key</i>Modifica Password</a>' +
-        '<a id="show-deleteaccount" class="mdl-navigation__link" href="#"><i class="material-icons">delete</i>Elimina Account</a>' +
-        '</nav>' +
-        '</div>';
+              '<span class="mdl-layout-title">AlwaysConnected</span>' +
+              '<nav id="logged-user-navigation" class="mdl-navigation">' +
+                '<hr/>' +
+                '<span class="mdl-layout-title subtitle">Gestione account</span>' +
+                '<a class="mdl-navigation__link" href=""><span class="space"/><i class="material-icons">wifi</i><span class="space"/>Le mie reti</a>' +
+                '<a class="mdl-navigation__link" href=""><span class="space"/><i class="material-icons">notifications</i><span class="space"/><span class="mdl-badge" data-badge="2">Notifiche</span></a>'+
+                '<a id="show-editpassword" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">vpn_key</i><span class="space"/>Modifica Password</a>' +
+                '<a id="show-deleteaccount" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">delete</i><span class="space"/>Elimina Account</a>' +
+              '</nav>' +
+           '</div>';
     
     // Crea l'action button per inserire una mappa 
     actionbtn = '<div id="left-actionbtn">'+
-        '<button id="show-addwifi" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">' +
-        '<i class="material-icons">add</i>'+
-        '</button>'+
-        ' </div>';
+                  '<button id="show-addwifi" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">' +
+                    '<i class="material-icons">add</i>'+
+                  '</button>'+
+                  '<div class="mdl-tooltip mdl-tooltip--left mdl-tooltip--large" data-mdl-for="show-addwifi">' +
+                    'Inserisci nuova rete WiFi' +
+                  '</div>' +
+                '</div>';
 
     
     /** Aggiunge le 3 componenti prima create:

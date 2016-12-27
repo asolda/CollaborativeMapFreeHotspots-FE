@@ -46,6 +46,16 @@ html, body {
     padding-right: 10px; /** Padding tra l'icona e il testo della voce del menu */
 }
 
+
+.mdl-layout-title.subtitle {
+  font-size: medium;
+  padding: 0px 0px 15px 28px;
+}
+
+.space {
+  margin : 8px;
+}
+
 .menuHeader {
   color: #C5CAE9 !important;
 }
@@ -95,9 +105,9 @@ form{ /** Elimina il margine a tutti i form */
 /** 5. Add WiFi Action button **/
 #left-actionbtn{ /** Visualizza l'action button in in basso a sinistra **/
     position: fixed;
-    z-index: 10;
+    z-index: 2;
     bottom: 25px;
-    left: 25px;
+    right: 45px;
 }
 
 

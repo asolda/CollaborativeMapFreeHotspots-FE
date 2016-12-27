@@ -1,28 +1,25 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 
     <head>
+        <!-- Meta tag -->
         <meta charset="utf-8"/>
-
-        <!-- OpenGraph -->
         <meta property="og:title" content="Alwaysconnected"/>
         <meta property="og:type" content="website"/>
         <meta property="og:image" content=""/>
-
-        <!-- Meta tag -->
         <title>Alwaysconnected: collaborative map of free hotspot</title>
         <meta name="description" content="collaborative map of free hotspot"/>
         <meta name="author" content="team gopher"/>
 
-        <!-- Material Design & other -->
+        <!-- Material Design e altro -->
         <link rel="stylesheet" type="text/css" href="assets/material.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/> 
         <script type="text/javascript" src="assets/material.min.js"></script>
-        <script type="text/javascript" src="js/segnalazione.js"></script>
         <script type="text/javascript" src="js/map.js"></script>
-		<script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/segnalazione.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
     </head>
 
     <body>
@@ -59,9 +56,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script>
             //Initialize LoggedUserHome
-            createLoggedHome();
+            //createLoggedHome();
             //Initialize notLoggedUser 
-            //createNotLoggedHome();
+            createNotLoggedHome();
         </script>
         <script>
 		 $('#invia_segn').click(function(){
