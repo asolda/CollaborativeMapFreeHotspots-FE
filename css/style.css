@@ -1,67 +1,95 @@
-/** Indice 
+/**    Indice 
     1.Regole Generali;
     2.Header
     3.Drawer & Menu;
     4.Dialog custom style
     5.Maps
-**/
+*/
 
-/** 1.Regole Generali **/
-html,
-body {
-  margin: 0;
-  padding: 0;
+
+
+
+/** ________________1.Regole Generali________________ */
+html, body {
+  margin: 0px;
+  padding: 0px;
 }
 
-/** 2. Header **/
-.mdl-layout__header-row{
-    padding: 0 20px 0 80px !important;
+
+
+
+
+
+/** ________________2. Header________________ */
+.mdl-layout__header-row {
+    padding: 0px 20px 0px 80px !important;
 }
-#notlogged-header{
-    padding: 0 0 0 20px !important;
+#notlogged-header {
+    padding: 0px 20px 0px 20px !important;
 } 
 
 
-/** 3. Drawer & Menu **/
-#logged-user-navigation .mdl-navigation__link{ /** Seleziona le voci del menu **/
+
+
+
+
+
+/** ________________3. Drawer & Menu________________ */
+#logged-user-navigation .mdl-navigation__link { /** Seleziona le voci del menu */
     padding-left: 10px !important; 
     padding-top: 10px !important;  
-    padding-bottom: 10px !important; /** Le tre regole sovrascrivono quelle di mdl, modificando il padding delle voci **/
-}
-#logged-user-navigation a i{ /** Seleziona le icone delle voci del menu **/
-    padding-right: 10px; /** Padding tra l'icona e il testo della voce del menu **/
+    padding-bottom: 10px !important; /** Le tre regole sovrascrivono quelle di mdl, modificando il padding delle voci */
 }
 
-/** 4. Dialog custom style **/
+#logged-user-navigation a i{ /** Seleziona le icone delle voci del menu */
+    padding-right: 10px; /** Padding tra l'icona e il testo della voce del menu */
+}
+
+.menuHeader {
+  color: #C5CAE9 !important;
+}
+.menuHeader:hover {
+  color: white !important;
+}
+
+
+
+
+/** ________________4. Dialog custom style________________ */
 .mdl-dialog-custom{ /** Stile custom per il componente dialog di mdl **/
     padding: 0 !important;
 }
-.mdl-dialog-custom .mdl-dialog__title{ /** Elimina il padding top/bottom del dialog predefinito **/
+.mdl-dialog-custom .mdl-dialog__title{ /** Elimina il padding top/bottom del dialog predefinito */
     padding-top: 0px !important;
     padding-bottom: 0px !important;
 }
-.mdl-dialog-custom .mdl-title{ /** Stile del titolo del dialog **/
+.mdl-dialog-custom .mdl-title{ /** Stile del titolo del dialog */
     color: white;
     padding-top: 15px;
     padding-bottom: 15px;
     background-color: #3f51b5;
 }
-.mdl-dialog__sub{ /** Sottotitolo del dialog **/
+.mdl-dialog__sub{ /** Sottotitolo del dialog */
     padding: 5px 24px 0px 24px;
     margin-bottom: 0;
 }
-.mdl-dialog-custom .mdl-button{ /** Colore del testo dei bottoni **/
+.mdl-dialog-custom .mdl-button{ /** Colore del testo dei bottoni */
     color: #3f51b5;
 }
-#mdl-title-icon{ /** Icona vicino al titolo **/
+#mdl-title-icon{ /** Icona vicino al titolo */
     color: white;
     margin-right: 5px;
 }
-form{ /** Elimina il margine a tutti i form **/
+form{ /** Elimina il margine a tutti i form */
     margin: 0px;
 }
 
-/** 5. Maps **/
+
+
+
+
+
+/** ________________5. Maps________________ */
 #map {
     height: 100%;
     position: static !important;

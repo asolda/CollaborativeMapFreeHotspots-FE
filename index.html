@@ -1,43 +1,49 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 
 <html>
+
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8"/>
+
         <!-- OpenGraph -->
-        <meta property="og:title" content="AlwaysConnected" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="" />
+        <meta property="og:title" content="Alwaysconnected"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:image" content=""/>
+
         <!-- Meta tag -->
-        <title>AlwaysConnected</title>
-        <meta name="description" content="">
-        <!-- Material Design -->
-        <link rel="stylesheet" href="assets/material.min.css">
-        <script src="assets/material.min.js"></script>
-        <script src="segnalazione.js"></script>
-        <script type="text/javascript" src="js/map.js"></script>
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <title>Alwaysconnected</title>
+        <meta name="description" content="collaborative map of free hotspot"/>
+        <meta name="author" content="team gopher"/>
+
+        <!-- Material Design & other -->
+        <link rel="stylesheet" type="text/css" href="assets/material.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/> 
+        <script type="text/javascript" src="assets/material.min.js"></script>
+        <script type="text/javascript" src="segnalazione.js"></script>
+        <script type="text/javascript" src="js/map.js"></script>
     </head>
+
     <body>
-        
-        <!-- Always shows a header, even in smaller screens. -->
+        <!-- Mostra sempre un header, anche su schermi piccoli. -->
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
           <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
-              <!-- Title -->
-              <span class="mdl-layout-title">alwaysconnected</span>
-              <!-- Add spacer, to align navigation to the right -->
+              <!-- Titolo -->
+              <span class="mdl-layout-title">Alwaysconnected</span>
+              <!-- Aggunge spazio, per allineare il menù sull'header a destra -->
               <div class="mdl-layout-spacer"></div>
             </div>
           </header> 
 
-            
-            <!-- Contenuto della pagina -->
+          <!-- Contenuto della pagina -->
           <main class="mdl-layout__content">
             <div class="page-content">
                 <div id="map"></div>
             </div>
           </main>
+
         </div>
     
         <!-- Snackbar component -->        
@@ -126,18 +132,15 @@
 
         
         <!-- carica script mappa -->
-         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHsz36Bfu65nOK4F9cnpZv8m--nmi2NcQ&callback=initMap"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHsz36Bfu65nOK4F9cnpZv8m--nmi2NcQ&callback=initMap"></script>
         <script src="js/main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        
         <script>
             //Initialize LoggedUserHome
             //createLoggedHome();
             //Initialize notLoggedUser 
             createNotLoggedHome();
         </script>
-
-         
         <script>
 		 $('#invia_segn').click(function(){
             segnala($('#utente').val(),$('#rete').val(),$('#tipo').val(),$('#dettagli').val());

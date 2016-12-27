@@ -1,12 +1,13 @@
-/** Funzione di inizializzazione della pagina per visitatori **/
+﻿/** Funzione di inizializzazione della pagina per visitatori **/
+
 function createNotLoggedHome(){
     //setta l'id all'header
     $('.mdl-layout__header-row').attr('id','notlogged-header');
     
     //costruisce il menu
     menu = '<nav id="notlogged-menu" class="mdl-navigation">' +
-        '<a id="show-login" class="mdl-navigation__link" href="#">Accedi</a>' +
-        '<a id="show-signup" class="mdl-navigation__link" href="#">Registrati</a>' +
+        '<a id="show-login" class="mdl-navigation__link menuHeader" href="#">Accedi</a>' +
+        '<a id="show-signup" class="mdl-navigation__link menuHeader" href="#">Registrati</a>' +
         '</nav>';
     
     //lo aggiunge alla pagina
