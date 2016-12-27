@@ -7,6 +7,7 @@ function createNotLoggedHome(){
     //costruisce il menu
     menu = '<nav id="notlogged-menu" class="mdl-navigation">' +
         '<a id="show-login" class="mdl-navigation__link menuHeader" href="#">Accedi</a>' +
+        '<span class="dividerHeader">|</span>' +
         '<a id="show-signup" class="mdl-navigation__link menuHeader" href="#">Registrati</a>' +
         '</nav>';
     
@@ -20,11 +21,12 @@ function createNotLoggedHome(){
 
 /** Funzione di inizializzazione della pagina per utenti connessi **/
 function createLoggedHome(){
-    hello = '<span>Ciao, alberto. <a href="#">Esci</a></span>'
+    hello = '<span class="menuHeader">Ciao, alberto. <a href="#">Esci</a></span>'
     
     $('.mdl-layout__header-row').append(hello);
     
     menu = '<div id="user-drawer" class="mdl-layout__drawer">' +
+        '<span for="user-drawer" class="mdl-tooltip">Menu principale</span>' + 
         '<span class="mdl-layout-title">AlwaysConnected</span>' +
         '<nav id="logged-user-navigation" class="mdl-navigation">' +
         '<a class="mdl-navigation__link" href=""><i class="material-icons">wifi</i>Le mie reti</a>' +

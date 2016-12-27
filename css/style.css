@@ -52,6 +52,11 @@ html, body {
   color: white !important;
 }
 
+.dividerHeader {
+  font-weight: bolder !important;
+  font-size: x-large;
+  color: #D500F9 !important;
+}
 
 
 
