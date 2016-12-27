@@ -101,8 +101,16 @@ function addNotLoggedModal(){
             });
             
             /** login request **/
-            
-            
+            document.getElementById('enterbtn-login').addEventListener('click', function() {
+				var email = document.forms["login-form"]["l-email"].value;
+				var password = document.forms["login-form"]["l-password"].value;
+				if (!email.equals("") && !password.equals("")) {
+					login(email, password);
+				}
+				else {
+					console.log('Email o password non inseriti');
+				}
+			});
             /**./Login request **/
             
            login.showModal();
@@ -245,22 +253,3 @@ function addLoggedModal(){
     } //./setDeleteaccountModal
         
 }//./addLoggedModal
-
-/** Gestisce lo snackbar. Accetta come parametro un oggetto con i seguenti attributi
-        +string message,
-        +int timeout *optional
-        +string actionText, *optional
-        +function actionHandler *optional
-**/
-function showSnackbar(sb){    
-    //get the snackbar component
-    var snackbar = document.getElementById('sb-confirm-operation');
-    
-    //check the optional parameter
-    if(!sb.timeout){sb.timeout = 2000;}
-    if(!sb.actionText){sb.actionText = 'Annulla'; }
-    if(!sb.actionHandler){sb.actionHandler = null;};
-    
-    //show the snackbar
-    snackbar.MaterialSnackbar.showSnackbar(sb);
-}
