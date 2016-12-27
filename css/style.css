@@ -3,7 +3,8 @@
     2.Header
     3.Drawer & Menu;
     4.Dialog custom style
-    5.Maps
+    5.Add WiFi Action button
+    6.Maps
 */
 
 
@@ -91,7 +92,13 @@ form{ /** Elimina il margine a tutti i form */
 
 
 
-
+/** 5. Add WiFi Action button **/
+#left-actionbtn{ /** Visualizza l'action button in in basso a sinistra **/
+    position: fixed;
+    z-index: 10;
+    bottom: 25px;
+    left: 25px;
+}
 
 
 /** ________________5. Maps________________ */

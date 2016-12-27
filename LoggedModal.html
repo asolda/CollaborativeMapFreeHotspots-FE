@@ -1,0 +1,47 @@
+<!-- Edit Password Modal Component -->
+        <dialog id="dialog-editpassword" class="mdl-dialog mdl-dialog-custom">
+        <div class="mdl-title">
+            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Modifica password</h4>
+            <p class="mdl-dialog__sub">Inserisci la password attuale, per modificarla</p>
+        </div>
+        <div class="mdl-dialog__content">
+            <form>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password" id="ep-newpassword"/>
+                    <label class="mdl-textfield__label" for="ep-newpassword">Password attuale</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password" id="ep-password">
+                    <label class="mdl-textfield__label" for="ep-password">Nuova password</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password" id="ep-confermapassword">
+                    <label class="mdl-textfield__label" for="ep-confermapasswrod">Conferma Password</label>
+                </div>
+            </form>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button id="enterbtn-editpassword" type="button" class="mdl-button">Modifica</button>
+            <button id="closebtn-editpassword" type="button" class="mdl-button dialog-close">Annulla</button>
+        </div>
+        </dialog>
+
+        <!-- Delete account Modal Component -->
+        <dialog id="dialog-deleteaccount" class="mdl-dialog mdl-dialog-custom">
+        <div class="mdl-title">
+            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Elimina account</h4>
+            <p class="mdl-dialog__sub">Inserisci la password per iniziare la procedura</p>
+        </div>
+        <div class="mdl-dialog__content">
+            <form>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password" id="da-password"/>
+                    <label class="mdl-textfield__label" for="da-password">Password</label>
+                </div>
+            </form>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button id="enterbtn-deleteaccount" type="button" class="mdl-button">Elimina</button>
+            <button id="closebtn-deleteaccount" type="button" class="mdl-button dialog-close">Annulla</button>
+        </div>
+        </dialog>

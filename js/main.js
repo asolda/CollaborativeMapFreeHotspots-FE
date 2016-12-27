@@ -1,6 +1,6 @@
-﻿/** Funzione di inizializzazione della pagina per visitatori **/
-
+/** Funzione di inizializzazione della pagina per visitatori **/
 function createNotLoggedHome(){
+    
     //setta l'id all'header
     $('.mdl-layout__header-row').attr('id','notlogged-header');
     
@@ -14,33 +14,60 @@ function createNotLoggedHome(){
     //lo aggiunge alla pagina
     $('.mdl-layout__header-row').append(menu);
     
-    addNotLoggedModal(); //aggiunge i modali alla pagina
-    
+    // [TEMP] Carica i modali da file
+    $.get('notLoggedModal.html',function(data){
+       $('body').append(data); //Li aggiunge all'index
+        
+        addNotLoggedModal(); //Li inizializza
+    });
+     
 } //./createNotLoggedHome
 
 
 /** Funzione di inizializzazione della pagina per utenti connessi **/
 function createLoggedHome(){
+    
+    // Crea la stringa di welcome 
     hello = '<span class="menuHeader">Ciao, alberto. <a href="#">Esci</a></span>'
     
-    $('.mdl-layout__header-row').append(hello);
-    
+    // Crea il menu 
     menu = '<div id="user-drawer" class="mdl-layout__drawer">' +
-        '<span for="user-drawer" class="mdl-tooltip">Menu principale</span>' + 
         '<span class="mdl-layout-title">AlwaysConnected</span>' +
         '<nav id="logged-user-navigation" class="mdl-navigation">' +
         '<a class="mdl-navigation__link" href=""><i class="material-icons">wifi</i>Le mie reti</a>' +
         '<a class="mdl-navigation__link" href=""><i class="material-icons">notifications</i><span class="mdl-badge" data-badge="2">Notifiche</span></a>'+
-        '<a class="mdl-navigation__link" href=""><i class="material-icons">vpn_key</i>Modifica Password</a>' +
-        '<a class="mdl-navigation__link" href=""><i class="material-icons">delete</i>Elimina Account</a>' +
+        '<a id="show-editpassword" class="mdl-navigation__link" href="#"><i class="material-icons">vpn_key</i>Modifica Password</a>' +
+        '<a id="show-deleteaccount" class="mdl-navigation__link" href="#"><i class="material-icons">delete</i>Elimina Account</a>' +
         '</nav>' +
         '</div>';
     
-    //aggiunge il menù alla pagina
+    // Crea l'action button per inserire una mappa 
+    actionbtn = '<div id="left-actionbtn">'+
+        '<button id="show-addwifi" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">' +
+        '<i class="material-icons">add</i>'+
+        '</button>'+
+        ' </div>';
+
+    
+    /** Aggiunge le 3 componenti prima create:
+        hello, nell'header;
+        il menu, nell'header;
+        l'action button, dopo il layout della pagina;
+    **/
+    $('.mdl-layout__header-row').append(hello); 
     $('.mdl-layout__header').after(menu);
-                          
-          
+    $('.mdl-layout').after(actionbtn);
+    
+    
+    // [TEMP] Carica i modali da file
+    $.get('LoggedModal.html',function(data){
+       $('body').append(data); //Li aggiunge all'index
+        
+        addLoggedModal(); //Li inizializza
+    });
+    
 } //./createLoggedModal
+
 
 /** Inizializza i modali di un utente non connesso 
     +Login
@@ -109,12 +136,12 @@ function addNotLoggedModal(){
             
             /**./recover request **/
             
-            login.close();
+            login.close(); //nasconde il modale di login
             recover.showModal();
             
             
         });
-    }
+    } //./setRecoverModal
     
     function setSignupModal(){
         
@@ -148,3 +175,73 @@ function addNotLoggedModal(){
     
 } //./notloggedModal
 
+/** Inizializza i modali di un utente connesso
+    +Modifica Password
+    +Elimina Account
+    +Inserisci rete (mancante)
+    +Notifiche (mancante)
+    +Gestione reti (mancante)
+**/
+function addLoggedModal(){
+    var editpassword, deleteaccount;
+    
+    setEditPasswordModal();
+    setDeleteAccountModal();
+    
+    function setEditPasswordModal(){
+        
+        document.getElementById('show-editpassword').addEventListener('click', function(){
+            
+            editpassword = document.getElementById('dialog-editpassword'); //get dialog element
+            
+            if (! editpassword.showModal) {
+                dialogPolyfill.registerDialog(editpassword);
+            }
+            
+            /** close button function **/
+            var v = document.getElementById('closebtn-editpassword');
+            v.addEventListener('click', function() {
+                
+                editpassword.close();
+            });
+            
+            /** editpassword request **/
+            
+            
+            /**./editpassword request **/
+            
+           editpassword.showModal();
+                
+        }); //./document
+        
+    } //./setEditPasswordModal
+    
+    function setDeleteAccountModal(){
+        
+        document.getElementById('show-deleteaccount').addEventListener('click', function(){
+            
+            deleteaccount = document.getElementById('dialog-deleteaccount'); //get dialog element
+            
+            if (! deleteaccount.showModal) {
+                dialogPolyfill.registerDialog(deleteaccount);
+            }
+            
+            /** close button function **/
+            var v = document.getElementById('closebtn-deleteaccount');
+            v.addEventListener('click', function() {
+                
+                deleteaccount.close();
+            });
+            
+            /** deleteaccount request **/
+            
+            
+            /**./deleteaccount request **/
+            
+           deleteaccount.showModal();
+                
+        }); //./document
+        
+    } //./setDeleteaccountModal
+        
+}//./addLoggedModal

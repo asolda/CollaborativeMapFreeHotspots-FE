@@ -32,7 +32,7 @@
             <div class="mdl-layout__header-row">
               <!-- Titolo -->
               <span class="mdl-layout-title">Alwaysconnected</span>
-              <!-- Aggunge spazio, per allineare il menù sull'header a destra -->
+              <!-- Aggunge spazio, per allineare il menï¿½ sull'header a destra -->
               <div class="mdl-layout-spacer"></div>
             </div>
           </header> 
@@ -51,95 +51,16 @@
           <div class="mdl-snackbar__text"></div>
           <button class="mdl-snackbar__action" type="button"></button>
         </div>
-        
-        <!-- Login Modal Component -->
-        <dialog id="dialog-login" class="mdl-dialog mdl-dialog-custom">
-    <div class="mdl-title">
-        <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Login</h4>
-        <p class="mdl-dialog__sub">Accedi al tuo account personale</p>
-    </div>
-<div class="mdl-dialog__content">
-    <form id="login-form">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="l-email"/>
-            <label class="mdl-textfield__label" for="l-email">Email</label>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="l-password"/>
-            <label class="mdl-textfield__label" for="l-password">Password</label>
-        </div>
-        <a id="show-recover" href="#"><p>Password dimenticata?</p></a>
-    </form>
-</div>
-<div class="mdl-dialog__actions">
-    <button id="enterbtn-login" type="button" class="mdl-button">Accedi</button>
-    <button id="closebtn-login" type="button" class="mdl-button dialog-close">Annulla</button>
-</div>
-</dialog>
-
-        
-        <!-- Signup Modal Component -->
-        <dialog id="dialog-signup" class="mdl-dialog mdl-dialog-custom">
-        <div class="mdl-title">
-            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Registrati</h4>
-            <p class="mdl-dialog__sub">Crea il tuo account personale</p>
-        </div>
-        <div class="mdl-dialog__content">
-            <form>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="r-email"/>
-                    <label class="mdl-textfield__label" for="r-email">Email</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" id="r-password">
-                    <label class="mdl-textfield__label" for="r-password">Password</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" id="r-confermapassword">
-                    <label class="mdl-textfield__label" for="r-confermapasswrod">Conferma Password</label>
-                </div>
-            </form>
-        </div>
-        <div class="mdl-dialog__actions">
-            <button id="enterbtn-signup" type="button" class="mdl-button">Crea</button>
-            <button id="closebtn-signup" type="button" class="mdl-button dialog-close">Annulla</button>
-        </div>
-        </dialog>
-
-
-        <!-- Recover Modal Component -->
-        <dialog id="dialog-recover" class="mdl-dialog mdl-dialog-custom">
-            <div class="mdl-title">
-                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Reimposta password</h4>
-                 <p class="mdl-dialog__sub">Compila il form per iniziare</p> 
-            </div>
-        <div class="mdl-dialog__content">
-            <form id="reimposta-form">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="re-email"/>
-                    <label class="mdl-textfield__label" for="re-email">Email</label>
-                </div>
-            </form>
-        </div>
-        <div class="mdl-dialog__actions">
-            <button id="enterbtn-recover" type="button" class="mdl-button">Reimposta</button>
-            <button id="closebtn-recover" type="button" class="mdl-button dialog-close">Annulla</button>
-        </div>
-        </dialog>
-
-
-        
-
-        
+                
         <!-- carica script mappa -->
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHsz36Bfu65nOK4F9cnpZv8m--nmi2NcQ&callback=initMap"></script>
         <script src="js/main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script>
             //Initialize LoggedUserHome
-            //createLoggedHome();
+            createLoggedHome();
             //Initialize notLoggedUser 
-            createNotLoggedHome();
+            //createNotLoggedHome();
         </script>
         <script>
 		 $('#invia_segn').click(function(){
