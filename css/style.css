@@ -108,7 +108,9 @@ html, body {
 form { /** Elimina il margine a tutti i form */
     margin: 0px;
 }
-
+.mdl-textfield mdl-js-textfield mdl-textfield--floating-label{ 
+    padding-bottom: 30px !important;
+}
 
 
 
@@ -117,7 +119,7 @@ form { /** Elimina il margine a tutti i form */
 
 
 /** ________________5. Add WiFi Action button________________ */
-#left-actionbtn { /** Visualizza l'action button in in basso a sinistra */
+#left-actionbtn { /** Visualizza l'action button in in basso a destra */
     position: fixed;
     z-index: 2;
     bottom: 25px;
