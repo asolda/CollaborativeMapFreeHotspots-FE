@@ -37,7 +37,7 @@ function createLoggedHome(){
               '<nav id="logged-user-navigation" class="mdl-navigation">' +
                 '<hr/>' +
                 '<span class="mdl-layout-title subtitle">Gestione account</span>' +
-                '<a class="mdl-navigation__link" href=""><span class="space"/><i class="material-icons">wifi</i><span class="space"/>Le mie reti</a>' +
+                '<a id="show-mywifi" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">wifi</i><span class="space"/>Le mie reti</a>' +
                 '<a class="mdl-navigation__link" href=""><span class="space"/><i class="material-icons">notifications</i><span class="space"/><span class="mdl-badge" data-badge="2">Notifiche</span></a>'+
                 '<a id="show-editpassword" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">vpn_key</i><span class="space"/>Modifica Password</a>' +
                 '<a id="show-deleteaccount" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">delete</i><span class="space"/>Elimina Account</a>' +
@@ -211,22 +211,20 @@ function addNotLoggedModal(){
 
 
 
-___________________________________________________________________________________________________________
-
-
 
 /** Inizializza i modali di un utente connesso
     +Modifica Password
     +Elimina Account
     +Inserisci rete (mancante)
     +Notifiche (mancante)
-    +Gestione reti (mancante)
+    +Gestione reti (da completare)
 **/
 function addLoggedModal(){
-    var editpassword, deleteaccount;
+    var editpassword, deleteaccount,mywifi;
     
     setEditPasswordModal();
     setDeleteAccountModal();
+    setMyWifiModal();
     
     function setEditPasswordModal(){
         
@@ -283,8 +281,36 @@ function addLoggedModal(){
         }); //./document
         
     } //./setDeleteaccountModal
+    
+    
+    
+        function setMyWifiModal(){
+        
+        document.getElementById('show-mywifi').addEventListener('click', function(){
+            
+            mywifi = document.getElementById('dialog-mywifi'); //get dialog element
+            
+            if (! mywifi.showModal) {
+                dialogPolyfill.registerDialog(mywifi);
+            }
+            
+            /** close button function **/
+            var v = document.getElementById('closebtn-mywifi');
+            v.addEventListener('click', function() {
+                
+                mywifi.close();
+            });
+            
+
+            
+           mywifi.showModal();
+                
+        }); //./document
+        
+    } //./setMyWifiModal
         
 }//./addLoggedModal
+
 
 /** Gestisce lo snackbar. Accetta come parametro un oggetto con i seguenti attributi
         +string message,

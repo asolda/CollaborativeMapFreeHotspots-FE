@@ -114,6 +114,30 @@ form { /** Elimina il margine a tutti i form */
     padding-bottom: 30px !important;
 }
 
+/** Dialog mywifi custom style **/
+#dialog-mywifi{
+    width: 450px;
+    height: 500px;
+}
+.mdl-list__item{
+    padding: 5px 16px 5px 16px !important;
+}
+.mdl-list__item-avatar, .mdl-list__item-avatar.material-icons{
+    color: #757575;
+    background-color: white;
+}
+#dialog-wifi{
+    overflow: hidden !important;
+}
+.mdl-list__item--three-line{
+    height: auto !important;
+}
+#dialog-mywifi .mdl-dialog__content{
+    padding: 0 15px 0 15px;
+    height: 320px;
+    overflow: auto;
+}
+
 
 
 
