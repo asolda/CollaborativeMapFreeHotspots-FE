@@ -8,7 +8,7 @@ function createNotLoggedHome(){
     menu = '<nav id="notlogged-menu" class="mdl-navigation">' +
              '<a id="show-login" class="mdl-navigation__link menuHeader" href="#">Accedi</a>' +
              '<span class="dividerHeader">|</span>' +
-             '<a id="show-signup" class="mdl-navigation__link menuHeader" href="#">Registrati</a>' +
+             '<a id="show-signup" class="mdl-navigation__link menuHeader" href="#">Crea un nuovo account</a>' +
            '</nav>';
     
     //lo aggiunge alla pagina
@@ -17,7 +17,6 @@ function createNotLoggedHome(){
     // [TEMP] Carica i modali da file
     $.get('notLoggedModal.html',function(data){
        $('body').append(data); //Li aggiunge all'index
-        
         addNotLoggedModal(); //Li inizializza
     });
      
@@ -29,7 +28,7 @@ function createLoggedHome(){
     
     // Crea il menu con la funzione per uscire
     hello = '<nav class="mdl-navigation">' +
-              '<a href="#" class="mdl-navigation__link menuHeader">Ciao <span id="name">Utente</span>, esci</a>' +
+              '<a id="exitSystem" href="#" class="mdl-navigation__link menuHeader">Ciao <span id="name">Utente</span>, esci</a>' +
             '</nav>'
     
     // Crea il menu 
@@ -69,11 +68,10 @@ function createLoggedHome(){
     // [TEMP] Carica i modali da file
     $.get('LoggedModal.html',function(data){
        $('body').append(data); //Li aggiunge all'index
-        
         addLoggedModal(); //Li inizializza
     });
     
-} //./createLoggedModal
+} 
 
 
 /** Inizializza i modali di un utente non connesso 
@@ -85,27 +83,22 @@ function addNotLoggedModal(){
     
     var signup, login, recover;
     
-    
     setLoginModal();
     setSignupModal();
     setRecoverModal();
     
     function setLoginModal(){
-        
         document.getElementById('show-login').addEventListener('click', function(){
-            
-            login = document.getElementById('dialog-login'); //get dialog element
-            
-            if (! login.showModal) {
+             login = document.getElementById('dialog-login'); //get dialog element
+             if (!login.showModal) {
                 dialogPolyfill.registerDialog(login);
-            }
+             }
             
-            /** close button function **/
-            var v = document.getElementById('closebtn-login');
-            v.addEventListener('click', function() {
-                
+             /** close button function **/
+             var v = document.getElementById('closebtn-login');
+             v.addEventListener('click', function() {
                 login.close();
-            });
+             });
             
             /** login request **/
             document.getElementById('enterbtn-login').addEventListener('click', function() {
@@ -115,56 +108,43 @@ function addNotLoggedModal(){
 					login(email, password);
 				}
 				else {
-					console.log('Email o password non inseriti');
+				        console.log('Email o password non inseriti');
 				}
-			});
+	    });
             
             /**./Login request **/
             
            login.showModal();
                 
-        }); //./document
-        
-    } //./setLoginModal
+        });
+     } 
     
     function setRecoverModal(){
-        
             document.getElementById('show-recover').addEventListener('click', function(){
+                recover = document.getElementById('dialog-recover'); //get dialog element
+                  if (!recover.showModal) {
+                    dialogPolyfill.registerDialog(recover);
+                  }
             
-            recover = document.getElementById('dialog-recover'); //get dialog element
+                  /** close button function **/
+                  var v = document.getElementById('closebtn-recover');
+                  v.addEventListener('click', function() {
+                     //GO BACK to login modal, and hide recover 
+                     recover.close(); 
+                     login.showModal();
+                  });
             
-            if (! recover.showModal) {
-                dialogPolyfill.registerDialog(recover);
-            }
+                  /** TODO recover request **/
             
-            /** close button function **/
-            var v = document.getElementById('closebtn-recover');
-            v.addEventListener('click', function() {
-                
-                //GO BACK to login modal, and hide recover 
-                recover.close(); 
-                login.showModal();
-                
+            
+                  login.close(); //nasconde il modale di login
+                  recover.showModal();
             });
-            
-            /** recover request **/
-            
-            
-            /**./recover request **/
-            
-            login.close(); //nasconde il modale di login
-            recover.showModal();
-            
-            
-        });
-    } //./setRecoverModal
+    } 
     
     function setSignupModal(){
-        
         document.getElementById('show-signup').addEventListener('click', function(){
-            
             signup = document.getElementById('dialog-signup'); //get dialog element
-            
             if (! signup.showModal) {
                 dialogPolyfill.registerDialog(signup); 
             }
@@ -175,21 +155,20 @@ function addNotLoggedModal(){
                 signup.close();
             });
             
-            /** signup request **/
-            
-            
-            /**./signup request **/
+            /** TODO signup request **/
             
            signup.showModal();
             
-            
         });
-        
-    } //./setSignupModal
-    
+    } 
 
-    
-} //./notloggedModal
+} 
+
+
+
+
+
+
 
 /** Inizializza i modali di un utente connesso
     +Modifica Password
