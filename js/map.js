@@ -1,6 +1,5 @@
-var lastPosNE, lastPosSW, lastCenter, markers;
+var lastPosNE, lastPosSW, lastCenter, markers = [];
 var pins_info = [];
-
 
 
 function initMap() {
@@ -16,17 +15,16 @@ function initMap() {
 
   //var myLatLng = {lat: 41.060816, lng: 14.334157};
 
-    //inizializzazione della mappa, con parametri di configurazione stile, zoom e centro
+
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16,
-    styles: [{featureType:"road",elementType:"geometry",stylers:[{lightness:100},{visibility:"simplified"}]},{"featureType":"water","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#C6E2FF",}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"color":"#C5E3BF"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#D1D1B8"}]}],
     center: {
       lat: 42.516122,
       lng: 12.513889
     },
   });
   lastCenter = map.getCenter();
-  //lastPosNE = map.getBounds().getNorthEast();
+  // lastPosNE = map.getBounds().getNorthEast();
   //console.debug(map.getNorthEast());
   //lastCenter.lat() = 0;
   //lastCenter.lng() = 0;
@@ -72,10 +70,13 @@ function initMap() {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.');
   }
+  console.debug(markers);
 
-  markers = loadMarkers();
+  loadMarkers(lastCenter.lat(), lastCenter.lng(), 600);
+  console.debug(markers);
 
   loadPins(map, markers, infowindowMarker);
+  console.debug(markers);
 
 
   // evento che triggera ogni volta che vengono modificati gli estremi dell' area da visualizzare
@@ -83,6 +84,7 @@ function initMap() {
     //console.debug(map.getCenter().lat()+" "+map.getCenter().lng());
     var newPosNE = map.getBounds().getNorthEast();
     var newPosSW = map.getBounds().getSouthWest();
+
 
     var center = map.getCenter();
 
@@ -109,6 +111,17 @@ function initMap() {
       lastPosNE = newPosNE;
       lastPosSW = newPosSW;
       lastCenter = center;
+
+
+      //console.debug(markers);
+      delete_pins();
+      //console.debug(markers);
+
+
+      loadMarkers(lastCenter.lat(), lastCenter.lng(), radius);
+      //console.debug(markers);
+
+      loadPins(map, markers, infowindowMarker);
     }
 
     //console.debug(map.getBounds().getNorthEast() +" " + map.getBounds().getSouthWest());
@@ -136,7 +149,6 @@ function bindInfoWindow(marker, map, infowindow, description) {
 }
 
 function loadPins(map, markers, infowindowMarker) {
-
   for (var pin in markers) {
     var marker = new google.maps.Marker({
       position: markers[pin].position,
@@ -186,28 +198,48 @@ function deleteMarkers() {
   clearMarkers();
   pins_info = [];
   pins_info = [];
+  markers = [];
 }
 
 
-
-function loadMarkers() {
+function loadMarkers(lat, lng, radius) {
+  //function loadMarkers(lat, lng, radius) {
 
 //funzione per caricare i markers da be
-/*
+var image = 'http://marcoaprea.altervista.org/Goopher/golang-logo2.png';
+
+var url_request = 'http://127.0.0.1:8080/pin/get_networks/'+lat+'/'+lng+'/'+radius+'/'+radius;
 $.ajax({
     type: 'GET',
-    url: 'http://127.0.0.1:8081/user/',
+    url: url_request,
+    async: false,
     success: function(data) {
-      var markers = jQuery.parseJSON(data);
+      var data_from_back = jQuery.parseJSON(data);
+      //console.debug(data);
+      $.each(JSON.parse(data), function(idx, pin){
+      //console.debug(pin.latitudine + " " + pin.longitudine + "");
+      var mark = {
+        position: {
+          lat: pin.latitudine,
+          lng: pin.longitudine
+        },
+        map: map,
+        icon: image,
+        description: "<h1>Potato2</h1>",
+        radius: 100
+      };
       
+      markers.push(mark);
+   });
     },
     error: function(xhr, status, error) {
       console.log('Error: ' + error.message);
     }
   });
-  */
+  
   //fine funzione per caricare i markers da be
-  var image = 'http://marcoaprea.altervista.org/Goopher/golang-logo2.png';
+  
+  /*
   var markers = {
     mark1: {
       position: {
@@ -255,5 +287,6 @@ $.ajax({
       radius: 20
     }
   };
-  return markers;
+  */
+  
 }
