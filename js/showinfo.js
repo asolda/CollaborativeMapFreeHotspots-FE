@@ -1,8 +1,8 @@
- function login(email, password){
+ function showinfo(pin_id){
           $.ajax({
-            type: 'POST',
-            url: 'http://127.0.0.1:8080/login/',
-            data: "email="+email+"&password="+password,
+            type: 'GET',
+            url: 'http://127.0.0.1:8080/showinfo/',
+            data: "pin_id="+pin_id+,
             contentType: "application/x-www-form-urlencoded",
             success: function(data) {
               try {
@@ -12,10 +12,11 @@
                 }else if(ret.status==1){
                     $('#result').append(ret.message + '</br>');
                 }
+				return ret;
                 
                 
               } catch (err) {
-                alert('Errore nel login: ' + ret.message);
+                alert('Errore nella visualizzazione delle info del pin: ' + ret.message);
               }
             },
             error: function(xhr, status, error) {
