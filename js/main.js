@@ -86,7 +86,9 @@ function addNotLoggedModal(){
     setLoginModal();
     setSignupModal();
     setRecoverModal();
-    
+    setRecoverBisModal();  
+    setSignupBisModal();  
+
     function setLoginModal(){
         document.getElementById('show-login').addEventListener('click', function(){
              login = document.getElementById('dialog-login'); //get dialog element
@@ -105,7 +107,7 @@ function addNotLoggedModal(){
 				var email = document.forms["login-form"]["l-email"].value;
 				var password = document.forms["login-form"]["l-password"].value;
 				if (!email.equals("") && !password.equals("")) {
-					login(email, password);
+					login(email, password); //TODO gestire l'accesso
 				}
 				else {
 				        console.log('Email o password non inseriti');
@@ -134,13 +136,38 @@ function addNotLoggedModal(){
                      login.showModal();
                   });
             
-                  /** TODO recover request **/
-            
-            
                   login.close(); //nasconde il modale di login
                   recover.showModal();
             });
     } 
+
+
+    function setRecoverBisModal() {
+      document.getElementById('enterbtn-recover').addEventListener('click', function(){
+         recoverBis = document.getElementById('dialog-recoverBis');
+            if (!recoverBis.showModal) {
+                    dialogPolyfill.registerDialog(recover);
+            }
+         
+                 /** close button function **/
+                  var v = document.getElementById('closebtn-recoverBis');
+                  v.addEventListener('click', function() {
+                     recoverBis.close(); 
+                  });
+      
+
+                  // Richiesta di recupero password
+		  var email = document.forms["reimposta-form"]["re-email"].value;
+		    if (!(email === "")) {
+			//  TODO controllo corrispondenza email e visualizza prossimo form
+                        recover.close();
+                        recoverBis.showModal();
+		    }
+		    else {
+                        console.log('Email o password non inseriti');
+		    }
+      })
+    }
     
     function setSignupModal(){
         document.getElementById('show-signup').addEventListener('click', function(){
@@ -155,18 +182,36 @@ function addNotLoggedModal(){
                 signup.close();
             });
             
-            /** TODO signup request **/
-            
-           signup.showModal();
+            signup.showModal();
             
         });
     } 
+
+
+    function setSignupBisModal() {
+      document.getElementById('enterbtn-signup').addEventListener('click', function(){
+         signupBis = document.getElementById('dialog-signupBis');
+            if (!signupBis.showModal) {
+                    dialogPolyfill.registerDialog(recover);
+            }
+         
+                 /** close button function **/
+                  var v = document.getElementById('closebtn-signupBis');
+                  v.addEventListener('click', function() {
+                     signupBis.close(); 
+                  });
+
+             //TODO controllo campi
+             signup.close();
+             signupBis.showModal();
+      })
+    }
 
 } 
 
 
 
-
+___________________________________________________________________________________________________________
 
 
 
