@@ -88,21 +88,31 @@ function initMap() {
 
     var center = map.getCenter();
 
-
-    var d_lng = Math.abs(lastPosNE.lng() - lastPosSW.lng());
-    var d_lat = Math.abs(lastPosNE.lat() - lastPosSW.lat());
+    var d_lng = Math.abs(newPosNE.lng() - newPosSW.lng());
+    var d_lat = Math.abs(newPosNE.lat() - newPosSW.lat());
+    //var d_lng = Math.abs(lastPosNE.lng() - lastPosSW.lng());
+    //var d_lat = Math.abs(lastPosNE.lat() - lastPosSW.lat());
+    
+    //console.debug("d_lng="+d_lng+", d_lat="+d_lat);
+    
     d_lng /= 2;
     d_lat /= 2;
+    
+    
 
-    activation = Math.pow(d_lng, 2) + Math.pow(d_lat, 2);
-    activation = Math.sqrt(activation);
+    //activation = Math.pow(d_lng, 2) + Math.pow(d_lat, 2);
+    //activation = Math.sqrt(activation);
 
     //console.debug(lastPosNE +" " + lastPosSW);
 
     //console.debug(calcDistance(center.lat(), center.lng(), lastCenter.lat(), lastCenter.lng()))
     //l' if è vero solo se la distanza dall' ultimo centro di mappa dista più di 1 km da quello visualizzato
     //se vero aggiorna il nuovo centro
-    if (calcDistance(center.lat(), center.lng(), lastCenter.lat(), lastCenter.lng()) > activation || calcDistance(newPosNE.lat(), newPosNE.lng(), lastPosNE.lat(), lastPosNE.lng()) > activation) {
+    
+    //console.debug("cdlat="+Math.abs(lastCenter.lat() - center.lat())+",cdlng="+Math.abs(lastCenter.lng() - center.lng())+",d_lng="+d_lng+", d_lat="+d_lat);
+    
+    if(overflow_distance(lastCenter.lat(), lastCenter.lng(), center.lat(), center.lng(), d_lng, d_lat) || overflow_distance(lastPosNE.lat(), lastPosNE.lng(), newPosNE.lat(), newPosNE.lng(), d_lng, d_lat)){
+    //if (calcDistance(center.lat(), center.lng(), lastCenter.lat(), lastCenter.lng()) > activation) {
       //console.debug(map.getBounds().getNorthEast() +" " + map.getBounds().getSouthWest());
       lng_diff = calcDistance(newPosNE.lat(), newPosNE.lng(), newPosNE.lat(), center.lng());
       lat_diff = calcDistance(newPosNE.lat(), newPosNE.lng(), center.lat(), newPosNE.lng());
@@ -141,6 +151,17 @@ function initMap() {
   });
   //end func initMap
 }
+
+
+
+function overflow_distance(lat_center, lng_center, lat_new, lng_new, dlat, dlng){
+    if ( Math.abs(lat_center - lat_new) > dlat || Math.abs(lng_center - lng_new) > dlng)
+        return true;
+    else
+        return false;
+}
+
+
 
 function calcDistance(fromLat, fromLng, toLat, toLng) {
 
