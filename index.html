@@ -21,6 +21,8 @@
         <script type="text/javascript" src="js/segnalazione.js"></script>
 		<script type="text/javascript" src="js/login.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/sessioncheck.js"></script>
+		<script type="text/javascript" src="js/getcookie.js"></script>
     </head>
 
     <body>
@@ -56,7 +58,19 @@
         <script src="js/main.js"></script>
         <script>
             //Initialize LoggedUserHome
-            createLoggedHome();
+			var cookie = getcookie("actoken32");
+			if (!cookie.equals(""))) {
+				var id_utente;
+				if (!((id _utente = sessioncheck(cookie)).equals(""))) {  //getcookie restituisce il valore del cookie, che viene passato a sessioncheck; sessioncheck deve restituire l'id dell'utente da passare a createloggedhome
+					createLoggedHome(id_utente);
+				}
+				else {
+					createNotLoggedHome();
+				}
+			}
+			else {
+				createNotLoggedHome();
+			}
             //Initialize notLoggedUser 
             //createNotLoggedHome();
         </script>
