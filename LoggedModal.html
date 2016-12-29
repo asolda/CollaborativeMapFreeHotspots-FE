@@ -1,8 +1,8 @@
 <!-- Edit Password Modal Component -->
         <dialog id="dialog-editpassword" class="mdl-dialog mdl-dialog-custom">
         <div class="mdl-title">
-            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Modifica password</h4>
-            <p class="mdl-dialog__sub">Inserisci la password attuale, per modificarla</p>
+            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">vpn_key</i>Modifica la tua password</h4>
+            <p class="mdl-dialog__sub">Compila i campi sottostanti</p>
         </div>
         <div class="mdl-dialog__content">
             <form>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="password" id="ep-confermapassword">
-                    <label class="mdl-textfield__label" for="ep-confermapasswrod">Conferma Password</label>
+                    <label class="mdl-textfield__label" for="ep-confermapasswrod">Conferma nuova password</label>
                     <span class="mdl-textfield__error">La password non coincide</span>
                 </div>
             </form>
@@ -29,26 +29,94 @@
         </div>
         </dialog>
 
+
+
+     <!-- EditPasswordBis Modal Component -->
+     <dialog id="dialog-editPasswordBis" class="mdl-dialog mdl-dialog-custom">
+            <div class="mdl-title">
+                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">vpn_key</i>Ci siamo</h4> 
+            </div>
+
+            <div class="mdl-dialog__content">
+              Password modificata con successo.
+              </form>
+            </div>
+
+            <div class="mdl-dialog__actions">
+              <button id="closebtn-editPasswordBis" type="button" class="mdl-button dialog-close">Chiudi</button>
+            </div>
+      </dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- Delete account Modal Component -->
         <dialog id="dialog-deleteaccount" class="mdl-dialog mdl-dialog-custom">
         <div class="mdl-title">
-            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Elimina account</h4>
-            <p class="mdl-dialog__sub">Inserisci la password per iniziare la procedura</p>
+            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">delete</i>Elimina il tuo account</h4>
+            <p class="mdl-dialog__sub">Compila il campo sottostante</p>
         </div>
         <div class="mdl-dialog__content">
             <form>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="password" id="da-password"/>
-                    <label class="mdl-textfield__label" for="da-password">Password</label>
+                    <label class="mdl-textfield__label" for="da-password">Inserisci la tua password</label>
                     <span class="mdl-textfield__error">Password non valida</span>
                 </div>
             </form>
         </div>
         <div class="mdl-dialog__actions">
-            <button id="enterbtn-deleteaccount" type="button" class="mdl-button">Elimina</button>
+            <button id="enterbtn-deleteaccount" type="button" class="mdl-button">Continua</button>
             <button id="closebtn-deleteaccount" type="button" class="mdl-button dialog-close">Annulla</button>
         </div>
         </dialog>
+
+
+        <!-- Delete account Bis Modal Component -->
+     <dialog id="dialog-deleteaccountBis" class="mdl-dialog mdl-dialog-custom">
+            <div class="mdl-title">
+                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">delete</i>Ci siamo quasi</h4> 
+            </div>
+
+            <div class="mdl-dialog__content">
+              Abbiamo inviato una email al tuo indirizzo di posta elettronica contenente il link per l'eliminazione del tuo account.
+              </form>
+            </div>
+
+            <div class="mdl-dialog__actions">
+              <button id="closebtn-deleteaccountBis" type="button" class="mdl-button dialog-close">Chiudi</button>
+            </div>
+      </dialog>
+
+      <!-- Exit Modal Component -->
+     <dialog id="dialog-exit" class="mdl-dialog mdl-dialog-custom">
+            <div class="mdl-title">
+                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Logout</h4> 
+                <p class="mdl-dialog__sub">Esci dal tuo account</p>
+            </div>
+
+            <div class="mdl-dialog__content">
+              Sei sicuro di voler uscire dal tuo account?
+              </form>
+            </div>
+
+            <div class="mdl-dialog__actions">
+              <button id="enterbtn-exit" type="button" class="mdl-button dialog-close">Esci</button>
+              <button id="closebtn-exit" type="button" class="mdl-button dialog-close">Annulla</button>
+            </div>
+      </dialog>
+
+
 
  <!-- MyWifiList Modal Component -->
         <dialog id="dialog-mywifi" class="mdl-dialog mdl-dialog-custom">

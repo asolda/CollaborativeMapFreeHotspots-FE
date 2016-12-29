@@ -222,10 +222,34 @@ function addNotLoggedModal(){
 function addLoggedModal(){
     var editpassword, deleteaccount,mywifi;
     
+    setExitModal();
     setEditPasswordModal();
+    setEditPasswordBisModal();
     setDeleteAccountModal();
+    setDeleteAccountBisModal();
     setMyWifiModal();
     
+
+    function setExitModal() {
+      document.getElementById('exitSystem').addEventListener('click', function(){
+        exitDialog = document.getElementById('dialog-exit');
+        if (!exitDialog.showModal){
+          dialogPolyfill.registerDialog(exitDialog);
+        }
+
+        var v = document.getElementById('closebtn-exit');
+        v.addEventListener('click', function(){
+          exitDialog.close();
+        });
+
+         var vv = document.getElementById('enterbtn-exit');
+         vv.addEventListener('click', function(){
+          // TODO logout()
+         });
+        exitDialog.showModal();
+      });
+    }
+
     function setEditPasswordModal(){
         
         document.getElementById('show-editpassword').addEventListener('click', function(){
@@ -254,6 +278,26 @@ function addLoggedModal(){
         
     } //./setEditPasswordModal
     
+
+    function setEditPasswordBisModal() {
+      document.getElementById('enterbtn-editpassword').addEventListener('click', function(){
+         editPasswordBis = document.getElementById('dialog-editPasswordBis');
+            if (!editPasswordBis.showModal) {
+                    dialogPolyfill.registerDialog(recover);
+            }
+         
+                 /** close button function **/
+                  var v = document.getElementById('closebtn-editPasswordBis');
+                  v.addEventListener('click', function() {
+                     editPasswordBis.close(); 
+                  });
+
+             //TODO controllo campi
+             editpassword.close();
+             editPasswordBis.showModal();
+      })
+    }
+
     function setDeleteAccountModal(){
         
         document.getElementById('show-deleteaccount').addEventListener('click', function(){
@@ -283,6 +327,27 @@ function addLoggedModal(){
     } //./setDeleteaccountModal
     
     
+    function setDeleteAccountBisModal() {
+      document.getElementById('enterbtn-deleteaccount').addEventListener('click', function(){
+         deleteaccountBis = document.getElementById('dialog-deleteaccountBis');
+            if (!deleteaccountBis.showModal) {
+                    dialogPolyfill.registerDialog(recover);
+            }
+         
+                 /** close button function **/
+                  var v = document.getElementById('closebtn-deleteaccountBis');
+                  v.addEventListener('click', function() {
+                     deleteaccountBis.close(); 
+                  });
+
+             //TODO controllo campi
+             deleteaccount.close();
+             deleteaccountBis.showModal();
+      })
+    }
+
+
+
     
         function setMyWifiModal(){
         
