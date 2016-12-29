@@ -230,6 +230,7 @@ function addLoggedModal(){
     setMyWifiModal();
     
 
+    
     function setExitModal() {
       document.getElementById('exitSystem').addEventListener('click', function(){
         exitDialog = document.getElementById('dialog-exit');
@@ -371,9 +372,47 @@ function addLoggedModal(){
            mywifi.showModal();
                 
         }); //./document
+            
+        setDeleteWifi(); //aggiunge il modale per eliminare una rete
         
     } //./setMyWifiModal
+       
+    
+    
+    function setDeleteWifi(){
         
+        document.getElementById('show-deletewifi').addEventListener('click', function(){
+            
+            deletewifi = document.getElementById('dialog-deletewifi'); //get dialog element
+            
+            if (! deletewifi.showModal) {
+                dialogPolyfill.registerDialog(deletewifi);
+            }
+            
+            /** close button function **/
+            var v = document.getElementById('closebtn-deletewifi');
+            v.addEventListener('click', function() {
+                deletewifi.close();
+                mywifi.showModal();
+            });
+            
+
+            /** delete button **/
+            
+                //send request
+                //refresh wifi list
+                //close this modal
+                //show wifi list
+            
+            mywifi.close();
+           deletewifi.showModal();
+                
+        }); //./document
+        
+    } //./setDeleteWifi
+    
+    
+    
 }//./addLoggedModal
 
 
