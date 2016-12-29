@@ -398,7 +398,7 @@ function addLoggedModal(){
             
 
             /** delete button **/
-            
+                //TODO
                 //send request
                 //refresh wifi list
                 //close this modal

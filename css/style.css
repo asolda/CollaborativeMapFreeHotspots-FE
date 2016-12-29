@@ -36,6 +36,11 @@ html, body {
 
 
 /** ________________3. Drawer & Menu________________ */
+
+#user-drawer {
+ background-color: white !important;
+}
+
 #logged-user-navigation .mdl-navigation__link { /** Seleziona le voci del menu */
     padding-left: 10px !important; 
     padding-top: 10px !important;  
@@ -44,6 +49,7 @@ html, body {
 
 #logged-user-navigation a i { /** Seleziona le icone delle voci del menu */
     padding-right: 10px; /** Padding tra l'icona e il testo della voce del menu */
+    color: rgb(77, 144, 254) !important;
 }
 
 
@@ -115,11 +121,10 @@ form { /** Elimina il margine a tutti i form */
     padding-bottom: 30px !important;
 }
 
-/** Dialog mywifi custom style **/
-#dialog-mywifi{
-    width: 450px;
-    height: 500px;
-}
+
+
+
+/** ------ Dialog mywifi custom style ------- **/
 .mdl-list__item{
     padding: 5px 16px 5px 16px !important;
 }
@@ -133,6 +138,7 @@ form { /** Elimina il margine a tutti i form */
 .mdl-list__item--three-line{
     height: auto !important;
 }
+
 #dialog-mywifi .mdl-dialog__content{
     padding: 0 15px 0 15px;
     height: 320px;
@@ -143,7 +149,9 @@ form { /** Elimina il margine a tutti i form */
   color: rgb(66, 133, 244);
 }
 
-
+.mdl-list__item-primary-content i {
+  color: rgb(77, 144, 254) !important;
+}
 
 
 

@@ -116,13 +116,13 @@
       <!-- Delete WiFi Modal Component -->
      <dialog id="dialog-deletewifi" class="mdl-dialog mdl-dialog-custom">
             <div class="mdl-title">
-                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">wifi</i>Elimina rete</h4> 
-                <p class="mdl-dialog__sub">Sei sicuro di voler eliminare la rete?</p>
+                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">settings</i>Elimina rete Wi-Fi</h4> 
+                <p class="mdl-dialog__sub">Sei sicuro di voler eliminare la rete selezionata?</p>
             </div>
 
             <div class="mdl-dialog__content">
                 
-                <ul class="mywifi mdl-list">
+                
               <li class="mdl-list__item mdl-list__item--three-line">
                 <span class="mdl-list__item-primary-content">
                   <i class="material-icons mdl-list__item-avatar">wifi</i>
@@ -132,7 +132,7 @@
                   </span>
                 </span>
               </li>
-                </ul>
+                
                 
             </div>
 
@@ -142,10 +142,14 @@
             </div>
       </dialog>
 
+
+
+
+
  <!-- MyWifiList Modal Component -->
         <dialog id="dialog-mywifi" class="mdl-dialog mdl-dialog-custom">
         <div class="mdl-title">
-            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Le mie reti</h4>
+            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">settings</i>Gestisci reti Wi-Fi</h4>
             <p class="mdl-dialog__sub">Modifica o elimina le tue reti WiFi</p>
         </div>
         <div class="mdl-dialog__content">
@@ -153,6 +157,7 @@
             <ul class="mywifi mdl-list">
                 
               <li id="rete1" class="mdl-list__item mdl-list__item--three-line">
+
                 <span class="mdl-list__item-primary-content">
                   <i class="material-icons mdl-list__item-avatar">wifi</i>
                   <span>Rete 1</span>
@@ -160,12 +165,15 @@
                     Via prova 123, 84035 Polla, SA, IT
                   </span>
                 </span>
+
                 <span class="mdl-list__item-secondary-content">
-                  <!-- Right aligned menu below button -->
-                    <button id="1"
+                     <button id="1"
                             class="mdl-button mdl-js-button mdl-button--icon">
                       <i class="material-icons">more_vert</i>
-                    </button>
+                     </button>
+                     <div class="mdl-tooltip" for="1"> <!-- Tooltip -->
+                        Altro
+                     </div>
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="1">
@@ -173,6 +181,7 @@
                       <li id="show-deletewifi" class="mdl-menu__item">Elimina</li>
                     </ul>
                 </span>
+
               </li>
               
                 <li class="mdl-list__item mdl-list__item--three-line">
@@ -189,6 +198,9 @@
                             class="mdl-button mdl-js-button mdl-button--icon">
                       <i class="material-icons">more_vert</i>
                     </button>
+                    <div class="mdl-tooltip" for="2"> <!-- Tooltip -->
+                        Altro
+                    </div>
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="2">
@@ -212,6 +224,9 @@
                             class="mdl-button mdl-js-button mdl-button--icon">
                       <i class="material-icons">more_vert</i>
                     </button>
+                    <div class="mdl-tooltip" for="3"> <!-- Tooltip -->
+                        Altro
+                    </div>
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="3">
@@ -235,6 +250,9 @@
                             class="mdl-button mdl-js-button mdl-button--icon">
                       <i class="material-icons">more_vert</i>
                     </button>
+                    <div class="mdl-tooltip" for="4"> <!-- Tooltip -->
+                        Altro
+                    </div>
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="4">
@@ -254,13 +272,16 @@
                 </span>
                 <span class="mdl-list__item-secondary-content">
                   <!-- Right aligned menu below button -->
-                    <button id="4"
+                    <button id="5"
                             class="mdl-button mdl-js-button mdl-button--icon">
                       <i class="material-icons">more_vert</i>
                     </button>
+                    <div class="mdl-tooltip" for="5"> <!-- Tooltip -->
+                        Altro
+                    </div>
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                        for="4">
+                        for="5">
                       <li class="mdl-menu__item">Modifica</li>
                       <li class="mdl-menu__item">Elimina</li>
                     </ul>
@@ -277,13 +298,16 @@
                 </span>
                 <span class="mdl-list__item-secondary-content">
                   <!-- Right aligned menu below button -->
-                    <button id="4"
+                    <button id="6"
                             class="mdl-button mdl-js-button mdl-button--icon">
                       <i class="material-icons">more_vert</i>
                     </button>
+                    <div class="mdl-tooltip" for="6"> <!-- Tooltip -->
+                        Altro
+                    </div>
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                        for="4">
+                        for="6">
                       <li class="mdl-menu__item">Modifica</li>
                       <li class="mdl-menu__item">Elimina</li>
                     </ul>
