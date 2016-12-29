@@ -72,7 +72,7 @@ function initMap() {
   }
   console.debug(markers);
 
-  loadMarkers(lastCenter.lat(), lastCenter.lng(), 600);
+  loadMarkers(lastCenter.lat(), lastCenter.lng(), 0, 0);
   console.debug(markers);
 
   loadPins(map, markers, infowindowMarker);
@@ -107,6 +107,18 @@ function initMap() {
       lng_diff = calcDistance(newPosNE.lat(), newPosNE.lng(), newPosNE.lat(), center.lng());
       lat_diff = calcDistance(newPosNE.lat(), newPosNE.lng(), center.lat(), newPosNE.lng());
       radius = Math.max(lng_diff, lat_diff);
+      extreme = {
+        lat: 0.0,
+        lng: 0.0
+      };
+      if(radius == lng_diff){
+        extreme.lat = center.lat();
+        extreme.lng = newPosNE.lng();
+      }
+      if(radius == lat_diff){
+        extreme.lat = newPosNE.lat();
+        extreme.lng = center.lng();
+      }
       console.debug(lastCenter.lat() + " " + lastCenter.lng() + " " + radius);
       lastPosNE = newPosNE;
       lastPosSW = newPosSW;
@@ -118,7 +130,7 @@ function initMap() {
       //console.debug(markers);
 
 
-      loadMarkers(lastCenter.lat(), lastCenter.lng(), radius);
+      loadMarkers(lastCenter.lat(), lastCenter.lng(), extreme.lat, extreme.lng);
       //console.debug(markers);
 
       loadPins(map, markers, infowindowMarker);
@@ -202,21 +214,21 @@ function deleteMarkers() {
 }
 
 
-function loadMarkers(lat, lng, radius) {
+function loadMarkers(lat, lng, rad_lat, rad_lng) {
   //function loadMarkers(lat, lng, radius) {
 
 //funzione per caricare i markers da be
 var image = 'http://marcoaprea.altervista.org/Goopher/golang-logo2.png';
 
-var url_request = 'http://127.0.0.1:8080/pin/get_networks/'+lat+'/'+lng+'/'+radius+'/'+radius;
+var url_request = 'http://127.0.0.1:8080/pin/get_networks/'+lat+'/'+lng+'/'+rad_lat+'/'+rad_lng;
 $.ajax({
     type: 'GET',
     url: url_request,
     async: false,
     success: function(data) {
-      var data_from_back = jQuery.parseJSON(data);
+      //var data_from_back = jQuery.parseJSON(data);
       //console.debug(data);
-      $.each(JSON.parse(data), function(idx, pin){
+      $.each(data, function(idx, pin){
       //console.debug(pin.latitudine + " " + pin.longitudine + "");
       var mark = {
         position: {
