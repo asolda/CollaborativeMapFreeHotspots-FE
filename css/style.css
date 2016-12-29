@@ -77,6 +77,8 @@ html, body {
 /** ________________4. Dialog custom style________________ */
 .mdl-dialog-custom { /** Stile custom per il componente dialog di mdl **/
     padding: 0px !important;
+    width: 30%;
+    min-width: 500px;
 }
 
 .mdl-dialog-custom .mdl-dialog__title { /** Elimina il padding top/bottom del dialog predefinito */
