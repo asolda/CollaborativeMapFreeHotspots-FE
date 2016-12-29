@@ -59,7 +59,7 @@
         <script>
             //Initialize LoggedUserHome
 			var cookie = getcookie("actoken32");
-			if (!cookie.equals(""))) {
+			if (!cookie.equals("")) {
 				var id_utente;
 				if (!((id _utente = sessioncheck(cookie)).equals(""))) {  //getcookie restituisce il valore del cookie, che viene passato a sessioncheck; sessioncheck deve restituire l'id dell'utente da passare a createloggedhome
 					createLoggedHome(id_utente);
