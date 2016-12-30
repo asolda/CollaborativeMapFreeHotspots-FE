@@ -37,6 +37,26 @@ html, body {
 
 /** ________________3. Drawer & Menu________________ */
 
+#mainTitle {
+ margin-bottom: 0px !important;
+ padding-bottom: 0px !important;
+}
+
+#logged-user-navigation {
+ margin-top: 0px !important;
+ padding-top: 0px !important;
+}
+
+#imageLogo {
+  padding-top: 20px;
+  width: 100%;
+  height: 100px;
+  background-image: url("../assets/logo.png");
+  background-repeat: no-repeat;
+  background-size: 80px 100px;
+  background-position: center;
+}
+
 #user-drawer {
  background-color: white !important;
 }

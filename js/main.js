@@ -25,7 +25,17 @@ function createNotLoggedHome(){
 
 /** Funzione di inizializzazione della pagina per utenti connessi **/
 function createLoggedHome(){
-    
+
+    // Rimuove l'immagine e lo spazio
+    var parent = document.getElementById("toDelete").parentNode;
+    var childToRemove = document.getElementById("toDelete");
+    parent.removeChild(childToRemove);
+
+    parent = document.getElementById("toDelete2").parentNode;
+    childToRemove = document.getElementById("toDelete2");
+    parent.removeChild(childToRemove);
+
+
     // Crea il menu con la funzione per uscire
     hello = '<nav class="mdl-navigation">' +
               '<a id="exitSystem" href="#" class="mdl-navigation__link menuHeader">Ciao <span id="name">Utente</span>, esci</a>' +
@@ -33,7 +43,10 @@ function createLoggedHome(){
     
     // Crea il menu 
     menu = '<div id="user-drawer" class="mdl-layout__drawer">' +
-              '<span class="mdl-layout-title">Alwaysconnected</span>' +
+              '<div id="imageLogo"></div>' +
+              '<span class="mdl-layout-title" id="mainTitle">' +
+                'Alwaysconnected' + 
+              '</span>' +
               '<nav id="logged-user-navigation" class="mdl-navigation">' +
                 '<hr/>' +
                 '<span class="mdl-layout-title subtitle">Gestione account</span>' +
