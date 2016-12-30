@@ -426,23 +426,29 @@ function addLoggedModal(){
             showMyNotificationModal.showModal();
 
             function handleMouseClick(e) {
-              var element = e.target.firstChild.nextElementSibling;
-               //nextElementSibling
-              alert(element.nodeName);
-              if (element.hasAttribute("hidden"))
+              //TODO Aggiornare il contatore notifiche e il badge
+              var clicked_element = e.target;
+
+              if (clicked_element.nodeName == "I")
+                 clicked_element.innerHTML = "notifications_none";
+              else if (clicked_element.nodeName == "SPAN")
+                 clicked_element.previousElementSibling.innerHTML = "notifications_none";
+
+              clicked_element = clicked_element.parentNode.nextElementSibling;
+              
+              if (clicked_element.hasAttribute("hidden"))
               {
-                element.removeAttribute("hidden");
-                alert("SI");
+                clicked_element.removeAttribute("hidden");
               }
               else
               {
-                element.setAttribute("hidden", "true");
-                alert("NO");
+                clicked_element.setAttribute("hidden", "true");
               }
+              
             }
             var x = document.getElementsByClassName("toHide");
              for (i = 0; i < x.length; i++) {
-               x[i].addEventListener("click", handleMouseClick);
+               x[i].addEventListener("click", handleMouseClick, false);
              }
             
       });
