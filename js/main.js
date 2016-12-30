@@ -38,7 +38,7 @@ function createLoggedHome(){
                 '<hr/>' +
                 '<span class="mdl-layout-title subtitle">Gestione account</span>' +
                 '<a id="show-mywifi" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">wifi</i><span class="space"/>Le mie reti</a>' +
-                '<a class="mdl-navigation__link" href=""><span class="space"/><i class="material-icons">notifications</i><span class="space"/><span class="mdl-badge" data-badge="2">Notifiche</span></a>'+
+                '<a id="show-mynotification" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">notifications</i><span class="space"/><span class="mdl-badge" data-badge="2">Notifiche</span></a>'+
                 '<a id="show-editpassword" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">vpn_key</i><span class="space"/>Modifica Password</a>' +
                 '<a id="show-deleteaccount" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">delete</i><span class="space"/>Elimina Account</a>' +
               '</nav>' +
@@ -228,7 +228,7 @@ function addLoggedModal(){
     setDeleteAccountModal();
     setDeleteAccountBisModal();
     setMyWifiModal();
-    
+    setMyNotificationModal();
 
     
     function setExitModal() {
@@ -412,6 +412,41 @@ function addLoggedModal(){
     } //./setDeleteWifi
     
     
+
+    function setMyNotificationModal() {
+      document.getElementById('show-mynotification').addEventListener('click', function(){
+            showMyNotificationModal = document.getElementById('dialog-mynotification'); //get dialog element
+            if (! showMyNotificationModal.showModal) {
+                showMyNotificationModal.registerDialog(showMyNotificationModal);
+            }
+            var v = document.getElementById('closebtn-mynotification');
+            v.addEventListener('click', function() {
+                showMyNotificationModal.close();
+            });
+            showMyNotificationModal.showModal();
+
+            function handleMouseClick(e) {
+              var element = e.target.firstChild.nextElementSibling;
+               //nextElementSibling
+              alert(element.nodeName);
+              if (element.hasAttribute("hidden"))
+              {
+                element.removeAttribute("hidden");
+                alert("SI");
+              }
+              else
+              {
+                element.setAttribute("hidden", "true");
+                alert("NO");
+              }
+            }
+            var x = document.getElementsByClassName("toHide");
+             for (i = 0; i < x.length; i++) {
+               x[i].addEventListener("click", handleMouseClick);
+             }
+            
+      });
+    }
     
 }//./addLoggedModal
 

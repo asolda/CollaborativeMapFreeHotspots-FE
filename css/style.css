@@ -123,8 +123,12 @@ form { /** Elimina il margine a tutti i form */
 
 
 
+/** ------ Dialog mywifi/notification custom style ------- **/
+#dialog-mynotification a {
+ text-decoration: none;
+ color: black;
+}
 
-/** ------ Dialog mywifi custom style ------- **/
 .mdl-list__item{
     padding: 5px 16px 5px 16px !important;
 }
@@ -132,14 +136,14 @@ form { /** Elimina il margine a tutti i form */
     color: #757575;
     background-color: white;
 }
-#dialog-wifi{
+#dialog-wifi, #dialog-mynotification {
     overflow: hidden !important;
 }
 .mdl-list__item--three-line{
     height: auto !important;
 }
 
-#dialog-mywifi .mdl-dialog__content{
+#dialog-mywifi .mdl-dialog__content, #dialog-mynotification .mdl-dialog__content{
     padding: 0 15px 0 15px;
     height: 320px;
     overflow: auto;
