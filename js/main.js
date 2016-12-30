@@ -50,10 +50,10 @@ function createLoggedHome(){
               '<nav id="logged-user-navigation" class="mdl-navigation">' +
                 '<hr/>' +
                 '<span class="mdl-layout-title subtitle">Gestione account</span>' +
-                '<a id="show-mywifi" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">wifi</i><span class="space"/>Le mie reti</a>' +
-                '<a id="show-mynotification" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">notifications</i><span class="space"/><span class="mdl-badge" data-badge="2">Notifiche</span></a>'+
-                '<a id="show-editpassword" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">vpn_key</i><span class="space"/>Modifica Password</a>' +
-                '<a id="show-deleteaccount" class="mdl-navigation__link" href="#"><span class="space"/><i class="material-icons">delete</i><span class="space"/>Elimina Account</a>' +
+                '<a id="show-mywifi" class="mdl-navigation__link drawerlink" href="#"><span class="space"/><i class="material-icons">wifi</i><span class="space"/>Le mie reti</a>' +
+                '<a id="show-mynotification" class="mdl-navigation__link drawerlink" href="#"><span class="space"/><i class="material-icons">notifications</i><span class="space"/><span class="mdl-badge" data-badge="2">Notifiche</span></a>'+
+                '<a id="show-editpassword" class="mdl-navigation__link drawerlink" href="#"><span class="space"/><i class="material-icons">vpn_key</i><span class="space"/>Modifica Password</a>' +
+                '<a id="show-deleteaccount" class="mdl-navigation__link drawerlink" href="#"><span class="space"/><i class="material-icons">delete</i><span class="space"/>Elimina Account</a>' +
               '</nav>' +
            '</div>';
     

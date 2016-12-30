@@ -38,8 +38,17 @@ html, body {
 /** ________________3. Drawer & Menu________________ */
 
 #mainTitle {
- margin-bottom: 0px !important;
- padding-bottom: 0px !important;
+ text-align: center !important;
+ padding: 0px;
+}
+
+.mdl-layout__drawer {
+  width: 320px;
+  left: -160px;
+}
+
+.mdl-layout__drawer.is-visible {
+  left: 0;
 }
 
 #logged-user-navigation {
@@ -96,6 +105,9 @@ html, body {
 }
 
 
+.mdl-navigation__link.drawerlink {
+  height:30px !important;
+}
 
 
 
