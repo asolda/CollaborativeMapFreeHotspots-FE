@@ -33,7 +33,7 @@ function createLoggedHome(){
     
     // Crea il menu 
     menu = '<div id="user-drawer" class="mdl-layout__drawer">' +
-              '<span class="mdl-layout-title">AlwaysConnected</span>' +
+              '<span class="mdl-layout-title">Alwaysconnected</span>' +
               '<nav id="logged-user-navigation" class="mdl-navigation">' +
                 '<hr/>' +
                 '<span class="mdl-layout-title subtitle">Gestione account</span>' +
