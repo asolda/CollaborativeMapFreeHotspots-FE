@@ -6,6 +6,7 @@
     5.Add WiFi Action button
     6.Maps
     7.Splash Screen
+    8.Conferme
 */
 
 
@@ -231,7 +232,7 @@ form { /** Elimina il margine a tutti i form */
 
 
 
-/**_________________7. Splash Screen___________*/
+/**_________________7. Splash Screen_________________*/
 
 #splashscreen {
     position: fixed;
@@ -257,4 +258,25 @@ form { /** Elimina il margine a tutti i form */
 
 #logoSplashScreen > h5 {
   letter-spacing: 5px;
+}
+
+
+
+
+
+/**_________________8. Conferme_________________*/
+
+#conferma button {
+  color: white !important;
+  background-color: rgb(77, 144, 254) !important; 
+}
+
+#conferma table {
+  width: 100%;
+  height: 100%;
+  color: rgb(131, 131, 131);
+}
+
+#conferma th {
+  vertical-align: top;
 }
