@@ -5,6 +5,7 @@
     4.Dialog custom style
     5.Add WiFi Action button
     6.Maps
+    7.Splash Screen
 */
 
 
@@ -15,6 +16,7 @@ html, body {
   margin: 0px;
   padding: 0px;
 }
+
 
 
 
@@ -209,4 +211,35 @@ form { /** Elimina il margine a tutti i form */
 #map {
     width: 100%;
     position: static !important;
+}
+
+
+
+
+
+/**_________________7. Splash Screen___________*/
+#splashscreen {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height: 100%;
+    background-color:white;
+    z-index: 50;
+}
+
+#splashscreen table {
+  width: 100%;
+  height: 100%;
+}
+
+#logoSplashScreen {
+  padding: 0px;
+  margin: 0px;
+  color: rgb(131, 131, 131);
+  text-align: bottom;
+}
+
+#logoSplashScreen > h5 {
+  letter-spacing: 5px;
 }

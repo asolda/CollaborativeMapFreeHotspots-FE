@@ -26,7 +26,18 @@
 	<script type="text/javascript" src="js/getcookie.js"></script>
     </head>
 
+    
+  </div> <!-- End of .main class -->
     <body>
+       <div id="splashscreen"> 
+        <table>
+             <tbody>
+               <tr><td></td><td></td><td></td></tr>
+               <tr><td></td><th><img src="./assets/logo.png" width="180" height="240"/><br/><br/><div class="mdl-spinner mdl-js-spinner is-active"></div></th><td></td></tr>
+               <tr><td></td><th id="logoSplashScreen"><h3>Alwaysconnected</h3><h5>COLLABORATIVE MAP OF FREE HOTSPOT</h5></th><td></td></tr>
+             </tbody>
+        </table>
+       </div>
         <!-- Mostra sempre un header, anche su schermi piccoli. -->
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
@@ -86,6 +97,10 @@
             segnala($('#utente').val(),$('#rete').val(),$('#tipo').val(),$('#dettagli').val());
           });
         </script>
-    
+         
+        
+        <script defer>
+          $('#splashscreen').fadeOut(3000);
+        </script>
     </body>
 </html>
