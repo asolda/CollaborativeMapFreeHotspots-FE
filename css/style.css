@@ -15,6 +15,8 @@
 html, body {
   margin: 0px;
   padding: 0px;
+  width: 100%;
+  height: 100%;
 }
 
 
@@ -96,6 +98,7 @@ html, body {
 }
 
 .menuHeader {
+  font-size: medium !important;
   color: #C5CAE9 !important;
 }
 .menuHeader:hover {
@@ -121,6 +124,11 @@ html, body {
 
 
 /** ________________4. Dialog custom style________________ */
+
+.mdl-dialog__content {
+  font-size: medium !important;
+}
+
 .mdl-dialog-custom { /** Stile custom per il componente dialog di mdl **/
     padding: 0px !important;
     width: 30%;
@@ -226,7 +234,7 @@ form { /** Elimina il margine a tutti i form */
 /**_________________7. Splash Screen___________*/
 
 #splashscreen {
-    position: absolute;
+    position: fixed;
     top:0;
     left:0;
     width:100%;
