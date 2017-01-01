@@ -43,9 +43,10 @@ html, body {
 /** ________________3. Drawer & Menu________________ */
 #badgeNotificheHeader {
   position: fixed;
-  top: 20px;
-  left: 35px;
+  top: 22px;
+  left: 30px;
   z-index: 5;
+  cursor: pointer;
 }
 
 #mainTitle {
@@ -157,6 +158,9 @@ html, body {
 
 
 /** ________________4. Dialog custom style________________ */
+.mdl-dialog__actions button {
+  color: rgb(255, 64, 129) !important;
+}
 
 .mdl-dialog__content {
   font-size: medium !important;

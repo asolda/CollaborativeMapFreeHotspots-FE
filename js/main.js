@@ -469,7 +469,7 @@ function addLoggedModal(){
             showMyNotificationModal.showModal();
 
             function handleMouseClick(e) {
-              //TODO Aggiornare il contatore notifiche e il badge
+              //TODO Aggiornare il contatore notifiche e i 2 badge
               var clicked_element = e.target;
 
               if (clicked_element.nodeName == "I")
