@@ -19,14 +19,17 @@ function createNotLoggedHome(){
        $('body').append(data); //Li aggiunge all'index
         addNotLoggedModal(); //Li inizializza
     });
+
+    document.getElementById("badgeNotificheMenuHeader").setAttribute("hidden", "true");
      
 } //./createNotLoggedHome
 
 
 /** Funzione di inizializzazione della pagina per utenti connessi **/
 function createLoggedHome(){
+    
 
-    // Rimuove l'immagine e lo spazio
+    // Rimuove l'immagine(logo) e lo spazio
     var parent = document.getElementById("toDelete").parentNode;
     var childToRemove = document.getElementById("toDelete");
     parent.removeChild(childToRemove);
@@ -39,19 +42,23 @@ function createLoggedHome(){
     // Crea il menu con la funzione per uscire
     hello = '<nav class="mdl-navigation">' +
               '<a id="exitSystem" href="#" class="mdl-navigation__link menuHeader">Ciao <span id="name">Utente</span>, esci</a>' +
-            '</nav>'
+            '</nav>';
     
     // Crea il menu 
     menu = '<div id="user-drawer" class="mdl-layout__drawer">' +
+              '<span id="closeDrawer" class="iconCloseDrawer">' +
+               '<i id="iconCloseDrawerOne" class="material-icons">navigate_before</i>' +
+               '<i id="iconCloseDrawerTwo" class="material-icons">navigate_before</i>' +
+              '</span>' +
               '<div id="imageLogo"></div>' +
               '<span class="mdl-layout-title" id="mainTitle">' +
                 'Alwaysconnected' + 
               '</span>' +
-              '<nav id="logged-user-navigation" class="mdl-navigation">' +
+              '<nav id="logged-user-navigation" class="mdl-navigation">' +  //id = badgeNotificheMenu
                 '<hr/>' +
                 '<span class="mdl-layout-title subtitle">Gestione account</span>' +
                 '<a id="show-mywifi" class="mdl-navigation__link drawerlink" href="#"><span class="space"/><i class="material-icons">wifi</i><span class="space"/>Le mie reti</a>' +
-                '<a id="show-mynotification" class="mdl-navigation__link drawerlink" href="#"><span class="space"/><i class="material-icons">notifications</i><span class="space"/><span class="mdl-badge" data-badge="2">Notifiche</span></a>'+
+                '<a id="show-mynotification" class="mdl-navigation__link drawerlink" href="#"><span class="space"/><i class="material-icons">notifications</i><span class="space"/>Notifiche<span hidden class="mdl-badge" data-badge="" id="badgeNotificheMenu"></span></a>'+
                 '<a id="show-editpassword" class="mdl-navigation__link drawerlink" href="#"><span class="space"/><i class="material-icons">vpn_key</i><span class="space"/>Modifica Password</a>' +
                 '<a id="show-deleteaccount" class="mdl-navigation__link drawerlink" href="#"><span class="space"/><i class="material-icons">delete</i><span class="space"/>Elimina Account</a>' +
               '</nav>' +
@@ -63,10 +70,15 @@ function createLoggedHome(){
                     '<i class="material-icons">add</i>'+
                   '</button>'+
                   '<div class="mdl-tooltip mdl-tooltip--left mdl-tooltip--large" data-mdl-for="show-addwifi">' +
-                    'Inserisci nuova rete WiFi' +
+                    'Inserisci nuova rete Wi-Fi' +
                   '</div>' +
                 '</div>';
 
+    /*
+    document.getElementById("closeDrawer").addEventListener("click", function(){
+       $('.mdl-layout__drawer').MaterialLayout.toggleDrawer();
+    });
+    */
     
     /** Aggiunge le 3 componenti prima create:
         hello, nell'header;
@@ -84,8 +96,26 @@ function createLoggedHome(){
         addLoggedModal(); //Li inizializza
     });
     
+    gestioneNotifiche();
 } 
 
+
+function gestioneNotifiche() {
+  //GESTIONE NOTIFICHE 
+     var badgeHeader = document.getElementById("badgeNotificheHeader");
+     var badgeMenu = document.getElementById("badgeNotificheMenu");
+
+     //Se ci sono notifiche rendere visibilei i badge (nell'header e nel menù) eliminando l'attributo hidden (di default è hidden) e settare il numero di notifiche l'attributo data-badge="numero", altrimenti nasconderlo con hidden false
+      badgeHeader.removeAttribute("hidden");
+      badgeHeader.setAttribute("data-badge", "2");
+ 
+      badgeMenu.removeAttribute("hidden");
+      badgeMenu.setAttribute("data-badge", "2");
+
+     //Altrimenti nascondere il badge
+      //badgeHeader.setAttribute("hidden", "true");
+      //badgeMenu.setAttribute("hidden", "true");
+}
 
 /** Inizializza i modali di un utente non connesso 
     +Login

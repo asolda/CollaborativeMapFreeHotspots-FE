@@ -41,6 +41,12 @@ html, body {
 
 
 /** ________________3. Drawer & Menu________________ */
+#badgeNotificheHeader {
+  position: fixed;
+  top: 20px;
+  left: 35px;
+  z-index: 5;
+}
 
 #mainTitle {
  text-align: center !important;
@@ -64,6 +70,7 @@ html, body {
 }
 
 #imageLogo {
+  position: relative;
   padding-top: 30px;
   width: 100%;
   height: 100px;
@@ -71,6 +78,31 @@ html, body {
   background-repeat: no-repeat;
   background-size: 80px 105px;
   background-position: center;
+}
+
+.iconCloseDrawer {
+ z-index: 4;
+ position: absolute;
+ color: rgb(153, 153, 153);
+ top: 15px;
+ right: 15px;
+}
+
+.iconCloseDrawer:hover {
+ cursor: pointer;
+ color: rgb(127, 127, 127);
+}
+
+#iconCloseDrawerOne {
+ margin: 0px;
+ padding: 0px;
+ position: relative;
+ right: -18px;
+}
+
+#iconCloseDrawerTwo {
+  margin: 0px;
+  padding: 0px;
 }
 
 #user-drawer {

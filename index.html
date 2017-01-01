@@ -1,4 +1,4 @@
-﻿<!DOCTYPE>
+﻿<!DOCTYPE html>
 
 <html>
 
@@ -38,6 +38,8 @@
              </tbody>
         </table>
        </div>
+
+       <span hidden class="mdl-badge" data-badge="" id="badgeNotificheHeader"></span>
        <script type="text/javascript">
           //Gestione splash screen, attende il caricamento della pagina
          (function(){   
@@ -111,6 +113,11 @@
         <script>
 		 $('#invia_segn').click(function(){
             segnala($('#utente').val(),$('#rete').val(),$('#tipo').val(),$('#dettagli').val());
+          });
+
+          //chiude il menù laterale al click sull'icona <<
+          document.getElementById("closeDrawer").addEventListener("click", function(){
+           $( 'div[class^="mdl-layout__obfuscator"]' ).trigger( "click" );
           });
         </script>
     </body>
