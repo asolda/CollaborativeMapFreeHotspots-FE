@@ -20,7 +20,9 @@ html, body {
   height: 100%;
 }
 
-
+.mdl-tooltip {
+  border-radius: 7px / 7px !important;
+}
 
 
 
@@ -35,7 +37,15 @@ html, body {
 } 
 
 
-
+#tooltipApriMenu {
+ position: fixed;
+ top: 10px;
+ left: 10px;
+ width: 50px;
+ height: 40px;
+ cursor: pointer;
+ z-index: 4;
+}
 
 
 
@@ -209,6 +219,10 @@ form { /** Elimina il margine a tutti i form */
 
 
 /** ------ Dialog mywifi/notification custom style ------- **/
+.mdl-menu__item:hover {
+  color: rgb(77, 144, 254) !important;
+}
+
 #dialog-mynotification a {
  text-decoration: none;
  color: black;
@@ -305,6 +319,10 @@ form { /** Elimina il margine a tutti i form */
 #conferma button {
   color: white !important;
   background-color: rgb(77, 144, 254) !important; 
+}
+
+#conferma button:hover {
+  background-color: #00BCD4 !important; 
 }
 
 #conferma table {

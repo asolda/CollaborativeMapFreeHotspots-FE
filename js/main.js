@@ -27,7 +27,11 @@ function createNotLoggedHome(){
 
 /** Funzione di inizializzazione della pagina per utenti connessi **/
 function createLoggedHome(){
-    
+    document.getElementById("tooltipApriMenu").removeAttribute("hidden");
+    document.getElementById("tooltipApriMenu").addEventListener("click", function(){
+            $( 'div[class^="mdl-layout__obfuscator"]' ).trigger( "click" );
+    });
+
 
     // Rimuove l'immagine(logo) e lo spazio
     var parent = document.getElementById("toDelete").parentNode;
@@ -76,12 +80,6 @@ function createLoggedHome(){
                     'Inserisci nuova rete Wi-Fi' +
                   '</div>' +
                 '</div>';
-
-    /*
-    document.getElementById("closeDrawer").addEventListener("click", function(){
-       $('.mdl-layout__drawer').MaterialLayout.toggleDrawer();
-    });
-    */
     
     /** Aggiunge le 3 componenti prima create:
         hello, nell'header;
