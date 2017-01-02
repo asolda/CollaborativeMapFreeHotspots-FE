@@ -25,21 +25,21 @@ function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restri
                         $('#result').append(ret.message + '</br>');
                     }else if(ret.status==1){
                         $('#result').append(ret.message + '</br>');
-                            if(ret.message.equals("ERROR_DB")){
+                            if(strcmp(ret.message,"ERROR_DB")==0){
                                     //codice per mostrare a frontend l'errore ERROR_DB
-                            }else if(ret.message.equals("ERROR_SSID")){
+                            }else if(strcmp(ret.message,"ERROR_SSID")==0){
                                     //codice per mostrare a frontend l'errore ERROR_SSID
-                            }else if(ret.message.equals("ERROR_PASSWORD")){
+                            }else if(strcmp(ret.message,"ERROR_PASSWORD")==0){
                                     //codice per mostrare a frontend l'errore ERROR_PASSWORD
-                            }else if(ret.message.equals("ERROR_QUALITY")){
+                            }else if(strcmp(ret.message,"ERROR_QUALITY")==0){
                                     //codice per mostrare a frontend l'errore ERROR_QUALITY
-                            }else if(ret.message.equals("ERROR_LOGIN_NECESSARY")){
+                            }else if(strcmp(ret.message,"ERROR_LOGIN_NECESSARY")==0){
                                     //codice per mostrare a frontend l'errore ERROR_LOGIN_NECESSARY
-                            }else if(ret.message.equals("ERROR_RANGE")){
+                            }else if(strcmp(ret.message,"ERROR_RANGE")==0){
                                     //codice per mostrare a frontend l'errore ERROR_RANGE
-                            }else if(ret.message.equals("ERROR_LATITUDE")){
+                            }else if(strcmp(ret.message,"ERROR_LATITUDE")==0){
                                     //codice per mostrare a frontend l'errore ERROR_LATITUDE
-                            }else if(ret.message.equals("ERROR_LONGITUDE")){
+                            }else if(strcmp(ret.message,"ERROR_LONGITUDE")==0){
                                     //codice per mostrare a frontend l'errore ERROR_LONGITUDE
                             }
                     }
@@ -55,7 +55,7 @@ function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restri
         }  
     }
     
-//funzione per  le informazioni di un pin    
+//funzione per visualizzazione le informazioni di un pin    
 function getpininfo(id){
     if(isNaN(id)){
      //codice per mostrare a frontend l'errore ERROR_DB   
@@ -99,9 +99,9 @@ function deletepin(rete_wifi,utente){
                         $('#result').append(ret.message + '</br>');
                     }else if(ret.status==1){
                         $('#result').append(ret.message + '</br>'); 
-                            if(ret.message.equals("ERROR_DB")){
+                            if(strcmp(ret.message,"ERROR_DB")==0){
                                      //codice per mostrare a frontend l'errore ERROR_DB
-                            }else if(ret.message.equals("ERROR_IS_NOT_OWNER")){
+                            }else if(strcmp(ret.message,"ERROR_IS_NOT_OWNER")==0){
                                     //codice per mostrare a frontend l'errore ERROR_IS_NOT_OWNER
                             }        
                       }
