@@ -418,24 +418,59 @@ function addLoggedModal(){
         }); //./document
             
         setDeleteWifi(); //aggiunge il modale per eliminare una rete
-        
+        setEditWiFi();
+
     } //./setMyWifiModal
        
     
-    
+    function setEditWiFi() {
+       var y = document.getElementsByClassName("show-editwifi");
+       for (i = 0; i < y.length; i++) {
+          y[i].addEventListener("click", handleMouseClickEdit, false);
+       }
+       
+       function handleMouseClickEdit(e) {
+         mywifi.close();
+         editwifidialog = document.getElementById('dialog-editwifi'); //get dialog element
+         if (! editwifidialog.showModal) {
+             dialogPolyfill.registerDialog(editwifidialog);
+         }
+         var nameWiFiToEdit = e.target.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].innerHTML;
+         document.getElementById("enterbtn-editwifi").setAttribute("name", nameWiFiToEdit);
+         var snackbarContainer = document.querySelector('#sb-confirm-operation');
+         document.getElementById("subtitleNomeEditRete").innerHTML = nameWiFiToEdit;
+         var v = document.getElementById('closebtn-editwifi');
+                v.addEventListener('click', function() {
+                  editwifidialog.close(); 
+                  mywifi.showModal();
+                });
+         var vv = document.getElementById('enterbtn-editwifi');
+                vv.addEventListener('click', function(){
+                  //TODO modificare effettivamente i dettagli del wi-fi
+                  editwifidialog.close();
+                  data = {message: 'Le modifiche da te richieste sono state apportate con successo. Grazie!'};
+                       snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                });
+         editwifidialog.showModal();
+       }
+                
+    }
+
+
     function setDeleteWifi(){
         
            var x = document.getElementsByClassName("show-deletewifi");
              for (i = 0; i < x.length; i++) {
-               x[i].addEventListener("click", handleMouseClick, false);
+               x[i].addEventListener("click", handleMouseClickDelete, false);
              }
 
-           function handleMouseClick(e) {
+
+           function handleMouseClickDelete(e) {
              deletewifi = document.getElementById('dialog-deletewifi'); //get dialog element
              if (! deletewifi.showModal) {
                 dialogPolyfill.registerDialog(deletewifi);
              }
-             /** close button function **/
+             
              var v = document.getElementById('closebtn-deletewifi');
              v.addEventListener('click', function() {
                 deletewifi.close();
@@ -461,6 +496,7 @@ function addLoggedModal(){
                        //snackbarContainer.MaterialSnackbar.showSnackbar(data);
 
              });
+            
            
             //visualizza la rete selezionata nel modale di conferma eliminazione
             var nameWifiToDelete = e.target.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].innerHTML;

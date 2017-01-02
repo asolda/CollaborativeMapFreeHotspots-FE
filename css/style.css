@@ -28,7 +28,10 @@ html, body {
  z-index: 30 !important;
 }
 
-
+.mdl-snackbar__text {
+  color: yellow !important;
+  font-size: medium !important;
+}
 
 /** ________________2. Header________________ */
 .mdl-layout__header-row {

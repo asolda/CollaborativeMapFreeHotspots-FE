@@ -176,7 +176,7 @@
                      </div>
 
                      <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="buttonNomeRete1">
-                         <li class="mdl-menu__item">Modifica</li>
+                         <li class="mdl-menu__item show-editwifi">Modifica</li>
                          <li class="mdl-menu__item show-deletewifi">Elimina</li>
                      </ul>
                 </span>
@@ -206,7 +206,7 @@
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="2">
-                      <li class="mdl-menu__item">Modifica</li>
+                      <li class="mdl-menu__item show-editwifi">Modifica</li>
                       <li class="mdl-menu__item show-deletewifi">Elimina</li>
                     </ul>
                 </span>
@@ -232,7 +232,7 @@
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="3">
-                      <li class="mdl-menu__item">Modifica</li>
+                      <li class="mdl-menu__item show-editwifi">Modifica</li>
                       <li class="mdl-menu__item show-deletewifi">Elimina</li>
                     </ul>
                 </span>
@@ -258,7 +258,7 @@
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="4">
-                      <li class="mdl-menu__item">Modifica</li>
+                      <li class="mdl-menu__item show-editwifi">Modifica</li>
                       <li class="mdl-menu__item show-deletewifi">Elimina</li>
                     </ul>
                 </span>
@@ -284,7 +284,7 @@
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="5">
-                      <li class="mdl-menu__item">Modifica</li>
+                      <li class="mdl-menu__item show-editwifi">Modifica</li>
                       <li class="mdl-menu__item show-deletewifi">Elimina</li>
                     </ul>
                 </span>
@@ -310,7 +310,7 @@
 
                     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                         for="6">
-                      <li class="mdl-menu__item">Modifica</li>
+                      <li class="mdl-menu__item show-editwifi">Modifica</li>
                       <li class="mdl-menu__item show-deletewifi">Elimina</li>
                     </ul>
                 </span>
@@ -439,3 +439,49 @@
             <button id="closebtn-mynotification" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Chiudi</button>
           </div>
         </dialog>
+
+
+
+
+
+
+<!-- Edit Wi-Fi Modal Component -->
+<dialog id="dialog-editwifi" class="mdl-dialog mdl-dialog-custom">
+   <div class="mdl-title">
+    <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">mode_edit</i>Modifica rete Wi-Fi</h4>
+    <p class="mdl-dialog__sub" id="subtitleNomeEditRete"></p>
+   </div>
+   <div class="mdl-dialog__content">
+     <form>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+         <input class="mdl-textfield__input" type="text" id="newRestrizioni"/>
+         <label class="mdl-textfield__label" for="newRestrizioni">Restrizioni</label>
+         <span class="mdl-textfield__error">Restrizioni non valide</span>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+         <input class="mdl-textfield__input" type="text" id="newRange">
+         <label class="mdl-textfield__label" for="newRange">Range</label>
+         <span class="mdl-textfield__error">Range non valido</span>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="newInfo">
+          <label class="mdl-textfield__label" for="newInfo">Altre informazioni</label>
+          <span class="mdl-textfield__error">Informazioni non valide</span>
+        </div>
+      </form>
+    </div>
+    <div class="mdl-dialog__actions">
+      <button id="enterbtn-editwifi" name="" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect">Modifica</button>
+      <button id="closebtn-editwifi" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Annulla</button>
+    </div>
+</dialog>
+
+
+
+
+
+
+
+
+
+
