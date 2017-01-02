@@ -57,8 +57,6 @@
 
 
 
-
-
         <!-- Delete account Modal Component -->
         <dialog id="dialog-deleteaccount" class="mdl-dialog mdl-dialog-custom">
         <div class="mdl-title">
@@ -475,6 +473,199 @@
       <button id="closebtn-editwifi" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Annulla</button>
     </div>
 </dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ____________________________________SEGNALAZIONI________________________________________- -->
+
+
+<!-- Report Modal Component -->
+        <dialog id="dialog-report" class="mdl-dialog mdl-dialog-custom">
+        <div class="mdl-title">
+            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">warning</i>Segnala rete Wi-Fi</h4>
+            <p class="mdl-dialog__sub">Seleziona il tipo di segnalazione</p>
+        </div>
+        <div class="mdl-dialog__content">
+            <form>
+                
+                <div class="mdl-radio-option">
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                        <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="idRete">
+                        <span class="mdl-radio__label">Rete non esistente</span>
+                    </label>
+                </div>
+                <br/>
+                <div class="mdl-radio-option">
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                        <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="idRete">
+                        <span class="mdl-radio__label">Range errato</span>
+                    </label>
+                </div>
+                <br/>
+                <div class="mdl-radio-option">
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+                        <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="idRete">
+                        <span class="mdl-radio__label">Restrizioni incoerenti</span>
+                    </label>
+                </div>
+                <br/>
+                <div class="mdl-radio-option">
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
+                        <input type="radio" id="option-4" class="mdl-radio__button" name="options" value="idRete">
+                        <span class="mdl-radio__label">Login necessario</span>
+                    </label>
+                </div>
+                
+            </form>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button id="enterbtn-report" type="button" class="mdl-button">Segnala</button>
+            <button id="closebtn-report" type="button" class="mdl-button dialog-close">Annulla</button>
+        </div>
+        </dialog>
+
+
+
+
+<!-- Report rete inesistente Modal Component -->
+      <dialog id="dialog-report-inexistent" class="mdl-dialog mdl-dialog-custom">
+        <div class="mdl-title">
+            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">not_interested</i>Segnala Rete Wi-Fi inesistente</h4>
+        </div>
+        <div class="mdl-dialog__content">
+            <p>In questa schermata &egrave possibile segnalare una rete WiFi presente nel nostro sistema che non ha corrispondenza nella realt&agrave.</p>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button id="enterbtn-inexistent" name="IdRete" type="button" class="mdl-button">Conferma</button>
+            <button id="closebtn-inexistent" type="button" class="mdl-button dialog-close">Annulla</button>
+        </div>
+      </dialog>
+
+
+
+
+
+<!-- Report login necessario Modal Component -->
+        <dialog id="dialog-report-login" class="mdl-dialog mdl-dialog-custom">
+        <div class="mdl-title">
+            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">vpn_key</i>Segnala login necessario</h4>
+        </div>
+        <div class="mdl-dialog__content">
+            <p>In questa schermata &egrave possibile segnalare una rete WiFi presente nel nostro sistema che prevede il login necessario.</p>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button id="enterbtn-report-login" name="IdRete" type="button" class="mdl-button">Conferma</button>
+            <button id="closebtn-report-login" type="button" class="mdl-button dialog-close">Annulla</button>
+        </div>
+        </dialog>
+
+
+
+
+
+
+ <!-- Report range errato Modal Component -->
+        <dialog id="dialog-report-range" class="mdl-dialog mdl-dialog-custom">
+        <div class="mdl-title">
+            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">track_changes</i>Segnala range errato</h4>
+        </div>
+        <div class="mdl-dialog__content">
+            <form>
+                  <div class="mdl-textfield mdl-js-textfield">
+                    <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ></textarea>
+                    <label class="mdl-textfield__label" for="sample5">Informazioni da segnalare</label>
+                  </div>
+            </form>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button id="enterbtn-report-range" name="IdRete" type="button" class="mdl-button">Conferma</button>
+            <button id="closebtn-report-range" type="button" class="mdl-button dialog-close">Annulla</button>
+        </div>
+        </dialog>
+
+
+
+
+        <!-- Report restrizioni incoerenti Modal Component -->
+        <dialog id="dialog-report-restriction" class="mdl-dialog mdl-dialog-custom">
+        <div class="mdl-title">
+            <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">border_color</i>Segnala restrizioni incoerenti</h4>
+        </div>
+        <div class="mdl-dialog__content">
+            <form>
+                  <div class="mdl-textfield mdl-js-textfield">
+                    <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ></textarea>
+                    <label class="mdl-textfield__label" for="sample5">Informazioni da segnalare</label>
+                  </div>
+            </form>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button id="enterbtn-report-restriction" name="IdRete" type="button" class="mdl-button">Conferma</button>
+            <button id="closebtn-report-restriction" type="button" class="mdl-button dialog-close">Annulla</button>
+        </div>
+        </dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -65,6 +65,7 @@ function createLoggedHome(){
                 '<a id="show-mynotification" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">notifications</i><span class="space"/>Notifiche&nbsp&nbsp&nbsp&nbsp&nbsp<span hidden class="mdl-badge" data-badge="" id="badgeNotificheMenu"></span></a>'+
                 '<a id="show-editpassword" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">vpn_key</i><span class="space"/>Modifica Password</a>' +
                 '<a id="show-deleteaccount" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">delete</i><span class="space"/>Elimina Account</a>' +
+                '<a hidden id="test" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">warning</i><span class="space"/>TEST FORM SEGNALAZIONI</a>' +
               '</nav>' +
            '</div>' +
            '<div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="closeDrawer">' +
@@ -273,7 +274,7 @@ function addLoggedModal(){
     setDeleteAccountBisModal();
     setMyWifiModal();
     setMyNotificationModal();
-
+    
     
     function setExitModal() {
       document.getElementById('exitSystem').addEventListener('click', function(){
@@ -556,6 +557,134 @@ function addLoggedModal(){
              }
             
       });
+
+      segnalazione();
+      function segnalazione() {
+        var snackbarContainer = document.querySelector('#sb-confirm-operation');
+        inexistent(); 
+        loginNecessario();
+        rangeErrato();
+        restrizioni();
+         
+
+        document.getElementById("test").addEventListener('click', function(){
+
+          //TODO Ricevere l'ID della rete
+
+          showReport = document.getElementById('dialog-report'); //get dialog element
+            if (! showReport.showModal) {
+                showReport.registerDialog(showMyNotificationModal);
+            }
+            var v = document.getElementById('closebtn-report');
+            v.addEventListener('click', function() {
+                showReport.close();
+            });
+            var vv = document.getElementById('enterbtn-report');
+            vv.addEventListener('click', function() {
+                if(document.getElementById("option-1").checked) {
+                  showReport.close();
+                  showInexistent.showModal();
+                }
+                if(document.getElementById("option-2").checked) {
+                  showReport.close();
+                  showRangeErrato.showModal();
+                }
+                if(document.getElementById("option-3").checked) {
+                  showReport.close();
+                  showRestrizioni.showModal();
+                }
+                if(document.getElementById("option-4").checked) {
+                  showReport.close();
+                  showLoginNecessario.showModal();
+                }
+            });
+            showReport.showModal();
+
+
+        });
+
+               
+               function inexistent() {
+                  showInexistent = document.getElementById('dialog-report-inexistent'); //get dialog element
+                   if (! showInexistent.showModal) {
+                     showInexistent.registerDialog(showInexistent);
+                   }
+                   var v = document.getElementById('closebtn-inexistent');
+                   v.addEventListener('click', function() {
+                      showInexistent.close();
+                      showReport.showModal();
+                   });
+                   var vv = document.getElementById('enterbtn-inexistent');
+                   vv.addEventListener('click', function() {
+                       //TODO Segnalare
+                       data = {message: "La tua segnalazione e' stata notificata al creatore della rete. Grazie!"};
+                       snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                       showInexistent.close();
+                   });
+               }
+
+
+               function loginNecessario() {
+                  showLoginNecessario = document.getElementById('dialog-report-login'); //get dialog element
+                   if (! showLoginNecessario.showModal) {
+                     showLoginNecessario.registerDialog(showLoginNecessario);
+                   }
+                   var v = document.getElementById('closebtn-report-login');
+                   v.addEventListener('click', function() {
+                      showLoginNecessario.close();
+                      showReport.showModal();
+                   });
+                   var vv = document.getElementById('enterbtn-report-login');
+                   vv.addEventListener('click', function() {
+                       //TODO Segnalare
+                       data = {message: "La tua segnalazione e' stata notificata al creatore della rete. Grazie!"};
+                       snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                       showLoginNecessario.close();
+                   });
+               }
+
+               
+               function rangeErrato() {
+                  showRangeErrato = document.getElementById('dialog-report-range'); //get dialog element
+                   if (! showRangeErrato.showModal) {
+                     showRangeErrato.registerDialog(showRangeErrato);
+                   }
+                   var v = document.getElementById('closebtn-report-range');
+                   v.addEventListener('click', function() {
+                      showRangeErrato.close();
+                      showReport.showModal();
+                   });
+                   var vv = document.getElementById('enterbtn-report-range');
+                   vv.addEventListener('click', function() {
+                       //TODO Segnalare
+                       data = {message: "La tua segnalazione e' stata notificata al creatore della rete. Grazie!"};
+                       snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                       showRangeErrato.close();
+                   });
+               }
+
+                  
+
+               function restrizioni() {
+                  showRestrizioni = document.getElementById('dialog-report-restriction'); //get dialog element
+                   if (! showRestrizioni.showModal) {
+                     showRestrizioni.registerDialog(showRestrizioni);
+                   }
+                   var v = document.getElementById('closebtn-report-restriction');
+                   v.addEventListener('click', function() {
+                      showRestrizioni.close();
+                      showReport.showModal();
+                   });
+                   var vv = document.getElementById('enterbtn-report-restriction');
+                   vv.addEventListener('click', function() {
+                       //TODO Segnalare
+                       data = {message: "La tua segnalazione e' stata notificata al creatore della rete. Grazie!"};
+                       snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                       showRestrizioni.close();
+                   });
+               }
+      }
+
     }
     
 }//./addLoggedModal
