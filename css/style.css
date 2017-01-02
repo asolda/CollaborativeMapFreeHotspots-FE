@@ -187,6 +187,15 @@ html, body {
   color: rgb(255, 64, 129) !important;
 }
 
+/** TEST
+.mdl-dialog__actions button:hover {
+  box-shadow: 0px 2px 7px rgb(153, 153, 153) !important;
+}
+
+.mdl-dialog__actions button:active {
+  background-color: green !important;
+} */
+
 .mdl-dialog__content {
   font-size: medium !important;
 }
@@ -267,11 +276,22 @@ form { /** Elimina il margine a tutti i form */
   color: rgb(66, 133, 244);
 }
 
+
 .mdl-list__item-primary-content i {
   color: rgb(77, 144, 254) !important;
 }
 
+.mdl-button.mdl-js-button.mdl-button--icon.mdl-js-ripple-effect > .material-icons{
+  color: rgb(153, 153, 153) !important;
+}
 
+.mdl-button.mdl-js-button.mdl-button--icon.mdl-js-ripple-effect {
+  padding: 20px !important;
+}
+
+.mdl-button.mdl-js-button.mdl-button--icon.mdl-js-ripple-effect:hover {
+  box-shadow: 0px 2px 7px rgb(153, 153, 153) !important;
+}
 
 /** ________________5. Add WiFi Action button________________ */
 #left-actionbtn { /** Visualizza l'action button in in basso a destra */
