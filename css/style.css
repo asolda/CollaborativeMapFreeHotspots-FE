@@ -120,16 +120,12 @@ html, body {
  background-color: white !important;
 }
 
-#logged-user-navigation .mdl-navigation__link { /** Seleziona le voci del menu */
-    padding-left: 10px !important; 
-    padding-top: 10px !important;  
-    padding-bottom: 10px !important; /** Le tre regole sovrascrivono quelle di mdl, modificando il padding delle voci */
-}
 
 #logged-user-navigation a i { /** Seleziona le icone delle voci del menu */
     padding-right: 10px; /** Padding tra l'icona e il testo della voce del menu */
     color: rgb(77, 144, 254) !important;
 }
+
 
 
 .mdl-layout-title.subtitle {
@@ -145,6 +141,8 @@ html, body {
   font-size: medium !important;
   color: #C5CAE9 !important;
 }
+
+
 .menuHeader:hover {
   color: white !important;
   border-bottom: thick solid rgb(255, 64, 129) !important;
@@ -157,14 +155,31 @@ html, body {
 }
 
 
-.mdl-navigation__link.drawerlink {
-  height:30px !important;
-  font-size: medium;
+.mdl-button.mdl-js-button.mdl-js-ripple-effect.drawerlink {
+  height: 35px !important;
+  font-size: medium !important;
+  text-transform: none !important;
+  color: rgb(131, 131, 131);
+  margin-left: 0px;
+  padding-left: 0px;
+  text-align: left;
 }
 
-.mdl-navigation__link.drawerlink:hover {
+.mdl-button.mdl-js-button.mdl-js-ripple-effect.drawerlink:hover {
   color: rgb(77, 144, 254) !important;
 }
+
+#logged-user-navigation .mdl-button.mdl-js-button.mdl-js-ripple-effect { /** Seleziona le voci del menu */
+    padding-left: 10px !important; 
+    padding-top: 10px !important;  
+    padding-bottom: 10px !important; /** Le tre regole sovrascrivono quelle di mdl, modificando il padding delle voci */
+}
+
+
+
+
+
+
 
 
 /** ________________4. Dialog custom style________________ */
