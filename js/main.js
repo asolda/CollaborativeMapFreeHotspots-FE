@@ -394,7 +394,7 @@ function addLoggedModal(){
 
 
     
-        function setMyWifiModal(){
+    function setMyWifiModal(){
         
         document.getElementById('show-mywifi').addEventListener('click', function(){
             
@@ -425,33 +425,57 @@ function addLoggedModal(){
     
     function setDeleteWifi(){
         
-        document.getElementById('show-deletewifi').addEventListener('click', function(){
-            
-            deletewifi = document.getElementById('dialog-deletewifi'); //get dialog element
-            
-            if (! deletewifi.showModal) {
+           var x = document.getElementsByClassName("show-deletewifi");
+             for (i = 0; i < x.length; i++) {
+               x[i].addEventListener("click", handleMouseClick, false);
+             }
+
+           function handleMouseClick(e) {
+             deletewifi = document.getElementById('dialog-deletewifi'); //get dialog element
+             if (! deletewifi.showModal) {
                 dialogPolyfill.registerDialog(deletewifi);
-            }
-            
-            /** close button function **/
-            var v = document.getElementById('closebtn-deletewifi');
-            v.addEventListener('click', function() {
+             }
+             /** close button function **/
+             var v = document.getElementById('closebtn-deletewifi');
+             v.addEventListener('click', function() {
                 deletewifi.close();
                 mywifi.showModal();
-            });
-            
+             });
 
-            /** delete button **/
-                //TODO
-                //send request
-                //refresh wifi list
-                //close this modal
-                //show wifi list
-            
+             var vv = document.getElementById('enterbtn-deletewifi');
+             vv.addEventListener('click', function() {
+                deletewifi.close();
+                'use strict';
+                var snackbarContainer = document.querySelector('#sb-confirm-operation');
+                var data;
+                //TODO: send request TRUE o FALSE, delete wifi, delete pin on maps
+                //Se tutto va bene allora
+                   //Snackbar
+                       data = {message: 'Rete Wi-Fi eliminata con successo.'};
+                       snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                   //refresh wifi list
+                       document.getElementById(idToDelete).parentNode.removeChild(document.getElementById(idToDelete));
+                       mywifi.showModal();
+                //Altrimenti
+                       //data = {message: 'Rete Wi-Fi non eliminata.'};
+                       //snackbarContainer.MaterialSnackbar.showSnackbar(data);
+
+             });
+           
+            //visualizza la rete selezionata nel modale di conferma eliminazione
+            var nameWifiToDelete = e.target.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].innerHTML;
+            var wifiToDelete = e.target.parentNode.parentNode.parentNode.parentNode.childNodes[1].cloneNode("true");
+            var contenitore = document.getElementById("toShow");
+            contenitore.removeChild(contenitore.childNodes[0]);
+            contenitore.appendChild(wifiToDelete);
+            document.getElementById("enterbtn-deletewifi").setAttribute("name", nameWifiToDelete);
+
+            idToDelete = e.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
+
             mywifi.close();
-           deletewifi.showModal();
-                
-        }); //./document
+            deletewifi.showModal();
+          }
+
         
     } //./setDeleteWifi
     
