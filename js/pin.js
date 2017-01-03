@@ -56,34 +56,35 @@ function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restri
     }
     
 //funzione per visualizzazione le informazioni di un pin    
-function getpininfo(id){
-    if(isNaN(id)){
+function getpininfo(pin_id){
+    if(isNaN(pin_id)){
      //codice per mostrare a frontend l'errore ERROR_DB   
     } 
     else{
         $.ajax({
             type: 'GET',
-            url: 'http://127.0.0.1:8080/getinfo/'+id,
+            url: 'http://127.0.0.1:8080/showinfo/',
+            data: "pin_id="+pin_id+,
+            contentType: "application/x-www-form-urlencoded",
             success: function(data) {
-                try {
-                  var ret = data;
-                  if(ret.status==0){
-                            //richiama function scritta dal FE      
-                  }else if(ret.status==1){
-                            //codice per mostrare a frontend l'errore ERROR_DB
-                  }
-                            
-                            
-                          } catch (err) {
-                            alert('Errore imprevisto: ' + ret.message);
-                          }
-                        },
-                        error: function(xhr, status, error) {
-                          console.log('Error: ' + error.message);
-                        }
-                      });
-    }
-}
+              try {
+                var ret = jQuery.parseJSON(JSON.stringify(data));
+                if(ret.status==0){
+                    $('#result').append(ret.message + '</br>');
+					return ret; //se ok, restituisce le info del pin
+                }else if(ret.status==1){
+                    $('#result').append(ret.message + '</br>'); //errore
+                }                
+                
+              } catch (err) {
+                alert('Errore nella visualizzazione delle info del pin: ' + ret.message);
+              }
+            },
+            error: function(xhr, status, error) {
+              console.log('Error: ' + error.message);
+            }
+          });
+         }
 
 //funzione per eliminare un pin 
 function deletepin(rete_wifi,utente){   
