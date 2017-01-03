@@ -14,7 +14,7 @@ function createNotLoggedHome(){
     //lo aggiunge alla pagina
     $('.mdl-layout__header-row').append(menu);
     
-    // [TEMP] Carica i modali da file
+       // [TEMP] Carica i modali da file
     $.get('notLoggedModal.html',function(data){
        $('body').append(data); //Li aggiunge all'index
         addNotLoggedModal(); //Li inizializza
