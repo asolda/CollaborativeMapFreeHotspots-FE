@@ -151,7 +151,7 @@ function addNotLoggedModal(){
             document.getElementById('enterbtn-login').addEventListener('click', function() {
 				var email = document.forms["login-form"]["l-email"].value;
 				var password = document.forms["login-form"]["l-password"].value;
-				if (!email.equals("") && !password.equals("")) {
+				if ((strcmp(email, "") != 0) && (strcmp(password, "") != 0)) {
 					login(email, password); //TODO gestire l'accesso
 				}
 				else {
