@@ -6,11 +6,13 @@
             contentType: "application/x-www-form-urlencoded",
             success: function(data) {
               try {
-                var ret = jQuery.parseJSON(JSON.stringify(data));
+                var ret = data;
                 if(ret.status==0){
                     $('#result').append(ret.message + '</br>');
+					var id_utente = ret.message.user;
 					return id_utente; //login ok
-                }else if(ret.status==1){
+                }
+				else if(ret.status==1){
                     $('#result').append(ret.message + '</br>');
 					return 0; //email e/o password errati
                 }

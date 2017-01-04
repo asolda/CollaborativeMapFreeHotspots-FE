@@ -7,8 +7,8 @@ function getCookie(cname) {
             c = c.substring(1);
         }
         if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
+            return c.substring(name.length, c.length); // se il cookie "actoken32" esiste, restituisce il suo valore
         }
     }
-    return "";
+    return ""; // se il cookie "actoken32" non esiste, restituisce la stringa vuota
 }

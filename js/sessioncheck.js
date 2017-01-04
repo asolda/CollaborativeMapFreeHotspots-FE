@@ -1,18 +1,18 @@
- function sessionCheck(cookie){
+ function sessionCheck(){
           $.ajax({
             type: 'GET',
-            url: 'http://127.0.0.1:8080/sessioncheck/',
-            data: "cookie="+cookie,
-            contentType: "application/x-www-form-urlencoded",
+            url: 'http://127.0.0.1:8080/session/check/',
             success: function(data) {
               try {
-                var ret = jQuery.parseJSON(JSON.stringify(data));
-                if(ret.status==0){
+                var ret = data;
+                if(ret.status == 0){
                     $('#result').append(ret.message + '</br>');
+					var id_utente = ret.message.user;
 					return id_utente; //sessione esistente
-                }else if(ret.status==1){
+                }
+				else if(ret.status == 1){
                     $('#result').append(ret.message + '</br>');
-					return ""; //sessione non esistente
+					return 0; //sessione non esistente
                 }
                 
                 
