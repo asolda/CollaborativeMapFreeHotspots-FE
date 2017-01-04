@@ -1,7 +1,7 @@
  function login(email, password){
           $.ajax({
             type: 'POST',
-            url: 'http://127.0.0.1:8080/login/',
+            url: 'http://127.0.0.1:8080/user/login/',
             data: "email="+email+"&password="+password,
             contentType: "application/x-www-form-urlencoded",
             success: function(data) {
