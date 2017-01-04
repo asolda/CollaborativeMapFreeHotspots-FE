@@ -19,7 +19,8 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <script type="text/javascript" src="assets/material.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="js/createHome.js></script>
+		<script type="text/javascript" src="js/createHome.js"></script>
+		<script type="text/javascript" src="js/functions.js"></script>
         <script type="text/javascript" src="js/map.js"></script>
         <script type="text/javascript" src="js/segnalazione.js"></script>
 		<script type="text/javascript" src="js/login.js"></script>
@@ -96,11 +97,9 @@
 		<!-- script caricamento pagina iniziale -->
 
         <script>
-           createLoggedHome();
-
-           /* Commento per testare la UI //RIMUOVERE COMMENTI APPENA TERMINATA LA PARTE DI LOGIN E SESSIONE
-		   createHome(); */
-        </script>
+			createHome();
+		</script>
+		
         <script>
 		 $('#invia_segn').click(function(){
             segnala($('#utente').val(),$('#rete').val(),$('#tipo').val(),$('#dettagli').val());
