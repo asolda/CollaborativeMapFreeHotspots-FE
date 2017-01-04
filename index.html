@@ -19,11 +19,12 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <script type="text/javascript" src="assets/material.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/createHome.js></script>
         <script type="text/javascript" src="js/map.js"></script>
         <script type="text/javascript" src="js/segnalazione.js"></script>
-	<script type="text/javascript" src="js/login.js"></script>
-	<script type="text/javascript" src="js/sessionCheck.js"></script>
-	<script type="text/javascript" src="js/getCookie.js"></script>
+		<script type="text/javascript" src="js/login.js"></script>
+		<script type="text/javascript" src="js/sessionCheck.js"></script>
+		<script type="text/javascript" src="js/getCookie.js"></script>
     </head>
 
     
@@ -96,26 +97,9 @@
 
         <script>
            createLoggedHome();
-           //createNotLoggedHome();
 
-           /* Commento per testare la UI
-            //Initialize LoggedUserHome
-			var cookie = getCookie("actoken32");
-			if (strcmp(cookie, "") != 0) {
-				var id_utente = sessionCheck();
-				if (id_utente != 0) {  //getcookie restituisce il valore del cookie o la stringa vuota, dopodiché si controlla se tale cookie esiste confrontando il valore restituito con la stringa vuota; sessioncheck deve restituire l'id dell'utente da passare a createloggedhome
-					createLoggedHome(id_utente);
-				}
-				else {
-					createNotLoggedHome();
-				}
-			}
-			else {
-				createNotLoggedHome();
-			}
-            //Initialize notLoggedUser 
-            //createNotLoggedHome();
-          */
+           /* Commento per testare la UI //RIMUOVERE COMMENTI APPENA TERMINATA LA PARTE DI LOGIN E SESSIONE
+		   createHome(); */
         </script>
         <script>
 		 $('#invia_segn').click(function(){
