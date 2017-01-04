@@ -1,4 +1,4 @@
-/**    Indice 
+/**    Indice
     1.Regole Generali;
     2.Header
     3.Drawer & Menu;
@@ -7,6 +7,7 @@
     6.Maps
     7.Splash Screen
     8.Conferme
+    9. Dettagli Pin
 */
 
 
@@ -39,7 +40,7 @@ html, body {
 }
 #notlogged-header {
     padding: 0px 20px 0px 20px !important;
-} 
+}
 
 
 #tooltipApriMenu {
@@ -176,8 +177,8 @@ html, body {
 }
 
 #logged-user-navigation .mdl-button.mdl-js-button.mdl-js-ripple-effect { /** Seleziona le voci del menu */
-    padding-left: 10px !important; 
-    padding-top: 10px !important;  
+    padding-left: 10px !important;
+    padding-top: 10px !important;
     padding-bottom: 10px !important; /** Le tre regole sovrascrivono quelle di mdl, modificando il padding delle voci */
 }
 
@@ -199,14 +200,14 @@ html, body {
   color: rgb(255, 64, 129) !important;
 }
 
-/** TEST 
+/** TEST
 .mdl-dialog__actions button:hover {
   box-shadow: 0px 2px 7px rgb(153, 153, 153) !important;
 } */
 
 .mdl-dialog__actions button:active {
   color: #2196F3 !important;
-} 
+}
 
 
 
@@ -250,7 +251,7 @@ html, body {
 form { /** Elimina il margine a tutti i form */
     margin: 0px;
 }
-.mdl-textfield mdl-js-textfield mdl-textfield--floating-label{ 
+.mdl-textfield mdl-js-textfield mdl-textfield--floating-label{
     padding-bottom: 30px !important;
 }
 
@@ -367,11 +368,11 @@ form { /** Elimina il margine a tutti i form */
 
 #conferma button {
   color: white !important;
-  background-color: rgb(77, 144, 254) !important; 
+  background-color: rgb(77, 144, 254) !important;
 }
 
 #conferma button:hover {
-  background-color: #00BCD4 !important; 
+  background-color: #00BCD4 !important;
 }
 
 #conferma table {
@@ -382,4 +383,32 @@ form { /** Elimina il margine a tutti i form */
 
 #conferma th {
   vertical-align: top;
+}
+
+/** ________________9.Dettagli pin________________ **/
+.pin-detail-container{
+  background-color: white;
+  overflow: hidden;
+}
+#close-pin-detail{
+  float: right;
+}
+.pin-detail-title{
+  color: white;
+  padding: 20px 10px 20px 10px;
+  background-color: #3f51b5;
+}
+.pin-detail-info{
+  padding: 0 10px 0 10px;
+  height: auto;
+  overflow: auto;
+}
+.pin-detail-star ul{
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  list-style-type: none;
+}
+.pin-detail-star ul li{
+  float: left;
+  margin-bottom: 16px;
 }
