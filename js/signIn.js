@@ -1,4 +1,4 @@
- function login(email, password){
+ function signIn(email, password){
           $.ajax({
             type: 'POST',
             url: 'http://127.0.0.1:8080/user/login/',

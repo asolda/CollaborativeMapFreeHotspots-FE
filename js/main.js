@@ -152,7 +152,7 @@ function addNotLoggedModal(){
 				var email = document.forms["login-form"]["l-email"].value;
 				var password = document.forms["login-form"]["l-password"].value;
 				if ((strcmp(email, "") != 0) && (strcmp(password, "") != 0)) {
-					login(email, password); //TODO gestire l'accesso
+					signIn(email, password); //TODO gestire l'accesso
 				}
 				else {
 				        console.log('Email o password non inseriti');
