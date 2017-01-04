@@ -126,7 +126,7 @@ function gestioneNotifiche() {
 **/
 function addNotLoggedModal(){
     
-    var signup, login, recover;
+    var signup, loginDialog, recover;
     
     setLoginModal();
     setSignupModal();
@@ -136,15 +136,15 @@ function addNotLoggedModal(){
 
     function setLoginModal(){
         document.getElementById('show-login').addEventListener('click', function(){
-             login = document.getElementById('dialog-login'); //get dialog element
-             if (!login.showModal) {
-                dialogPolyfill.registerDialog(login);
+             loginDialog = document.getElementById('dialog-login'); //get dialog element
+             if (!loginDialog.showModal) {
+                dialogPolyfill.registerDialog(loginDialog);
              }
             
              /** close button function **/
              var v = document.getElementById('closebtn-login');
              v.addEventListener('click', function() {
-                login.close();
+                loginDialog.close();
              });
             
             /** login request **/
@@ -161,7 +161,7 @@ function addNotLoggedModal(){
             
             /**./Login request **/
             
-           login.showModal();
+           loginDialog.showModal();
                 
         });
      } 
@@ -178,10 +178,10 @@ function addNotLoggedModal(){
                   v.addEventListener('click', function() {
                      //GO BACK to login modal, and hide recover 
                      recover.close(); 
-                     login.showModal();
+                     loginDialog.showModal();
                   });
             
-                  login.close(); //nasconde il modale di login
+                  loginDialog.close(); //nasconde il modale di login
                   recover.showModal();
             });
     } 
