@@ -103,7 +103,7 @@
 			var cookie = getCookie("actoken32");
 			if (strcmp(cookie, "") != 0) {
 				var id_utente = sessionCheck(cookie);
-				if (strcmp(id_utente, "") != 0) {  //getcookie restituisce il valore del cookie, che viene passato a sessioncheck; sessioncheck deve restituire l'id dell'utente da passare a createloggedhome
+				if (id_utente != 0) {  //getcookie restituisce il valore del cookie, che viene passato a sessioncheck; sessioncheck deve restituire l'id dell'utente da passare a createloggedhome
 					createLoggedHome(id_utente);
 				}
 				else {

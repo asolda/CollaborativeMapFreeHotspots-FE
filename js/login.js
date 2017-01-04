@@ -9,7 +9,7 @@
                 var ret = jQuery.parseJSON(JSON.stringify(data));
                 if(ret.status==0){
                     $('#result').append(ret.message + '</br>');
-					return 1; //login ok
+					return id_utente; //login ok
                 }else if(ret.status==1){
                     $('#result').append(ret.message + '</br>');
 					return 0; //email e/o password errati
