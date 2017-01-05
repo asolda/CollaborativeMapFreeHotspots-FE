@@ -117,23 +117,23 @@
                 "<ul>"+
 
                   "<li class='star-val'>"+
-                    "<button id='star1' class='mdl-button mdl-js-button mdl-button--icon'><i class='material-icons'>star_rate</i></button>"+
+                    "<button id='star1' class='mdl-button mdl-js-button mdl-button--icon'><i id='1' class='material-icons'>star_rate</i></button>"+
                   "</li>"+
 
                   "<li class='star-val'>"+
-                    "<button id='star2' class='mdl-button mdl-js-button mdl-button--icon star-selected'><i class='material-icons'>star_rate</i></button>"+
+                    "<button id='star2' class='mdl-button mdl-js-button mdl-button--icon star-selected'><i id='2' class='material-icons'>star_rate</i></button>"+
                   "</li>"+
 
                   "<li class='star-val'>"+
-                    "<button id='star3' class='mdl-button mdl-js-button mdl-button--icon'><i class='material-icons'>star_rate</i></button>"+
+                    "<button id='star3' class='mdl-button mdl-js-button mdl-button--icon'><i id='3' class='material-icons'>star_rate</i></button>"+
                   "</li>"+
 
                   "<li class='star-val'>"+
-                    "<button id='star4' class='mdl-button mdl-js-button mdl-button--icon'><i class='material-icons'>star_rate</i></button>"+
+                    "<button id='star4' class='mdl-button mdl-js-button mdl-button--icon'><i id='4' class='material-icons'>star_rate</i></button>"+
                   "</li>"+
 
                   "<li class='star-val'>"+
-                    "<button id='star5' class='mdl-button mdl-js-button mdl-button--icon'><i class='material-icons'>star_rate</i></button>"+
+                    "<button id='star5' class='mdl-button mdl-js-button mdl-button--icon'><i id='5' class='material-icons'>star_rate</i></button>"+
                   "</li>"+
 
                 "</ul>"+
@@ -209,29 +209,80 @@
       //inizializza la valutazione e la chiusura dell'overlay
       function inizializzaValutazione(){
 
-        //ajax call for valutation parameter
+        var valutazione = {
+          star: 5,
+          htmlObj: $('.star-val button'),
+          valore: 3 //temp
+        }
 
-        //valutazione temporanea
-        val = 3;
+        valutazione.setValutazione = function(){
+          console.log('chiamata');
+          $.each(this.htmlObj, function(i, star){
 
-        //colora le stelle in base alla qualità
-        var stars = $('.star-val button'); //seleziona le stelle
-        $.each(stars, function(i, star){
-          if(i < val){
-            $(star).addClass('mdl-button--colored');
-          }
+            if(i < 3 ){
+              $(star).addClass('mdl-button--colored');
+            }//./if
 
-          $(star).click(function(){
-            for(j=0; j <= 4; j++){
-              if(j<=i){
-                $(stars[j]).addClass('mdl-button--colored');
-              }else{
-                $(stars[j]).removeClass('mdl-button--colored');
-              }
-            }
+          });//.each
 
-          })
-        });
+        }//./setValutazione
+
+        valutazione.setOnclick = function(){
+          stars = this.htmlObj;
+
+          $.each(stars, function(i,star){
+            $(star).click(function(event){
+
+              this.valore = event.target.id;
+
+              for(j=0; j < 5; j++){
+                if(j<=i){
+                  $(stars[j]).addClass('mdl-button--colored');
+                }else{
+                  $(stars[j]).removeClass('mdl-button--colored');
+                } //./if
+
+              }//./for
+          });//.click function
+        });//./each
+      }//./setOnclick
+
+        valutazione.setmouseOver = function(){
+
+          stars = this.htmlObj;
+          $.each(stars, function(i,star){
+            $(star).mouseover(function(event){
+                for(j = 0; j <= i; j++){
+                  if(! $(stars[j]).hasClass('mdl-button--colored')){
+                    $(stars[j]).addClass('mdl-button--colored');
+                  }//./if
+                }//./for
+
+            });//./mouseover
+          });//./each
+
+        }//./setmouseOver
+
+        valutazione.setmouseOut = function(){
+          stars = this.htmlObj;
+          setvalutazione = this.setValutazione;
+          $.each(stars, function(i,star){
+            $(star).mouseout(function(event){
+
+                for(j = 0; j <= 4; j++){
+                  if( $(stars[j]).hasClass('mdl-button--colored')){
+                    $(stars[j]).removeClass('mdl-button--colored');
+                  }//./if
+                }//./for
+            });//./mouseover
+            setvalutazione();
+          });//./each
+
+        }//./setmouseOut
+
+        valutazione.setValutazione();
+        valutazione.setOnclick();
+
 
         $('#close-pin-detail').click(function(){
             overlay.onRemove();
