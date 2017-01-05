@@ -1,4 +1,4 @@
-function tokencheck_reset1(if_redirect){
+function tokencheck_reset1(if_redirect){ //incompleta;relativa al primo tokencheck, in reimpostazione password dopo l'invio della mail
     
                 var tokenvalue= getParameter("token");
                 
@@ -33,7 +33,7 @@ function tokencheck_reset1(if_redirect){
     
 }
 
-function tokencheck_reset2(if_redirect){
+function tokencheck_reset2(if_redirect){//incompleta;relativa al secondo tokencheck, in reimpostazione password dopo l'inserimento delle password
     
                 var tokenvalue= getParameter("token");
                 
@@ -68,7 +68,7 @@ function tokencheck_reset2(if_redirect){
     
 }
 
-function tokencheck_registration(if_redirect){
+function tokencheck_registration(if_redirect){//incompleta;relativa al tokencheck in registrazione utente
     
                 var tokenvalue= getParameter("token");
                 
