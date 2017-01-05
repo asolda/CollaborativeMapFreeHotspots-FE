@@ -8,22 +8,22 @@
 
     <div class="mdl-dialog__content">
       <form id="login-form">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="l-email"/>
+        <div id="l-email" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text"/>
             <label class="mdl-textfield__label" for="l-email">Email</label>
-            <span class="mdl-textfield__error">Email non valida</span>
+            <span id='l-email-error' class="mdl-textfield__error">Email non valida</span>
         </div>
         <br/><br/>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="l-password"/>
+        <div id="l-password" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password"/>
             <label class="mdl-textfield__label" for="l-password">Password</label>
-            <span class="mdl-textfield__error">Password Errata</span>
+            <span id='l-password-error' class="mdl-textfield__error">Password Errata</span>
         </div>
         <br/><br/><br/>
         <a id="show-recover" href="#"><p>Password dimenticata?</p></a>
       </form>
     </div>
-    
+
     <br/>
     <div class="mdl-dialog__actions">
      <button id="enterbtn-login" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect">Accedi</button>
@@ -44,15 +44,15 @@
      <dialog id="dialog-recover" class="mdl-dialog mdl-dialog-custom">
             <div class="mdl-title">
                 <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Recupera password</h4>
-                 <p class="mdl-dialog__sub">Compila i campi sottostanti</p> 
+                 <p class="mdl-dialog__sub">Compila i campi sottostanti</p>
             </div>
 
             <div class="mdl-dialog__content">
               <form id="reimposta-form">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="re-email"/>
+                <div id="re-email" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text"/>
                     <label class="mdl-textfield__label" for="re-email">Inserisci la tua email</label>
-                    <span class="mdl-textfield__error">Email non valida</span>
+                    <span id="re-email-error" class="mdl-textfield__error">Email non valida</span>
                 </div>
               </form>
             </div>
@@ -72,7 +72,7 @@
      <!-- RecoverBis Modal Component -->
      <dialog id="dialog-recoverBis" class="mdl-dialog mdl-dialog-custom">
             <div class="mdl-title">
-                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Ci siamo quasi</h4> 
+                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">account_circle</i>Ci siamo quasi</h4>
             </div>
 
             <div class="mdl-dialog__content">
@@ -101,22 +101,22 @@ _______________________________________________________________________
 
        <div class="mdl-dialog__content">
             <form>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="r-email"/>
+                <div id="r-email" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text"/>
                     <label class="mdl-textfield__label" for="r-email">Inserisci la tua email</label>
-                    <span class="mdl-textfield__error">Email non valida</span>
+                    <span id="r-email-error" class="mdl-textfield__error">Email non valida</span>
                 </div>
                 <br/><br/>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" id="r-password">
+                <div id="r-password" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password">
                     <label class="mdl-textfield__label" for="r-password">Crea una password</label>
-                    <span class="mdl-textfield__error">Password non valida</span>
+                    <span id="r-password-error" class="mdl-textfield__error">Password non valida</span>
                 </div>
                 <br/><br/>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" id="r-confermapassword">
+                <div id="r-confermapassword" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password">
                     <label class="mdl-textfield__label" for="r-confermapasswrod">Conferma la password</label>
-                    <span class="mdl-textfield__error">Le password non coincidono</span>
+                    <span id="r-confermapassword-error" class="mdl-textfield__error">Le password non coincidono</span>
                 </div>
             </form>
         </div>
@@ -137,7 +137,7 @@ _______________________________________________________________________
      <!-- SignupBis Modal Component -->
      <dialog id="dialog-signupBis" class="mdl-dialog mdl-dialog-custom">
             <div class="mdl-title">
-                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">person_add</i>Ci siamo quasi</h4> 
+                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">person_add</i>Ci siamo quasi</h4>
             </div>
 
             <div class="mdl-dialog__content">
