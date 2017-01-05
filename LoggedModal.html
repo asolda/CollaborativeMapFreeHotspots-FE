@@ -6,20 +6,20 @@
         </div>
         <div class="mdl-dialog__content">
             <form>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" id="ep-newpassword"/>
+                <div id="ep-newpassword" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password"/>
                     <label class="mdl-textfield__label" for="ep-newpassword">Password attuale</label>
-                    <span class="mdl-textfield__error">Password non valida</span>
+                    <span id='ep-newpassword-error' class="mdl-textfield__error">Password non valida</span>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" id="ep-password">
+                <div id="ep-password" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password">
                     <label class="mdl-textfield__label" for="ep-password">Nuova password</label>
-                    <span class="mdl-textfield__error">Password non valida</span>
+                    <span id='ep-password-error' class="mdl-textfield__error">Password non valida</span>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" id="ep-confermapassword">
+                <div id="ep-confermapassword" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password">
                     <label class="mdl-textfield__label" for="ep-confermapasswrod">Conferma nuova password</label>
-                    <span class="mdl-textfield__error">La password non coincide</span>
+                    <span id='ep-confermapassword-error' class="mdl-textfield__error">La password non coincide</span>
                 </div>
             </form>
         </div>
@@ -34,7 +34,7 @@
      <!-- EditPasswordBis Modal Component -->
      <dialog id="dialog-editPasswordBis" class="mdl-dialog mdl-dialog-custom">
             <div class="mdl-title">
-                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">vpn_key</i>Ci siamo</h4> 
+                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">vpn_key</i>Ci siamo</h4>
             </div>
 
             <div class="mdl-dialog__content">
@@ -65,10 +65,10 @@
         </div>
         <div class="mdl-dialog__content">
             <form>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password" id="da-password"/>
+                <div id="da-password" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password"/>
                     <label class="mdl-textfield__label" for="da-password">Inserisci la tua password</label>
-                    <span class="mdl-textfield__error">Password non valida</span>
+                    <span id='da-password-error' class="mdl-textfield__error">Password non valida</span>
                 </div>
             </form>
         </div>
@@ -82,7 +82,7 @@
         <!-- Delete account Bis Modal Component -->
      <dialog id="dialog-deleteaccountBis" class="mdl-dialog mdl-dialog-custom">
             <div class="mdl-title">
-                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">delete</i>Ci siamo quasi</h4> 
+                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">delete</i>Ci siamo quasi</h4>
             </div>
 
             <div class="mdl-dialog__content">
@@ -97,7 +97,7 @@
       <!-- Exit Modal Component -->
      <dialog id="dialog-exit" class="mdl-dialog mdl-dialog-custom">
             <div class="mdl-title">
-                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">power_settings_new</i>Logout</h4> 
+                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">power_settings_new</i>Logout</h4>
                 <p class="mdl-dialog__sub">Esci dal tuo account</p>
             </div>
 
@@ -114,19 +114,19 @@
       <!-- Delete WiFi Modal Component -->
      <dialog id="dialog-deletewifi" class="mdl-dialog mdl-dialog-custom">
             <div class="mdl-title">
-                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">settings</i>Elimina rete Wi-Fi</h4> 
+                <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">settings</i>Elimina rete Wi-Fi</h4>
                 <p class="mdl-dialog__sub">Sei sicuro di voler eliminare la rete selezionata?</p>
             </div>
 
             <div class="mdl-dialog__content">
-                
-                
+
+
               <li class="mdl-list__item mdl-list__item--three-line" id="toShow">
-                //qui verrà copiato il wifi da eliminare
+                //qui verrï¿½ copiato il wifi da eliminare
                </span>
               </li>
-                
-                
+
+
             </div>
 
             <div class="mdl-dialog__actions">
@@ -148,12 +148,12 @@
         <div class="mdl-dialog__content">
             <h3 hidden id="noneWifi" class="none">Non hai reti Wi-Fi aggiunte.</h3>
             <ul id="listWifi" class="mywifi mdl-list">
-                
+
 
 
 
               <!-- settare ID = nomeRete -->
-              <li id="nomeRete1" class="mdl-list__item mdl-list__item--three-line"> 
+              <li id="nomeRete1" class="mdl-list__item mdl-list__item--three-line">
 
                 <span class="mdl-list__item-primary-content">
                   <i class="material-icons mdl-list__item-avatar">wifi</i>
@@ -165,7 +165,7 @@
 
                 <span class="mdl-list__item-secondary-content">
                     <!-- generare stringa "buttonNomeRete" e settardo come ID a button, FOR a div tooltip e FOR a ul menu -->
-                   
+
                      <button id="buttonNomeRete1" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
                          <i class="material-icons">more_vert</i>
                      </button>
@@ -180,7 +180,7 @@
                 </span>
 
               </li>
-              
+
 
 
 
@@ -209,7 +209,7 @@
                     </ul>
                 </span>
               </li>
-                
+
             <li id="nomeRete3" class="mdl-list__item mdl-list__item--three-line">
                 <span class="mdl-list__item-primary-content">
                   <i class="material-icons mdl-list__item-avatar">wifi</i>
@@ -235,7 +235,7 @@
                     </ul>
                 </span>
               </li>
-               
+
                <li id="nomeRete4" class="mdl-list__item mdl-list__item--three-line">
                 <span class="mdl-list__item-primary-content">
                   <i class="material-icons mdl-list__item-avatar">wifi</i>
@@ -261,7 +261,7 @@
                     </ul>
                 </span>
               </li>
-                
+
                <li id="nomeRete5" class="mdl-list__item mdl-list__item--three-line">
                 <span class="mdl-list__item-primary-content">
                   <i class="material-icons mdl-list__item-avatar">wifi</i>
@@ -287,7 +287,7 @@
                     </ul>
                 </span>
               </li>
-                
+
             <li id="nomeRete6" class="mdl-list__item mdl-list__item--three-line">
                 <span class="mdl-list__item-primary-content">
                   <i class="material-icons mdl-list__item-avatar">wifi</i>
@@ -313,9 +313,9 @@
                     </ul>
                 </span>
               </li>
-                
+
             </ul>
-            
+
         </div>
         <div class="mdl-dialog__actions">
             <button id="closebtn-mywifi" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Chiudi</button>
@@ -339,7 +339,7 @@
           <div class="mdl-dialog__content">
              <h3 hidden id="noneNotifiche" class="none">Non hai notifiche.</h3>
              <ul id="listNotifiche" class="mywifi mdl-list">
-                
+
               <li id="notifica1" class="mdl-list__item mdl-list__item--three-line">
                <span class="mdl-list__item-primary-content">
                   <a class="toHide" id="ttt1" href="#">
@@ -353,8 +353,8 @@
                     Altro
                   </div>
                 </span>
-               </li> 
-               
+               </li>
+
               <li id="notifica2" class="mdl-list__item mdl-list__item--three-line">
                <span class="mdl-list__item-primary-content">
                   <a class="toHide" id="ttt2" href="#">
@@ -368,8 +368,8 @@
                     Altro
                   </div>
                 </span>
-              </li> 
-               
+              </li>
+
                 <li id="notifica3" class="mdl-list__item mdl-list__item--three-line">
                <span class="mdl-list__item-primary-content">
                   <a class="toHide" id="ttt3" href="#">
@@ -383,7 +383,7 @@
                     Altro
                   </div>
                 </span>
-               </li> 
+               </li>
 
 
                <li id="notifica4" class="mdl-list__item mdl-list__item--three-line">
@@ -399,7 +399,7 @@
                     Altro
                   </div>
                 </span>
-               </li> 
+               </li>
 
                <li id="notifica5" class="mdl-list__item mdl-list__item--three-line">
                <span class="mdl-list__item-primary-content">
@@ -414,7 +414,7 @@
                     Altro
                   </div>
                 </span>
-               </li> 
+               </li>
 
                <li id="notifica6" class="mdl-list__item mdl-list__item--three-line">
                <span class="mdl-list__item-primary-content">
@@ -429,9 +429,9 @@
                     Altro
                   </div>
                 </span>
-               </li> 
+               </li>
             </ul>
-       
+
           </div>
           <div class="mdl-dialog__actions">
             <button id="closebtn-mynotification" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Chiudi</button>
@@ -451,20 +451,20 @@
    </div>
    <div class="mdl-dialog__content">
      <form>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-         <input class="mdl-textfield__input" type="text" id="newRestrizioni"/>
+        <div id="newRestrizioni" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+         <input class="mdl-textfield__input" type="text"/>
          <label class="mdl-textfield__label" for="newRestrizioni">Restrizioni</label>
-         <span class="mdl-textfield__error">Restrizioni non valide</span>
+         <span id='newRestrizioni-error' class="mdl-textfield__error">Restrizioni non valide</span>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-         <input class="mdl-textfield__input" type="text" id="newRange">
+        <div id="newRange" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+         <input class="mdl-textfield__input" type="text">
          <label class="mdl-textfield__label" for="newRange">Range</label>
-         <span class="mdl-textfield__error">Range non valido</span>
+         <span id='newRange-error' class="mdl-textfield__error">Range non valido</span>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="newInfo">
+        <div id="newInfo" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text">
           <label class="mdl-textfield__label" for="newInfo">Altre informazioni</label>
-          <span class="mdl-textfield__error">Informazioni non valide</span>
+          <span id='newInfo-error' class="mdl-textfield__error">Informazioni non valide</span>
         </div>
       </form>
     </div>
@@ -525,7 +525,7 @@
         </div>
         <div class="mdl-dialog__content">
             <form>
-                
+
                 <div class="mdl-radio-option">
                     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
                         <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="idRete">
@@ -553,7 +553,7 @@
                         <span class="mdl-radio__label">Login necessario</span>
                     </label>
                 </div>
-                
+
             </form>
         </div>
         <div class="mdl-dialog__actions">
@@ -609,8 +609,8 @@
         </div>
         <div class="mdl-dialog__content">
             <form>
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ></textarea>
+                  <div id="re-range" class="mdl-textfield mdl-js-textfield">
+                    <textarea class="mdl-textfield__input" type="text" rows= "3" ></textarea>
                     <label class="mdl-textfield__label" for="sample5">Informazioni da segnalare</label>
                   </div>
             </form>
@@ -631,8 +631,8 @@
         </div>
         <div class="mdl-dialog__content">
             <form>
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ></textarea>
+                  <div id="re-restriction" class="mdl-textfield mdl-js-textfield">
+                    <textarea class="mdl-textfield__input" type="text" rows= "3" ></textarea>
                     <label class="mdl-textfield__label" for="sample5">Informazioni da segnalare</label>
                   </div>
             </form>
@@ -642,37 +642,3 @@
             <button id="closebtn-report-restriction" type="button" class="mdl-button dialog-close">Annulla</button>
         </div>
         </dialog>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
