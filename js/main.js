@@ -20,7 +20,8 @@ function createNotLoggedHome(){
         addNotLoggedModal(); //Li inizializza
     });
 
-    document.getElementById("badgeNotificheMenuHeader").setAttribute("hidden", "true");
+    document.getElementById("badgeNotificheHeader").setAttribute("hidden", "true");
+    document.getElementById("tooltipApriMenu").setAttribute("hidden", "true");
      
 } //./createNotLoggedHome
 
@@ -58,7 +59,7 @@ function createLoggedHome(){
               '<span class="mdl-layout-title" id="mainTitle">' +
                 'Alwaysconnected' + 
               '</span>' +
-              '<nav id="logged-user-navigation" class="mdl-navigation">' +  //id = badgeNotificheMenu
+              '<nav id="logged-user-navigation" class="mdl-navigation">' +  
                 '<hr/>' +
                 '<span class="mdl-layout-title subtitle">Gestione account</span>' +
                 '<a id="show-mywifi" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">wifi</i><span class="space"/>Le mie reti</a>' +
@@ -110,6 +111,10 @@ function gestioneNotifiche() {
      //Se ci sono notifiche rendere visibilei i badge (nell'header e nel menù) eliminando l'attributo hidden (di default è hidden) e settare il numero di notifiche l'attributo data-badge="numero", altrimenti nasconderlo con hidden false
       badgeHeader.removeAttribute("hidden");
       badgeHeader.setAttribute("data-badge", "2");
+      //apre il menù laterale al click sul badge nell'header
+      document.getElementById("badgeNotificheHeader").addEventListener("click", function(){
+          $( 'div[class^="mdl-layout__obfuscator"]' ).trigger( "click" );
+      });
  
       badgeMenu.removeAttribute("hidden");
       badgeMenu.setAttribute("data-badge", "2");

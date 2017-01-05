@@ -104,16 +104,6 @@
 		 $('#invia_segn').click(function(){
             segnala($('#utente').val(),$('#rete').val(),$('#tipo').val(),$('#dettagli').val());
           });
-
-          //chiude il menù laterale al click sull'icona <<
-          document.getElementById("closeDrawer").addEventListener("click", function(){
-           $( 'div[class^="mdl-layout__obfuscator"]' ).trigger( "click" );
-          });
-
-          //apre il menù laterale al click sul badge nell'header
-          document.getElementById("badgeNotificheHeader").addEventListener("click", function(){
-            $( 'div[class^="mdl-layout__obfuscator"]' ).trigger( "click" );
-          });
         </script>
     </body>
 </html>
