@@ -5,7 +5,8 @@
 			if (strcmp(cookie, "") != 0) { // getcookie restituisce il valore del cookie, se esiste, o la stringa vuota, se non esiste; dopodiché, si controlla se tale cookie esiste confrontando il valore restituito con la stringa vuota
 				sessionCheck(function(ret) { // sessioncheck deve restituire l'id dell'utente da passare a createloggedhome o 0 se la sessione non esiste nel DB
 						var id_utente = ret;
-						if (id_utente != 0) {
+						alert(id_utente);
+						if (id_utente != 0 && !isNaN(id_utente)) {
 							// SE IL COOKIE E LA SESSIONE ESISTONO E GLI ID CORRISPONDONO
 							//Inizializza la home per l'utente loggato
 							createLoggedHome();
