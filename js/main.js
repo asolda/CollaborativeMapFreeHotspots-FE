@@ -1,19 +1,19 @@
 /** Funzione di inizializzazione della pagina per visitatori **/
 function createNotLoggedHome(){
-    
+
     //setta l'id all'header
     $('.mdl-layout__header-row').attr('id','notlogged-header');
-    
+
     //costruisce il menu
     menu = '<nav id="notlogged-menu" class="mdl-navigation">' +
              '<a id="show-login" class="mdl-navigation__link menuHeader" href="#">Accedi</a>' +
              '<span class="dividerHeader">|</span>' +
              '<a id="show-signup" class="mdl-navigation__link menuHeader" href="#">Crea un nuovo account</a>' +
            '</nav>';
-    
+
     //lo aggiunge alla pagina
     $('.mdl-layout__header-row').append(menu);
-    
+
        // [TEMP] Carica i modali da file
     $.get('notLoggedModal.html',function(data){
        $('body').append(data); //Li aggiunge all'index
@@ -22,7 +22,7 @@ function createNotLoggedHome(){
 
     document.getElementById("badgeNotificheHeader").setAttribute("hidden", "true");
     document.getElementById("tooltipApriMenu").setAttribute("hidden", "true");
-     
+
 } //./createNotLoggedHome
 
 
@@ -48,8 +48,8 @@ function createLoggedHome(){
     hello = '<nav class="mdl-navigation">' +
               '<a id="exitSystem" href="#" class="mdl-navigation__link menuHeader">Ciao <span id="name">Utente</span>, esci</a>' +
             '</nav>';
-    
-    // Crea il menu 
+
+    // Crea il menu
     menu = '<div id="user-drawer" class="mdl-layout__drawer">' +
               '<span id="closeDrawer" class="iconCloseDrawer">' +
                '<i id="iconCloseDrawerOne" class="material-icons">navigate_before</i>' +
@@ -57,9 +57,9 @@ function createLoggedHome(){
               '</span>' +
               '<div id="imageLogo"></div>' +
               '<span class="mdl-layout-title" id="mainTitle">' +
-                'Alwaysconnected' + 
+                'Alwaysconnected' +
               '</span>' +
-              '<nav id="logged-user-navigation" class="mdl-navigation">' +  
+              '<nav id="logged-user-navigation" class="mdl-navigation">' +
                 '<hr/>' +
                 '<span class="mdl-layout-title subtitle">Gestione account</span>' +
                 '<a id="show-mywifi" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">wifi</i><span class="space"/>Le mie reti</a>' +
@@ -72,8 +72,8 @@ function createLoggedHome(){
            '<div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="closeDrawer">' +
                 'Chiudi men&ugrave' +
               '</div>' ;
-    
-    // Crea l'action button per inserire una mappa 
+
+    // Crea l'action button per inserire una mappa
     actionbtn = '<div id="left-actionbtn">'+
                   '<button id="show-addwifi" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">' +
                     '<i class="material-icons">add</i>'+
@@ -82,40 +82,40 @@ function createLoggedHome(){
                     'Inserisci nuova rete Wi-Fi' +
                   '</div>' +
                 '</div>';
-    
+
     /** Aggiunge le 3 componenti prima create:
         hello, nell'header;
         il menu, nell'header;
         l'action button, dopo il layout della pagina;
     **/
-    $('.mdl-layout__header-row').append(hello); 
+    $('.mdl-layout__header-row').append(hello);
     $('.mdl-layout__header').after(menu);
     $('.mdl-layout').after(actionbtn);
-    
-    
+
+
     // [TEMP] Carica i modali da file
     $.get('LoggedModal.html',function(data){
        $('body').append(data); //Li aggiunge all'index
         addLoggedModal(); //Li inizializza
     });
-    
+
     gestioneNotifiche();
-} 
+}
 
 
 function gestioneNotifiche() {
-  //GESTIONE NOTIFICHE 
+  //GESTIONE NOTIFICHE
      var badgeHeader = document.getElementById("badgeNotificheHeader");
      var badgeMenu = document.getElementById("badgeNotificheMenu");
 
-     //Se ci sono notifiche rendere visibilei i badge (nell'header e nel menù) eliminando l'attributo hidden (di default è hidden) e settare il numero di notifiche l'attributo data-badge="numero", altrimenti nasconderlo con hidden false
+     //Se ci sono notifiche rendere visibilei i badge (nell'header e nel menï¿½) eliminando l'attributo hidden (di default ï¿½ hidden) e settare il numero di notifiche l'attributo data-badge="numero", altrimenti nasconderlo con hidden false
       badgeHeader.removeAttribute("hidden");
       badgeHeader.setAttribute("data-badge", "2");
-      //apre il menù laterale al click sul badge nell'header
+      //apre il menï¿½ laterale al click sul badge nell'header
       document.getElementById("badgeNotificheHeader").addEventListener("click", function(){
           $( 'div[class^="mdl-layout__obfuscator"]' ).trigger( "click" );
       });
- 
+
       badgeMenu.removeAttribute("hidden");
       badgeMenu.setAttribute("data-badge", "2");
 
@@ -124,20 +124,20 @@ function gestioneNotifiche() {
       //badgeMenu.setAttribute("hidden", "true");
 }
 
-/** Inizializza i modali di un utente non connesso 
+/** Inizializza i modali di un utente non connesso
     +Login
-    +Recupera password 
+    +Recupera password
     +Registrati
 **/
 function addNotLoggedModal(){
-    
+
     var signup, loginDialog, recover;
-    
+
     setLoginModal();
     setSignupModal();
     setRecoverModal();
-    setRecoverBisModal();  
-    setSignupBisModal();  
+    setRecoverBisModal();
+    setSignupBisModal();
 
     function setLoginModal(){
         document.getElementById('show-login').addEventListener('click', function(){
@@ -145,13 +145,13 @@ function addNotLoggedModal(){
              if (!loginDialog.showModal) {
                 dialogPolyfill.registerDialog(loginDialog);
              }
-            
+
              /** close button function **/
              var v = document.getElementById('closebtn-login');
              v.addEventListener('click', function() {
                 loginDialog.close();
              });
-            
+
             /** login request **/
             document.getElementById('enterbtn-login').addEventListener('click', function() {
 				var email = document.forms["login-form"]["l-email"].value;
@@ -163,33 +163,33 @@ function addNotLoggedModal(){
 				        console.log('Email o password non inseriti');
 				}
 	    });
-            
+
             /**./Login request **/
-            
+
            loginDialog.showModal();
-                
+
         });
-     } 
-    
+     }
+
     function setRecoverModal(){
             document.getElementById('show-recover').addEventListener('click', function(){
                 recover = document.getElementById('dialog-recover'); //get dialog element
                   if (!recover.showModal) {
                     dialogPolyfill.registerDialog(recover);
                   }
-            
+
                   /** close button function **/
                   var v = document.getElementById('closebtn-recover');
                   v.addEventListener('click', function() {
-                     //GO BACK to login modal, and hide recover 
-                     recover.close(); 
+                     //GO BACK to login modal, and hide recover
+                     recover.close();
                      loginDialog.showModal();
                   });
-            
+
                   loginDialog.close(); //nasconde il modale di login
                   recover.showModal();
             });
-    } 
+    }
 
 
     function setRecoverBisModal() {
@@ -198,13 +198,13 @@ function addNotLoggedModal(){
             if (!recoverBis.showModal) {
                     dialogPolyfill.registerDialog(recover);
             }
-         
+
                  /** close button function **/
                   var v = document.getElementById('closebtn-recoverBis');
                   v.addEventListener('click', function() {
-                     recoverBis.close(); 
+                     recoverBis.close();
                   });
-      
+
 
                   // Richiesta di recupero password
 		  var email = document.forms["reimposta-form"]["re-email"].value;
@@ -218,24 +218,24 @@ function addNotLoggedModal(){
 		    }
       })
     }
-    
+
     function setSignupModal(){
         document.getElementById('show-signup').addEventListener('click', function(){
             signup = document.getElementById('dialog-signup'); //get dialog element
             if (! signup.showModal) {
-                dialogPolyfill.registerDialog(signup); 
+                dialogPolyfill.registerDialog(signup);
             }
-            
+
             /** close button function **/
             var v = document.getElementById('closebtn-signup');
             v.addEventListener('click', function() {
                 signup.close();
             });
-            
+
             signup.showModal();
-            
+
         });
-    } 
+    }
 
 
     function setSignupBisModal() {
@@ -244,11 +244,11 @@ function addNotLoggedModal(){
             if (!signupBis.showModal) {
                     dialogPolyfill.registerDialog(recover);
             }
-         
+
                  /** close button function **/
                   var v = document.getElementById('closebtn-signupBis');
                   v.addEventListener('click', function() {
-                     signupBis.close(); 
+                     signupBis.close();
                   });
 
              //TODO controllo campi
@@ -257,7 +257,7 @@ function addNotLoggedModal(){
       })
     }
 
-} 
+}
 
 
 
@@ -271,7 +271,7 @@ function addNotLoggedModal(){
 **/
 function addLoggedModal(){
     var editpassword, deleteaccount,mywifi;
-    
+
     setExitModal();
     setEditPasswordModal();
     setEditPasswordBisModal();
@@ -279,8 +279,27 @@ function addLoggedModal(){
     setDeleteAccountBisModal();
     setMyWifiModal();
     setMyNotificationModal();
-    
-    
+    setAskInsertWifiMode();
+
+    function setAskInsertWifiMode(){
+      console.log('ok');
+        document.getElementById('show-addwifi').addEventListener('click', function(){
+             askInsertWifiMode = document.getElementById('dialog-askinsertwifimode'); //get dialog element
+             console.log('ok2');
+             if (!askInsertWifiMode.showModal) {
+                askInsertWifiMode.registerDialog(askInsertWifiMode);
+             }
+
+             /** close button function **/
+             var v = document.getElementById('closebtn-askinsertwifimode');
+             v.addEventListener('click', function() {
+                askInsertWifiMode.close();
+             });
+
+             askInsertWifiMode.showModal();
+           });
+      }
+
     function setExitModal() {
       document.getElementById('exitSystem').addEventListener('click', function(){
         exitDialog = document.getElementById('dialog-exit');
@@ -302,33 +321,33 @@ function addLoggedModal(){
     }
 
     function setEditPasswordModal(){
-        
+
         document.getElementById('show-editpassword').addEventListener('click', function(){
-            
+
             editpassword = document.getElementById('dialog-editpassword'); //get dialog element
-            
+
             if (! editpassword.showModal) {
                 dialogPolyfill.registerDialog(editpassword);
             }
-            
+
             /** close button function **/
             var v = document.getElementById('closebtn-editpassword');
             v.addEventListener('click', function() {
-                
+
                 editpassword.close();
             });
-            
+
             /** editpassword request **/
-            
-            
+
+
             /**./editpassword request **/
-            
+
            editpassword.showModal();
-                
+
         }); //./document
-        
+
     } //./setEditPasswordModal
-    
+
 
     function setEditPasswordBisModal() {
       document.getElementById('enterbtn-editpassword').addEventListener('click', function(){
@@ -336,11 +355,11 @@ function addLoggedModal(){
             if (!editPasswordBis.showModal) {
                     dialogPolyfill.registerDialog(recover);
             }
-         
+
                  /** close button function **/
                   var v = document.getElementById('closebtn-editPasswordBis');
                   v.addEventListener('click', function() {
-                     editPasswordBis.close(); 
+                     editPasswordBis.close();
                   });
 
              //TODO controllo campi
@@ -350,45 +369,45 @@ function addLoggedModal(){
     }
 
     function setDeleteAccountModal(){
-        
+
         document.getElementById('show-deleteaccount').addEventListener('click', function(){
-            
+
             deleteaccount = document.getElementById('dialog-deleteaccount'); //get dialog element
-            
+
             if (! deleteaccount.showModal) {
                 dialogPolyfill.registerDialog(deleteaccount);
             }
-            
+
             /** close button function **/
             var v = document.getElementById('closebtn-deleteaccount');
             v.addEventListener('click', function() {
-                
+
                 deleteaccount.close();
             });
-            
+
             /** deleteaccount request **/
-            
-            
+
+
             /**./deleteaccount request **/
-            
+
            deleteaccount.showModal();
-                
+
         }); //./document
-        
+
     } //./setDeleteaccountModal
-    
-    
+
+
     function setDeleteAccountBisModal() {
       document.getElementById('enterbtn-deleteaccount').addEventListener('click', function(){
          deleteaccountBis = document.getElementById('dialog-deleteaccountBis');
             if (!deleteaccountBis.showModal) {
                     dialogPolyfill.registerDialog(recover);
             }
-         
+
                  /** close button function **/
                   var v = document.getElementById('closebtn-deleteaccountBis');
                   v.addEventListener('click', function() {
-                     deleteaccountBis.close(); 
+                     deleteaccountBis.close();
                   });
 
              //TODO controllo campi
@@ -399,42 +418,42 @@ function addLoggedModal(){
 
 
 
-    
+
     function setMyWifiModal(){
-        
+
         document.getElementById('show-mywifi').addEventListener('click', function(){
-            
+
             mywifi = document.getElementById('dialog-mywifi'); //get dialog element
-            
+
             if (! mywifi.showModal) {
                 dialogPolyfill.registerDialog(mywifi);
             }
-            
+
             /** close button function **/
             var v = document.getElementById('closebtn-mywifi');
             v.addEventListener('click', function() {
-                
+
                 mywifi.close();
             });
-            
 
-            
+
+
            mywifi.showModal();
-                
+
         }); //./document
-            
+
         setDeleteWifi(); //aggiunge il modale per eliminare una rete
         setEditWiFi();
 
     } //./setMyWifiModal
-       
-    
+
+
     function setEditWiFi() {
        var y = document.getElementsByClassName("show-editwifi");
        for (i = 0; i < y.length; i++) {
           y[i].addEventListener("click", handleMouseClickEdit, false);
        }
-       
+
        function handleMouseClickEdit(e) {
          mywifi.close();
          editwifidialog = document.getElementById('dialog-editwifi'); //get dialog element
@@ -447,7 +466,7 @@ function addLoggedModal(){
          document.getElementById("subtitleNomeEditRete").innerHTML = nameWiFiToEdit;
          var v = document.getElementById('closebtn-editwifi');
                 v.addEventListener('click', function() {
-                  editwifidialog.close(); 
+                  editwifidialog.close();
                   mywifi.showModal();
                 });
          var vv = document.getElementById('enterbtn-editwifi');
@@ -459,12 +478,12 @@ function addLoggedModal(){
                 });
          editwifidialog.showModal();
        }
-                
+
     }
 
 
     function setDeleteWifi(){
-        
+
            var x = document.getElementsByClassName("show-deletewifi");
              for (i = 0; i < x.length; i++) {
                x[i].addEventListener("click", handleMouseClickDelete, false);
@@ -476,7 +495,7 @@ function addLoggedModal(){
              if (! deletewifi.showModal) {
                 dialogPolyfill.registerDialog(deletewifi);
              }
-             
+
              var v = document.getElementById('closebtn-deletewifi');
              v.addEventListener('click', function() {
                 deletewifi.close();
@@ -502,8 +521,8 @@ function addLoggedModal(){
                        //snackbarContainer.MaterialSnackbar.showSnackbar(data);
 
              });
-            
-           
+
+
             //visualizza la rete selezionata nel modale di conferma eliminazione
             var nameWifiToDelete = e.target.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].innerHTML;
             var wifiToDelete = e.target.parentNode.parentNode.parentNode.parentNode.childNodes[1].cloneNode("true");
@@ -518,10 +537,10 @@ function addLoggedModal(){
             deletewifi.showModal();
           }
 
-        
+
     } //./setDeleteWifi
-    
-    
+
+
 
     function setMyNotificationModal() {
       document.getElementById('show-mynotification').addEventListener('click', function(){
@@ -545,7 +564,7 @@ function addLoggedModal(){
                  clicked_element.previousElementSibling.innerHTML = "notifications_none";
 
               clicked_element = clicked_element.parentNode.nextElementSibling;
-              
+
               if (clicked_element.hasAttribute("hidden"))
               {
                 clicked_element.removeAttribute("hidden");
@@ -554,23 +573,23 @@ function addLoggedModal(){
               {
                 clicked_element.setAttribute("hidden", "true");
               }
-              
+
             }
             var x = document.getElementsByClassName("toHide");
              for (i = 0; i < x.length; i++) {
                x[i].addEventListener("click", handleMouseClick, false);
              }
-            
+
       });
 
       segnalazione();
       function segnalazione() {
         var snackbarContainer = document.querySelector('#sb-confirm-operation');
-        inexistent(); 
+        inexistent();
         loginNecessario();
         rangeErrato();
         restrizioni();
-         
+
 
         document.getElementById("test").addEventListener('click', function(){
 
@@ -608,7 +627,7 @@ function addLoggedModal(){
 
         });
 
-               
+
                function inexistent() {
                   showInexistent = document.getElementById('dialog-report-inexistent'); //get dialog element
                    if (! showInexistent.showModal) {
@@ -648,7 +667,7 @@ function addLoggedModal(){
                    });
                }
 
-               
+
                function rangeErrato() {
                   showRangeErrato = document.getElementById('dialog-report-range'); //get dialog element
                    if (! showRangeErrato.showModal) {
@@ -668,7 +687,7 @@ function addLoggedModal(){
                    });
                }
 
-                  
+
 
                function restrizioni() {
                   showRestrizioni = document.getElementById('dialog-report-restriction'); //get dialog element
@@ -691,7 +710,7 @@ function addLoggedModal(){
       }
 
     }
-    
+
 }//./addLoggedModal
 
 
@@ -701,15 +720,15 @@ function addLoggedModal(){
         +string actionText, *optional
         +function actionHandler *optional
 **/
-function showSnackbar(sb){    
+function showSnackbar(sb){
     //get the snackbar component
     var snackbar = document.getElementById('sb-confirm-operation');
-    
+
     //check the optional parameter
     if(!sb.timeout){sb.timeout = 2000;}
     if(!sb.actionText){sb.actionText = 'Annulla'; }
     if(!sb.actionHandler){sb.actionHandler = null;};
-    
+
     //show the snackbar
     snackbar.MaterialSnackbar.showSnackbar(sb);
 }
