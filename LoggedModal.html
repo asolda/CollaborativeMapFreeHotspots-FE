@@ -642,6 +642,8 @@
             <button id="closebtn-report-restriction" type="button" class="mdl-button dialog-close">Annulla</button>
         </div>
         </dialog>
+
+
         <dialog id="dialog-askinsertwifimode" class="mdl-dialog mdl-dialog-custom">
                <div class="mdl-title">
                    <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">wifi</i>Inserisci rete</h4>
@@ -654,7 +656,83 @@
 
                <div class="mdl-dialog__actions">
                  <button id="closebtn-askinsertwifimode" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Chiudi</button>
-                 <button id="custom-askinsertwifimode" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Mia posizione</button>
-                 <button id="myposition-askinsertwifimode" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Posizione custom</button>
+                 <button id="custom-askinsertwifimode" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Posizione custom</button>
+                 <button id="myposition-askinsertwifimode" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Mia posizione</button>
                </div>
          </dialog>
+
+         <dialog id="dialog-insertnewwifi" class="mdl-dialog mdl-dialog-custom">
+                <div class="mdl-title">
+                    <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">wifi</i>Inserisci i dettagli della rete</h4>
+                </div>
+
+                <div class="mdl-dialog__content">
+
+                      <div id="insert-nomerete" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                       <input class="mdl-textfield__input" type="text"/>
+                       <label class="mdl-textfield__label" for="insert-nomerete">Nome rete</label>
+                       <span id='insert-nomerete-error' class="mdl-textfield__error">Nome rete non valido</span>
+                      </div>
+
+                      <div id="insert-quality" class='pin-detail-star'>
+                        <span>Qualità rete</span>
+                        <ul>
+                         <li class='star-val'>
+                           <button id='star1' class='mdl-button mdl-js-button mdl-button--icon'><i id='1' class='material-icons'>star_rate</i></button>
+                         </li>
+
+                         <li class='star-val'>
+                           <button id='star2' class='mdl-button mdl-js-button mdl-button--icon'><i id='2' class='material-icons'>star_rate</i></button>
+                         </li>
+
+                         <li class='star-val'>
+                           <button id='star3' class='mdl-button mdl-js-button mdl-button--icon'><i id='3' class='material-icons'>star_rate</i></button>
+                         </li>
+
+                         <li class='star-val'>
+                           <button id='star4' class='mdl-button mdl-js-button mdl-button--icon'><i id='4' class='material-icons'>star_rate</i></button>
+                         </li>
+
+                         <li class='star-val'>
+                           <button id='star5' class='mdl-button mdl-js-button mdl-button--icon'><i id='5' class='material-icons'>star_rate</i></button>
+                         </li>
+                       </ul>
+                       </div>
+
+                      <div id="insert-restrizioni" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                       <input class="mdl-textfield__input" type="text"/>
+                       <label class="mdl-textfield__label" for="insert-restrizioni">Restrizioni</label>
+                       <span id='insert-restrizioni-error' class="mdl-textfield__error">Restrizioni non valide</span>
+                      </div>
+
+                      <ul class="mdl-list">
+                        <li class="mdl-list__item">
+                          <span class="mdl-list__item-primary-content">
+                            Login Necessario?
+                          </span>
+                          <span class="mdl-list__item-secondary-action">
+                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="insert-login">
+                            <input type="checkbox" id="insert-login" class="mdl-switch__input" />
+                            </label>
+                          </span>
+                        </li>
+                      </ul>
+
+                      <div id="insert-range" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                       <input class="mdl-textfield__input" type="text"/>
+                       <label class="mdl-textfield__label" for="insert-range">Range</label>
+                       <span id='insert-range-error' class="mdl-textfield__error">Range non valido</span>
+                      </div>
+
+                    <div id="insert-altreinfo" class="mdl-textfield mdl-js-textfield">
+                      <input class="mdl-textfield__input" type="text" rows= "3" ></textarea>
+                      <label class="mdl-textfield__label" for="insert-altreinfo">Altre informazioni</label>
+                    </div>
+
+                </div>
+
+                <div class="mdl-dialog__actions">
+                  <button id="closebtn-insertnewwifi" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Chiudi</button>
+                  <button id="enterbtn-insertnewwifi" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Inserisci</button>
+                </div>
+          </dialog>

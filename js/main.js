@@ -282,22 +282,39 @@ function addLoggedModal(){
     setAskInsertWifiMode();
 
     function setAskInsertWifiMode(){
-      console.log('ok');
+
         document.getElementById('show-addwifi').addEventListener('click', function(){
              askInsertWifiMode = document.getElementById('dialog-askinsertwifimode'); //get dialog element
-             console.log('ok2');
              if (!askInsertWifiMode.showModal) {
                 askInsertWifiMode.registerDialog(askInsertWifiMode);
              }
 
              /** close button function **/
-             var v = document.getElementById('closebtn-askinsertwifimode');
-             v.addEventListener('click', function() {
+             document.getElementById('closebtn-askinsertwifimode').addEventListener('click', function() {
                 askInsertWifiMode.close();
+             });
+
+             document.getElementById('myposition-askinsertwifimode').addEventListener('click', function() {
+                askInsertWifiMode.close();
+
+                //get user position and show insertwifi modal
+                insertnewwifi.showModal();
              });
 
              askInsertWifiMode.showModal();
            });
+
+                insertnewwifi = document.getElementById('dialog-insertnewwifi'); //get dialog element
+                if (!insertnewwifi.showModal) {
+                   insertnewwifi.registerDialog(insertnewwifi);
+                }
+
+                var valutazione = inizializzaValutazione('#insert-quality .star-val button',null);
+                /** close button function **/
+                var v = document.getElementById('closebtn-insertnewwifi');
+                v.addEventListener('click', function() {
+                   insertnewwifi.close();
+                });
       }
 
     function setExitModal() {
@@ -731,4 +748,53 @@ function showSnackbar(sb){
 
     //show the snackbar
     snackbar.MaterialSnackbar.showSnackbar(sb);
+}
+
+
+function inizializzaValutazione(stringselector,valoreiniziale){
+  if(!valoreiniziale){valoreiniziale = 0;}
+  var valutazione = {
+    star: 5,
+    htmlObj: $(stringselector),
+    valore: valoreiniziale //temp
+  }
+  valutazione.getValutazione = function(){
+    return this.valore;
+  }
+  valutazione.setValutazione = function(val){
+    if( !val ){ val = this.valore;}
+    $.each(this.htmlObj, function(i, star){
+
+      if(i < val ){
+        $(star).addClass('mdl-button--colored');
+      }//./if
+
+    });//.each
+
+  }//./setValutazione
+
+  valutazione.setOnclick = function(){
+    stars = this.htmlObj;
+
+    $.each(stars, function(i,star){
+      $(star).click(function(event){
+
+        this.valore = event.target.id;
+
+        for(j=0; j < 5; j++){
+          if(j<=i){
+            $(stars[j]).addClass('mdl-button--colored');
+          }else{
+            $(stars[j]).removeClass('mdl-button--colored');
+          } //./if
+
+        }//./for
+    });//.click function
+  });//./each
+}//./setOnclick
+
+  valutazione.setValutazione();
+  valutazione.setOnclick();
+
+  return valutazione;
 }

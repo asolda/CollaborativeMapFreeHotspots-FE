@@ -240,7 +240,7 @@ html, body {
 }
 
 .mdl-dialog-custom .mdl-button { /** Colore del testo dei bottoni */
-    color: #3f51b5;
+    /**color: #3f51b5;**/
 }
 
 #mdl-title-icon { /** Icona vicino al titolo */
@@ -411,4 +411,20 @@ form { /** Elimina il margine a tutti i form */
 .pin-detail-star ul li{
   float: left;
   margin-bottom: 16px;
+}
+
+/** ________________10.Inserisci pin________________ **/
+#dialog-insertnewwifi ul li{
+  padding-left: 0 !important;
+}
+#dialog-insertnewwifi ul{
+  margin: 0;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+#dialog-insertnewwifi .mdl-list{
+  width: 300px;
+}
+#dialog-insertnewwifi #insert-quality{
+    padding-top: 18px;
 }
