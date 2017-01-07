@@ -428,3 +428,11 @@ form { /** Elimina il margine a tutti i form */
 #dialog-insertnewwifi #insert-quality{
     padding-top: 18px;
 }
+#insert-quality .invalid{
+  color: red;
+}
+#insert-input-error{
+  display: none;
+  display: block;
+  color: red;
+}
