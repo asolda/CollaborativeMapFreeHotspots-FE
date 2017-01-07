@@ -295,7 +295,9 @@ function addLoggedModal(){
              });
 
              document.getElementById('myposition-askinsertwifimode').addEventListener('click', function() {
-                askInsertWifiMode.close();
+
+              askInsertWifiMode.close();
+
 
                 //get user position and show insertwifi modal
                 insertnewwifi.showModal();
@@ -798,5 +800,12 @@ function inizializzaValutazione(stringselector,valoreiniziale){
   valutazione.setValutazione();
   valutazione.setOnclick();
 
-  return valutazione;
+}
+
+function showErrorDB(modale, codiceerrore){
+  $(modale + ' .mdl-dialog__title').html('<h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">error</i>Ops!</h4>');
+  $(modale + ' .mdl-dialog__sub').text('Si è verificato un errore');
+  $(modale + ' .mdl-dialog__content').html("<p>Impossibile completare la richiesta. Riprova</p>");
+  $(modale + ' .mdl-dialog__actions').html('<button onclick="location.reload();" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Ricarica la pagina</button>');
+  console.log('Impossibile completare la richiesta. Errore: '+codiceerrore);
 }
