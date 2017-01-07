@@ -58,7 +58,7 @@ function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restri
     }
     
 //funzione per visualizzazione le informazioni di un pin    
-function getPinInfo(pin_id){
+function getPinInfo(pin_id, onclose){
     if(isNaN(pin_id)){
      //codice per mostrare a frontend l'errore ERROR_DB   
     } 
@@ -66,18 +66,25 @@ function getPinInfo(pin_id){
         $.ajax({
             type: 'GET',
             url: 'http://127.0.0.1:8080/pin/getPinInfo/'+pin_id,
+            crossDomain: true,
+                xhrFields: {
+                 withCredentials: true
+               },
             success: function(data) {
               try {
                 var ret = data;
+                console.debug(ret);
                 if(ret.status==0){
-                    $('#result').append(ret.message + '</br>');
-					return ret; //se ok, restituisce le info del pin
+                    //$('#result').append(ret.message + '</br>');
+                    //console.debug(ret.message);
+                    onclose(ret.message);
+                //return ret.message; //se ok, restituisce le info del pin
                 }else if(ret.status==1){
-                    $('#result').append(ret.message + '</br>'); //errore
+                    //$('#result').append(ret.message + '</br>'); //errore
                 }                
                 
               } catch (err) {
-                alert('Errore nella visualizzazione delle info del pin: ' + ret.message);
+                //alert('Errore nella visualizzazione delle info del pin: ' + ret.message);
               }
             },
             error: function(xhr, status, error) {

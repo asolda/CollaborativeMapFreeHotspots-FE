@@ -19,9 +19,12 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <script type="text/javascript" src="assets/material.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHsz36Bfu65nOK4F9cnpZv8m--nmi2NcQ&callback=initMap&libraries=geometry"></script>
 		<script type="text/javascript" src="js/createHome.js"></script>
 		<script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/pin.js"></script>
         <script type="text/javascript" src="js/map.js"></script>
+        <script type="text/javascript" src="js/overlay.js"></script>
         <script type="text/javascript" src="js/segnalazione.js"></script>
 		<script type="text/javascript" src="js/signIn.js"></script>
 		<script type="text/javascript" src="js/sessioncheck.js"></script>
@@ -91,7 +94,7 @@
         </div>
 
         <!-- carica script mappa -->
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHsz36Bfu65nOK4F9cnpZv8m--nmi2NcQ&callback=initMap&libraries=geometry"></script>
+        
         <script src="js/main.js"></script>
 
 		<!-- script caricamento pagina iniziale -->
@@ -105,5 +108,8 @@
             segnala($('#utente').val(),$('#rete').val(),$('#tipo').val(),$('#dettagli').val());
           });
         </script>
+                <script type="text/javascript" src="js/overlay.js"></script>
+
+        <script>google.maps.event.addDomListener(window, 'load', initMap);</script>
     </body>
 </html>

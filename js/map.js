@@ -1,6 +1,12 @@
+//UPDATED FILE MAP
 var lastPosNE, lastPosSW, lastCenter, markers = [];
 var pins_info = [];
+var user_position;
+var mutex_new_pin = 0;
 
+var map, pos;
+var bounds;
+var srcImage = 'https://golang.org/doc/gopher/appenginegophercolor.jpg';
 
 function initMap() {
   var infoWindow = new google.maps.InfoWindow({
@@ -10,13 +16,15 @@ function initMap() {
   var infowindowMarker = new google.maps.InfoWindow({
     content: '<h1>Loading</h1>' + '<p>Caricamentos</p>'
   });
-
+var infowindowNewMarker = new google.maps.InfoWindow({
+    content: '<h1>Loading</h1>' + '<p>Caricamentos</p>'
+  });
 
 
   //var myLatLng = {lat: 41.060816, lng: 14.334157};
 
 
-  var map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16,
     center: {
       lat: 42.516122,
@@ -36,6 +44,8 @@ function initMap() {
     lastPosSW = map.getBounds().getSouthWest();
 
     lastCenter = map.getCenter();
+
+    bounds = map.getBounds();
   });
 
   var infoWindow = new google.maps.InfoWindow({
@@ -47,11 +57,12 @@ function initMap() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
 
-      var pos = {
+      pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
 
+      user_position = pos;
 
 
       infoWindow.setPosition(pos);
@@ -78,13 +89,25 @@ function initMap() {
   loadPins(map, markers, infowindowMarker);
   console.debug(markers);
 
+  //aggiungo un nuovo pin con il click sulla mappa
+  
+google.maps.event.addListener(map,'click',function(event) {
+        if(mutex_new_pin  == 0){
+          mutex_new_pin = 1;
+          addMarker(event.latLng, 'Click Generated Marker', map, infowindowNewMarker);
+        }else{
+          alert("Completa prima l' inserimento di un pin");
+        } 
+});
+
+
 
   // evento che triggera ogni volta che vengono modificati gli estremi dell' area da visualizzare
   google.maps.event.addListener(map, 'bounds_changed', function () {
     //console.debug(map.getCenter().lat()+" "+map.getCenter().lng());
     var newPosNE = map.getBounds().getNorthEast();
     var newPosSW = map.getBounds().getSouthWest();
-
+    bounds = map.getBounds();
 
     var center = map.getCenter();
 
@@ -149,6 +172,14 @@ function initMap() {
     //console.debug(map.getBounds().getNorthEast() +" " + map.getBounds().getSouthWest());
 
   });
+
+  bounds = map.getBounds();
+        //google.maps.event.addDomListener(window, 'load', initMap);
+
+        // The custom USGSOverlay object contains the USGS image,
+        // the bounds of the image, and a reference to the map.
+  overlay = new USGSOverlay(bounds, srcImage, map, null);
+
   //end func initMap
 }
 
@@ -172,14 +203,72 @@ function calcDistance(fromLat, fromLng, toLat, toLng) {
 }
 
 
-function bindInfoWindow(marker, map, infowindow, description) {
+function bindInfoWindow(marker, map, infowindow, id) {
   marker.pin.addListener('click', function () {
     hideRads();
-    infowindow.setContent(description);
-    infowindow.open(map, this);
+    //id has pin id
+    //console.debug("1");
+    
+    var text;
+  getPinInfo(id, function onclose(text){
+    //console.debug(text[0].ssid);
+    //overlay.setData(text[0]);
+    overlay.toggleDOM(text[0]);
+  });
+      //console.debug(text);
+       
+  
+    //infowindow.setContent(text);
+    //infowindow.open(map, this);
     marker.rad.setMap(map);
   });
 }
+
+function addMarker(latlng,title,map, infowindowNewMarker) {
+    var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: title,
+            draggable:true
+    });
+    google.maps.event.addListener(marker,'drag',function(event) {
+        console.debug(this.position.lat()+" "+this.position.lng());
+        //alert('drag');
+    });
+
+    google.maps.event.addListener(marker,'dragend',function(event) {
+            console.debug(this.position.lat()+" "+this.position.lng());
+            infowindowNewMarker.setContent("<h1>CIAO</h1>");
+            infowindowNewMarker.open(map, this);
+            //qui vanno completati i campi ed effettuata la richiesta del be
+    });
+    google.maps.event.addListener(marker,'click',function(event) {
+            console.debug(this.position.lat()+" "+this.position.lng());
+            infowindowNewMarker.setContent("<h1 onclick='query_insert_pin()'>CIAO</h1>");
+            infowindowNewMarker.open(map, this);
+            console.debug("My position "+user_position.lat+" "+user_position.lng);
+            //qui vanno completati i campi ed effettuata la richiesta del be
+    });
+}
+
+function query_insert_pin(){
+inseriscipin(1,1,user_position.lat,user_position.lng,1,1,1,1,1);
+}
+/*
+//handler per il click sulla conferma di inserimento pin
+document.getElementById('enterbtn-insertpin').addEventListener('click', function() {
+				var ssid = document.forms["insertpin-form"]["p-ssid"].value;
+        var qualita = document.forms["insertpin-form"]["p-qualita"].value;
+        var latitudine = user_position.lat;
+        var longitudine = user_position.lng;
+        var necessita_login = document.forms["insertpin-form"]["p-necessita_login"].value;
+        var restrizioni = document.forms["insertpin-form"]["p-restrizioni"].value;
+        var altre_informazioni = document.forms["insertpin-form"]["p-altre_informazioni"].value;
+        var range = document.forms["insertpin-form"]["p-range"].value;
+        var utente = //da recuperare nella sessione
+				inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restrizioni,altre_informazioni,range,utente); 
+	    });
+*/
 
 function loadPins(map, markers, infowindowMarker) {
   for (var pin in markers) {
@@ -200,7 +289,7 @@ function loadPins(map, markers, infowindowMarker) {
       radius: markers[pin].radius
     });
     pin_info = { pin: marker, rad: pinRadius };
-    bindInfoWindow(pin_info, map, infowindowMarker, markers[pin].description);
+    bindInfoWindow(pin_info, map, infowindowMarker, markers[pin].id);
     pins_info.push(pin_info)
   }
   hideRads();
@@ -246,11 +335,15 @@ $.ajax({
     type: 'GET',
     url: url_request,
     async: false,
+    crossDomain: true,
+            xhrFields: {
+             withCredentials: true
+           },
     success: function(data) {
       //var data_from_back = jQuery.parseJSON(data);
       //console.debug(data);
       $.each(data, function(idx, pin){
-      //console.debug(pin.latitudine + " " + pin.longitudine + "");
+      //console.debug(data);
       var mark = {
         position: {
           lat: pin.latitudine,
@@ -258,7 +351,7 @@ $.ajax({
         },
         map: map,
         icon: image,
-        description: "<h1>Potato2</h1>",
+        id: pin.id,
         radius: 100
       };
       
@@ -323,3 +416,4 @@ $.ajax({
   */
   
 }
+
