@@ -309,7 +309,7 @@ function addLoggedModal(){
                    insertnewwifi.registerDialog(insertnewwifi);
                 }
 
-                var valutazione = inizializzaValutazione('#insert-quality .star-val button',null);
+                inizializzaValutazione('#insert-quality',null);
                 /** close button function **/
                 var v = document.getElementById('closebtn-insertnewwifi');
                 v.addEventListener('click', function() {
@@ -755,14 +755,16 @@ function inizializzaValutazione(stringselector,valoreiniziale){
   if(!valoreiniziale){valoreiniziale = 0;}
   var valutazione = {
     star: 5,
-    htmlObj: $(stringselector),
-    valore: valoreiniziale //temp
+    htmlObj: $(stringselector +' .star-val button'),
+    valore: valoreiniziale,
+    input: $(stringselector + ' input')
   }
   valutazione.getValutazione = function(){
     return this.valore;
   }
   valutazione.setValutazione = function(val){
     if( !val ){ val = this.valore;}
+    $(this.input).val(val);
     $.each(this.htmlObj, function(i, star){
 
       if(i < val ){
@@ -775,12 +777,11 @@ function inizializzaValutazione(stringselector,valoreiniziale){
 
   valutazione.setOnclick = function(){
     stars = this.htmlObj;
-
+    input = $(this.input);
     $.each(stars, function(i,star){
       $(star).click(function(event){
 
         this.valore = event.target.id;
-
         for(j=0; j < 5; j++){
           if(j<=i){
             $(stars[j]).addClass('mdl-button--colored');
@@ -789,6 +790,7 @@ function inizializzaValutazione(stringselector,valoreiniziale){
           } //./if
 
         }//./for
+        $(input).val(this.valore);
     });//.click function
   });//./each
 }//./setOnclick
