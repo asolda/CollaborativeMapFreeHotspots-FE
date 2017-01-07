@@ -16,7 +16,7 @@ function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restri
             $.ajax({
                 type: 'POST',
                 url: 'http://127.0.0.1:8080/pin/new/',
-                data: "ssid="+ssid+"&qualità="+qualita+"&latitudine="+latitudine+"&longitudine="+longitudine+"&necessità_login="+necessita_login+"&restrizioni="+restrizioni+"&altre_informazioni="+altre_informazioni+"&range="+range,
+                data: "ssid="+ssid+"&qualitï¿½="+qualita+"&latitudine="+latitudine+"&longitudine="+longitudine+"&necessitï¿½_login="+necessita_login+"&restrizioni="+restrizioni+"&altre_informazioni="+altre_informazioni+"&range="+range,
                 contentType: "application/x-www-form-urlencoded",
                 crossDomain: true,
                 xhrFields: {
@@ -157,3 +157,4 @@ function pinranking(voto,utente,rete_wifi){
                           });
                           }   
 }                          
+}
