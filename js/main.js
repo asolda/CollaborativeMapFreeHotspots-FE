@@ -317,6 +317,29 @@ function addLoggedModal(){
                 v.addEventListener('click', function() {
                    insertnewwifi.close();
                 });
+                
+            document.getElementById('#enterbtn-insertnewwifi').addEventListener('click', function(){
+               inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restrizioni,altre_informazioni,range,function(status_ok, data){
+                   if(status_ok){
+                        showSnackbar({message: 'Rete Wi-Fi aggiunta correttamente.'});
+                   }else{
+                        if(strcmp(data, 'ERROR_SSID')==0){
+                            $('#insert-nomerete-error').show();
+                            $('#insert-input-error').html('Campo obbligatorio non compilato.');
+                            $('#insert-input-error').show();
+                        }else if(strcmp(data, 'ERROR_QUALITY')==0){
+                            $('#insert-quality')toggleClass(".invalid");
+                            $('#insert-input-error').html('Campo obbligatorio non compilato.');
+                            $('#insert-input-error').show();
+                        }else if(strcmp(data, 'ERROR_INVALID_DATA')==0){
+                            $('#insert-input-error').html('Dati invalidi.');
+                            $('#insert-input-error').show();
+                        }else if(strcmp(data, 'ERROR_DB')==0){
+                            showErrorDB('#dialog-insertnewwifi', 'ERROR_DB');
+                        }
+                   }
+                }); 
+            });
       }
 
     function setExitModal() {
