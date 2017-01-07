@@ -328,7 +328,7 @@ function addLoggedModal(){
                             $('#insert-input-error').html('Campo obbligatorio non compilato.');
                             $('#insert-input-error').show();
                         }else if(strcmp(data, 'ERROR_QUALITY')==0){
-                            $('#insert-quality')toggleClass(".invalid");
+                            $('#insert-quality').toggleClass(".invalid");
                             $('#insert-input-error').html('Campo obbligatorio non compilato.');
                             $('#insert-input-error').show();
                         }else if(strcmp(data, 'ERROR_INVALID_DATA')==0){
