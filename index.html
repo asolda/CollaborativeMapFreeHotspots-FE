@@ -15,7 +15,7 @@
         <!-- Material Design e altro -->
         <link rel="icon" type="image/png" href="./assets/icon.png"/>
         <link rel="stylesheet" type="text/css" href="assets/material.min.css"/>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/> 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <script type="text/javascript" src="assets/material.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -24,13 +24,14 @@
         <script type="text/javascript" src="js/map.js"></script>
         <script type="text/javascript" src="js/segnalazione.js"></script>
 		<script type="text/javascript" src="js/signIn.js"></script>
-		<script type="text/javascript" src="js/sessionCheck.js"></script>
+		<script type="text/javascript" src="js/sessioncheck.js"></script>
+		<script type="text/javascript" src="js/getCookie.js"></script>
     </head>
 
-    
+
    <!-- End of .main class -->
     <body>
-       <div id="splashscreen">  
+       <div id="splashscreen">
         <table>
              <tbody>
                <tr><td></td><td></td><td></td></tr>
@@ -47,10 +48,10 @@
        </div>
        <script type="text/javascript">
           //Gestione splash screen, attende il caricamento della pagina
-         (function(){   
+         (function(){
            if (window.addEventListener)
            {
-              window.addEventListener("load", nascondi_splash_screen, false);    
+              window.addEventListener("load", nascondi_splash_screen, false);
            }else{
               window.attachEvent("onload", nascondi_splash_screen);
            }
@@ -58,7 +59,7 @@
           function nascondi_splash_screen()
           {
              $('#splashscreen').fadeOut("slow");
-          } 
+          }
        </script>
 
         <!-- Mostra sempre un header, anche su schermi piccoli. -->
@@ -67,12 +68,12 @@
           <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
               <!-- Titolo -->
-              
+
               <span class="mdl-layout-title"><img id="toDelete" src="./assets/logo.png" width="40" height="50"/><span id="toDelete2">&nbsp&nbsp</span>Alwaysconnected</span>
               <!-- Aggunge spazio, per allineare il men� sull'header a destra -->
               <div class="mdl-layout-spacer"></div>
             </div>
-          </header> 
+          </header>
 
           <!-- Contenuto della pagina -->
           <main class="mdl-layout__content">
@@ -82,23 +83,23 @@
           </main>
 
         </div>
-    
-        <!-- Snackbar component for confirm operation -->        
+
+        <!-- Snackbar component for confirm operation -->
         <div id="sb-confirm-operation" class="mdl-js-snackbar mdl-snackbar">
           <div class="mdl-snackbar__text"></div>
           <button class="mdl-snackbar__action" type="button"></button>
         </div>
-                
+
         <!-- carica script mappa -->
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHsz36Bfu65nOK4F9cnpZv8m--nmi2NcQ&callback=initMap&libraries=geometry"></script>
         <script src="js/main.js"></script>
-		
+
 		<!-- script caricamento pagina iniziale -->
 
         <script>
 			createHome();
 		</script>
-		
+
         <script>
 		 $('#invia_segn').click(function(){
             segnala($('#utente').val(),$('#rete').val(),$('#tipo').val(),$('#dettagli').val());

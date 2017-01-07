@@ -16,8 +16,8 @@
                     $('#result').append(ret.message + '</br>');
 					return 0; //email e/o password errati
                 }
-                
-                
+
+
               } catch (err) {
                 alert('Errore nel login: ' + ret.message);
               }
@@ -27,3 +27,11 @@
             }
           });
          }
+         
+/** Funzione per effetuare il logout **/
+function signOut(){
+
+  //aja call
+
+  console.log('logout');
+}

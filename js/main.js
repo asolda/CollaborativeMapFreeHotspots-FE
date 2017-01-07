@@ -317,8 +317,8 @@ function addLoggedModal(){
                 v.addEventListener('click', function() {
                    insertnewwifi.close();
                 });
-                
-            document.getElementById('#enterbtn-insertnewwifi').addEventListener('click', function(){
+
+            document.getElementById('enterbtn-insertnewwifi').addEventListener('click', function(){
                inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restrizioni,altre_informazioni,range,function(status_ok, data){
                    if(status_ok){
                         showSnackbar({message: 'Rete Wi-Fi aggiunta correttamente.'});
@@ -338,7 +338,7 @@ function addLoggedModal(){
                             showErrorDB('#dialog-insertnewwifi', 'ERROR_DB');
                         }
                    }
-                }); 
+                });
             });
       }
 

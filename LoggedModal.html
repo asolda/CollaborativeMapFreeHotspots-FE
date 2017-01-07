@@ -106,7 +106,7 @@
             </div>
 
             <div class="mdl-dialog__actions">
-              <button id="enterbtn-exit" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Esci</button>
+              <button id="enterbtn-exit" type="button" onclick="signOut();" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Esci</button>
               <button id="closebtn-exit" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Annulla</button>
             </div>
       </dialog>
@@ -725,10 +725,9 @@
                        <span id='insert-range-error' class="mdl-textfield__error">Range non valido</span>
                       </div>
 
-                    <div id="insert-altreinfo" class="mdl-textfield mdl-js-textfield--floating-label">
+                    <div id="insert-altreinfo" class="mdl-textfield mdl-js-textfield">
                       <input class="mdl-textfield__input" type="text" rows= "3" ></textarea>
                       <label class="mdl-textfield__label" for="insert-altreinfo">Altre informazioni</label>
-                      <span id='insert-altreinfo-error' class="mdl-textfield__error">Range non valido</span>
                     </div>
                     <span id="insert-input-error">Campi obbligatori non compilati</span>
                 </div>
