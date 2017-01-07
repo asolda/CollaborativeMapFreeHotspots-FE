@@ -433,6 +433,5 @@ form { /** Elimina il margine a tutti i form */
 }
 #insert-input-error{
   display: none;
-  display: block;
   color: red;
 }
