@@ -91,6 +91,7 @@ var infowindowNewMarker = new google.maps.InfoWindow({
 
   //aggiungo un nuovo pin con il click sulla mappa
   
+  /*
 google.maps.event.addListener(map,'click',function(event) {
         if(mutex_new_pin  == 0){
           mutex_new_pin = 1;
@@ -99,7 +100,7 @@ google.maps.event.addListener(map,'click',function(event) {
           alert("Completa prima l' inserimento di un pin");
         } 
 });
-
+*/
 
 
   // evento che triggera ogni volta che vengono modificati gli estremi dell' area da visualizzare
@@ -223,7 +224,7 @@ function bindInfoWindow(marker, map, infowindow, id) {
     marker.rad.setMap(map);
   });
 }
-
+/*
 function addMarker(latlng,title,map, infowindowNewMarker) {
     var marker = new google.maps.Marker({
             position: latlng,
@@ -250,10 +251,13 @@ function addMarker(latlng,title,map, infowindowNewMarker) {
             //qui vanno completati i campi ed effettuata la richiesta del be
     });
 }
+*/
 
+/*
 function query_insert_pin(){
 inseriscipin(1,1,user_position.lat,user_position.lng,1,1,1,1,1);
 }
+*/
 /*
 //handler per il click sulla conferma di inserimento pin
 document.getElementById('enterbtn-insertpin').addEventListener('click', function() {
