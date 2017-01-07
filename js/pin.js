@@ -1,46 +1,48 @@
 //funzione per inserire un pin 
-function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restrizioni,altre_informazioni,range,utente){
+function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restrizioni,altre_informazioni,range,onclose){
     if(ssid == null || ssid.length==0){
-             //codice per mostrare a frontend l'errore ERROR_SSID
-        }else if(qualita <= 0 || qualita > 5){
-            //codice per mostrare a frontend l'errore ERROR_QUALITY
-        }else if(isNaN(necessita_login) || necessita_login < 0 || necessita_login > 1){
-            //codice per mostrare a frontend l'errore ERROR_LOGIN_NECESSARY
-        }else if(isNaN(range) || range <= 0){
-            //codice per mostrare a frontend l'errore ERROR_RANGE
-        }else if(isNaN(latitudine)){
-            //codice per mostrare a frontend l'errore ERROR_LATITUDE
-        }else if(isNaN(longitudine)){
-            //codice per mostrare a frontend l'errore ERROR_LONGITUDE
-        }else{
-             $.ajax({
+        onclose(false, 'ERROR_SSID');
+    }else if(qualita <= 0 || qualita > 5){
+        onclose(false, 'ERROR_QUALITY');
+    }else if(isNaN(necessita_login) || necessita_login < 0 || necessita_login > 1){
+        onclose(false, 'ERROR_INVALID_DATA');
+    }else if(isNaN(range) || range <= 0){
+        onclose(false, 'ERROR_INVALID_DATA');
+    }else if(isNaN(latitudine)){
+        onclose(false, 'ERROR_INVALID_DATA');
+    }else if(isNaN(longitudine)){
+        onclose(false, 'ERROR_INVALID_DATA');
+    }else{
+            $.ajax({
                 type: 'POST',
                 url: 'http://127.0.0.1:8080/pin/new/',
-                data: "ssid="+ssid+"&qualità="+qualita+"&latitudine="+latitudine+"&longitudine="+longitudine+"&necessità_login="+necessita_login+"&restrizioni="+restrizioni+"&altre_informazioni="+altre_informazioni+"&range="+range+"&utente="+utente, 
+                data: "ssid="+ssid+"&qualità="+qualita+"&latitudine="+latitudine+"&longitudine="+longitudine+"&necessità_login="+necessita_login+"&restrizioni="+restrizioni+"&altre_informazioni="+altre_informazioni+"&range="+range,
                 contentType: "application/x-www-form-urlencoded",
+                crossDomain: true,
+                xhrFields: {
+                 withCredentials: true
+               },
                 success: function(data) {
                   try {
                     var ret = data;
                     if(ret.status==0){
-                        $('#result').append(ret.message + '</br>');
+                        onclose(true, 'INSERT_OK');
                     }else if(ret.status==1){
                         $('#result').append(ret.message + '</br>');
                             if(strcmp(ret.message,"ERROR_DB")==0){
-                                    //codice per mostrare a frontend l'errore ERROR_DB
+                                onclose(false, 'ERROR_DB');
                             }else if(strcmp(ret.message,"ERROR_SSID")==0){
-                                    //codice per mostrare a frontend l'errore ERROR_SSID
-                            }else if(strcmp(ret.message,"ERROR_PASSWORD")==0){
-                                    //codice per mostrare a frontend l'errore ERROR_PASSWORD
+                                onclose(false, 'ERROR_SSID');
                             }else if(strcmp(ret.message,"ERROR_QUALITY")==0){
-                                    //codice per mostrare a frontend l'errore ERROR_QUALITY
+                                onclose(false, 'ERROR_QUALITY');
                             }else if(strcmp(ret.message,"ERROR_LOGIN_NECESSARY")==0){
-                                    //codice per mostrare a frontend l'errore ERROR_LOGIN_NECESSARY
+                                onclose(false, 'ERROR_INVALID_DATA');
                             }else if(strcmp(ret.message,"ERROR_RANGE")==0){
-                                    //codice per mostrare a frontend l'errore ERROR_RANGE
+                                onclose(false, 'ERROR_INVALID_DATA');
                             }else if(strcmp(ret.message,"ERROR_LATITUDE")==0){
-                                    //codice per mostrare a frontend l'errore ERROR_LATITUDE
+                                onclose(false, 'ERROR_INVALID_DATA');
                             }else if(strcmp(ret.message,"ERROR_LONGITUDE")==0){
-                                    //codice per mostrare a frontend l'errore ERROR_LONGITUDE
+                                onclose(false, 'ERROR_INVALID_DATA');
                             }
                     }
                     
@@ -51,7 +53,7 @@ function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restri
                 error: function(xhr, status, error) {
                   console.log('Error: ' + error.message);
                 }
-              });
+            });
         }  
     }
     
