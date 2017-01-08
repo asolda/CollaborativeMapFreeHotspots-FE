@@ -12,11 +12,11 @@ function validatePassword(password){
 
 
 //funzione per la prima parte della reimpostazione della password
-function resetpassword(email){
-        if( email.length==0 || email==null){
-           //codice per mostrare a frontend l'errore CAMPO VUOTO
+function resetpassword(email,onclose){
+        if(email.length==0 || email==null){
+           onclose(false,"EMPTY_FIELD");
         }else if(!validateEmail(email)){
-           //codice per mostrare a frontend l'errore EMAIL INVALIDA
+           onclose(false,"INVALID_EMAIL");
         }
         else { 
             $.ajax({
@@ -24,19 +24,23 @@ function resetpassword(email){
             url: 'http://127.0.0.1:8080/user/reset_password/request/',
             data: "email="+email+"&frontend_url="+window.location.href, 
             contentType: "application/x-www-form-urlencoded",
+            crossDomain: true,
+            xhrFields: {
+                withCredentials: true
+            },
             success: function(data) {
               try {
                 var ret = data;
                 if(ret.status==0){
-                    $('#result').append(ret.message + '</br>'); //EMAIL_OK visualizzare il modal "ci siamo quasi"
+                    onclose(true,ret.message);
                 }else if(ret.status==1){
                     $('#result').append(ret.message + '</br>');
                         if(strcmp(ret.message,"ERROR_EMAIL")==0){
-                                //codice per mostrare a frontend l'errore ERROR_EMAIL
+                               onclose(false,"ERROR_EMAIL");
                         }else if(strcmp(ret.message,"ERROR_DB")==0){
-                                //codice per mostrare a frontend l'errore ERROR_DB
+                               onclose(false,"ERROR_DB");
                         }else if(strcmp(ret.message,"ERROR_EMAIL_NOT_FOUND")==0){
-                                //codice per mostrare a frontend l'errore ERROR_EMAIL_NOT_FOUND
+                               onclose(false,"ERROR_EMAIL_NOT_FOUND");
                         }
                     }
                 
@@ -53,13 +57,13 @@ function resetpassword(email){
 
 
 //funzione per la seconda parte della reimpostazione della password
-function resetpassword2(password,conf_password){
+function resetpassword2(password,conf_password,onclose){
        if(password == null || password.length==0 || !validatePassword(password)){
-            //codice per mostrare a frontend l'errore PASSWORD INVALIDA
+            onclose(false,'INVALID_PASSWORD');
         }else if(password.length<8){
-            //codice per mostrare a frontend l'errore LUNGHEZZA INVALIDA
+            onclose(false,'INVALID_PASSWORD_LENGTH');
         }else if(strcmp(passwrod,conf_password)==0){    
-            //codice per mostrare a frontend l'errore CAMPI DIVERSI
+            onclose(false,'NOT_IDENTICAL_FIELDS');
         }else{
             var token= getParameter("token");
             if(token!=null){
@@ -68,21 +72,25 @@ function resetpassword2(password,conf_password){
                 url: 'http://127.0.0.1:8080/user/reset_password/do/',
                 data: "token="+token+"&password="+password, 
                 contentType: "application/x-www-form-urlencoded",
+                crossDomain: true,
+                xhrFields: {
+                  withCredentials: true
+               },
                 success: function(data) {
                   try {
                     var ret = data;
                     if(ret.status==0){
-                        $('#result').append(ret.message + '</br>');
+                        onclose(true,ret.message);
                     }else if(ret.status==1){
                         $('#result').append(ret.message + '</br>');
                             if(strcmp(ret.message,"ERROR_TOKEN")==0){
-                                    //ERROR_TOKEN  
+                                    onclose(false,"ERROR_TOKEN");
                             }else if(strcmp(ret.message,"ERROR_DB")==0){
-                                    //codice per mostrare a frontend l'errore ERROR_DB
+                                    onclose(false,"ERROR_DB");
                             }else if(rstrcmp(ret.message,"ERROR_PASSWORD")==0){
-                                    //codice per mostrare a frontend l'errore ERROR_PASSWORD
+                                    onclose(false,"ERROR_PASSWORD");
                             }else if(strcmp(ret.message,"ERROR_PASSWORD_LENGHT")==0){
-                                    //codice per mostrare a frontend l'errore ERROR_PASSWORD_LENGHT
+                                    onclose(false,"ERROR_PASSWORD_LENGHT");
                             }
                     }
                     
