@@ -48,7 +48,7 @@ function reimpostaPassword() {
     document.getElementById('#enterbtn-recover').addEventListener('click', function(){
     function resetpassword(email, function(status_ok,data){
             if(status_ok){
-                
+              //mostra modale ci siamo quasi
             }else{
                 if((strcmp(data,"EMPTY_FIELD")==0){    
                    $('#re-email').toggleClass('.is-invalid'); 
@@ -78,7 +78,7 @@ function reimpostaPassword() {
     document.getElementById('#btnReimpostaPassword').addEventListener('click', function(){ 
     function resetpassword2(password,conf_password,function(status_ok,data){
             if(satus_ok){
-                
+                //mostra password reimpostata correttamente
             }else{
                 if((strcmp(data,"INVALID_PASSWORD")==0){
                  $('#one').toggleClass('.is-invalid');
