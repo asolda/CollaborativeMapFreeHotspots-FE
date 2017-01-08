@@ -238,7 +238,7 @@ function addNotLoggedModal(){
             document.getElementById('#enterbtn-signup').addEventListener('click', function(){
             registration(email,password,confermapassword,function(status_ok,data){
                if(status_ok){
-                   window.location.replace("conferma_registrazione.html");
+                   window.location.replace(""); //redirect a conferma_registrazione.html
                }else{
                    if((strcmp(data,'CAMPI_EMAIL_PASSWORD_CONFERMAPASSWORD_NON_COMPILATI')==0)){
                        $('#r-email').toggleClass('.is-invalid');
