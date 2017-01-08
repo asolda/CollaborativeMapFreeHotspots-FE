@@ -5,7 +5,7 @@ function confermaRegistrazione() {
   document.getElementById("btnEffettuaLogin").addEventListener("click", function(){
        //TODO reindirizzare l'utente alla home page del sito, dove poi si potrà effettuare il login.
   });
-
+  
 }
 
 
@@ -44,4 +44,69 @@ function reimpostaPassword() {
 
    document.getElementById("text1").innerHTML = "Password reimpostata correttamente. Ora puoi effettuare il login.";
  });
+    
+    document.getElementById('#enterbtn-recover').addEventListener('click', function(){
+    function resetpassword(email, function(status_ok,data){
+            if(status_ok){
+                
+            }else{
+                if((strcmp(data,"EMPTY_FIELD")==0){    
+                   $('#re-email').toggleClass('.is-invalid'); 
+                   $('re-email-error').html("Campo non compilato");
+                   $('#re-email-error').show();
+                   
+                }else if((strcmp(data,"INVALID_EMAIL")==0){
+                   $('#re-email').toggleClass('.is-invalid');
+                   $('#re-email-error').show();
+                   
+                }else if((strcmp(data,"ERROR_EMAIL")==0){
+                   $('#re-email').toggleClass('.is-invalid'); 
+                   $('#re-email-error').show();
+                   
+                }else if((strcmp(data,"ERROR_DB")==0){
+                  showErrorDB('#dialog-recover', 'ERROR_DB');
+                  
+                }else if((strcmp(data,"ERROR_EMAIL_NOT_FOUND")==0){    
+                   $('#re-email').toggleClass('.is-invalid');
+                   $('#re-email-error').html("Email inesistente");
+                   $('#re-email-error').show(); 
+                }
+            }
+       });  
+    });  
+     
+    document.getElementById('#btnReimpostaPassword').addEventListener('click', function(){ 
+    function resetpassword2(password,conf_password,function(status_ok,data){
+            if(satus_ok){
+                
+            }else{
+                if((strcmp(data,"INVALID_PASSWORD")==0){
+                 $('#one').toggleClass('.is-invalid');
+                 $('#reimposta-new-error').show(); 
+            
+                }else if((strcmp(data,"INVALID_PASSWORD_LENGHT")==0){
+                 $('#one').toggleClass('.is-invalid');   
+                 $('#reimposta-new-error').show();    
+                    
+                }else if((strcmp(data,"NOT_IDENTICAL_FIELDS")==0){
+                 $('#one').toggleClass('.is-invalid'); 
+                 $('#two').toggleClass('.is-invalid');
+                 $('#reimposta-confirm-new-error').show();
+                
+                }else if((strcmp(data,"ERROR_TOKEN")==0){
+                 showSnackbar({message: 'Token non valido, potrebbe esserci un errore nel sistema.'});  
+                    
+                }else if((strcmp(data,"ERROR_DB")==0){  
+                 showErrorDB('#conferma', 'ERROR_DB');
+                
+                }else if((strcmp(data,"ERROR_PASSWORD")==0){
+                 $('#one').toggleClass('.is-invalid');
+                 $('#reimposta-new-error').show();   
+                
+                }else if((strcmp(data,"ERROR_PASSWORD_LENGHT")==0){ 
+                 $('#one').toggleClass('.is-invalid');   
+                 $('#reimposta-new-error').show();
+            }
+      });   
+    });
 }
