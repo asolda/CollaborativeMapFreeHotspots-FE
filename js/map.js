@@ -1,5 +1,6 @@
 var lastCenterNE, lastCenterSW, lastCenter, markers = [], map;
 var pins_info = []; var overlay=null;
+var map_loaded=false;
 
 /** Oggetto/funzione che restituisce il colore in base al
 /** valore (segnalazioni) ricevute come parametro
@@ -56,10 +57,6 @@ function initMap() {
         //console.log('New position: '+pos.lat + " " + pos.lng);
         map.setCenter(pos);
 
-        lastCenter = map.getCenter();
-
-        lastCenterNE = map.getBounds().getNorthEast();
-        lastCenterSW = map.getBounds().getSouthWest();
         console.log("MAP GETBOUNDS: "+JSON.stringify(map.getBounds()));
 
       //console.log('lastCenterNE: ' +lastCenterNE.lat() + " " + lastCenterNE.lng());
@@ -78,7 +75,13 @@ function initMap() {
 
     // evento che triggera ogni volta che vengono modificati gli estremi dell' area da visualizzare
     google.maps.event.addListener(map, 'bounds_changed', function () {
-        if(overlay==null) overlay = new USGSOverlay(map.getBounds(), map);
+        if(!map_loaded){
+            overlay = new USGSOverlay(map.getBounds(), map);
+            lastCenter = map.getCenter();
+            lastCenterNE = map.getBounds().getNorthEast();
+            lastCenterSW = map.getBounds().getSouthWest();
+            map_loaded=true;
+        } 
         $('.pin-detail-container').css('visibility','hidden');
         
         var newPosNE = map.getBounds().getNorthEast();
