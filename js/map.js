@@ -111,8 +111,9 @@ function initMap() {
 
         loadMarkers(lastCenter.lat(), lastCenter.lng(), extreme.lat, extreme.lng);
         
-        overlay = new USGSOverlay(map.getBounds(), map);
     });
+    
+    overlay = new USGSOverlay(map.getBounds(), map);
 }  //end func initMap
 
 
