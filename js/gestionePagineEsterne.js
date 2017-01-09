@@ -46,27 +46,27 @@ function reimpostaPassword() {
  });
     
     document.getElementById('#enterbtn-recover').addEventListener('click', function(){
-    function resetpassword(email, function(status_ok,data){
+            resetpassword(email, function(status_ok,data){
             if(status_ok){
               //mostra modale ci siamo quasi
             }else{
-                if((strcmp(data,"EMPTY_FIELD")==0){    
+                if((strcmp(data,"EMPTY_FIELD")==0)){    
                    $('#re-email').toggleClass('.is-invalid'); 
                    $('re-email-error').html("Campo non compilato");
                    $('#re-email-error').show();
                    
-                }else if((strcmp(data,"INVALID_EMAIL")==0){
+                }else if((strcmp(data,"INVALID_EMAIL")==0)){
                    $('#re-email').toggleClass('.is-invalid');
                    $('#re-email-error').show();
                    
-                }else if((strcmp(data,"ERROR_EMAIL")==0){
+                }else if((strcmp(data,"ERROR_EMAIL")==0)){
                    $('#re-email').toggleClass('.is-invalid'); 
                    $('#re-email-error').show();
                    
-                }else if((strcmp(data,"ERROR_DB")==0){
+                }else if((strcmp(data,"ERROR_DB")==0)){
                   showErrorDB('#dialog-recover', 'ERROR_DB');
                   
-                }else if((strcmp(data,"ERROR_EMAIL_NOT_FOUND")==0){    
+                }else if((strcmp(data,"ERROR_EMAIL_NOT_FOUND")==0)){    
                    $('#re-email').toggleClass('.is-invalid');
                    $('#re-email-error').html("Email inesistente");
                    $('#re-email-error').show(); 
@@ -76,7 +76,7 @@ function reimpostaPassword() {
     });  
      
     document.getElementById('#btnReimpostaPassword').addEventListener('click', function(){ 
-    function resetpassword2(password,conf_password,function(status_ok,data){
+            resetpassword2(password,conf_password,function(status_ok,data){
             if(satus_ok){
                 //mostra password reimpostata correttamente
             }else{
