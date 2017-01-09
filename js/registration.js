@@ -17,9 +17,9 @@ function registration(email,password,confermapassword,onclose){
            onclose(false,'ERROR_EMAIL');     
         }else if(!validatePassword(password)){
            onclose(false,'ERROR_PASSWORD');   
-        }else if(user.password.length<8){
+        }else if(password.length<8){
            onclose(false,'ERROR_PASSWORD_LENGTH');        
-        }else if(strcmp(password,confermapassword)==0){
+        }else if(strcmp(password,confermapassword)!=0){
            onclose(false,'CAMPI_NON_COINCIDENTI');    
         }else{    
             $.ajax({
@@ -57,3 +57,4 @@ function registration(email,password,confermapassword,onclose){
             }
           });
          }
+}
