@@ -1,3 +1,9 @@
+/** Funzione di servizio per ottenere l'id dell'utente la cui sessione è attiva **/
+var userId;
+function getUser() {
+	return userId;
+}
+
 /** Funzione di inizializzazione della pagina per visitatori **/
 function createNotLoggedHome(){
 
@@ -157,7 +163,17 @@ function addNotLoggedModal(){
 				var email = document.forms["login-form"]["l-email"].value;
 				var password = document.forms["login-form"]["l-password"].value;
 				if ((strcmp(email, "") != 0) && (strcmp(password, "") != 0)) {
-					signIn(email, password); //TODO gestire l'accesso
+					signIn(email, password, function(status, data) {
+						if (status == 'LOGIN_OK') { //login ok
+							userID = data;
+							createLoggedHome();
+						}
+						else { //errore nel login
+							if (status == 'CANNOT_LOGIN') {
+								// TODO visualizzazione errore login nel modale
+							}
+						}
+					});
 				}
 				else {
 				        console.log('Email o password non inseriti');

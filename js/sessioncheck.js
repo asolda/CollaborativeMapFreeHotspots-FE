@@ -1,4 +1,4 @@
- function sessionCheck(check){
+ function sessionCheck(onCheckTermination){
           $.ajax({
             type: 'GET',
             url: 'http://127.0.0.1:8080/session/check/',
@@ -12,12 +12,12 @@
                 if(ret.status == 0){
 					//sessione esistente
                     //$('#result').append(ret.message + '</br>');
-					check(ret.message.user);
+					onCheckTermination(ret.message.user);
                 }
 				else if(ret.status == 1){
 					//sessione non esistente
                     //$('#result').append(ret.message + '</br>');
-					check(ret.message);
+					onCheckTermination(ret.message);
                 }
                 
                 
