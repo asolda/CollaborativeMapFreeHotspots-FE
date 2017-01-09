@@ -1,8 +1,25 @@
 var lastCenterNE, lastCenterSW, lastCenter, markers = [], map;
 var pins_info = []; var overlay;
-var greenpin = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-var yellowpin = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
-var redpin = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+
+/** Oggetto/funzione che restituisce il colore in base al
+/** valore (segnalazioni) ricevute come parametro
+/** 0 - 3 -> green;
+/** 4 - 7 -> yellow;
+/** >8 -> red **/
+var pinColor = {
+  green: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+  yellow: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+  redpin: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+}
+pinColor.getColor = function(val){
+  if(val <= 3){
+    return this.green;
+  }else if(val <= 7){
+    return this.yellow;
+  }
+  return this.red;
+}
+
 var valutazione;
 
 function initMap() {
@@ -40,7 +57,7 @@ function initMap() {
         map.setCenter(pos);
 
         lastCenter = map.getCenter();
-      
+
         lastCenterNE = map.getBounds().getNorthEast();
         lastCenterSW = map.getBounds().getSouthWest();
 
@@ -178,7 +195,7 @@ function loadMarkers(lat, lng, rad_lat, rad_lng) {
                 var marker = new google.maps.Marker({
                     position: { lat: pin.latitudine, lng: pin.longitudine },
                     map: map,
-                    icon: greenpin,
+                    icon: pinColor.getColor(pin.numero_segnalazioni), //attribuisce il colore del pin in base al numero di segnalazioni
                     id: pin.id,
                     nsegnalazioni: pin.numero_segnalazioni,
                 });
