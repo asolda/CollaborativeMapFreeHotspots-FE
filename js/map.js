@@ -1,5 +1,6 @@
 var lastCenterNE, lastCenterSW, lastCenter, markers = [], map;
 var pins_info = []; var overlay;
+
 /** Oggetto/funzione che restituisce il colore in base al
 /** valore (segnalazioni) ricevute come parametro
 /** 0 - 3 -> green;
@@ -18,158 +19,186 @@ pinColor.getColor = function(val){
   }
   return this.red;
 }
+
 var valutazione;
 
 function initMap() {
-   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 16,
-    center: {
-      lat: 42.516122,
-      lng: 12.513889
-    },
-  });
-  lastCenter = map.getCenter();
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        center: {
+            lat: 42.516122,
+            lng: 12.513889
+        },
+    });
+    lastCenter = map.getCenter();
   //console.log('Posizione default: '+lastCenter.lat() + " "+lastCenter.lng());
 
-  google.maps.event.addListener(map, 'tilesloaded', function() {
+    google.maps.event.addListener(map, 'tilesloaded', function() {
         lastCenterNE = map.getBounds().getNorthEast();
         lastCenterSW = map.getBounds().getSouthWest();
-  });
+    });
 
-  overlay = new USGSOverlay(map.getBounds(), map);
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
 
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
 
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
+        var infoWindow = new google.maps.InfoWindow({
+            map: map
+        });
 
-      var infoWindow = new google.maps.InfoWindow({
-        map: map
-      });
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('Tu sei qui');
+        //console.log('New position: '+pos.lat + " " + pos.lng);
+        map.setCenter(pos);
 
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('Tu sei qui');
-      //console.log('New position: '+pos.lat + " " + pos.lng);
-      map.setCenter(pos);
+        lastCenter = map.getCenter();
 
-      lastCenter = map.getCenter();
-      lastCenterNE = map.getBounds().getNorthEast();
-      lastCenterSW = map.getBounds().getSouthWest();
+        lastCenterNE = map.getBounds().getNorthEast();
+        lastCenterSW = map.getBounds().getSouthWest();
 
-      //console.log('LastCenterNE: ' +lastCenterNE.lat() + " " + lastCenterNE.lng());
+      //console.log('lastCenterNE: ' +lastCenterNE.lat() + " " + lastCenterNE.lng());
 
-    }, function () {
-      handleLocationError(true, infoWindow, map.getCenter()); });
-  } else { // Browser doesn't support Geolocation
+        }, function () {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else { // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
 
-    handleLocationError(false, infoWindow, map.getCenter());
-  }
+    loadMarkers(lastCenter.lat(), lastCenter.lng(), 0, 0);
+    //console.debug(markers);
+    //loadPins(map, markers);
+    //console.debug(markers);
 
-  loadMarkers(lastCenter.lat(), lastCenter.lng(), 0, 0);
-  //console.debug(markers);
-  //loadPins(map, markers);
-  //console.debug(markers);
-
-  // evento che triggera ogni volta che vengono modificati gli estremi dell' area da visualizzare
-  google.maps.event.addListener(map, 'bounds_changed', function () {
-    //console.debug(map.getCenter().lat()+" "+map.getCenter().lng());
-    var newCenterNE = map.getBounds().getNorthEast();
-    var newCenterSW = map.getBounds().getSouthWest();
-    var tmpcenter = map.getCenter();
-
-    var d_lng = Math.abs(newCenterNE.lng() - newCenterSW.lng());
-    var d_lat = Math.abs(newCenterNE.lat() - newCenterSW.lat());
-
-    d_lng /= 2;
-    d_lat /= 2;
-      lng_diff = calcDistance(newCenterNE.lat(), newCenterNE.lng(), newCenterNE.lat(), tmpcenter.lng());
-      lat_diff = calcDistance(newCenterNE.lat(), newCenterNE.lng(), tmpcenter.lat(), newCenterNE.lng());
+    // evento che triggera ogni volta che vengono modificati gli estremi dell' area da visualizzare
+    google.maps.event.addListener(map, 'bounds_changed', function () {
+        var newPosNE = map.getBounds().getNorthEast();
+        var newPosSW = map.getBounds().getSouthWest();
 
 
-      radius = Math.max(lng_diff, lat_diff);
-      extreme = {
-        lat: 0.0,
-        lng: 0.0
-      };
-      if(radius == lng_diff){
-        extreme.lat = tmpcenter.lat();
-        extreme.lng = newCenterNE.lng();
-      }
-      if(radius == lat_diff){
-        extreme.lat = newCenterNE.lat();
-        extreme.lng = tmpcenter.lng();
-      }
-      //console.debug(lastCenter.lat() + " " + lastCenter.lng() + " " + radius);
-      lastCenterNE = newCenterNE;
-      lastCenterSW = newCenterSW;
-      lastCenter = tmpcenter;
+        var center = map.getCenter();
 
-      loadMarkers(lastCenter.lat(), lastCenter.lng(), extreme.lat, extreme.lng);
-  });
+        var d_lng = Math.abs(newPosNE.lng() - newPosSW.lng());
+        var d_lat = Math.abs(newPosNE.lat() - newPosSW.lat());
+        //var d_lng = Math.abs(lastCenterNE.lng() - lastCenterSW.lng());
+        //var d_lat = Math.abs(lastCenterNE.lat() - lastCenterSW.lat());
+        
+        //console.debug("d_lng="+d_lng+", d_lat="+d_lat);
+        
+        d_lng /= 2;
+        d_lat /= 2;
+        
+        
 
+        //activation = Math.pow(d_lng, 2) + Math.pow(d_lat, 2);
+        //activation = Math.sqrt(activation);
+
+        //console.debug(lastCenterNE +" " + lastCenterSW);
+
+        //console.debug(calcDistance(center.lat(), center.lng(), lastCenter.lat(), lastCenter.lng()))
+        //l' if è vero solo se la distanza dall' ultimo centro di mappa dista più di 1 km da quello visualizzato
+        //se vero aggiorna il nuovo centro
+        
+        //console.debug("cdlat="+Math.abs(lastCenter.lat() - center.lat())+",cdlng="+Math.abs(lastCenter.lng() - center.lng())+",d_lng="+d_lng+", d_lat="+d_lat);
+        
+        if(overflow_distance(lastCenter.lat(),
+        lastCenter.lng(), 
+        center.lat(),
+        center.lng(), 
+        d_lng, d_lat) || overflow_distance(
+        lastCenterNE.lat(),
+        lastCenterNE.lng(),
+        newPosNE.lat(), 
+        newPosNE.lng(), 
+        d_lng, d_lat)){
+        //if (calcDistance(center.lat(), center.lng(), lastCenter.lat(), lastCenter.lng()) > activation) {
+          //console.debug(map.getBounds().getNorthEast() +" " + map.getBounds().getSouthWest());
+              lng_diff = calcDistance(newPosNE.lat(), newPosNE.lng(), newPosNE.lat(), center.lng());
+              lat_diff = calcDistance(newPosNE.lat(), newPosNE.lng(), center.lat(), newPosNE.lng());
+              radius = Math.max(lng_diff, lat_diff);
+              extreme = {
+                lat: 0.0,
+                lng: 0.0
+              };
+              if(radius == lng_diff){
+                extreme.lat = center.lat();
+                extreme.lng = newPosNE.lng();
+              }
+              if(radius == lat_diff){
+                extreme.lat = newPosNE.lat();
+                extreme.lng = center.lng();
+              }
+              console.debug(lastCenter.lat() + " " + lastCenter.lng() + " " + radius);
+              lastCenterNE = newPosNE;
+              lastCenterSW = newPosSW;
+              lastCenter = center;
+
+            loadMarkers(lastCenter.lat(), lastCenter.lng(), extreme.lat, extreme.lng);
+        }
+    });
+    
+    overlay = new USGSOverlay(map.getBounds(), map);
 }  //end func initMap
 
 
 
 function overflow_distance(lat_center, lng_center, lat_new, lng_new, dlat, dlng){
-    if ( Math.abs(lat_center - lat_new) > dlat || Math.abs(lng_center - lng_new) > dlng)
-        return true;
-    else
-        return false;
+    return ( Math.abs(lat_center - lat_new) > dlat || Math.abs(lng_center - lng_new) > dlng);
 }
 
 
 
 function calcDistance(fromLat, fromLng, toLat, toLng) {
-
-  return google.maps.geometry.spherical.computeDistanceBetween(
-
-    new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(toLat, toLng));
-
+    return google.maps.geometry.spherical.computeDistanceBetween(
+        new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(toLat, toLng)
+    );
 }
 
 
 function popolateOverlay(marker,data){
+    console.log(data);
+    //cambia il nome
+    $('.pin-detail-title .mdl-dialog__sub').text(data.ssid);
 
-  console.log(data);
-  //cambia il nome
-  $('.pin-detail-title .mdl-dialog__sub').text(data.ssid);
+    //cambia le restrizioni
+    $('#dett_restrizioni').text(data.restrizioni);
+    //cambia il range
+    $('#dett_range').text(data.range_wifi);
 
-  //cambia le restrizioni
-  $('#dett_restrizioni').text(data.restrizioni);
-  //cambia il range
-  $('#dett_range').text(data.range_wifi);
+    //cambia login necessario
+    if(data.necessità_login == 0){
+        a = 'No';
+    }else{
+        a = 'Si'
+    }
+    $('#dett_login-necessario').text(a);
+    //cambia altre info
+    $('#dett_altreinfo').text(data.altre_informazioni);
+    //inizializza valutazione
+    valutazione = inizializzaValutazione('#wifi-quality',data.qualità);
 
-  //cambia login necessario
-  if(data.necessità_login == 0){
-    a = 'No';
-  }else{
-    a = 'Si'
-  }
-  $('#dett_login-necessario').text(a);
-  //cambia altre info
-  $('#dett_altreinfo').text(data.altre_informazioni);
-  //inizializza valutazione
-  valutazione = inizializzaValutazione('#wifi-quality',data.qualità);
-
-  $('.pin-detail-container').css('visibility','visible');
+    $('.pin-detail-container').css('visibility','visible');
 }
 
-function getPinInfo(id){
-  var ret;
-  $.ajax({
-      type: 'GET',
-      url: 'http://127.0.0.1:8080/pin/getPinInfo/'+id,
-      async: false,
-      success: function(data) {
-        ret = jQuery.parseJSON(JSON.stringify(data.message[0]));
-      }
+function getPinInfo(id,onclose){
+    var ret;
+    $.ajax({
+        type: 'GET',
+        url: 'http://127.0.0.1:8080/pin/getPinInfo/'+id,
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            ret = jQuery.parseJSON(JSON.stringify(data.message[0]));
+            onclose(ret);
+        }
     });
-    return ret;
 }
 
 /**
@@ -184,47 +213,50 @@ function hideRads() {
 }
 
 function loadMarkers(lat, lng, rad_lat, rad_lng) {
+    var url_request = 'http://127.0.0.1:8080/pin/get_networks/'+lat+'/'+lng+'/'+rad_lat+'/'+rad_lng;
+    console.log("called");
+    $.ajax({
+        type: 'GET',
+        url: url_request,
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            $.each(data, function(idx, pin){
+                //console.log(pin);
+                var marker = new google.maps.Marker({
+                    position: { lat: pin.latitudine, lng: pin.longitudine },
+                    map: map,
+                    icon: pinColor.getColor(pin.numero_segnalazioni), //attribuisce il colore del pin in base al numero di segnalazioni
+                    id: pin.id,
+                    nsegnalazioni: pin.numero_segnalazioni,
+                });
 
-var url_request = 'http://127.0.0.1:8080/pin/get_networks/'+lat+'/'+lng+'/'+rad_lat+'/'+rad_lng;
-$.ajax({
-    type: 'GET',
-    url: url_request,
-    async: false,
-    success: function(data) {
-      $.each(data, function(idx, pin){
-        //console.log(pin);
-        var marker = new google.maps.Marker({
-        position: { lat: pin.latitudine, lng: pin.longitudine },
-        map: map,
-        icon: pinColor.getColor(pin.numero_segnalazioni),
-        id: pin.id,
-        nsegnalazioni: pin.numero_segnalazioni,
-      });
+                marker.addListener('click', function () {
+                    getPinInfo(marker.id,function(data){
+                        popolateOverlay(marker,data);
+                    });
+                });
 
-        marker.addListener('click', function () {
-          data = getPinInfo(marker.id);
-          popolateOverlay(marker,data);
-      });
+                var pinRadius = new google.maps.Circle({
+                    strokeColor: '#1b85b8',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#1b85b8',
+                    fillOpacity: 0.0,
+                    map: null,
+                    center: { lat: pin.latitudine, lng: pin.longitudine },
+                    radius: pin.range_wifi
+                });
 
-      var pinRadius = new google.maps.Circle({
-        strokeColor: '#1b85b8',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#1b85b8',
-        fillOpacity: 0.0,
-        map: null,
-        center: { lat: pin.latitudine, lng: pin.longitudine },
-        radius: pin.range_wifi
-      });
-
-      pins_info.push({ pin: marker, rad: pinRadius });
-
-      });
-    },
-    error: function(xhr, status, error) {
-      console.log('Error: ' + error.message);
-    }
-  });
+                pins_info.push({ pin: marker, rad: pinRadius });
+            });
+        },
+        error: function(xhr, status, error) {
+            console.log('Error: ' + error.message);
+        }
+    });
 }
 
 
