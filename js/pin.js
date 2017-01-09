@@ -16,7 +16,7 @@ function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restri
             $.ajax({
                 type: 'POST',
                 url: 'http://127.0.0.1:8080/pin/new/',
-                data: "ssid="+ssid+"&qualit�="+qualita+"&latitudine="+latitudine+"&longitudine="+longitudine+"&necessit�_login="+necessita_login+"&restrizioni="+restrizioni+"&altre_informazioni="+altre_informazioni+"&range="+range,
+                data: "ssid="+ssid+"&qualità="+qualita+"&latitudine="+latitudine+"&longitudine="+longitudine+"&necessità_login="+necessita_login+"&restrizioni="+restrizioni+"&altre_informazioni="+altre_informazioni+"&range="+range,
                 contentType: "application/x-www-form-urlencoded",
                 crossDomain: true,
                 xhrFields: {
@@ -157,4 +157,34 @@ function pinranking(voto,utente,rete_wifi){
                           });
                           }   
 }                          
+}
+function addMarker(latlng,title,map) {
+    new_marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: title,
+            draggable:true
+    });
+    google.maps.event.addListener(new_marker,'drag',function(event) {
+        //console.debug(this.position.lat()+" "+this.position.lng());
+        //alert('drag');
+    });
+
+    google.maps.event.addListener(new_marker,'dragend',function(event) {
+            //console.debug(this.position.lat()+" "+this.position.lng());
+            new_pin_position = this.position;
+            insertnewwifi.showModal();
+            $('#dialog-insertnewwifi p').empty();
+            $('#dialog-insertnewwifi p').append(this.position.lat()+" "+this.position.lng());
+            //qui vanno completati i campi ed effettuata la richiesta del be
+    });
+    google.maps.event.addListener(new_marker,'click',function(event) {
+            //console.debug(this.position.lat()+" "+this.position.lng());
+            //console.debug("My position "+user_position.lat+" "+user_position.lng);
+            new_pin_position = this.position;
+            insertnewwifi.showModal();
+            $('#dialog-insertnewwifi p').empty();
+            $('#dialog-insertnewwifi p').append(this.position.lat()+" "+this.position.lng());
+            //qui vanno completati i campi ed effettuata la richiesta del be
+    });
 }

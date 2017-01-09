@@ -1,20 +1,25 @@
- function signIn(email, password){
+ function signIn(email, password, onSignInTermination){
           $.ajax({
             type: 'POST',
             url: 'http://127.0.0.1:8080/user/login/',
             data: "email="+email+"&password="+password,
             contentType: "application/x-www-form-urlencoded",
+			crossDomain: true,
+			xhrFields: {
+				withCredentials: true
+			},
             success: function(data) {
               try {
                 var ret = data;
                 if(ret.status==0){
-                    $('#result').append(ret.message + '</br>');
-					var id_utente = ret.message.user;
-					return id_utente; //login ok
+					//login ok
+                    //$('#result').append(ret.message + '</br>');
+					onSignInTermination('LOGIN_OK', ret.message.user);
                 }
 				else if(ret.status==1){
-                    $('#result').append(ret.message + '</br>');
-					return 0; //email e/o password errati
+					//errore login
+                    //$('#result').append(ret.message + '</br>');
+					onSignInTermination(ret.message, null);
                 }
 
 
