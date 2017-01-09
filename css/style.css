@@ -389,6 +389,7 @@ form { /** Elimina il margine a tutti i form */
 .pin-detail-container{
   background-color: white;
   overflow: hidden;
+  visibility: hidden;
 }
 #close-pin-detail{
   float: right;
