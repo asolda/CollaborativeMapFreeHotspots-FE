@@ -110,6 +110,8 @@ function initMap() {
         lastCenter = tmpcenter;
 
         loadMarkers(lastCenter.lat(), lastCenter.lng(), extreme.lat, extreme.lng);
+        
+        overlay = new USGSOverlay(map.getBounds(), map);
     });
 }  //end func initMap
 
@@ -202,7 +204,6 @@ function loadMarkers(lat, lng, rad_lat, rad_lng) {
 
                 marker.addListener('click', function () {
                     getPinInfo(marker.id,function(data){
-                        overlay = new USGSOverlay(map.getBounds(), map);
                         popolateOverlay(marker,data);
                     });
                 });
