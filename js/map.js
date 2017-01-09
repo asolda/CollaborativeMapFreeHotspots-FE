@@ -1,5 +1,5 @@
 var lastCenterNE, lastCenterSW, lastCenter, markers = [], map;
-var pins_info = []; var overlay;
+var pins_info = []; var overlay=null;
 
 /** Oggetto/funzione che restituisce il colore in base al
 /** valore (segnalazioni) ricevute come parametro
@@ -60,6 +60,7 @@ function initMap() {
 
         lastCenterNE = map.getBounds().getNorthEast();
         lastCenterSW = map.getBounds().getSouthWest();
+        console.log("MAP GETBOUNDS: "+JSON.stringify(map.getBounds()));
 
       //console.log('lastCenterNE: ' +lastCenterNE.lat() + " " + lastCenterNE.lng());
 
@@ -77,6 +78,9 @@ function initMap() {
 
     // evento che triggera ogni volta che vengono modificati gli estremi dell' area da visualizzare
     google.maps.event.addListener(map, 'bounds_changed', function () {
+        if(overlay==null) overlay = new USGSOverlay(map.getBounds(), map);
+        $('.pin-detail-container').css('visibility','hidden');
+        
         var newPosNE = map.getBounds().getNorthEast();
         var newPosSW = map.getBounds().getSouthWest();
 
@@ -142,7 +146,6 @@ function initMap() {
         }
     });
     
-    overlay = new USGSOverlay(map.getBounds(), map);
 }  //end func initMap
 
 
@@ -235,6 +238,8 @@ function loadMarkers(lat, lng, rad_lat, rad_lng) {
 
                 marker.addListener('click', function () {
                     getPinInfo(marker.id,function(data){
+                        console.log(JSON.stringify(map.getBounds()));
+                        overlay.setBounds(map.getBounds());
                         popolateOverlay(marker,data);
                     });
                 });
@@ -261,8 +266,8 @@ function loadMarkers(lat, lng, rad_lat, rad_lng) {
 
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      infoWindow.setPosition(pos);
-      infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.');
 }
 
 USGSOverlay.prototype = new google.maps.OverlayView();
@@ -281,6 +286,10 @@ function USGSOverlay(bounds, map) {
 
   // Explicitly call setMap on this overlay.
   this.setMap(map);
+}
+
+USGSOverlay.prototype.setBounds = function(bounds){
+    this.bounds_ = bounds;
 }
 
 /**
@@ -362,13 +371,13 @@ USGSOverlay.prototype.draw = function() {
   // Retrieve the south-west and north-east coordinates of this overlay
   // in LatLngs and convert them to pixel coordinates.
   // We'll use these coordinates to resize the div.
-  //var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
-  //var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+  /*var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
+  var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
 
   // Resize the image's div to fit the indicated dimensions.
-  //var div = this.div_;
-  //div.style.left = sw.x + 'px';
-  //div.style.top = ne.y + 'px';
+  var div = this.div_;
+  div.style.left = sw.x + 'px';
+  div.style.top = ne.y + 'px';*/
 };
 
 // The onRemove() method will be called automatically from the API if
