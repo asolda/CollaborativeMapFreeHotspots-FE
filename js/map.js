@@ -1,6 +1,9 @@
-var lastCenterNE, lastCenterSW, lastCenter, markers = [], map;
+var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos;
 var pins_info = []; var overlay=null;
 var map_loaded=false;
+var mutex_new_pin = 0;
+var new_pin_position;
+var new_marker;
 
 /** Oggetto/funzione che restituisce il colore in base al
 /** valore (segnalazioni) ricevute come parametro
@@ -43,7 +46,7 @@ function initMap() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
 
-        var pos = {
+        pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };

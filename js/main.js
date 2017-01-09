@@ -411,10 +411,37 @@ function addLoggedModal(){
              document.getElementById('myposition-askinsertwifimode').addEventListener('click', function() {
 
               askInsertWifiMode.close();
+              if(mutex_new_pin  == 0){
+                    mutex_new_pin = 1;
+                    addMarker(event.latLng, 'Click Generated Marker', map);
+                }else{
+                    alert("Completa prima l' inserimento di un pin");
+                } 
 
-
+              $('#dialog-insertnewwifi p').empty();
                 //get user position and show insertwifi modal
+                $('#dialog-insertnewwifi p').append(pos.lat+" "+pos.lng);
+                
                 insertnewwifi.showModal();
+             });
+             document.getElementById('custom-askinsertwifimode').addEventListener('click', function() {
+
+              askInsertWifiMode.close();
+
+              $('#dialog-insertnewwifi p').empty();
+              google.maps.event.addListener(map,'click',function(event) {
+                if(mutex_new_pin  == 0){
+                    mutex_new_pin = 1;
+                    addMarker(event.latLng, 'Click Generated Marker', map);
+                }else{
+                    alert("Completa prima l' inserimento di un pin");
+                } 
+});
+
+
+
+                //va fatto comparire il modal dopo aver piazzato il pin
+                //insertnewwifi.showModal();
              });
 
              askInsertWifiMode.showModal();
@@ -424,15 +451,39 @@ function addLoggedModal(){
                 if (!insertnewwifi.showModal) {
                    insertnewwifi.registerDialog(insertnewwifi);
                 }
-
+                
                 inizializzaValutazione('#insert-quality',null);
                 /** close button function **/
                 var v = document.getElementById('closebtn-insertnewwifi');
                 v.addEventListener('click', function() {
                    insertnewwifi.close();
+                   if(mutex_new_pin == 1){
+                        mutex_new_pin = 0;
+                        new_marker.setMap(null);
+                    }   
                 });
 
             document.getElementById('enterbtn-insertnewwifi').addEventListener('click', function(){
+                console.debug(mutex_new_pin);
+                var ssid = $('#insert-nomerete input').val();
+                var qualita = $('#insert-quality input').val();
+                var necessita_login = $('#insert-login').is(':checked');
+                if (necessita_login == false)
+                    necessita_login = 0;
+                if (necessita_login == true)
+                    necessita_login = 1;
+                var restrizioni = $('#insert-restrizioni input').val();
+                var altre_informazioni = $('#insert-altreinfo input').val();
+                var range = $('#insert-range input').val();
+                var latitudine, longitudine;
+                if(mutex_new_pin == 0){
+                    latitudine = pos.lat;
+                    longitudine = pos.lng;
+                }
+                if(mutex_new_pin == 1){
+                    latitudine = new_pin_position.lat;
+                    longitudine = new_pin_position.lng;
+                }
                inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restrizioni,altre_informazioni,range,function(status_ok, data){
                    if(status_ok){
                         showSnackbar({message: 'Rete Wi-Fi aggiunta correttamente.'});
@@ -452,7 +503,9 @@ function addLoggedModal(){
                             showErrorDB('#dialog-insertnewwifi', 'ERROR_DB');
                         }
                    }
+                   
                 });
+                
             });
       }
 
