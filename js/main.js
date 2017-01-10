@@ -159,30 +159,39 @@ function addNotLoggedModal(){
              });
 
             /** login request **/
-            document.getElementById('enterbtn-login').addEventListener('click', function() {
-				var email = document.forms["login-form"]["l-email"].value;
-				var password = document.forms["login-form"]["l-password"].value;
-				if ((strcmp(email, "") != 0) && (strcmp(password, "") != 0)) {
-					signIn(email, password, function(status, data) {
-						if (status == 'LOGIN_OK') { //login ok
+            document.getElementById('enterbtna-login').addEventListener('click', function(){
+				var email = $('#in-l-email').val();/*document.forms["login-form"]["l-email"].value;*/
+				var password = $('#in-l-password').val();/*document.forms["login-form"]["l-password"].value;*/
+				
+                console.debug("value="+ JSON.stringify(email));
+                console.debug("value="+ JSON.stringify(password));
+			     signIn(email, password, function(status_ok, data){
+                     console.debug("value s="+ JSON.stringify(status_ok));
+                     console.debug("value d="+ JSON.stringify(data));
+						if (status_ok){ //login ok
 							userID = data;
 							createLoggedHome();
-						}
-						else { //errore nel login
-							if (status == 'CANNOT_LOGIN') {
+						}else{ //errore nel login
+							if(strcmp(data,'CANNOT_LOGIN')==0){
 								// TODO visualizzazione errore login nel modale
-							}
+                            }else if(strcmp(data,'ERROR_GENERATIN_SESSION')==0){
+                             console.log('1');
+                            }else if(strcmp(data,'ERROR_EMAIL_PASSWORD')==0){
+                             console.log('2');
+                            }else if(strcmp(data,'ERROR_EMAIL')==0){
+                             console.log('3');
+                            }else if(strcmp(data,'ERROR_PASSWORD')==0){
+                             console.log('4');
+                            }else if(strcmp(data,'ERROR_CREDENTIALS')==0){
+                             console.log('5');
+                            }
 						}
 					});
-				}
-				else {
-				        console.log('Email o password non inseriti');
-				}
-	    });
+				
+	            });
 
             /**./Login request **/
-
-           loginDialog.showModal();
+                    loginDialog.showModal();
 
         });
      }
@@ -261,22 +270,24 @@ function addNotLoggedModal(){
                        console.debug("value="+ JSON.stringify(password));
                        console.debug("value="+ JSON.stringify(confermapassword));*/
                 registration(email,password,confermapassword,function(status_ok,data){
+                    console.debug("value="+ JSON.stringify(email));
                    if(status_ok){
-                       /*console.debug("Registrazione ok");*/
+                       console.debug("Registrazione ok");
+                       console.debug("value="+ JSON.stringify(email));
                    }else{
                       
                        if((strcmp(data,'CAMPI_EMAIL_PASSWORD_CONFERMAPASSWORD_NON_COMPILATI'))==0){
-                           $('#r-email').toggleClass('.invalid');
-                           $('#r-email-error').html("Campo non compilato");
+                           $('#in-r-email').toggleClass('.invalid');
+                           //$('#r-email-error').html("Campo non compilato");
                            $('#r-email-error').show();
 
                            $('#r-password').toggleClass('.invalid');
-                           $('#r-password-error').html("Campo non compilato");
-                           $('#r-password-error').show();
+                           //$('#r-password-error').html("Campo non compilato");
+                           //$('#r-password-error').show();
 
                            $('#r-confermapassword').toggleClass('.invalid');
-                           $('#r-confermapassword-error').html("Campo non compilato");
-                           $('#r-confermapassword-error').show();
+                          // $('#r-confermapassword-error').html("Campo non compilato");
+                           //$('#r-confermapassword-error').show();
                            
                        }else if((strcmp(data,"CAMPI_EMAIL_PASSWORD_NON_COMPILATI"))==0){
                            $('#r-email').toggleClass('.is-invalid');
