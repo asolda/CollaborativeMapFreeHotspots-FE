@@ -4,6 +4,11 @@ function getUser() {
 	return userId;
 }
 
+function destroyHome(){
+    //$('body').empty(); <-- da' errore
+    window.location.href='.';
+}
+
 /** Funzione di inizializzazione della pagina per visitatori **/
 function createNotLoggedHome(){
 
@@ -170,7 +175,7 @@ function addNotLoggedModal(){
                      console.debug("value d="+ JSON.stringify(data));
 						if (status_ok){ //login ok
 							userID = data;
-							createLoggedHome();
+                            destroyHome();
 						}else{ //errore nel login
 							if(strcmp(data,'CANNOT_LOGIN')==0){
 								// TODO visualizzazione errore login nel modale
