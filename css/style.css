@@ -230,7 +230,7 @@ html, body {
 .mdl-dialog-custom { /** Stile custom per il componente dialog di mdl **/
     padding: 0px !important;
     width: 30%;
-    min-width: 500px;
+    min-width: 600px;
 }
 
 .mdl-dialog-custom .mdl-dialog__title { /** Elimina il padding top/bottom del dialog predefinito */
@@ -271,7 +271,10 @@ form { /** Elimina il margine a tutti i form */
   color: rgb(119, 119, 119) !important;
 }
 
-
+#dialog-askinsertwifimode button {
+ float: right !important;
+ color: rgb(255, 64, 129) !important;
+}
 
 /** ------ Dialog mywifi/notification custom style ------- **/
 .mdl-menu__item:hover {
