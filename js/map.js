@@ -84,9 +84,9 @@ function initMap() {
             lastCenterNE = map.getBounds().getNorthEast();
             lastCenterSW = map.getBounds().getSouthWest();
             map_loaded=true;
-        } 
-        $('.pin-detail-container').css('visibility','hidden');
-        
+        }
+        //$('.pin-detail-container').css('visibility','hidden');
+
         var newPosNE = map.getBounds().getNorthEast();
         var newPosSW = map.getBounds().getSouthWest();
 
@@ -97,13 +97,13 @@ function initMap() {
         var d_lat = Math.abs(newPosNE.lat() - newPosSW.lat());
         //var d_lng = Math.abs(lastCenterNE.lng() - lastCenterSW.lng());
         //var d_lat = Math.abs(lastCenterNE.lat() - lastCenterSW.lat());
-        
+
         //console.debug("d_lng="+d_lng+", d_lat="+d_lat);
-        
+
         d_lng /= 2;
         d_lat /= 2;
-        
-        
+
+
 
         //activation = Math.pow(d_lng, 2) + Math.pow(d_lat, 2);
         //activation = Math.sqrt(activation);
@@ -113,18 +113,18 @@ function initMap() {
         //console.debug(calcDistance(center.lat(), center.lng(), lastCenter.lat(), lastCenter.lng()))
         //l' if è vero solo se la distanza dall' ultimo centro di mappa dista più di 1 km da quello visualizzato
         //se vero aggiorna il nuovo centro
-        
+
         //console.debug("cdlat="+Math.abs(lastCenter.lat() - center.lat())+",cdlng="+Math.abs(lastCenter.lng() - center.lng())+",d_lng="+d_lng+", d_lat="+d_lat);
-        
+
         if(overflow_distance(lastCenter.lat(),
-        lastCenter.lng(), 
+        lastCenter.lng(),
         center.lat(),
-        center.lng(), 
+        center.lng(),
         d_lng, d_lat) || overflow_distance(
         lastCenterNE.lat(),
         lastCenterNE.lng(),
-        newPosNE.lat(), 
-        newPosNE.lng(), 
+        newPosNE.lat(),
+        newPosNE.lng(),
         d_lng, d_lat)){
         //if (calcDistance(center.lat(), center.lng(), lastCenter.lat(), lastCenter.lng()) > activation) {
           //console.debug(map.getBounds().getNorthEast() +" " + map.getBounds().getSouthWest());
@@ -151,7 +151,7 @@ function initMap() {
             loadMarkers(lastCenter.lat(), lastCenter.lng(), extreme.lat, extreme.lng);
         }
     });
-    
+
 }  //end func initMap
 
 
@@ -245,7 +245,7 @@ function loadMarkers(lat, lng, rad_lat, rad_lng) {
                 marker.addListener('click', function () {
                     getPinInfo(marker.id,function(data){
                         console.log(JSON.stringify(map.getBounds()));
-                        overlay.setBounds(map.getBounds());
+                        overlay.setBounds(marker);
                         popolateOverlay(marker,data);
                     });
                 });
@@ -294,8 +294,8 @@ function USGSOverlay(bounds, map) {
   this.setMap(map);
 }
 
-USGSOverlay.prototype.setBounds = function(bounds){
-    this.bounds_ = bounds;
+USGSOverlay.prototype.setBounds = function(){
+    this.draw();
 }
 
 /**
@@ -379,7 +379,6 @@ USGSOverlay.prototype.onAdd = function(data) {
 
 //function to draw the overlay
 USGSOverlay.prototype.draw = function() {
-
   // We use the south-west and north-east
   // coordinates of the overlay to peg it to the correct position and size.
   // To do this, we need to retrieve the projection from the overlay.
@@ -388,13 +387,15 @@ USGSOverlay.prototype.draw = function() {
   // Retrieve the south-west and north-east coordinates of this overlay
   // in LatLngs and convert them to pixel coordinates.
   // We'll use these coordinates to resize the div.
-  /*var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
-  var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+  var sw = overlayProjection.fromLatLngToDivPixel(map.getBounds().getSouthWest());
+  var ne = overlayProjection.fromLatLngToDivPixel(map.getBounds().getNorthEast());
 
   // Resize the image's div to fit the indicated dimensions.
   var div = this.div_;
-  div.style.left = sw.x + 'px';
-  div.style.top = ne.y + 'px';*/
+  div.style.position = 'relative';
+
+  div.style.left = sw.x +100+ 'px';
+  div.style.top = ne.y +100+ 'px';
 };
 
 // The onRemove() method will be called automatically from the API if
