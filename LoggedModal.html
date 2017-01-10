@@ -1,4 +1,4 @@
-<!-- Edit Password Modal Component -->
+﻿<!-- Edit Password Modal Component -->
         <dialog id="dialog-editpassword" class="mdl-dialog mdl-dialog-custom">
         <div class="mdl-title">
             <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">vpn_key</i>Modifica la tua password</h4>
@@ -644,9 +644,31 @@
         </dialog>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--INSERIMENTO RETE GENERALE-->
+
+
         <dialog id="dialog-askinsertwifimode" class="mdl-dialog mdl-dialog-custom">
                <div class="mdl-title">
-                   <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">wifi</i>Inserisci rete</h4>
+                   <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">wifi</i>Inserisci nuova rete Wi-Fi</h4>
                </div>
 
                <div class="mdl-dialog__content">
@@ -656,14 +678,22 @@
 
                <div class="mdl-dialog__actions">
                  <button id="closebtn-askinsertwifimode" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Chiudi</button>
-                 <button id="custom-askinsertwifimode" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Posizione custom</button>
-                 <button id="myposition-askinsertwifimode" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Mia posizione</button>
+                 <button id="custom-askinsertwifimode" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Posizione personalizzata</button>
+                 <button id="myposition-askinsertwifimode" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">posizione corrente</button>
                </div>
          </dialog>
 
+
+
+
+
+<!--INSERIMENTO RETE POSIZIONE CORRENTE-->
+
          <dialog id="dialog-insertnewwifi" class="mdl-dialog mdl-dialog-custom">
                 <div class="mdl-title">
-                    <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">wifi</i>Inserisci rete</h4>
+                    <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">wifi</i>Inserisci nuova rete Wi-Fi</h4>
+                    <br/>
+                    <span class="mdl-dialog__sub">Posizione corrente: </span>
                     <p class="mdl-dialog__sub">[New pin address]</p>
                 </div>
 
@@ -671,12 +701,12 @@
 
                       <div id="insert-nomerete" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                        <input class="mdl-textfield__input" type="text"/>
-                       <label class="mdl-textfield__label" for="insert-nomerete">Nome rete</label>
+                       <label class="mdl-textfield__label" for="insert-nomerete">Nome rete (SSID)</label>
                        <span id='insert-nomerete-error' class="mdl-textfield__error">Nome rete non valido</span>
                       </div>
 
                       <div id="insert-quality" class='pin-detail-star'>
-                        <span>Qualità rete</span>
+                        <span>Qualità:</span><br/>
                         <ul>
                          <li class='star-val'>
                            <button id='star1' class='mdl-button mdl-js-button mdl-button--icon'><i id='1' class='material-icons'>star_rate</i></button>
@@ -699,14 +729,16 @@
                          </li>
                        </ul>
                        <input value="0" hidden="true">
-                       </div>
+                      </div>
 
+                      <br/><br/><br/>
                       <div id="insert-restrizioni" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                        <input class="mdl-textfield__input" type="text"/>
                        <label class="mdl-textfield__label" for="insert-restrizioni">Restrizioni</label>
                        <span id='insert-restrizioni-error' class="mdl-textfield__error">Restrizioni non valide</span>
                       </div>
 
+                      <br/><br/>
                       <ul class="mdl-list">
                         <li class="mdl-list__item">
                           <span id='insert-login-title' class="mdl-list__item-primary-content">
@@ -714,12 +746,13 @@
                           </span>
                           <span class="mdl-list__item-secondary-action">
                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="insert-login">
-                            <input type="checkbox" id="insert-login" class="mdl-switch__input" />
+                              <input type="checkbox" id="insert-login" class="mdl-switch__input" />
                             </label>
                           </span>
                         </li>
                       </ul>
 
+                      <br/><br/>
                       <div id="insert-range" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                        <input class="mdl-textfield__input" type="text"/>
                        <label class="mdl-textfield__label" for="insert-range">Range</label>
@@ -727,7 +760,7 @@
                       </div>
 
                     <div id="insert-altreinfo" class="mdl-textfield mdl-js-textfield">
-                      <input class="mdl-textfield__input" type="text" rows= "3" ></textarea>
+                      <textarea class="mdl-textfield__input" type="text" rows= "3" ></textarea>
                       <label class="mdl-textfield__label" for="insert-altreinfo">Altre informazioni</label>
                     </div>
                     <span id="insert-input-error">Campi obbligatori non compilati</span>
@@ -735,6 +768,6 @@
 
                 <div class="mdl-dialog__actions">
                   <button id="closebtn-insertnewwifi" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Chiudi</button>
-                  <button id="enterbtn-insertnewwifi" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Inserisci</button>
+                  <button id="enterbtn-insertnewwifi" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Aggiungi</button>
                 </div>
           </dialog>

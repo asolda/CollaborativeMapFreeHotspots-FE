@@ -1,4 +1,4 @@
-var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos;
+﻿var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos;
 var pins_info = []; var overlay=null;
 var map_loaded=false;
 var mutex_new_pin = 0;
@@ -307,16 +307,16 @@ USGSOverlay.prototype.onAdd = function(data) {
   // Create the img element and attach it to the div.
   var finestra_dett = document.createElement('div');
   finestra_dett.className = 'pin-detail-container';
-  finestra_dett.style.width = '300px';
-  finestra_dett.style.height = '400px;';
+  finestra_dett.style.width = '400px';
+  finestra_dett.style.height = '500px;';
   finestra_dett.style.cursor = 'pointer';
   finestra_dett.style.position = 'absolute';
 
   var pindetail =
         "<div class='pin-detail-title'>"+
           "<div id='close-pin-detail'><i class='material-icons'>close</i></div>"+
-          "<h4 class='mdl-dialog__title'><i id='mdl-title-icon' class='material-icons'>wifi</i>Dettagli rete</h4>"+
-          "<p class='mdl-dialog__sub'>Rete1</p>"+
+          "<h4 class='mdl-dialog__title'><i id='mdl-title-icon' class='material-icons'>info</i>Dettagli rete Wi-Fi</h4>"+
+          "<p class='mdl-dialog__sub'>Rete1</p>" +
         "</div>"+
         "<div class='pin-detail-info'>"+
           "<div id='wifi-quality' class='pin-detail-star'>"+
@@ -352,6 +352,17 @@ USGSOverlay.prototype.onAdd = function(data) {
           "<p>Login Necessario: <span id='dett_login-necessario'></span></p>"+
           "<p>Altre informazioni: <span id='dett_altreinfo'></span></p></div>"+
 
+          '<button style="float: right;" id="other" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">' +
+             '<i class="material-icons">more_vert</i>' +
+           '</button>' +
+          '<div class="mdl-tooltip mdl-tooltip--large" for="other">' +
+             'Altro' +
+           '</div>' +
+           '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="other">' +
+             '<li class="mdl-menu__item" id="detailModifica">Modifica</li>' +
+             '<li class="mdl-menu__item" id="detailElimina">Elimina</li>' +
+             '<li hidden class="mdl-menu__item" id="detailSegnala">Segnala</li>' +
+           '</ul>' +
         "</div>";
       finestra_dett.innerHTML= pindetail;
 

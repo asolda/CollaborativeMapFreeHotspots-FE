@@ -21,10 +21,14 @@ html, body {
   height: 100%;
 }
 
+
+/**Tooltip*/
 .mdl-tooltip {
   border-radius: 7px / 7px !important;
 }
 
+
+/**Snackbar*/
 #sb-confirm-operation {
  z-index: 30 !important;
 }
@@ -33,6 +37,8 @@ html, body {
   color: yellow !important;
   font-size: medium !important;
 }
+
+
 
 /** ________________2. Header________________ */
 .mdl-layout__header-row {
@@ -209,7 +215,13 @@ html, body {
   color: #2196F3 !important;
 }
 
+.mdl-dialog__content a {
+ text-decoration: none !important;
+}
 
+.mdl-dialog__content a:hover {
+ text-decoration: underline !important;
+}
 
 .mdl-dialog__content {
   font-size: medium !important;
@@ -255,6 +267,10 @@ form { /** Elimina il margine a tutti i form */
     padding-bottom: 30px !important;
 }
 
+#insert-login-title {
+  color: rgb(119, 119, 119) !important;
+}
+
 
 
 /** ------ Dialog mywifi/notification custom style ------- **/
@@ -263,7 +279,12 @@ form { /** Elimina il margine a tutti i form */
 }
 
 #dialog-mynotification a {
- text-decoration: none;
+ text-decoration: none !important;
+ color: black;
+}
+
+#dialog-mynotification a:hover {
+ text-decoration: none !important;
  color: black;
 }
 
@@ -385,24 +406,30 @@ form { /** Elimina il margine a tutti i form */
   vertical-align: top;
 }
 
+
+
 /** ________________9.Dettagli pin________________ **/
 .pin-detail-container{
   background-color: white;
+  box-shadow: 0px 0px 30px #888888;
   overflow: hidden;
   visibility: hidden;
 }
 #close-pin-detail{
   float: right;
 }
+
+
 .pin-detail-title{
   color: white;
-  padding: 20px 10px 20px 10px;
+  padding: 10px 10px 20px 5px;
   background-color: #3f51b5;
 }
 .pin-detail-info{
-  padding: 0 10px 0 10px;
+  padding: 0 10px 15px 20px;
   height: auto;
   overflow: auto;
+  color: rgb(119, 119, 119) !important;
 }
 .pin-detail-star ul{
   margin-left: 0 !important;
@@ -413,6 +440,8 @@ form { /** Elimina il margine a tutti i form */
   float: left;
   margin-bottom: 16px;
 }
+
+
 
 /** ________________10.Inserisci pin________________ **/
 #dialog-insertnewwifi ul li{
