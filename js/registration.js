@@ -37,7 +37,6 @@ function registration(email,password,confermapassword,onclose){
                             if(ret.status==0){
                                  onclose(true,ret.message);
                             }else if(ret.status==1){
-                                $('#result').append(ret.message + '</br>');
                                 if(strcmp(ret.message,'ERROR_EMAIL_PASSWORD')==0){
                                    onclose(false,'ERROR_EMAIL_PASSWORD');  
                                 }else if(strcmp(ret.message,'ERROR_EMAIL')==0){
