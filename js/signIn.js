@@ -51,9 +51,32 @@
  }
          
 /** Funzione per effetuare il logout **/
-function signOut(){
+function signOut(onclose){
+        $.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:8080/user/logout/',
+			crossDomain: true,
+			xhrFields: {
+				withCredentials: true
+			},
+            success: function(data) {
+              try {
+                var ret = data;
+                if(ret.status==0){
+					onclose(true,ret.message);
+                }
+				else if(ret.status==1){
+					onclose(false,"ERROR_SESSION");
+                }
 
-  //aja call
 
-  console.log('logout');
-}
+              } catch (err) {
+                alert('Errore nel logout: ' + ret.message);
+              }
+            },
+            error: function(xhr, status, error) {
+              console.log('Error: ' + error.message);
+            }
+          });
+         }
+
