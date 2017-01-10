@@ -148,7 +148,7 @@ function addNotLoggedModal(){
     setSignupModal();
     setRecoverModal();
     setRecoverBisModal();
-    setSignupBisModal();
+    //setSignupBisModal();
 
     function setLoginModal(){
         document.getElementById('show-login').addEventListener('click', function(){
@@ -282,86 +282,85 @@ function addNotLoggedModal(){
                    }else{
                       
                        if((strcmp(data,'CAMPI_EMAIL_PASSWORD_CONFERMAPASSWORD_NON_COMPILATI'))==0){
-                           $('#in-r-email').toggleClass('.invalid');
+                           $('#r-email').toggleClass('is-invalid');
                            //$('#r-email-error').html("Campo non compilato");
-                           $('#r-email-error').show();
 
-                           $('#r-password').toggleClass('.invalid');
+                           $('#r-password').toggleClass('is-invalid');
                            //$('#r-password-error').html("Campo non compilato");
-                           //$('#r-password-error').show();
+                       
 
-                           $('#r-confermapassword').toggleClass('.invalid');
+                           $('#r-confermapassword').toggleClass('is-invalid');
                           // $('#r-confermapassword-error').html("Campo non compilato");
-                           //$('#r-confermapassword-error').show();
+                          
                            
                        }else if((strcmp(data,"CAMPI_EMAIL_PASSWORD_NON_COMPILATI"))==0){
-                           $('#r-email').toggleClass('.is-invalid');
+                           $('#r-email').toggleClass('is-invalid');
                            $('#r-email-error').html("Campo non compilato");
                            $('#r-email-error').show();
 
-                           $('#r-password').toggleClass('.is-invalid');
+                           $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Campo non compilato");
                            $('#r-password-error').show();
                        
                         
                        }else if((strcmp(data,"CAMPI_PASSWORD_CONFERMAPASSWORD_NON_COMPILATI"))==0){
-                           $('#r-password').toggleClass('.is-invalid');
+                           $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Campo non compilato");
                            $('#r-password-error').show();
 
-                           $('#r-confermapassword').toggleClass('.is-invalid');
+                           $('#r-confermapassword').toggleClass('is-invalid');
                            $('#r-confermapassword-error').html("Campo non compilato");
                            $('#r-confermapassword-error').show();
  
                        }else if((strcmp(data,"CAMPI_EMAIL_CONFERMAPASSWORD_NON_COMPILATI"))==0){
-                           $('#r-email').toggleClass('.is-invalid');
+                           $('#r-email').toggleClass('is-invalid');
                            $('#r-email-error').html("Campo non compilato");
                            $('#r-email-error').show();
 
-                           $('#r-confermapassword').toggleClass('.is-invalid');
+                           $('#r-confermapassword').toggleClass('is-invalid');
                            $('#r-confermapassword-error').html("Campo non compilato");
                            $('#r-confermapassword-error').show();
  
                        }else if((strcmp(data,"CAMP0_EMAIL_NON_COMPILATO"))==0){
-                           $('#r-email').toggleClass('.is-invalid');
+                           $('#r-email').toggleClass('is-invalid');
                            $('#r-email-error').html("Campo non compilato");
                            $('#r-email-error').show();
  
                        }else if((strcmp(data,"CAMP0_PASSWORD_NON_COMPILATO"))==0){
-                           $('#r-password').toggleClass('.is-invalid');
+                           $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Campo non compilato");
                            $('#r-password-error').show();
  
                        }else if((strcmp(data,"CAMP0_CONFERMAPASSWORD_NON_COMPILATO"))==0){
-                           $('#r-confermapassword').toggleClass('.is-invalid');
+                           $('#r-confermapassword').toggleClass('is-invalid');
                            $('#r-confermapassword-error').html("Campo non compilato");
                            $('#r-confermapassword-error').show();
  
                        }else if((strcmp(data,"ERROR_EMAIL"))==0){
-                           $('#r-email').toggleClass('.is-invalid');
+                           $('#r-email').toggleClass('is-invalid');
                            $('#r-email-error').show();
  
                        }else if((strcmp(data,"ERROR_PASSWORD"))==0){
-                           $('#r-password').toggleClass('.is-invalid');
+                           $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').show();
  
                        }else if((strcmp(data,"ERROR_PASSWORD_LENGHT"))==0){
-                           $('#r-password').toggleClass('.is-invalid');
+                           $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Lunghezza password non valida");
                            $('#r-password-error').show();
  
                        }else if((strcmp(data,"CAMPI_NON_COINCIDENTI"))==0){ //non completo
-                           $('#r-password').toggleClass('.is-invalid');
+                           $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Campo non coincidente");
 
 
-                           $('#r-confermapassword').toggleClass('.is-invalid');
+                           $('#r-confermapassword').toggleClass('is-invalid');
                            $('#r-confermapassword-error').html("Campo non coincidente");
  
                        }else if((strcmp(data,"ERROR_EMAIL_PASSWORD"))==0){ //non completo
-                           $('#r-email').toggleClass('.is-invalid');
+                           $('#r-email').toggleClass('is-invalid');
                            $('#r-email-error').html("Campo non compilato");
-                           $('#r-password').toggleClass('.is-invalid');
+                           $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Campo non compilato");
  
                        }else if((strcmp(data,"ERROR_DB"))==0){
@@ -376,15 +375,15 @@ function addNotLoggedModal(){
 
     }
 
-
+/*
     function setSignupBisModal() {
-      document.getElementById('enterbtn-signup').addEventListener('click', function(){
+      document.getElementById('enterbtn-signupbis').addEventListener('click', function(){
          signupBis = document.getElementById('dialog-signupBis');
             if (!signupBis.showModal) {
                     dialogPolyfill.registerDialog(recover);
             }
 
-                 /** close button function **/
+                 /** close button function **
                   var v = document.getElementById('closebtn-signupBis');
                   v.addEventListener('click', function() {
                      signupBis.close();
@@ -395,7 +394,7 @@ function addNotLoggedModal(){
              signupBis.showModal();
       })
     }
-
+  */
 }
 
 
