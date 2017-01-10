@@ -552,7 +552,15 @@ function addLoggedModal(){
          });
         exitDialog.showModal();
       });
-    }
+      
+      document.getElementById('enterbtn-exit').addEventListener('click',function(){
+          signOut(function(status_ok,data){
+              if(status_ok){
+                destroyHome();
+              }
+          });
+      });
+     }
 
     function setEditPasswordModal(){
 
