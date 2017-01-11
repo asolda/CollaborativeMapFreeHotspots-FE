@@ -1,4 +1,4 @@
-﻿var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos;
+﻿var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos, current_pin_id;
 var pins_info = []; var overlay=null;
 var map_loaded=false;
 var mutex_new_pin = 0;
@@ -83,7 +83,6 @@ function initMap() {
             lastCenter = map.getCenter();
             lastCenterNE = map.getBounds().getNorthEast();
             lastCenterSW = map.getBounds().getSouthWest();
-            map_loaded=true;
         }
         //$('.pin-detail-container').css('visibility','hidden');
 
@@ -116,8 +115,7 @@ function initMap() {
 
         //console.debug("cdlat="+Math.abs(lastCenter.lat() - center.lat())+",cdlng="+Math.abs(lastCenter.lng() - center.lng())+",d_lng="+d_lng+", d_lat="+d_lat);
 
-        if(overflow_distance(lastCenter.lat(),
-        lastCenter.lng(),
+        if(overflow_distance(lastCenter.lat(), lastCenter.lng(),
         center.lat(),
         center.lng(),
         d_lng, d_lat) || overflow_distance(
@@ -125,7 +123,7 @@ function initMap() {
         lastCenterNE.lng(),
         newPosNE.lat(),
         newPosNE.lng(),
-        d_lng, d_lat)){
+        d_lng, d_lat) || !map_loaded){
         //if (calcDistance(center.lat(), center.lng(), lastCenter.lat(), lastCenter.lng()) > activation) {
           //console.debug(map.getBounds().getNorthEast() +" " + map.getBounds().getSouthWest());
               lng_diff = calcDistance(newPosNE.lat(), newPosNE.lng(), newPosNE.lat(), center.lng());
@@ -150,6 +148,8 @@ function initMap() {
 
             loadMarkers(lastCenter.lat(), lastCenter.lng(), extreme.lat, extreme.lng);
         }
+        
+        map_loaded=true;
     });
 
 }  //end func initMap
@@ -244,7 +244,7 @@ function loadMarkers(lat, lng, rad_lat, rad_lng) {
 
                 marker.addListener('click', function () {
                     getPinInfo(marker.id,function(data){
-                        console.log(JSON.stringify(map.getBounds()));
+                        current_pin_id = marker.id;
                         overlay.setBounds(marker);
                         popolateOverlay(marker,data);
                     });
@@ -358,7 +358,47 @@ USGSOverlay.prototype.onAdd = function(data) {
                  '<button id="segnalaDettagliWiFi" type="button" class="buttonInfo mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Segnala</button>' +
                '</div>' +
         "</div>";
-      finestra_dett.innerHTML= pindetail;
+        
+        finestra_dett.innerHTML= pindetail;
+      
+        $("star1").click(function(){
+            vota(1);
+        });
+        $("star2").click(function(){
+            vota(2);
+        });
+        $("star3").click(function(){
+            vota(3);
+        });
+        $("star4").click(function(){
+            vota(4);
+        });
+        $("star5").click(function(){
+            vota(5);
+        });
+        
+        function vota(voto){
+            pinranking(current_pin_id, voto, function(status_ok, data){
+                if(status_ok){
+                    showSnackbar({message: 'Valutazione effettuata con successo.'});
+                }else{
+                    if(strcmp(data,"ERROR_SESSION_NOT_FOUND")==0){
+                        showSnackbar({message: 'Valutazione effettuata con successo.'});
+                    }else if(strcmp(data,"ERROR_RANKING")==0){
+                        showSnackbar({message: 'Errore nel ranking.'});
+                    }else if(strcmp(data,"ERROR_RANKING_ALREADY_DONE")==0){
+                        showSnackbar({message: 'Errore: hai già valutato questa rete.'});
+                    }else if(strcmp(data,"ERROR_DB")==0){
+                        showSnackbar({message: 'ERROR_DB'});
+                    }else if(strcmp(data,"ERROR_IS_OWNER")==0){
+                        showSnackbar({message: 'Errore: non sei il proprietario di questa rete!'});
+                    }
+                }
+            });
+        }
+        
+        
+        
 
   this.div_ = finestra_dett;
 
