@@ -19,7 +19,7 @@
               try {
                 var ret = data;
                 if(ret.status==0){
-					onclose(true,ret.message);
+					onclose(true,ret.message.user);
                 }
 				else if(ret.status==1){
 					 $('#result').append(ret.message + '</br>');
