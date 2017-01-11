@@ -148,7 +148,6 @@ function addNotLoggedModal(){
     setSignupModal();
     setRecoverModal();
     setRecoverBisModal();
-    //setSignupBisModal();
 
     function setLoginModal(){
         document.getElementById('show-login').addEventListener('click', function(){
@@ -251,22 +250,20 @@ function addNotLoggedModal(){
     }
 
     function setSignupModal(){
-        document.getElementById('show-signup').addEventListener('click', function(){
+        ListenersHandler.addListener('show-signup', 'click', function(){
             signup = document.getElementById('dialog-signup'); //get dialog element
             if (! signup.showModal) {
                 dialogPolyfill.registerDialog(signup);
             }
 
             /** close button function **/
-            var v = document.getElementById('closebtn-signup');
-            v.addEventListener('click', function() {
+            ListenersHandler.addListener('closebtn-signup', 'click', function() {
                 signup.close();
             });
 
             signup.showModal();
             
-
-            document.getElementById('enterbtn-signup').addEventListener('click', function(){
+            ListenersHandler.addListener('enterbtn-signup', 'click', function(){
                 var email= $('#in-r-email').val();
                 var password=$('#in-r-password').val();
                 var confermapassword=$('#in-r-confermapassword').val();
@@ -277,8 +274,9 @@ function addNotLoggedModal(){
                 registration(email,password,confermapassword,function(status_ok,data){
                     console.debug("value="+ JSON.stringify(email));
                    if(status_ok){
-                       console.debug("Registrazione ok");
-                       console.debug("value="+ JSON.stringify(email));
+                        console.debug("Registrazione ok");
+                        console.debug("value="+ JSON.stringify(email));
+                        setSignupBisModal();
                    }else{
                       
                        if((strcmp(data,'CAMPI_EMAIL_PASSWORD_CONFERMAPASSWORD_NON_COMPILATI'))==0){
@@ -375,15 +373,14 @@ function addNotLoggedModal(){
 
     }
 
-/*
+
     function setSignupBisModal() {
-      document.getElementById('enterbtn-signupbis').addEventListener('click', function(){
          signupBis = document.getElementById('dialog-signupBis');
             if (!signupBis.showModal) {
                     dialogPolyfill.registerDialog(recover);
             }
 
-                 /** close button function **
+                 //* close button function **
                   var v = document.getElementById('closebtn-signupBis');
                   v.addEventListener('click', function() {
                      signupBis.close();
@@ -392,9 +389,7 @@ function addNotLoggedModal(){
              //TODO controllo campi
              signup.close();
              signupBis.showModal();
-      })
     }
-  */
 }
 
 
