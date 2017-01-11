@@ -210,49 +210,7 @@ function getPinInfo(id,onclose){
     });
 }
 
-//funzione per valutare un pin 
-function pinranking(rete_wifi,voto,onclose){
-        if(isNaN(voto) || voto <= 0 || voto > 5){
-            onclose(false,"ERROR_RANKING");
-        }else{
-            $.ajax({
-                type: 'POST',
-                url: 'http://127.0.0.1:8080/pin/rank/',
-                data: "rete_wifi="+rete_wifi+"&voto="+voto, 
-                contentType: "application/x-www-form-urlencoded",
-                crossDomain: true,
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function(data) {
-                    try {
-                        var ret = data;
-                        console.log("ret="+ret.message);
-                        if(ret.status==0){
-                            onclose(true,ret.message);
-                        }else if(ret.status==1){
-                            if(strcmp(ret.message,"ERROR_SESSION_NOT_FOUND")==0){
-                                onclose(false,"ERROR_SESSION_NOT_FOUND");
-                            }else if(strcmp(ret.message,"ERROR_RANKING")==0){
-                                onclose(false,"ERROR_RANKING");
-                            }else if(strcmp(ret.message,"ERROR_RANKING_ALREADY_DONE")==0){
-                                onclose(false,"ERROR_RANKING_ALREADY_DONE");
-                            }else if(strcmp(ret.message,"ERROR_DB")==0){
-                                onclose(false,"ERROR_DB");
-                            }else if(strcmp(ret.message,"ERROR_IS_OWNER")==0){
-                                onclose(false,"ERROR_IS_OWNER");
-                            }
-                        }
-                    } catch (err) {
-                        alert('Errore imprevisto: ' + ret.message);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log('Error: ' + error.message);
-                }
-            });
-                          }   
-} 
+
 
 function vota(voto){
             pinranking(current_pin_id, voto, function(status_ok, data){
@@ -260,7 +218,7 @@ function vota(voto){
                     showSnackbar({message: 'Valutazione effettuata con successo.'});
                 }else{
                     if(strcmp(data,"ERROR_SESSION_NOT_FOUND")==0){
-                        showSnackbar({message: 'Valutazione effettuata con successo.'});
+                        showSnackbar({message: 'Errore: devi effettuare l\'accesso.'});
                     }else if(strcmp(data,"ERROR_RANKING")==0){
                         showSnackbar({message: 'Errore nel ranking.'});
                     }else if(strcmp(data,"ERROR_RANKING_ALREADY_DONE")==0){
@@ -426,22 +384,6 @@ USGSOverlay.prototype.onAdd = function(data) {
         "</div>";
         
         finestra_dett.innerHTML= pindetail;
-      
-        $("star1").click(function(){
-            vota(1);
-        });
-        $("star2").click(function(){
-            vota(2);
-        });
-        $("star3").click(function(){
-            vota(3);
-        });
-        $("star4").click(function(){
-            vota(4);
-        });
-        $("star5").click(function(){
-            vota(5);
-        });
         
         
 
