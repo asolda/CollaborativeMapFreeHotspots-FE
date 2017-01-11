@@ -210,6 +210,72 @@ function getPinInfo(id,onclose){
     });
 }
 
+//funzione per valutare un pin 
+function pinranking(rete_wifi,voto,onclose){
+        if(isNaN(voto) || voto <= 0 || voto > 5){
+            onclose(false,"ERROR_RANKING");
+        }else{
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:8080/pin/rank/',
+                data: "rete_wifi="+rete_wifi+"&voto="+voto, 
+                contentType: "application/x-www-form-urlencoded",
+                crossDomain: true,
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(data) {
+                    try {
+                        var ret = data;
+                        console.log("ret="+ret.message);
+                        if(ret.status==0){
+                            onclose(true,ret.message);
+                        }else if(ret.status==1){
+                            if(strcmp(ret.message,"ERROR_SESSION_NOT_FOUND")==0){
+                                onclose(false,"ERROR_SESSION_NOT_FOUND");
+                            }else if(strcmp(ret.message,"ERROR_RANKING")==0){
+                                onclose(false,"ERROR_RANKING");
+                            }else if(strcmp(ret.message,"ERROR_RANKING_ALREADY_DONE")==0){
+                                onclose(false,"ERROR_RANKING_ALREADY_DONE");
+                            }else if(strcmp(ret.message,"ERROR_DB")==0){
+                                onclose(false,"ERROR_DB");
+                            }else if(strcmp(ret.message,"ERROR_IS_OWNER")==0){
+                                onclose(false,"ERROR_IS_OWNER");
+                            }
+                        }
+                    } catch (err) {
+                        alert('Errore imprevisto: ' + ret.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error: ' + error.message);
+                }
+            });
+                          }   
+} 
+
+function vota(voto){
+            pinranking(current_pin_id, voto, function(status_ok, data){
+                if(status_ok){
+                    showSnackbar({message: 'Valutazione effettuata con successo.'});
+                }else{
+                    if(strcmp(data,"ERROR_SESSION_NOT_FOUND")==0){
+                        showSnackbar({message: 'Valutazione effettuata con successo.'});
+                    }else if(strcmp(data,"ERROR_RANKING")==0){
+                        showSnackbar({message: 'Errore nel ranking.'});
+                    }else if(strcmp(data,"ERROR_RANKING_ALREADY_DONE")==0){
+                        showSnackbar({message: 'Errore: hai già valutato questa rete.'});
+                    }else if(strcmp(data,"ERROR_DB")==0){
+                        showSnackbar({message: 'ERROR_DB'});
+                    }else if(strcmp(data,"ERROR_IS_OWNER")==0){
+                        showSnackbar({message: 'Errore: non sei il proprietario di questa rete!'});
+                    }
+                }
+            });
+        }
+        
+        
+        
 /**
 function delete_pins() {
   deleteMarkers();
@@ -324,23 +390,23 @@ USGSOverlay.prototype.onAdd = function(data) {
           "<ul>"+
 
             "<li class='star-val'>"+
-              "<button id='star1' class='mdl-button mdl-js-button mdl-button--icon'><i id='1' class='material-icons'>star_rate</i></button>"+
+              "<button id='star1' onclick='vota(1)' class='mdl-button mdl-js-button mdl-button--icon'><i id='1' class='material-icons'>star_rate</i></button>"+
             "</li>"+
 
             "<li class='star-val'>"+
-              "<button id='star2' class='mdl-button mdl-js-button mdl-button--icon star-selected'><i id='2' class='material-icons'>star_rate</i></button>"+
+              "<button id='star2' onclick='vota(2)' class='mdl-button mdl-js-button mdl-button--icon star-selected'><i id='2' class='material-icons'>star_rate</i></button>"+
             "</li>"+
 
             "<li class='star-val'>"+
-              "<button id='star3' class='mdl-button mdl-js-button mdl-button--icon'><i id='3' class='material-icons'>star_rate</i></button>"+
+              "<button id='star3' onclick='vota(3)' class='mdl-button mdl-js-button mdl-button--icon'><i id='3' class='material-icons'>star_rate</i></button>"+
             "</li>"+
 
             "<li class='star-val'>"+
-              "<button id='star4' class='mdl-button mdl-js-button mdl-button--icon'><i id='4' class='material-icons'>star_rate</i></button>"+
+              "<button id='star4' onclick='vota(4)' class='mdl-button mdl-js-button mdl-button--icon'><i id='4' class='material-icons'>star_rate</i></button>"+
             "</li>"+
 
             "<li class='star-val'>"+
-              "<button id='star5' class='mdl-button mdl-js-button mdl-button--icon'><i id='5' class='material-icons'>star_rate</i></button>"+
+              "<button id='star5' onclick='vota(5)' class='mdl-button mdl-js-button mdl-button--icon'><i id='5' class='material-icons'>star_rate</i></button>"+
             "</li>"+
 
           "</ul>"+
@@ -376,27 +442,6 @@ USGSOverlay.prototype.onAdd = function(data) {
         $("star5").click(function(){
             vota(5);
         });
-        
-        function vota(voto){
-            pinranking(current_pin_id, voto, function(status_ok, data){
-                if(status_ok){
-                    showSnackbar({message: 'Valutazione effettuata con successo.'});
-                }else{
-                    if(strcmp(data,"ERROR_SESSION_NOT_FOUND")==0){
-                        showSnackbar({message: 'Valutazione effettuata con successo.'});
-                    }else if(strcmp(data,"ERROR_RANKING")==0){
-                        showSnackbar({message: 'Errore nel ranking.'});
-                    }else if(strcmp(data,"ERROR_RANKING_ALREADY_DONE")==0){
-                        showSnackbar({message: 'Errore: hai già valutato questa rete.'});
-                    }else if(strcmp(data,"ERROR_DB")==0){
-                        showSnackbar({message: 'ERROR_DB'});
-                    }else if(strcmp(data,"ERROR_IS_OWNER")==0){
-                        showSnackbar({message: 'Errore: non sei il proprietario di questa rete!'});
-                    }
-                }
-            });
-        }
-        
         
         
 
