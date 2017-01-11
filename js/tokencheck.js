@@ -1,61 +1,39 @@
-function tokencheck_reset1(if_redirect){ //incompleta;relativa al primo tokencheck, in reimpostazione password dopo l'invio della mail
+function tokencheck(if_redirect){ //incompleta;relativa al primo tokencheck, in reimpostazione password dopo l'invio della mail
     
                 var tokenvalue= getParameter("token");
-                
+                var action=getParameter("action");
                 if(tokenvalue!=null){
                     $.ajax({
                         type: 'GET',
-                        url: 'http://127.0.0.1:8080/user/reset_password/token/'+tokenvalue,
+                        url: 'http://127.0.0.1:8080/token/'+tokenvalue,
+                        crossDomain: true,
+                        xhrFields: {
+                            withCredentials: true
+                        },
                         success: function(data) {
                           try {
                             var ret = data;
+                            var tmp= '';
+                            if(strcmp(action,'RESET_PASSWORD')==0){
+                                tmp="reimposta_password";
+                            }else if(strcmp(action,'DELETE_USER')==0){
+                                tmp="conferma_eliminazione";
+                            }    
+                            
                             if(ret.status==0){
                                if(if_redirect){ //redirect a reimposta_password.html 
-                                  window.location.replace(url);
+                                  window.location.href='.\\'+tmp;
                                } 
                             }else if(ret.status==1){
                                 if(!if_redirect){ 
+                                    window.location.href='.\\';
                                                 //home
-                                }if(strcmp(ret.message,'ERROR_TOKEN')==0){
+                                }
+                                if(strcmp(ret.message,'ERROR_TOKEN')==0){
                                         $('#result').append(ret.message + '</br>');
                                 }
                             
                             } 
-                          } catch (err) {
-                            alert('Errore imprevisto: ' + ret.message);
-                          }
-                        },
-                        error: function(xhr, status, error) {
-                          console.log('Error: ' + error.message);
-                        }
-                      });
-                }
-    
-}
-
-function tokencheck_reset2(if_redirect){//incompleta;relativa al secondo tokencheck, in reimpostazione password dopo l'inserimento delle password
-    
-                var tokenvalue= getParameter("token");
-                
-                if(tokenvalue!=null){
-                    $.ajax({
-                        type: 'GET',
-                        url: 'http://127.0.0.1:8080/user/reset_password/token/'+tokenvalue,
-                        success: function(data) {
-                          try {
-                            var ret = data;
-                            if(ret.status==0){
-                               if(if_redirect){ //redirect a reimposta_password.html 
-                                    
-                               } 
-                            }else if(ret.status==1){
-                                if(!if_redirect){ 
-                                                //home
-                                }if(ret.message.equals('ERROR_TOKEN'))
-                                        $('#result').append(ret.message + '</br>');
-                            }
-                            
-                            
                           } catch (err) {
                             alert('Errore imprevisto: ' + ret.message);
                           }
