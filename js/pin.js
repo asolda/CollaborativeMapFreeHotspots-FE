@@ -100,6 +100,10 @@ function deletepin(rete_wifi,utente){
                 url: 'http://127.0.0.1:8080/pin/delete/',
                 data: "rete_wifi="+rete_wifi+"&utente="+utente, 
                 contentType: "application/x-www-form-urlencoded",
+                crossDomain: true,
+                xhrFields: {
+                    withCredentials: true
+                },
                 success: function(data) {
                   try {
                     var ret = data; 
@@ -124,37 +128,46 @@ function deletepin(rete_wifi,utente){
 }
 
 //funzione per valutare un pin 
-function pinranking(voto,utente,rete_wifi){
+function pinranking(rete_wifi,voto,onclose){
         if(isNaN(voto) || voto <= 0 || voto > 5){
-            //codice per mostrare a frontend l'errore ERROR_RANKING
+            onclose(false,"ERROR_RANKING");
         }else{
-             $.ajax({
-                 type: 'POST',
-                 url: 'http://127.0.0.1:8080/pin/rank/',
-                 data: "voto="+voto+"&utente="+utente+"&rete_wifi="+rete_wifi, 
-                 contentType: "application/x-www-form-urlencoded",
-                 success: function(data) {
-                     try {
-                         var ret = data;
-                                        console.log("ret="+ret.message);
-                         if(ret.status==0){
-                                  $('#result').append(ret.message + '</br>');
-                         }else if(ret.status==1){
-                                  $('#result').append(ret.message + '</br>'); 
-                                    if(strcmp(ret.message,"ERROR_DB")==0){
-                                                ////codice per mostrare a frontend l'errore ERROR_DB
-                                    }else if(strcmp(ret.message,"ERROR_RANKING")==0){
-                                                //codice per mostrare a frontend l'errore ERROR_RANKING
-                                    }        
-                                  }
-                                } catch (err) {
-                                alert('Errore imprevisto: ' + ret.message);
-                              }
-                            },
-                            error: function(xhr, status, error) {
-                              console.log('Error: ' + error.message);
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:8080/pin/rank/',
+                data: "rete_wifi="+rete_wifi+"&voto="+voto, 
+                contentType: "application/x-www-form-urlencoded",
+                crossDomain: true,
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(data) {
+                    try {
+                        var ret = data;
+                        console.log("ret="+ret.message);
+                        if(ret.status==0){
+                            onclose(true,ret.message);
+                        }else if(ret.status==1){
+                            if(strcmp(ret.message,"ERROR_SESSION_NOT_FOUND")==0){
+                                onclose(false,"ERROR_SESSION_NOT_FOUND");
+                            }else if(strcmp(ret.message,"ERROR_RANKING")==0){
+                                onclose(false,"ERROR_RANKING");
+                            }else if(strcmp(ret.message,"ERROR_RANKING_ALREADY_DONE")==0){
+                                onclose(false,"ERROR_RANKING_ALREADY_DONE");
+                            }else if(strcmp(ret.message,"ERROR_DB")==0){
+                                onclose(false,"ERROR_DB");
+                            }else if(strcmp(ret.message,"ERROR_IS_OWNER")==0){
+                                onclose(false,"ERROR_IS_OWNER");
                             }
-                          });
+                        }
+                    } catch (err) {
+                        alert('Errore imprevisto: ' + ret.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error: ' + error.message);
+                }
+            });
                           }   
 }                          
 }

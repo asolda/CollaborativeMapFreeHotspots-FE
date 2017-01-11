@@ -503,7 +503,7 @@ function addLoggedModal(){
                     latitudine = new_pin_position.lat;
                     longitudine = new_pin_position.lng;
                 }
-               inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restrizioni,altre_informazioni,range,function(status_ok, data){
+                inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restrizioni,altre_informazioni,range,function(status_ok, data){
                    if(status_ok){
                         showSnackbar({message: 'Rete Wi-Fi aggiunta correttamente.'});
                    }else{
