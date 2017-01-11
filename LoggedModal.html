@@ -697,14 +697,15 @@
                     <p class="mdl-dialog__sub">[New pin address]</p>
                 </div>
 
-                <div class="mdl-dialog__content">
+               <div id="insertnewwifi">
+                  <div class="mdl-dialog__content">
 
                       <div id="insert-nomerete" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                        <input class="mdl-textfield__input" type="text"/>
                        <label class="mdl-textfield__label" for="insert-nomerete">Nome rete (SSID)</label>
                        <span id='insert-nomerete-error' class="mdl-textfield__error">Nome rete non valido</span>
                       </div>
-
+                    
                       <div id="insert-quality" class='pin-detail-star'>
                         <span>Qualità:</span><br/>
                         <ul>
@@ -738,7 +739,7 @@
                        <span id='insert-restrizioni-error' class="mdl-textfield__error">Restrizioni non valide</span>
                       </div>
 
-                      
+                      <br/><br/><br/>
                       <ul class="mdl-list">
                         <li class="mdl-list__item">
                           <span id='insert-login-title' class="mdl-list__item-primary-content">
@@ -752,13 +753,14 @@
                         </li>
                       </ul>
 
-                     
+                     <br/><br/><br/>
                       <div id="insert-range" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                        <input class="mdl-textfield__input" type="text"/>
                        <label class="mdl-textfield__label" for="insert-range">Range</label>
                        <span id='insert-range-error' class="mdl-textfield__error">Range non valido</span>
                       </div>
 
+                    <br/><br/><br/>
                     <div id="insert-altreinfo" class="mdl-textfield mdl-js-textfield">
                       <textarea class="mdl-textfield__input" type="text" rows= "3" ></textarea>
                       <label class="mdl-textfield__label" for="insert-altreinfo">Altre informazioni</label>
@@ -770,4 +772,5 @@
                   <button id="closebtn-insertnewwifi" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Chiudi</button>
                   <button id="enterbtn-insertnewwifi" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Aggiungi</button>
                 </div>
+               </div>
           </dialog>

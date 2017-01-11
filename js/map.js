@@ -352,17 +352,11 @@ USGSOverlay.prototype.onAdd = function(data) {
           "<p>Login Necessario: <span id='dett_login-necessario'></span></p>"+
           "<p>Altre informazioni: <span id='dett_altreinfo'></span></p></div>"+
 
-          '<button style="float: right;" id="other" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">' +
-             '<i class="material-icons">more_vert</i>' +
-           '</button>' +
-          '<div class="mdl-tooltip mdl-tooltip--large" for="other">' +
-             'Altro' +
-           '</div>' +
-           '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="other">' +
-             '<li class="mdl-menu__item" id="detailModifica">Modifica</li>' +
-             '<li class="mdl-menu__item" id="detailElimina">Elimina</li>' +
-             '<li hidden class="mdl-menu__item" id="detailSegnala">Segnala</li>' +
-           '</ul>' +
+               '<div>' +  // Con l'attributo hidden nascondere i pulsanti che non servono
+                 '<button id="modificaDettagliWiFi" type="button" class="buttonInfo mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Modifica</button>' +
+                 '<button id="eliminaDettagliWiFi" type="button" class=" buttonInfo mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Elimina</button>' +
+                 '<button id="segnalaDettagliWiFi" type="button" class="buttonInfo mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Segnala</button>' +
+               '</div>' +
         "</div>";
       finestra_dett.innerHTML= pindetail;
 
