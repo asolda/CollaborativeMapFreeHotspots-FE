@@ -282,7 +282,7 @@ form { /** Elimina il margine a tutti i form */
  color: rgb(255, 64, 129) !important;
 }
 
-.pin-detail-info button {
+.pin-detail-info .mdl-button--colored  {
  color: #FFC107 !important;
 }
 
