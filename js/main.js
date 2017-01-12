@@ -166,7 +166,7 @@ function addNotLoggedModal(){
             document.getElementById('enterbtna-login').addEventListener('click', function(){
 				var email = $('#in-l-email').val();/*document.forms["login-form"]["l-email"].value;*/
 				var password = $('#in-l-password').val();/*document.forms["login-form"]["l-password"].value;*/
-				
+
                 console.debug("value="+ JSON.stringify(email));
                 console.debug("value="+ JSON.stringify(password));
 			     signIn(email, password, function(status_ok, data){
@@ -191,7 +191,7 @@ function addNotLoggedModal(){
                             }
 						}
 					});
-				
+
 	            });
 
             /**./Login request **/
@@ -237,7 +237,7 @@ function addNotLoggedModal(){
 
                   // Richiesta di recupero password
 		    var email = $('#in-re-email').val(); //document.forms["reimposta-form"]["re-email"].value;
-            
+
 		    if (!(email === "")) {
 			//  TODO controllo corrispondenza email e visualizza prossimo form
                         recover.close();
@@ -262,12 +262,12 @@ function addNotLoggedModal(){
             });
 
             signup.showModal();
-            
+
             ListenersHandler.addListener('enterbtn-signup', 'click', function(){
                 var email= $('#in-r-email').val();
                 var password=$('#in-r-password').val();
                 var confermapassword=$('#in-r-confermapassword').val();
-               
+
                        /*console.debug("value="+ JSON.stringify(email));
                        console.debug("value="+ JSON.stringify(password));
                        console.debug("value="+ JSON.stringify(confermapassword));*/
@@ -278,19 +278,19 @@ function addNotLoggedModal(){
                         console.debug("value="+ JSON.stringify(email));
                         setSignupBisModal();
                    }else{
-                      
+
                        if((strcmp(data,'CAMPI_EMAIL_PASSWORD_CONFERMAPASSWORD_NON_COMPILATI'))==0){
                            $('#r-email').toggleClass('is-invalid');
                            //$('#r-email-error').html("Campo non compilato");
 
                            $('#r-password').toggleClass('is-invalid');
                            //$('#r-password-error').html("Campo non compilato");
-                       
+
 
                            $('#r-confermapassword').toggleClass('is-invalid');
                           // $('#r-confermapassword-error').html("Campo non compilato");
-                          
-                           
+
+
                        }else if((strcmp(data,"CAMPI_EMAIL_PASSWORD_NON_COMPILATI"))==0){
                            $('#r-email').toggleClass('is-invalid');
                            $('#r-email-error').html("Campo non compilato");
@@ -299,8 +299,8 @@ function addNotLoggedModal(){
                            $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Campo non compilato");
                            $('#r-password-error').show();
-                       
-                        
+
+
                        }else if((strcmp(data,"CAMPI_PASSWORD_CONFERMAPASSWORD_NON_COMPILATI"))==0){
                            $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Campo non compilato");
@@ -309,7 +309,7 @@ function addNotLoggedModal(){
                            $('#r-confermapassword').toggleClass('is-invalid');
                            $('#r-confermapassword-error').html("Campo non compilato");
                            $('#r-confermapassword-error').show();
- 
+
                        }else if((strcmp(data,"CAMPI_EMAIL_CONFERMAPASSWORD_NON_COMPILATI"))==0){
                            $('#r-email').toggleClass('is-invalid');
                            $('#r-email-error').html("Campo non compilato");
@@ -318,35 +318,35 @@ function addNotLoggedModal(){
                            $('#r-confermapassword').toggleClass('is-invalid');
                            $('#r-confermapassword-error').html("Campo non compilato");
                            $('#r-confermapassword-error').show();
- 
+
                        }else if((strcmp(data,"CAMP0_EMAIL_NON_COMPILATO"))==0){
                            $('#r-email').toggleClass('is-invalid');
                            $('#r-email-error').html("Campo non compilato");
                            $('#r-email-error').show();
- 
+
                        }else if((strcmp(data,"CAMP0_PASSWORD_NON_COMPILATO"))==0){
                            $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Campo non compilato");
                            $('#r-password-error').show();
- 
+
                        }else if((strcmp(data,"CAMP0_CONFERMAPASSWORD_NON_COMPILATO"))==0){
                            $('#r-confermapassword').toggleClass('is-invalid');
                            $('#r-confermapassword-error').html("Campo non compilato");
                            $('#r-confermapassword-error').show();
- 
+
                        }else if((strcmp(data,"ERROR_EMAIL"))==0){
                            $('#r-email').toggleClass('is-invalid');
                            $('#r-email-error').show();
- 
+
                        }else if((strcmp(data,"ERROR_PASSWORD"))==0){
                            $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').show();
- 
+
                        }else if((strcmp(data,"ERROR_PASSWORD_LENGHT"))==0){
                            $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Lunghezza password non valida");
                            $('#r-password-error').show();
- 
+
                        }else if((strcmp(data,"CAMPI_NON_COINCIDENTI"))==0){ //non completo
                            $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Campo non coincidente");
@@ -354,13 +354,13 @@ function addNotLoggedModal(){
 
                            $('#r-confermapassword').toggleClass('is-invalid');
                            $('#r-confermapassword-error').html("Campo non coincidente");
- 
+
                        }else if((strcmp(data,"ERROR_EMAIL_PASSWORD"))==0){ //non completo
                            $('#r-email').toggleClass('is-invalid');
                            $('#r-email-error').html("Campo non compilato");
                            $('#r-password').toggleClass('is-invalid');
                            $('#r-password-error').html("Campo non compilato");
- 
+
                        }else if((strcmp(data,"ERROR_DB"))==0){
                            showErrorDB('#dialog-signup', 'ERROR_DB');
 
@@ -435,12 +435,12 @@ function addLoggedModal(){
                     addMarker(event.latLng, 'Click Generated Marker', map);
                 }else{
                     alert("Completa prima l' inserimento di un pin");
-                } 
+                }
 
               $('#dialog-insertnewwifi p').empty();
                 //get user position and show insertwifi modal
                 $('#dialog-insertnewwifi p').append(pos.lat+" "+pos.lng);
-                
+
                 insertnewwifi.showModal();
              });
              document.getElementById('custom-askinsertwifimode').addEventListener('click', function() {
@@ -454,7 +454,7 @@ function addLoggedModal(){
                     addMarker(event.latLng, 'Click Generated Marker', map);
                 }else{
                     alert("Completa prima l' inserimento di un pin");
-                } 
+                }
 });
 
 
@@ -470,7 +470,7 @@ function addLoggedModal(){
                 if (!insertnewwifi.showModal) {
                    insertnewwifi.registerDialog(insertnewwifi);
                 }
-                
+
                 inizializzaValutazione('#insert-quality',null);
                 /** close button function **/
                 var v = document.getElementById('closebtn-insertnewwifi');
@@ -479,7 +479,7 @@ function addLoggedModal(){
                    if(mutex_new_pin == 1){
                         mutex_new_pin = 0;
                         new_marker.setMap(null);
-                    }   
+                    }
                 });
 
             document.getElementById('enterbtn-insertnewwifi').addEventListener('click', function(){
@@ -522,9 +522,9 @@ function addLoggedModal(){
                             showErrorDB('#dialog-insertnewwifi', 'ERROR_DB');
                         }
                    }
-                   
+
                 });
-                
+
             });
       }
 
@@ -546,7 +546,7 @@ function addLoggedModal(){
          });
         exitDialog.showModal();
       });
-      
+
       document.getElementById('enterbtn-exit').addEventListener('click',function(){
           signOut(function(status_ok,data){
               if(status_ok){
@@ -975,16 +975,17 @@ function inizializzaValutazione(stringselector,valoreiniziale){
   if(!valoreiniziale){valoreiniziale = 0;}
   var valutazione = {
     star: 5,
+		selector: stringselector,
     htmlObj: $(stringselector +' .star-val button'),
-    valore: valoreiniziale,
+    valoreiniziale: valoreiniziale,
     input: $(stringselector + ' input')
   }
-  valutazione.getValutazione = function(){
-    return this.valore;
-  }
+
   valutazione.setValutazione = function(val){
-    if( !val ){ val = this.valore;}
+    if( !val ){ val = this.valoreiniziale;}
+		console.log($(this.input));
     $(this.input).val(val);
+		$(this.selector).attr( 'old' , val );
     $.each(this.htmlObj, function(i, star){
 
       if(i < val ){
@@ -998,13 +999,16 @@ function inizializzaValutazione(stringselector,valoreiniziale){
   }//./setValutazione
 
   valutazione.setOnclick = function(){
-    stars = this.htmlObj;
-    input = $(this.input);
+		'use strict';
+    var stars = this.htmlObj;
+    var input = $(this.input);
+		var selector = this.selector;
+		var newval;
     $.each(stars, function(i,star){
       $(star).click(function(event){
 
-        this.valore = event.target.id;
-        for(j=0; j < 5; j++){
+				newval = event.target.id;
+        for(var j=0; j < 5; j++){
           if(j<=i){
             $(stars[j]).addClass('mdl-button--colored');
           }else{
@@ -1012,9 +1016,12 @@ function inizializzaValutazione(stringselector,valoreiniziale){
           } //./if
 
         }//./for
-        $(input).val(this.valore);
+				$(selector).attr( 'old' , $(input).val() );
+				$(input).val(newval);
+
     });//.click function
   });//./each
+
 }//./setOnclick
 
   valutazione.setValutazione();

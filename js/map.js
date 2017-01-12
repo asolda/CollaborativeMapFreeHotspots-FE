@@ -1,5 +1,5 @@
 ﻿var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos, current_pin_id;
-var pins_info = []; var overlay=null;
+var pins_info = []; var overlay=null; var user = 4;
 var map_loaded=false;
 var mutex_new_pin = 0;
 var new_pin_position;
@@ -148,7 +148,7 @@ function initMap() {
 
             loadMarkers(lastCenter.lat(), lastCenter.lng(), extreme.lat, extreme.lng);
         }
-        
+
         map_loaded=true;
     });
 
@@ -190,6 +190,7 @@ function popolateOverlay(marker,data){
     $('#dett_altreinfo').text(data.altre_informazioni);
     //inizializza valutazione
     valutazione = inizializzaValutazione('#wifi-quality',data.qualità);
+    createPinDetailMenu(data);
 
     $('.pin-detail-container').css('visibility','visible');
 }
@@ -211,7 +212,7 @@ function getPinInfo(id,onclose){
 }
 
 
-
+/**
 function vota(voto){
             pinranking(current_pin_id, voto, function(status_ok, data){
                 if(status_ok){
@@ -230,10 +231,10 @@ function vota(voto){
                     }
                 }
             });
-        }
-        
-        
-        
+  }
+**/
+
+
 /**
 function delete_pins() {
   deleteMarkers();
@@ -348,27 +349,27 @@ USGSOverlay.prototype.onAdd = function(data) {
           "<ul>"+
 
             "<li class='star-val'>"+
-              "<button id='star1' onclick='vota(1)' class='mdl-button mdl-js-button mdl-button--icon'><i id='1' class='material-icons'>star_rate</i></button>"+
+              "<button id='star1' class='mdl-button mdl-js-button mdl-button--icon'><i id='1' class='material-icons'>star_rate</i></button>"+
             "</li>"+
 
             "<li class='star-val'>"+
-              "<button id='star2' onclick='vota(2)' class='mdl-button mdl-js-button mdl-button--icon star-selected'><i id='2' class='material-icons'>star_rate</i></button>"+
+              "<button id='star2' class='mdl-button mdl-js-button mdl-button--icon star-selected'><i id='2' class='material-icons'>star_rate</i></button>"+
             "</li>"+
 
             "<li class='star-val'>"+
-              "<button id='star3' onclick='vota(3)' class='mdl-button mdl-js-button mdl-button--icon'><i id='3' class='material-icons'>star_rate</i></button>"+
+              "<button id='star3' class='mdl-button mdl-js-button mdl-button--icon'><i id='3' class='material-icons'>star_rate</i></button>"+
             "</li>"+
 
             "<li class='star-val'>"+
-              "<button id='star4' onclick='vota(4)' class='mdl-button mdl-js-button mdl-button--icon'><i id='4' class='material-icons'>star_rate</i></button>"+
+              "<button id='star4' class='mdl-button mdl-js-button mdl-button--icon'><i id='4' class='material-icons'>star_rate</i></button>"+
             "</li>"+
 
             "<li class='star-val'>"+
-              "<button id='star5' onclick='vota(5)' class='mdl-button mdl-js-button mdl-button--icon'><i id='5' class='material-icons'>star_rate</i></button>"+
+              "<button id='star5' class='mdl-button mdl-js-button mdl-button--icon'><i id='5' class='material-icons'>star_rate</i></button>"+
             "</li>"+
 
           "</ul>"+
-          "<input value='0' hidden='true'>"+
+          "<input value='0' style='visibility:hidden;'>"+
           "</div>"+
 
           "<div style='clear:both;'><p>Restrizioni: <span id='dett_restrizioni'></span</p>"+
@@ -376,16 +377,17 @@ USGSOverlay.prototype.onAdd = function(data) {
           "<p>Login Necessario: <span id='dett_login-necessario'></span></p>"+
           "<p>Altre informazioni: <span id='dett_altreinfo'></span></p></div>"+
 
-               '<div>' +  // Con l'attributo hidden nascondere i pulsanti che non servono
-                 '<button id="modificaDettagliWiFi" type="button" class="buttonInfo mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Modifica</button>' +
-                 '<button id="eliminaDettagliWiFi" type="button" class=" buttonInfo mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Elimina</button>' +
-                 '<button id="segnalaDettagliWiFi" type="button" class="buttonInfo mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Segnala</button>' +
-               '</div>' +
-        "</div>";
-        
+          '<div id="pin-detail-action">' +
+            '<button id="pin-detail-edit" type="button" class="buttonInfo mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Modifica</button>' +
+            '<button id="pin-detail-delete" type="button" class=" buttonInfo mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Elimina</button>' +
+            '<button id="pin-detail-report" type="button" class="buttonInfo mdl-button mdl-js-button mdl-js-ripple-effect dialog-close">Segnala</button>' +
+          '</div>' +
+   "</div>";
+
+
         finestra_dett.innerHTML= pindetail;
-        
-        
+
+
 
   this.div_ = finestra_dett;
 
@@ -445,3 +447,41 @@ USGSOverlay.prototype.toggleDOM = function() {
   }
 };
 google.maps.event.addDomListener(window, 'load', initMap);
+
+function createPinDetailMenu(marker){
+
+  /** L'utente non è loggato. Nessun menu **/
+  if(!user){ console.log('utente non loggato');
+    $('#pin-detail-action').hide(); //nasconde il div action che contiene il menu
+    return;
+
+  }else if(marker.utente == user){ //utente proprietario della rete
+
+    /** Mostra il contenitore del menu, i tasti Modifica e Elimina rete
+    /** Associa i listener per chiamare le relative funzioni
+    **/ console.log('Utente Loggato, proprietario');
+    $('#pin-detail-report').hide();
+    $(
+      '#pin-detail-action,#pin-detail-edit,#pin-detail-delete'
+    ).show();
+    return;
+
+  }
+
+  /** Utente loggato non proprietario della rete
+  /** Mostra il contenitore del menu, i tasti Modifica e Elimina rete
+  /** Associa i listener per chiamare le relative funzioni
+  **/ console.log('Utente loggato ('+ marker.utente +'), non proprietario');
+
+  $('#pin-detail-edit,#pin-detail-delete').hide();
+  $('#pin-detail-action, #pin-detail-report').show();
+
+  //$('#pin-detail-report').attr('data', JSON.stringify(marker));
+  $('#pin-detail-report').click( function(){
+    showReport.showModal();
+    console.log(marker);
+    $('#dialog-report').attr( 'data' , marker.id );
+    console.log($('#dialog-report'));
+  } );
+
+}
