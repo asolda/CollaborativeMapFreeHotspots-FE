@@ -1,5 +1,5 @@
 ﻿var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos, current_pin_id;
-var pins_info = []; var overlay=null; var user = 4;
+var pins_info = []; var overlay=null; var user;
 var map_loaded=false;
 var mutex_new_pin = 0;
 var new_pin_position;
@@ -449,7 +449,7 @@ USGSOverlay.prototype.toggleDOM = function() {
 google.maps.event.addDomListener(window, 'load', initMap);
 
 function createPinDetailMenu(marker){
-
+  user = getUser();
   /** L'utente non è loggato. Nessun menu **/
   if(!user){ console.log('utente non loggato');
     $('#pin-detail-action').hide(); //nasconde il div action che contiene il menu
@@ -479,9 +479,7 @@ function createPinDetailMenu(marker){
   //$('#pin-detail-report').attr('data', JSON.stringify(marker));
   $('#pin-detail-report').click( function(){
     showReport.showModal();
-    console.log(marker);
     $('#dialog-report').attr( 'data' , marker.id );
-    console.log($('#dialog-report'));
   } );
 
 }
