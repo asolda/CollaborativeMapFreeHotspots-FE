@@ -1,4 +1,4 @@
-/** Funzione di servizio per ottenere l'id dell'utente la cui sessione è attiva **/
+﻿/** Funzione di servizio per ottenere l'id dell'utente la cui sessione è attiva **/
 var userId;
 function getUser() {
 	return userId;
@@ -68,7 +68,7 @@ function createLoggedHome(){
               '</span>' +
               '<div id="imageLogo"></div>' +
               '<span class="mdl-layout-title" id="mainTitle">' +
-                'Alwaysconnected' +
+                'Always<span style="font-weight: bolder">connected</span>' +
               '</span>' +
               '<nav id="logged-user-navigation" class="mdl-navigation">' +
                 '<hr/>' +
