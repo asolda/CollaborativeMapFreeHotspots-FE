@@ -179,6 +179,7 @@ function addMarker(latlng,title,map) {
             title: title,
             draggable:true
     });
+    new_pin_position = this.position;
     google.maps.event.addListener(new_marker,'drag',function(event) {
         //console.debug(this.position.lat()+" "+this.position.lng());
         //alert('drag');
