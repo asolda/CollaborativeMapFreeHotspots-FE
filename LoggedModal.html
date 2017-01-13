@@ -6,18 +6,18 @@
         </div>
         <div class="mdl-dialog__content">
             <form>
-                <div id="ep-newpassword" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password"/>
-                    <label class="mdl-textfield__label" for="ep-newpassword">Password attuale</label>
-                    <span id='ep-newpassword-error' class="mdl-textfield__error">Password non valida</span>
-                </div>
                 <div id="ep-password" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password">
-                    <label class="mdl-textfield__label" for="ep-password">Nuova password</label>
+                    <input id='in-ep-newpassword' class="mdl-textfield__input" type="password"/>
+                    <label class="mdl-textfield__label" for="ep-newpassword">Password attuale</label>
                     <span id='ep-password-error' class="mdl-textfield__error">Password non valida</span>
                 </div>
+                <div id="ep-newpassword" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input id='in-ep-password' class="mdl-textfield__input" type="password">
+                    <label class="mdl-textfield__label" for="ep-password">Nuova password</label>
+                    <span id='ep-newpassword-error' class="mdl-textfield__error">Password non valida</span>
+                </div>
                 <div id="ep-confermapassword" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password">
+                    <input id='in-ep-confermapassword' class="mdl-textfield__input" type="password">
                     <label class="mdl-textfield__label" for="ep-confermapasswrod">Conferma nuova password</label>
                     <span id='ep-confermapassword-error' class="mdl-textfield__error">La password non coincide</span>
                 </div>
@@ -66,8 +66,8 @@
         <div class="mdl-dialog__content">
             <form>
                 <div id="da-password" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="password"/>
-                    <label class="mdl-textfield__label" for="da-password">Inserisci la tua password</label>
+                    <input id='in-da-password' class="mdl-textfield__input" type="password"/>
+                    <label class="mdl-textfield__label" for="in-da-password">Inserisci la tua password</label>
                     <span id='da-password-error' class="mdl-textfield__error">Password non valida</span>
                 </div>
             </form>
@@ -141,8 +141,6 @@
         <div class="mdl-dialog__content">
             <h3 hidden id="noneWifi" class="none">Non hai reti Wi-Fi aggiunte.</h3>
             <ul id="listWifi" class="mywifi mdl-list">
-
-
 
 
               <!-- settare ID = nomeRete -->
@@ -445,18 +443,18 @@
    <div class="mdl-dialog__content">
      <form>
         <div id="newRestrizioni" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
-         <input class="mdl-textfield__input" type="text"/>
-         <label class="mdl-textfield__label" for="newRestrizioni">Restrizioni</label>
+         <input id="in-newRestrizioni" class="mdl-textfield__input" type="text"/>
+         <label class="mdl-textfield__label" for="in-newRestrizioni">Restrizioni</label>
          <span id='newRestrizioni-error' class="mdl-textfield__error">Restrizioni non valide</span>
         </div>
         <div id="newRange" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
-         <input class="mdl-textfield__input" type="text">
-         <label class="mdl-textfield__label" for="newRange">Range</label>
+         <input id="in-newRange" class="mdl-textfield__input" type="text">
+         <label class="mdl-textfield__label" for="in-newRange">Range</label>
          <span id='newRange-error' class="mdl-textfield__error">Range non valido</span>
         </div>
         <div id="newInfo" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
-          <input class="mdl-textfield__input" type="text">
-          <label class="mdl-textfield__label" for="newInfo">Altre informazioni</label>
+          <input id="in-newInfo" class="mdl-textfield__input" type="text">
+          <label class="mdl-textfield__label" for="in-newInfo">Altre informazioni</label>
           <span id='newInfo-error' class="mdl-textfield__error">Informazioni non valide</span>
         </div>
       </form>
@@ -468,46 +466,7 @@
 </dialog>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ____________________________________SEGNALAZIONI________________________________________- -->
+<!-- SEGNALAZIONI -->
 
 
 <!-- Report Modal Component -->
@@ -606,8 +565,8 @@
         <div class="mdl-dialog__content">
             <form>
                   <div id="re-range" class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" type="text" rows= "3" ></textarea>
-                    <label class="mdl-textfield__label" for="sample5">Informazioni da segnalare</label>
+                    <textarea id="in-re-range" class="mdl-textfield__input" type="text" rows= "3" ></textarea>
+                    <label class="mdl-textfield__label" for="in-re-range">Informazioni da segnalare</label>
                   </div>
             </form>
         </div>
@@ -629,8 +588,8 @@
         <div class="mdl-dialog__content">
             <form>
                   <div id="re-restriction" class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" type="text" rows= "3" ></textarea>
-                    <label class="mdl-textfield__label" for="sample5">Informazioni da segnalare</label>
+                    <textarea id="in-re-restriction" class="mdl-textfield__input" type="text" rows= "3" ></textarea>
+                    <label class="mdl-textfield__label" for="in-re-restriction">Informazioni da segnalare</label>
                   </div>
             </form>
         </div>
@@ -698,8 +657,8 @@
                   <div class="mdl-dialog__content">
 
                       <div id="insert-nomerete" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                       <input class="mdl-textfield__input" type="text"/>
-                       <label class="mdl-textfield__label" for="insert-nomerete">Nome rete (SSID)</label>
+                       <input id="in-insert-nomerete" class="mdl-textfield__input" type="text"/>
+                       <label class="mdl-textfield__label" for="in-insert-nomerete">Nome rete (SSID)</label>
                        <span id='insert-nomerete-error' class="mdl-textfield__error">Nome rete non valido</span>
                       </div>
 
@@ -731,8 +690,8 @@
 
                       <br/><br/><br/>
                       <div id="insert-restrizioni" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                       <input class="mdl-textfield__input" type="text"/>
-                       <label class="mdl-textfield__label" for="insert-restrizioni">Restrizioni</label>
+                       <input id="in-insert-restrizioni" class="mdl-textfield__input" type="text"/>
+                       <label class="mdl-textfield__label" for="in-insert-restrizioni">Restrizioni</label>
                        <span id='insert-restrizioni-error' class="mdl-textfield__error">Restrizioni non valide</span>
                       </div>
 
@@ -752,15 +711,15 @@
 
                      <br/><br/><br/>
                       <div id="insert-range" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                       <input class="mdl-textfield__input" type="text"/>
-                       <label class="mdl-textfield__label" for="insert-range">Range</label>
+                       <input id="in-insert-range" class="mdl-textfield__input" type="text"/>
+                       <label class="mdl-textfield__label" for="in-insert-range">Range</label>
                        <span id='insert-range-error' class="mdl-textfield__error">Range non valido</span>
                       </div>
 
                     <br/><br/><br/>
                     <div id="insert-altreinfo" class="mdl-textfield mdl-js-textfield">
-                      <textarea class="mdl-textfield__input" type="text" rows= "3" ></textarea>
-                      <label class="mdl-textfield__label" for="insert-altreinfo">Altre informazioni</label>
+                      <textarea id="in-insert-altreinfo" class="mdl-textfield__input" type="text" rows= "3" ></textarea>
+                      <label class="mdl-textfield__label" for="in-insert-altreinfo">Altre informazioni</label>
                     </div>
                     <span id="insert-input-error">Campi obbligatori non compilati</span>
                 </div>
