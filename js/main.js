@@ -77,8 +77,8 @@ function createLoggedHome(){
                 '<span class="mdl-layout-title subtitle">Gestione account</span>' +
                 '<a id="show-mywifi" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">wifi</i><span class="space"/>Le mie reti</a>' +
                 '<a id="show-mynotification" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">notifications</i><span class="space"/>Notifiche&nbsp&nbsp&nbsp&nbsp&nbsp<span hidden class="mdl-badge" data-badge="" id="badgeNotificheMenu"></span></a>'+
-                '<a id="show-editpassword" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">vpn_key</i><span class="space"/>Modifica Password</a>' +
-                '<a id="show-deleteaccount" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">delete</i><span class="space"/>Elimina Account</a>' +
+                '<a id="show-editpassword" onclick="inizializzaModificaPassword().showModal();" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">vpn_key</i><span class="space"/>Modifica Password</a>' +
+                '<a id="show-deleteaccount" onclick="inizializzaCancellaAccount().showModal();" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">delete</i><span class="space"/>Elimina Account</a>' +
                 '<a hidden id="test" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">warning</i><span class="space"/>TEST FORM SEGNALAZIONI</a>' +
               '</nav>' +
            '</div>' +
@@ -405,12 +405,10 @@ function addNotLoggedModal(){
     +Gestione reti (da completare)
 **/
 function addLoggedModal(){
-    var editpassword, deleteaccount,mywifi;
+    var mywifi;
 
     setExitModal();
-    setEditPasswordModal();
     setEditPasswordBisModal();
-    setDeleteAccountModal();
     setMyWifiModal();
     setMyNotificationModal();
     setAskInsertWifiMode();
@@ -555,35 +553,6 @@ function addLoggedModal(){
 
      }
 
-    function setEditPasswordModal(){
-
-        document.getElementById('show-editpassword').addEventListener('click', function(){
-
-            editpassword = document.getElementById('dialog-editpassword'); //get dialog element
-
-            if (! editpassword.showModal) {
-                dialogPolyfill.registerDialog(editpassword);
-            }
-
-            /** close button function **/
-            var v = document.getElementById('closebtn-editpassword');
-            v.addEventListener('click', function() {
-
-                editpassword.close();
-            });
-
-            /** editpassword request **/
-
-
-            /**./editpassword request **/
-
-           editpassword.showModal();
-
-        }); //./document
-
-    } //./setEditPasswordModal
-
-
     function setEditPasswordBisModal() {
       document.getElementById('enterbtn-editpassword').addEventListener('click', function(){
          editPasswordBis = document.getElementById('dialog-editPasswordBis');
@@ -603,33 +572,6 @@ function addLoggedModal(){
       })
     }
 
-    function setDeleteAccountModal(){
-
-        document.getElementById('show-deleteaccount').addEventListener('click', function(){
-
-            deleteaccount = document.getElementById('dialog-deleteaccount'); //get dialog element
-
-            if (! deleteaccount.showModal) {
-                dialogPolyfill.registerDialog(deleteaccount);
-            }
-
-            /** close button function **/
-            var v = document.getElementById('closebtn-deleteaccount');
-            v.addEventListener('click', function() {
-
-                deleteaccount.close();
-            });
-
-            /** deleteaccount request **/
-
-
-            /**./deleteaccount request **/
-
-           deleteaccount.showModal();
-
-        }); //./document
-
-    } //./setDeleteaccountModal
 
 
     function setDeleteAccountBisModal() {
@@ -1007,7 +949,35 @@ function inizializzaModificaRete() {
 
 	return editwifidialog;
 }
+function inizializzaCancellaAccount(){
 
+	deleteaccount = document.getElementById('dialog-deleteaccount'); //get dialog element
+
+	if (! deleteaccount.showModal) {
+		dialogPolyfill.registerDialog(deleteaccount);
+	}
+	ListenersHandler.addListener('closebtn-deleteaccount', 'click', function(){
+		deleteaccount.close();
+	});
+	ListenersHandler.addListener('enterbtn-deleteaccount','click', function(){
+		console.log(getUser());
+	});
+	return deleteaccount;
+}
+function inizializzaModificaPassword(){
+
+	editpassword = document.getElementById('dialog-editpassword'); //get dialog element
+	if (! editpassword.showModal) {
+		dialogPolyfill.registerDialog(editpassword);
+	}
+	ListenersHandler.addListener('closebtn-editpassword','click', function() {
+		editpassword.close();
+	});
+	ListenersHandler.addListener('enterbtn-editpassword','click', function() {
+		console.log('Modifica password per: '+ getUser());
+	});
+	return editpassword;
+}
 /**
 function setDeleteWifi(){
 
