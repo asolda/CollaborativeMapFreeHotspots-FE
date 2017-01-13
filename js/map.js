@@ -449,8 +449,14 @@ function createPinDetailMenu(marker){
     $(
       '#pin-detail-action,#pin-detail-edit,#pin-detail-delete'
     ).show();
-    return;
 
+    ListenersHandler.addListener('pin-detail-delete', 'click', function(){
+      $('#dialog-deletewifi').attr('data', JSON.stringify(marker) );
+      deleteModal = inizializzaCancellaRete();
+      deleteModal.showModal();
+    });
+
+    return;
   }
 
   /** Utente loggato non proprietario della rete

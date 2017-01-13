@@ -411,7 +411,6 @@ function addLoggedModal(){
     setEditPasswordModal();
     setEditPasswordBisModal();
     setDeleteAccountModal();
-    setDeleteAccountBisModal();
     setMyWifiModal();
     setMyNotificationModal();
     setAskInsertWifiMode();
@@ -678,7 +677,6 @@ function addLoggedModal(){
 
         }); //./document
 
-        setDeleteWifi(); //aggiunge il modale per eliminare una rete
         setEditWiFi();
 
     } //./setMyWifiModal
@@ -716,65 +714,6 @@ function addLoggedModal(){
        }
 
     }
-
-
-    function setDeleteWifi(){
-
-           var x = document.getElementsByClassName("show-deletewifi");
-             for (i = 0; i < x.length; i++) {
-               x[i].addEventListener("click", handleMouseClickDelete, false);
-             }
-
-
-           function handleMouseClickDelete(e) {
-             deletewifi = document.getElementById('dialog-deletewifi'); //get dialog element
-             if (! deletewifi.showModal) {
-                dialogPolyfill.registerDialog(deletewifi);
-             }
-
-             var v = document.getElementById('closebtn-deletewifi');
-             v.addEventListener('click', function() {
-                deletewifi.close();
-                mywifi.showModal();
-             });
-
-             var vv = document.getElementById('enterbtn-deletewifi');
-             vv.addEventListener('click', function() {
-                deletewifi.close();
-                'use strict';
-                var snackbarContainer = document.querySelector('#sb-confirm-operation');
-                var data;
-                //TODO: send request TRUE o FALSE, delete wifi, delete pin on maps
-                //Se tutto va bene allora
-                   //Snackbar
-                       data = {message: 'Rete Wi-Fi eliminata con successo.'};
-                       snackbarContainer.MaterialSnackbar.showSnackbar(data);
-                   //refresh wifi list
-                       document.getElementById(idToDelete).parentNode.removeChild(document.getElementById(idToDelete));
-                       mywifi.showModal();
-                //Altrimenti
-                       //data = {message: 'Rete Wi-Fi non eliminata.'};
-                       //snackbarContainer.MaterialSnackbar.showSnackbar(data);
-
-             });
-
-
-            //visualizza la rete selezionata nel modale di conferma eliminazione
-            var nameWifiToDelete = e.target.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].innerHTML;
-            var wifiToDelete = e.target.parentNode.parentNode.parentNode.parentNode.childNodes[1].cloneNode("true");
-            var contenitore = document.getElementById("toShow");
-            contenitore.removeChild(contenitore.childNodes[0]);
-            contenitore.appendChild(wifiToDelete);
-            document.getElementById("enterbtn-deletewifi").setAttribute("name", nameWifiToDelete);
-
-            idToDelete = e.target.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
-
-            mywifi.close();
-            deletewifi.showModal();
-          }
-
-
-    } //./setDeleteWifi
 
 
 
@@ -904,7 +843,7 @@ function inizializzaValutazione(stringselector,valoreiniziale){
 
 }
 
-function vota(voto){
+/**function vota(voto){
     pinranking(current_pin_id, voto, function(status_ok, data){
         if(status_ok){
             showSnackbar({message: 'Valutazione effettuata con successo.'});
@@ -922,7 +861,7 @@ function vota(voto){
             }
         }
     });
-}
+} **/
 
 function showErrorDB(modale, codiceerrore){
   $(modale + ' .mdl-dialog__title').html('<h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">error</i>Ops!</h4>');
@@ -1060,3 +999,61 @@ function inizializzaSegnalazione() {
 
 		return showReport;
 	}
+function inizializzaCancellaRete(){
+
+	deletewifi = document.getElementById('dialog-deletewifi'); //get dialog element
+	if (! deletewifi.showModal) {
+		 dialogPolyfill.registerDialog(deletewifi);
+	}
+	var rete = jQuery.parseJSON($('#dialog-deletewifi').attr('data'));
+	//console.log($('#toshow span').text());
+	$('#dialog-deletewifi .mdl-dialog__content p').text(rete.ssid);
+	ListenersHandler.addListener('closebtn-deletewifi','click', function() {
+		 deletewifi.close();
+	});
+	ListenersHandler.addListener('enterbtn-deletewifi','click', function(){
+		console.log('elimina');
+	});
+
+	return deletewifi;
+}
+
+/**
+function setDeleteWifi(){
+
+
+
+
+
+
+
+				 var v = document.getElementById('closebtn-deletewifi');
+				 v.addEventListener('click', function() {
+						deletewifi.close();
+						mywifi.showModal();
+				 });
+
+				 var vv = document.getElementById('enterbtn-deletewifi');
+				 vv.addEventListener('click', function() {
+						deletewifi.close();
+						'use strict';
+						var snackbarContainer = document.querySelector('#sb-confirm-operation');
+						var data;
+						//TODO: send request TRUE o FALSE, delete wifi, delete pin on maps
+						//Se tutto va bene allora
+							 //Snackbar
+									 data = {message: 'Rete Wi-Fi eliminata con successo.'};
+									 snackbarContainer.MaterialSnackbar.showSnackbar(data);
+							 //refresh wifi list
+									 document.getElementById(idToDelete).parentNode.removeChild(document.getElementById(idToDelete));
+									 mywifi.showModal();
+						//Altrimenti
+									 //data = {message: 'Rete Wi-Fi non eliminata.'};
+									 //snackbarContainer.MaterialSnackbar.showSnackbar(data);
+
+				 });
+
+			}
+
+
+} //./setDeleteWifi **/
