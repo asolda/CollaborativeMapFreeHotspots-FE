@@ -8,11 +8,11 @@ function registration(email,password,confermapassword,onclose){
         }else if((email.length==0 || email==null) && (confermapassword.length==0 || confermapassword==null)){
            onclose(false,'CAMPI_EMAIL_CONFERMAPASSWORD_NON_COMPILATI');
         }else if((email.length==0 || email==null)){
-           onclose(false,'CAMP0_EMAIL_NON_COMPILATO');
+           onclose(false,'CAMPO_EMAIL_NON_COMPILATO');
         }else if((password.length==0 || password==null)){
-           onclose(false,'CAMP0_PASSWORD_NON_COMPILATO'); 
+           onclose(false,'CAMPO_PASSWORD_NON_COMPILATO'); 
         }else if((confermapassword.length==0 || confermapassword==null)){
-           onclose(false,'CAMP0_CONFERMAPASSWORD_NON_COMPILATO'); 
+           onclose(false,'CAMPO_CONFERMAPASSWORD_NON_COMPILATO'); 
         }else if(!validateEmail(email)){
            onclose(false,'ERROR_EMAIL');     
         }else if(!validatePassword(password)){
@@ -34,6 +34,7 @@ function registration(email,password,confermapassword,onclose){
                 success: function(data) {
                     try {
                         var ret = data;
+                        console.debug("data="+JSON.stringify(ret));
                             if(ret.status==0){
                                  onclose(true,ret.message);
                             }else if(ret.status==1){

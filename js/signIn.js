@@ -2,9 +2,9 @@
      if((email.length==0 || email==null) && (password.length==0 || password==null)){
            onclose(false,'CAMPI_EMAIL_PASSWORD_NON_COMPILATI'); 
      }else if((email.length==0 || email==null)){
-           onclose(false,'CAMP0_EMAIL_NON_COMPILATO');
+           onclose(false,'CAMPO_EMAIL_NON_COMPILATO');
      }else if((password.length==0 || password==null)){
-           onclose(false,'CAMP0_PASSWORD_NON_COMPILATO');
+           onclose(false,'CAMPO_PASSWORD_NON_COMPILATO');
      }else{     
           $.ajax({
             type: 'POST',
@@ -60,7 +60,6 @@ function signOut(onclose){
 				withCredentials: true
 			},
             success: function(data) {
-                console.log(JSON.stringify(data));
                 if(data.status==0){
 					onclose(true,data.message);
                 }else if(data.status==1){
