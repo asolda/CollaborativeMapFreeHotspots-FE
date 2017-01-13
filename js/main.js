@@ -42,7 +42,7 @@ function createNotLoggedHome(){
 /** Funzione di inizializzazione della pagina per utenti connessi **/
 function createLoggedHome(){
     document.getElementById("tooltipApriMenu").removeAttribute("hidden");
-    document.getElementById("tooltipApriMenu").addEventListener("click", function(){
+    ListenersHandler.addListener('tooltipApriMenu', 'click', function(){
             $( 'div[class^="mdl-layout__obfuscator"]' ).trigger( "click" );
     });
 
@@ -125,7 +125,7 @@ function gestioneNotifiche() {
       badgeHeader.removeAttribute("hidden");
       badgeHeader.setAttribute("data-badge", "2");
       //apre il men� laterale al click sul badge nell'header
-      document.getElementById("badgeNotificheHeader").addEventListener("click", function(){
+    ListenersHandler.addListener('badgeNotificheHeader', 'click', function(){
           $( 'div[class^="mdl-layout__obfuscator"]' ).trigger( "click" );
       });
 
@@ -152,20 +152,19 @@ function addNotLoggedModal(){
     setRecoverBisModal();
 
     function setLoginModal(){
-        document.getElementById('show-login').addEventListener('click', function(){
+        ListenersHandler.addListener('show-login', 'click', function(){
              loginDialog = document.getElementById('dialog-login'); //get dialog element
              if (!loginDialog.showModal) {
                 dialogPolyfill.registerDialog(loginDialog);
              }
 
              /** close button function **/
-             var v = document.getElementById('closebtn-login');
-             v.addEventListener('click', function() {
+             ListenersHandler.addListener('closebtn-login', 'click', function(){
                 loginDialog.close();
              });
 
             /** login request **/
-            document.getElementById('enterbtna-login').addEventListener('click', function(){
+            ListenersHandler.addListener('enterbtna-login', 'click', function(){
 				var email = $('#in-l-email').val();/*document.forms["login-form"]["l-email"].value;*/
 				var password = $('#in-l-password').val();/*document.forms["login-form"]["l-password"].value;*/
 
@@ -203,15 +202,14 @@ function addNotLoggedModal(){
      }
 
     function setRecoverModal(){
-            document.getElementById('show-recover').addEventListener('click', function(){
+        ListenersHandler.addListener('show-recover', 'click', function(){
                 recover = document.getElementById('dialog-recover'); //get dialog element
                   if (!recover.showModal) {
                     dialogPolyfill.registerDialog(recover);
                   }
 
                   /** close button function **/
-                  var v = document.getElementById('closebtn-recover');
-                  v.addEventListener('click', function() {
+                  ListenersHandler.addListener('closebtn-recover', 'click', function(){
                      //GO BACK to login modal, and hide recover
                      recover.close();
                      loginDialog.showModal();
@@ -219,20 +217,19 @@ function addNotLoggedModal(){
 
                   loginDialog.close(); //nasconde il modale di login
                   recover.showModal();
-            });
+        });
     }
 
 
     function setRecoverBisModal() {
-      document.getElementById('enterbtn-recover').addEventListener('click', function(){
+        ListenersHandler.addListener('enterbtn-recover', 'click', function(){
          recoverBis = document.getElementById('dialog-recoverBis');
             if (!recoverBis.showModal) {
                     dialogPolyfill.registerDialog(recover);
             }
 
                  /** close button function **/
-                  var v = document.getElementById('closebtn-recoverBis');
-                  v.addEventListener('click', function() {
+                 ListenersHandler.addListener('closebtn-recoverBis', 'click', function(){
                      recoverBis.close();
                   });
 
@@ -383,8 +380,7 @@ function addNotLoggedModal(){
             }
 
                  //* close button function **
-                  var v = document.getElementById('closebtn-signupBis');
-                  v.addEventListener('click', function() {
+                 ListenersHandler.addListener('closebtn-signupBis', 'click', function(){
                      signupBis.close();
                   });
 
@@ -414,20 +410,18 @@ function addLoggedModal(){
     setAskInsertWifiMode();
 
     function setAskInsertWifiMode(){
-
-        document.getElementById('show-addwifi').addEventListener('click', function(){
+        ListenersHandler.addListener('show-addwifi', 'click', function(){
              askInsertWifiMode = document.getElementById('dialog-askinsertwifimode'); //get dialog element
              if (!askInsertWifiMode.showModal) {
                 askInsertWifiMode.registerDialog(askInsertWifiMode);
              }
 
              /** close button function **/
-             document.getElementById('closebtn-askinsertwifimode').addEventListener('click', function() {
+             ListenersHandler.addListener('closebtn-askinsertwifimode', 'click', function(){
                 askInsertWifiMode.close();
              });
 
-             document.getElementById('myposition-askinsertwifimode').addEventListener('click', function() {
-
+             ListenersHandler.addListener('myposition-askinsertwifimode', 'click', function(){
               askInsertWifiMode.close();
               if(mutex_new_pin  == 0){
                     mutex_new_pin = 1;
@@ -442,7 +436,8 @@ function addLoggedModal(){
 
                 insertnewwifi.showModal();
              });
-             document.getElementById('custom-askinsertwifimode').addEventListener('click', function() {
+             
+             ListenersHandler.addListener('custom-askinsertwifimode', 'click', function(){
 
               askInsertWifiMode.close();
 
@@ -472,16 +467,16 @@ function addLoggedModal(){
 
                 inizializzaValutazione('#insert-quality',null);
                 /** close button function **/
-                var v = document.getElementById('closebtn-insertnewwifi');
-                v.addEventListener('click', function() {
+                
+                ListenersHandler.addListener('closebtn-insertnewwifi', 'click', function(){
                    insertnewwifi.close();
                    if(mutex_new_pin == 1){
                         mutex_new_pin = 0;
                         new_marker.setMap(null);
                     }
                 });
-
-            document.getElementById('enterbtn-insertnewwifi').addEventListener('click', function(){
+                
+            ListenersHandler.addListener('enterbtn-insertnewwifi', 'click', function(){
                 console.debug(mutex_new_pin);
                 var ssid = $('#insert-nomerete input').val();
                 var qualita = $('#insert-quality input').val();

@@ -10,7 +10,8 @@ function createHome() {
 							user_id = id_utente;
 							createLoggedHome();
 							//chiude il menù laterale al click sull'icona <<
-							document.getElementById("closeDrawer").addEventListener("click", function(){
+                            
+                            ListenersHandler.addListener('closeDrawer', 'click', function(){
 								$( 'div[class^="mdl-layout__obfuscator"]' ).trigger( "click" );
 							});
 						} else {
