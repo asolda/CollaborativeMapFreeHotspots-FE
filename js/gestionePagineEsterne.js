@@ -75,37 +75,38 @@ function reimpostaPassword() {
        });  
     });  
      
-    document.getElementById('#btnReimpostaPassword').addEventListener('click', function(){ 
+    document.getElementById('#btnReimpostaPassword').addEventListener('click', function(){
             resetpassword2(password,conf_password,function(status_ok,data){
             if(satus_ok){
                 //mostra password reimpostata correttamente
             }else{
-                if((strcmp(data,"INVALID_PASSWORD")==0){
+                if(strcmp(data,"INVALID_PASSWORD")==0){
                  $('#one').toggleClass('.is-invalid');
                  $('#reimposta-new-error').show(); 
             
-                }else if((strcmp(data,"INVALID_PASSWORD_LENGHT")==0){
+                }else if(strcmp(data,"INVALID_PASSWORD_LENGTH")==0){
                  $('#one').toggleClass('.is-invalid');   
                  $('#reimposta-new-error').show();    
                     
-                }else if((strcmp(data,"NOT_IDENTICAL_FIELDS")==0){
+                }else if(strcmp(data,"NOT_IDENTICAL_FIELDS")==0){
                  $('#one').toggleClass('.is-invalid'); 
                  $('#two').toggleClass('.is-invalid');
                  $('#reimposta-confirm-new-error').show();
                 
-                }else if((strcmp(data,"ERROR_TOKEN")==0){
+                }else if(strcmp(data,"ERROR_TOKEN")==0){
                  showSnackbar({message: 'Token non valido, potrebbe esserci un errore nel sistema.'});  
                     
-                }else if((strcmp(data,"ERROR_DB")==0){  
+                }else if(strcmp(data,"ERROR_DB")==0){  
                  showErrorDB('#conferma', 'ERROR_DB');
                 
-                }else if((strcmp(data,"ERROR_PASSWORD")==0){
+                }else if(strcmp(data,"ERROR_PASSWORD")==0){
                  $('#one').toggleClass('.is-invalid');
                  $('#reimposta-new-error').show();   
                 
-                }else if((strcmp(data,"ERROR_PASSWORD_LENGHT")==0){ 
+                }else if(strcmp(data,"ERROR_PASSWORD_LENGTH")==0){ 
                  $('#one').toggleClass('.is-invalid');   
                  $('#reimposta-new-error').show();
+                }
             }
       });   
     });

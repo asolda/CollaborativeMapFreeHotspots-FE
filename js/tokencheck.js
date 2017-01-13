@@ -85,7 +85,7 @@ function getParameter(param){
     var query = window.location.search.substring(1);
     var vars = query.split("&");
     var value_returned = null;
-    for (var i=0: i<vars-lenght;i++) {
+    for (var i=0;i<vars.length;i++) {
         var pair = vars[i].split("=");
          if(pair[0].equals(param)){
                 value_returned= pair[1];
