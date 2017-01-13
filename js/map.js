@@ -195,43 +195,27 @@ function popolateOverlay(marker,data){
     $('.pin-detail-container').css('visibility','visible');
 }
 
-function getPinInfo(id,onclose){
-    var ret;
-    $.ajax({
-        type: 'GET',
-        url: 'http://127.0.0.1:8080/pin/getPinInfo/'+id,
-        crossDomain: true,
-        xhrFields: {
-            withCredentials: true
-        },
-        success: function(data) {
-            ret = jQuery.parseJSON(JSON.stringify(data.message[0]));
-            onclose(ret);
-        }
-    });
-}
-
 
 /**
 function vota(voto){
-            pinranking(current_pin_id, voto, function(status_ok, data){
-                if(status_ok){
-                    showSnackbar({message: 'Valutazione effettuata con successo.'});
-                }else{
-                    if(strcmp(data,"ERROR_SESSION_NOT_FOUND")==0){
-                        showSnackbar({message: 'Errore: devi effettuare l\'accesso.'});
-                    }else if(strcmp(data,"ERROR_RANKING")==0){
-                        showSnackbar({message: 'Errore nel ranking.'});
-                    }else if(strcmp(data,"ERROR_RANKING_ALREADY_DONE")==0){
-                        showSnackbar({message: 'Errore: hai già valutato questa rete.'});
-                    }else if(strcmp(data,"ERROR_DB")==0){
-                        showSnackbar({message: 'ERROR_DB'});
-                    }else if(strcmp(data,"ERROR_IS_OWNER")==0){
-                        showSnackbar({message: 'Errore: non sei il proprietario di questa rete!'});
-                    }
-                }
-            });
-  }
+        pinranking(current_pin_id, voto, function(status_ok, data){
+        if(status_ok){
+            showSnackbar({message: 'Valutazione effettuata con successo.'});
+        }else{
+            if(strcmp(data,"ERROR_SESSION_NOT_FOUND")==0){
+                showSnackbar({message: 'Errore: devi effettuare l\'accesso.'});
+            }else if(strcmp(data,"ERROR_RANKING")==0){
+                showSnackbar({message: 'Errore nel ranking.'});
+            }else if(strcmp(data,"ERROR_RANKING_ALREADY_DONE")==0){
+                showSnackbar({message: 'Errore: hai già valutato questa rete.'});
+            }else if(strcmp(data,"ERROR_DB")==0){
+                showSnackbar({message: 'ERROR_DB'});
+            }else if(strcmp(data,"ERROR_IS_OWNER")==0){
+                showSnackbar({message: 'Errore: non sei il proprietario di questa rete!'});
+            }
+        }
+    });
+}
 **/
 
 

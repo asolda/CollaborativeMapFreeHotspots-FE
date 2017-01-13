@@ -1006,7 +1006,7 @@ function inizializzaValutazione(stringselector,valoreiniziale){
 		var newval;
     $.each(stars, function(i,star){
       $(star).click(function(event){
-
+            vota(i+1);
 				newval = event.target.id;
         for(var j=0; j < 5; j++){
           if(j<=i){
@@ -1027,6 +1027,26 @@ function inizializzaValutazione(stringselector,valoreiniziale){
   valutazione.setValutazione();
   valutazione.setOnclick();
 
+}
+
+function vota(voto){
+    pinranking(current_pin_id, voto, function(status_ok, data){
+        if(status_ok){
+            showSnackbar({message: 'Valutazione effettuata con successo.'});
+        }else{
+            if(strcmp(data,"ERROR_SESSION_NOT_FOUND")==0){
+                showSnackbar({message: 'Errore: devi effettuare l\'accesso.'});
+            }else if(strcmp(data,"ERROR_RANKING")==0){
+                showSnackbar({message: 'Errore nel ranking.'});
+            }else if(strcmp(data,"ERROR_RANKING_ALREADY_DONE")==0){
+                showSnackbar({message: 'Errore: hai già valutato questa rete.'});
+            }else if(strcmp(data,"ERROR_DB")==0){
+                showSnackbar({message: 'ERROR_DB'});
+            }else if(strcmp(data,"ERROR_IS_OWNER")==0){
+                showSnackbar({message: 'Errore: non sei il proprietario di questa rete!'});
+            }
+        }
+    });
 }
 
 function showErrorDB(modale, codiceerrore){
