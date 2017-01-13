@@ -456,6 +456,12 @@ function createPinDetailMenu(marker){
       deleteModal.showModal();
     });
 
+    ListenersHandler.addListener('pin-detail-edit', 'click', function(){
+      $('#dialog-editwifi').attr('data', JSON.stringify(marker) );
+      editModal = inizializzaModificaRete();
+      editModal.showModal();
+    });
+
     return;
   }
 

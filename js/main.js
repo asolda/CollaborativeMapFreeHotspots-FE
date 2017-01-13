@@ -677,45 +677,7 @@ function addLoggedModal(){
 
         }); //./document
 
-        setEditWiFi();
-
     } //./setMyWifiModal
-
-
-    function setEditWiFi() {
-       var y = document.getElementsByClassName("show-editwifi");
-       for (i = 0; i < y.length; i++) {
-          y[i].addEventListener("click", handleMouseClickEdit, false);
-       }
-
-       function handleMouseClickEdit(e) {
-         mywifi.close();
-         editwifidialog = document.getElementById('dialog-editwifi'); //get dialog element
-         if (! editwifidialog.showModal) {
-             dialogPolyfill.registerDialog(editwifidialog);
-         }
-         var nameWiFiToEdit = e.target.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].innerHTML;
-         document.getElementById("enterbtn-editwifi").setAttribute("name", nameWiFiToEdit);
-         var snackbarContainer = document.querySelector('#sb-confirm-operation');
-         document.getElementById("subtitleNomeEditRete").innerHTML = nameWiFiToEdit;
-         var v = document.getElementById('closebtn-editwifi');
-                v.addEventListener('click', function() {
-                  editwifidialog.close();
-                  mywifi.showModal();
-                });
-         var vv = document.getElementById('enterbtn-editwifi');
-                vv.addEventListener('click', function(){
-                  //TODO modificare effettivamente i dettagli del wi-fi
-                  editwifidialog.close();
-                  data = {message: 'Le modifiche da te richieste sono state apportate con successo. Grazie!'};
-                       snackbarContainer.MaterialSnackbar.showSnackbar(data);
-                });
-         editwifidialog.showModal();
-       }
-
-    }
-
-
 
     function setMyNotificationModal() {
       document.getElementById('show-mynotification').addEventListener('click', function(){
@@ -1016,6 +978,34 @@ function inizializzaCancellaRete(){
 	});
 
 	return deletewifi;
+}
+function inizializzaModificaRete() {
+
+	editwifidialog = document.getElementById('dialog-editwifi'); //get dialog element
+	if (! editwifidialog.showModal) {
+		dialogPolyfill.registerDialog(editwifidialog);
+	}
+	var rete = jQuery.parseJSON($('#dialog-editwifi').attr('data'));
+	$('#subtitleNomeEditRete').text(rete.ssid);
+
+	$('#newRestrizioni').addClass('is-dirty');
+	$('#newRestrizioni input').val(rete.restrizioni);
+
+	$('#newRange').addClass('is-dirty');
+	$('#newRange input').val(rete.range_wifi);
+
+	$('#newInfo').addClass('is-dirty');
+	$('#newInfo input').val(rete.altre_informazioni);
+
+	ListenersHandler.addListener('closebtn-editwifi','click', function() {
+		editwifidialog.close();
+	});
+	ListenersHandler.addListener('enterbtn-editwifi','click', function(){
+		editwifidialog.close();
+		console.log('edit wifi call');
+	});
+
+	return editwifidialog;
 }
 
 /**
