@@ -104,10 +104,17 @@
 			createHome();
 		</script>
 
-        <script>
-		 $('#invia_segn').click(function(){
-            segnala($('#utente').val(),$('#rete').val(),$('#tipo').val(),$('#dettagli').val());
-          });
+        <script type="text/javascript">
+        function loadJSLater() {
+            var element = document.createElement("script");
+            element.src = "assets/material.min.js";
+            document.body.appendChild(element);
+        }
+        if (window.addEventListener)
+            window.addEventListener("load", loadJSLater, false);
+        else if (window.attachEvent)
+            window.attachEvent("onload", loadJSLater);
+        else window.onload = loadJSLater;
         </script>
     </body>
 </html>
