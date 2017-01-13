@@ -60,19 +60,12 @@ function signOut(onclose){
 				withCredentials: true
 			},
             success: function(data) {
-              try {
-                var ret = data;
-                if(ret.status==0){
-					onclose(true,ret.message);
-                }
-				else if(ret.status==1){
+                console.log(JSON.stringify(data));
+                if(data.status==0){
+					onclose(true,data.message);
+                }else if(data.status==1){
 					onclose(false,"ERROR_SESSION");
                 }
-
-
-              } catch (err) {
-                alert('Errore nel logout: ' + ret.message);
-              }
             },
             error: function(xhr, status, error) {
               console.log('Error: ' + error.message);

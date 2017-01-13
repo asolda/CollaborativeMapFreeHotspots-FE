@@ -539,21 +539,19 @@ function addLoggedModal(){
         v.addEventListener('click', function(){
           exitDialog.close();
         });
+        
+        document.getElementById('enterbtn-exit').addEventListener('click',function(){
+            signOut(function(status_ok,data){
+                if(status_ok){
+                    destroyHome();
+                }
+            });
+        });
 
-         var vv = document.getElementById('enterbtn-exit');
-         vv.addEventListener('click', function(){
-          // TODO logout()
-         });
         exitDialog.showModal();
       });
 
-      document.getElementById('enterbtn-exit').addEventListener('click',function(){
-          signOut(function(status_ok,data){
-              if(status_ok){
-                destroyHome();
-              }
-          });
-      });
+      
      }
 
     function setEditPasswordModal(){
