@@ -170,7 +170,7 @@ function calcDistance(fromLat, fromLng, toLat, toLng) {
 
 
 function popolateOverlay(marker,data){
-    console.log(data);
+
     //cambia il nome
     $('.pin-detail-title .mdl-dialog__sub').text(data.ssid);
 
@@ -232,7 +232,7 @@ function hideRads() {
 
 function loadMarkers(lat, lng, rad_lat, rad_lng) {
     var url_request = 'http://127.0.0.1:8080/pin/get_networks/'+lat+'/'+lng+'/'+rad_lat+'/'+rad_lng;
-    console.log("called");
+    //console.log("called");
     $.ajax({
         type: 'GET',
         url: url_request,
@@ -253,7 +253,8 @@ function loadMarkers(lat, lng, rad_lat, rad_lng) {
 
                 marker.addListener('click', function () {
                     getPinInfo(marker.id,function(data){
-                        current_pin_id = marker.id;
+                        data.id = marker.id;
+                        console.log('set data: '+data.id);
                         overlay.setBounds(marker);
                         popolateOverlay(marker,data);
                     });
@@ -433,7 +434,7 @@ USGSOverlay.prototype.toggleDOM = function() {
 google.maps.event.addDomListener(window, 'load', initMap);
 
 function createPinDetailMenu(marker){
-  user = getUser();
+  user = 5;
   /** L'utente non è loggato. Nessun menu **/
   if(!user){ console.log('utente non loggato');
     $('#pin-detail-action').hide(); //nasconde il div action che contiene il menu
@@ -460,10 +461,12 @@ function createPinDetailMenu(marker){
   $('#pin-detail-edit,#pin-detail-delete').hide();
   $('#pin-detail-action, #pin-detail-report').show();
 
-  //$('#pin-detail-report').attr('data', JSON.stringify(marker));
-  $('#pin-detail-report').click( function(){
-    showReport.showModal();
-    $('#dialog-report').attr( 'data' , marker.id );
+  ListenersHandler.addListener('pin-detail-report', 'click', function(){
+    $('#dialog-report').attr( 'data' , JSON.stringify(marker) );
+      reportModal = inizializzaSegnalazione();
+      reportModal.showModal();
   } );
+
+
 
 }
