@@ -724,7 +724,7 @@ function inizializzaValutazione(stringselector,valoreiniziale){
 		var newval;
     $.each(stars, function(i,star){
       $(star).click(function(event){
-            vota(i+1);
+            //vota(i+1);
 				newval = event.target.id;
         for(var j=0; j < 5; j++){
           if(j<=i){
@@ -868,7 +868,7 @@ function inizializzaSegnalazione() {
 				showReport.showModal();
 		});
 		ListenersHandler.addListener('enterbtn-report-range','click', function() {
-			segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 1, '', function success(data){
+			segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 1, $('#re-range textarea').val(), function success(data){
 			 try {
 				 var ret = jQuery.parseJSON(JSON.stringify(data));
 				 showSnackbar({message: ret.message});
@@ -889,7 +889,7 @@ function inizializzaSegnalazione() {
 			showReport.showModal();
 		});
 		ListenersHandler.addListener('enterbtn-report-restriction','click', function() {
-			segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 2, '', function success(data){
+			segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 2, $('#re-restriction textarea').val(), function success(data){
 			 try {
 				 var ret = jQuery.parseJSON(JSON.stringify(data));
 				 showSnackbar({message: ret.message});
