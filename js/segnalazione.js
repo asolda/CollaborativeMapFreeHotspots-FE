@@ -1,9 +1,13 @@
- function segnala(utente,rete,tipo,dettagli,onclose){
+ function segnala(rete,tipo,dettagli,onclose){
           $.ajax({
             type: 'POST',
             url: 'http://127.0.0.1:8080/segnala/',
-            data: "utente="+utente+"&rete_wifi="+rete+"&tipo="+tipo+"&dettagli="+dettagli,
+            data: "rete_wifi="+rete+"&tipo="+tipo+"&dettagli="+dettagli,
             contentType: "application/x-www-form-urlencoded",
+            crossDomain: true,
+            xhrFields: {
+                withCredentials: true
+            },
             success:  function(data) {
                 onclose(data);
             },

@@ -748,7 +748,7 @@ function inizializzaValutazione(stringselector,valoreiniziale){
 }
 
 /**function vota(voto){
-    pinranking(current_pin_id, voto, function(status_ok, data){
+    pinranking(jQuery.parseJSON($('#dialog-report').attr('data')).id, voto, function(status_ok, data){
         if(status_ok){
             showSnackbar({message: 'Valutazione effettuata con successo.'});
         }else{
@@ -827,7 +827,7 @@ function inizializzaSegnalazione() {
 	});
 		ListenersHandler.addListener('enterbtn-inexistent','click', function() {
 
-		segnala(user, $('enterbtn-inexistent').attr('id'), 0, '', function success(data){
+		segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 0, '', function success(data){
 			try {
 				var ret = jQuery.parseJSON(JSON.stringify(data));
 				showSnackbar({message: ret.message});
@@ -847,7 +847,7 @@ function inizializzaSegnalazione() {
 						showReport.showModal();
 				 });
 		ListenersHandler.addListener('enterbtn-report-login','click', function() {
-			segnala(user, $('enterbtn-report-login').attr('id'), 0, '', function success(data){
+			segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 3, '', function success(data){
 			 try {
 				 var ret = jQuery.parseJSON(JSON.stringify(data));
 				 showSnackbar({message: ret.message});
@@ -868,8 +868,7 @@ function inizializzaSegnalazione() {
 				showReport.showModal();
 		});
 		ListenersHandler.addListener('enterbtn-report-range','click', function() {
-
-			segnala(user, $('enterbtn-report-login').attr('id'), 0, '', function success(data){
+			segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 1, '', function success(data){
 			 try {
 				 var ret = jQuery.parseJSON(JSON.stringify(data));
 				 showSnackbar({message: ret.message});
@@ -890,7 +889,7 @@ function inizializzaSegnalazione() {
 			showReport.showModal();
 		});
 		ListenersHandler.addListener('enterbtn-report-restriction','click', function() {
-			segnala(user, $('enterbtn-report-login').attr('id'), 0, '', function success(data){
+			segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 2, '', function success(data){
 			 try {
 				 var ret = jQuery.parseJSON(JSON.stringify(data));
 				 showSnackbar({message: ret.message});

@@ -434,13 +434,12 @@ USGSOverlay.prototype.toggleDOM = function() {
 google.maps.event.addDomListener(window, 'load', initMap);
 
 function createPinDetailMenu(marker){
-  user = 5;
   /** L'utente non è loggato. Nessun menu **/
-  if(!user){ console.log('utente non loggato');
+  if(!user_id){ console.log('utente non loggato');
     $('#pin-detail-action').hide(); //nasconde il div action che contiene il menu
     return;
 
-  }else if(marker.utente == user){ //utente proprietario della rete
+  }else if(marker.utente == user_id){ //utente proprietario della rete
 
     /** Mostra il contenitore del menu, i tasti Modifica e Elimina rete
     /** Associa i listener per chiamare le relative funzioni
