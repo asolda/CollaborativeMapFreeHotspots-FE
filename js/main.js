@@ -945,23 +945,32 @@ function inizializzaSegnalazione() {
 	ListenersHandler.addListener('enterbtn-report','click', function() {
 		if(document.getElementById("option-1").checked) {
 					showReport.close();
+					rete = jQuery.parseJSON($('#dialog-report').attr('data'));
+					$('#dialog-report-inexistent .mdl-dialog__sub').text('Rete: '+ rete.ssid);
 					showInexistent.showModal();
 				}
 		if(document.getElementById("option-2").checked) {
 			showReport.close();
+			rete = jQuery.parseJSON($('#dialog-report').attr('data'));
+			$('#dialog-report-range .mdl-dialog__sub').text('Rete: '+ rete.ssid);
 			showRangeErrato.showModal();
 		}
 		if(document.getElementById("option-3").checked) {
 			showReport.close();
+			rete = jQuery.parseJSON($('#dialog-report').attr('data'));
+			$('#dialog-report-restriction .mdl-dialog__sub').text('Rete: '+ rete.ssid);
 			showRestrizioni.showModal();
 		}
 		if(document.getElementById("option-4").checked) {
 			showReport.close();
+			rete = jQuery.parseJSON($('#dialog-report').attr('data'));
+			$('#dialog-report-login .mdl-dialog__sub').text('Rete: '+ rete.ssid);
 			showLoginNecessario.showModal();
 		}
 	});
 
 	showInexistent = document.getElementById('dialog-report-inexistent'); //get dialog element
+
 		if (! showInexistent.showModal) {
 					 showInexistent.registerDialog(showInexistent);
 	}
