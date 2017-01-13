@@ -174,20 +174,20 @@ function addNotLoggedModal(){
                      console.debug("value d="+ JSON.stringify(data));
 						if (status_ok){ //login ok
 							userID = data;
-                            destroyHome();
+                            setTimeout(function(){destroyHome();}, 1000);
 						}else{ //errore nel login
 							if(strcmp(data,'CANNOT_LOGIN')==0){
 								// TODO visualizzazione errore login nel modale
-                            }else if(strcmp(data,'ERROR_GENERATIN_SESSION')==0){
-                             console.log('1');
+                            }else if(strcmp(data,'ERROR_GENERATING_SESSION')==0){
+                                console.log('1');
                             }else if(strcmp(data,'ERROR_EMAIL_PASSWORD')==0){
-                             console.log('2');
+                                console.log('2');
                             }else if(strcmp(data,'ERROR_EMAIL')==0){
-                             console.log('3');
+                                console.log('3');
                             }else if(strcmp(data,'ERROR_PASSWORD')==0){
-                             console.log('4');
+                                console.log('4');
                             }else if(strcmp(data,'ERROR_CREDENTIALS')==0){
-                             console.log('5');
+                                console.log('5');
                             }
 						}
 					});
