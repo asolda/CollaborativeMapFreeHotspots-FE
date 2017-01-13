@@ -430,13 +430,15 @@ function addLoggedModal(){
                     alert("Completa prima l' inserimento di un pin");
                 }
 
-              $('#dialog-insertnewwifi p').empty();
-                //get user position and show insertwifi modal
-                $('#dialog-insertnewwifi p').append(pos.lat+" "+pos.lng);
+								getLocationFromLatLng(pos.lat, pos.lng, function(data){
+		              data = jQuery.parseJSON(JSON.stringify(data))
+		              data = data.results[0].formatted_address;
+		              $('#dialog-insertnewwifi .mdl-dialog__sub').text(data);
+		            });
 
                 insertnewwifi.showModal();
              });
-             
+
              ListenersHandler.addListener('custom-askinsertwifimode', 'click', function(){
 
               askInsertWifiMode.close();
@@ -467,7 +469,7 @@ function addLoggedModal(){
 
                 inizializzaValutazione('#insert-quality',null);
                 /** close button function **/
-                
+
                 ListenersHandler.addListener('closebtn-insertnewwifi', 'click', function(){
                    insertnewwifi.close();
                    if(mutex_new_pin == 1){
@@ -475,7 +477,7 @@ function addLoggedModal(){
                         new_marker.setMap(null);
                     }
                 });
-                
+
             ListenersHandler.addListener('enterbtn-insertnewwifi', 'click', function(){
                 console.debug(mutex_new_pin);
                 var ssid = $('#insert-nomerete input').val();
@@ -972,6 +974,16 @@ function inizializzaModificaPassword(){
 	});
 	return editpassword;
 }
+
+function getLocationFromLatLng(lat,lng, onsuccess){
+	$.get({
+		url: 'http://maps.googleapis.com/maps/api/geocode/json?',
+		data: 'latlng='+lat+','+lng,
+		success: function(data){
+			onsuccess(data); }
+		});
+}
+
 /**
 function setDeleteWifi(){
 

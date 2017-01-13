@@ -1,4 +1,4 @@
-//funzione per inserire un pin 
+//funzione per inserire un pin
 function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restrizioni,altre_informazioni,range,onclose){
     if(ssid == null || ssid.length==0){
         onclose(false, 'ERROR_SSID');
@@ -45,7 +45,7 @@ function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restri
                                 onclose(false, 'ERROR_INVALID_DATA');
                             }
                     }
-                    
+
                   } catch (err) {
                     alert('Errore imprevisto: ' + ret.message);
                   }
@@ -54,10 +54,10 @@ function inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restri
                   console.log('Error: ' + error.message);
                 }
             });
-        }  
+        }
     }
-    
-//funzione per visualizzazione le informazioni di un pin    
+
+//funzione per visualizzazione le informazioni di un pin
 function getPinInfo(id,onclose){
     var ret;
     $.ajax({
@@ -74,12 +74,12 @@ function getPinInfo(id,onclose){
     });
 }
 
-//funzione per eliminare un pin 
-function deletepin(rete_wifi,utente){   
+//funzione per eliminare un pin
+function deletepin(rete_wifi,utente){
          $.ajax({
                 type: 'POST',
                 url: 'http://127.0.0.1:8080/pin/delete/',
-                data: "rete_wifi="+rete_wifi+"&utente="+utente, 
+                data: "rete_wifi="+rete_wifi+"&utente="+utente,
                 contentType: "application/x-www-form-urlencoded",
                 crossDomain: true,
                 xhrFields: {
@@ -87,16 +87,16 @@ function deletepin(rete_wifi,utente){
                 },
                 success: function(data) {
                   try {
-                    var ret = data; 
+                    var ret = data;
                     if(ret.status==0){
                         $('#result').append(ret.message + '</br>');
                     }else if(ret.status==1){
-                        $('#result').append(ret.message + '</br>'); 
+                        $('#result').append(ret.message + '</br>');
                             if(strcmp(ret.message,"ERROR_DB")==0){
                                      //codice per mostrare a frontend l'errore ERROR_DB
                             }else if(strcmp(ret.message,"ERROR_IS_NOT_OWNER")==0){
                                     //codice per mostrare a frontend l'errore ERROR_IS_NOT_OWNER
-                            }        
+                            }
                       }
                     } catch (err) {
                     alert('Errore imprevisto: ' + ret.message);
@@ -108,7 +108,7 @@ function deletepin(rete_wifi,utente){
               });
 }
 
-//funzione per valutare un pin 
+//funzione per valutare un pin
 function pinranking(rete_wifi,voto,onclose){
         if(isNaN(voto) || voto <= 0 || voto > 5){
             onclose(false,"ERROR_RANKING");
@@ -116,7 +116,7 @@ function pinranking(rete_wifi,voto,onclose){
             $.ajax({
                 type: 'POST',
                 url: 'http://127.0.0.1:8080/pin/rank/',
-                data: "rete_wifi="+rete_wifi+"&voto="+voto, 
+                data: "rete_wifi="+rete_wifi+"&voto="+voto,
                 contentType: "application/x-www-form-urlencoded",
                 crossDomain: true,
                 xhrFields: {
@@ -149,9 +149,9 @@ function pinranking(rete_wifi,voto,onclose){
                     console.log('Error: ' + error.message);
                 }
             });
-        }   
-} 
-   
+        }
+}
+
 function addMarker(latlng,title,map) {
     new_marker = new google.maps.Marker({
             position: latlng,
@@ -168,18 +168,24 @@ function addMarker(latlng,title,map) {
     google.maps.event.addListener(new_marker,'dragend',function(event) {
             //console.debug(this.position.lat()+" "+this.position.lng());
             new_pin_position = this.position;
+            getLocationFromLatLng(new_pin_position.lat(), new_pin_position.lng(), function(data){
+              data = jQuery.parseJSON(JSON.stringify(data))
+              data = data.results[0].formatted_address;
+              $('#dialog-insertnewwifi .mdl-dialog__sub').text(data);
+            });
             insertnewwifi.showModal();
-            $('#dialog-insertnewwifi p').empty();
-            $('#dialog-insertnewwifi p').append(this.position.lat()+" "+this.position.lng());
-            //qui vanno completati i campi ed effettuata la richiesta del be
     });
     google.maps.event.addListener(new_marker,'click',function(event) {
             //console.debug(this.position.lat()+" "+this.position.lng());
             //console.debug("My position "+user_position.lat+" "+user_position.lng);
             new_pin_position = this.position;
+            getLocationFromLatLng(this.position.lat(), this.position.lng(), function(data){
+              data = jQuery.parseJSON(JSON.stringify(data))
+              data = data.results[0].formatted_address;
+              $('#dialog-insertnewwifi .mdl-dialog__sub').text(data);
+            });
             insertnewwifi.showModal();
-            $('#dialog-insertnewwifi p').empty();
-            $('#dialog-insertnewwifi p').append(this.position.lat()+" "+this.position.lng());
+
             //qui vanno completati i campi ed effettuata la richiesta del be
     });
 }

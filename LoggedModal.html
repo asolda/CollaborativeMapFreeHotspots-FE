@@ -1,4 +1,4 @@
-﻿<!-- Edit Password Modal Component -->
+<!-- Edit Password Modal Component -->
         <dialog id="dialog-editpassword" class="mdl-dialog mdl-dialog-custom">
         <div class="mdl-title">
             <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">vpn_key</i>Modifica la tua password</h4>
@@ -8,17 +8,17 @@
             <form>
                 <div id="ep-password" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input id='in-ep-newpassword' class="mdl-textfield__input" type="password"/>
-                    <label class="mdl-textfield__label" for="ep-newpassword">Password attuale</label>
+                    <label class="mdl-textfield__label" for="in-ep-newpassword">Password attuale</label>
                     <span id='ep-password-error' class="mdl-textfield__error">Password non valida</span>
                 </div>
                 <div id="ep-newpassword" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input id='in-ep-password' class="mdl-textfield__input" type="password">
-                    <label class="mdl-textfield__label" for="ep-password">Nuova password</label>
+                    <label class="mdl-textfield__label" for="in-ep-password">Nuova password</label>
                     <span id='ep-newpassword-error' class="mdl-textfield__error">Password non valida</span>
                 </div>
                 <div id="ep-confermapassword" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input id='in-ep-confermapassword' class="mdl-textfield__input" type="password">
-                    <label class="mdl-textfield__label" for="ep-confermapasswrod">Conferma nuova password</label>
+                    <label class="mdl-textfield__label" for="in-ep-confermapasswrod">Conferma nuova password</label>
                     <span id='ep-confermapassword-error' class="mdl-textfield__error">La password non coincide</span>
                 </div>
             </form>
@@ -648,9 +648,7 @@
          <dialog id="dialog-insertnewwifi" class="mdl-dialog mdl-dialog-custom">
                 <div class="mdl-title">
                     <h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">wifi</i>Inserisci nuova rete Wi-Fi</h4>
-                    <br/>
-                    <span class="mdl-dialog__sub">Posizione corrente: </span>
-                    <p class="mdl-dialog__sub">[New pin address]</p>
+                    <p class="mdl-dialog__sub"></p>
                 </div>
 
                <div id="insertnewwifi">
