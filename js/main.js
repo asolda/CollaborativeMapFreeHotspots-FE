@@ -947,24 +947,28 @@ function inizializzaSegnalazione() {
 					showReport.close();
 					rete = jQuery.parseJSON($('#dialog-report').attr('data'));
 					$('#dialog-report-inexistent .mdl-dialog__sub').text('Rete: '+ rete.ssid);
+					$('#enterbtn-inexistent').attr('data',rete.id);
 					showInexistent.showModal();
 				}
 		if(document.getElementById("option-2").checked) {
 			showReport.close();
 			rete = jQuery.parseJSON($('#dialog-report').attr('data'));
 			$('#dialog-report-range .mdl-dialog__sub').text('Rete: '+ rete.ssid);
+			$('#enterbtn-report-range').attr('data',rete.id);
 			showRangeErrato.showModal();
 		}
 		if(document.getElementById("option-3").checked) {
 			showReport.close();
 			rete = jQuery.parseJSON($('#dialog-report').attr('data'));
 			$('#dialog-report-restriction .mdl-dialog__sub').text('Rete: '+ rete.ssid);
+			$('#enterbtn-report-restriction').attr('data',rete.id);
 			showRestrizioni.showModal();
 		}
 		if(document.getElementById("option-4").checked) {
 			showReport.close();
 			rete = jQuery.parseJSON($('#dialog-report').attr('data'));
 			$('#dialog-report-login .mdl-dialog__sub').text('Rete: '+ rete.ssid);
+			$('#enterbtn-report-login').attr('data',rete.id);
 			showLoginNecessario.showModal();
 		}
 	});
@@ -979,9 +983,15 @@ function inizializzaSegnalazione() {
 			showReport.showModal();
 	});
 		ListenersHandler.addListener('enterbtn-inexistent','click', function() {
-						 //TODO Segnalare
-		data = {message: "La tua segnalazione e' stata notificata al creatore della rete. Grazie!"};
-		snackbarContainer.MaterialSnackbar.showSnackbar(data);
+
+		segnala(user, $('enterbtn-inexistent').attr('id'), 0, '', function success(data){
+			try {
+				var ret = jQuery.parseJSON(JSON.stringify(data));
+				showSnackbar({message: ret.message});
+			} catch (err) {
+				showSnackbar({message: ret.message});
+			}
+		});
 		showInexistent.close();
 	});
 
@@ -994,11 +1004,17 @@ function inizializzaSegnalazione() {
 						showReport.showModal();
 				 });
 		ListenersHandler.addListener('enterbtn-report-login','click', function() {
-						 //TODO Segnalare
-						 data = {message: "La tua segnalazione e' stata notificata al creatore della rete. Grazie!"};
-						 snackbarContainer.MaterialSnackbar.showSnackbar(data);
-						 showLoginNecessario.close();
-				 });
+			segnala(user, $('enterbtn-report-login').attr('id'), 0, '', function success(data){
+			 try {
+				 var ret = jQuery.parseJSON(JSON.stringify(data));
+				 showSnackbar({message: ret.message});
+			 } catch (err) {
+				 showSnackbar({message: ret.message});
+			 }
+		 });
+
+		showLoginNecessario.close();
+		});
 
 	showRangeErrato = document.getElementById('dialog-report-range'); //get dialog element
 		if (! showRangeErrato.showModal) {
@@ -1010,8 +1026,15 @@ function inizializzaSegnalazione() {
 		});
 		ListenersHandler.addListener('enterbtn-report-range','click', function() {
 
-				data = {message: "La tua segnalazione e' stata notificata al creatore della rete. Grazie!"};
-				snackbarContainer.MaterialSnackbar.showSnackbar(data);
+			segnala(user, $('enterbtn-report-login').attr('id'), 0, '', function success(data){
+			 try {
+				 var ret = jQuery.parseJSON(JSON.stringify(data));
+				 showSnackbar({message: ret.message});
+			 } catch (err) {
+				 showSnackbar({message: ret.message});
+			 }
+			});
+
 				showRangeErrato.close();
 		});
 
@@ -1024,8 +1047,14 @@ function inizializzaSegnalazione() {
 			showReport.showModal();
 		});
 		ListenersHandler.addListener('enterbtn-report-restriction','click', function() {
-			data = {message: "La tua segnalazione e' stata notificata al creatore della rete. Grazie!"};
-			snackbarContainer.MaterialSnackbar.showSnackbar(data);
+			segnala(user, $('enterbtn-report-login').attr('id'), 0, '', function success(data){
+			 try {
+				 var ret = jQuery.parseJSON(JSON.stringify(data));
+				 showSnackbar({message: ret.message});
+			 } catch (err) {
+				 showSnackbar({message: ret.message});
+			 }
+		 });
 			showRestrizioni.close();
 		});
 
