@@ -175,7 +175,11 @@ function addNotLoggedModal(){
                      console.debug("value d="+ JSON.stringify(data));
 						if (status_ok){ //login ok
 							userID = data;
-                            setTimeout(function(){destroyHome();}, 1000);
+                            try{
+                                setTimeout(function(){return destroyHome();}, 1000);
+                            }catch(err){
+                                window.location = window.location.href;
+                            }
 						}else{ //errore nel login
 							if(strcmp(data,'CANNOT_LOGIN')==0){
 								// TODO visualizzazione errore login nel modale
@@ -525,41 +529,44 @@ function addLoggedModal(){
       }
 
     function setExitModal() {
-      document.getElementById('exitSystem').addEventListener('click', function(){
-        exitDialog = document.getElementById('dialog-exit');
-        if (!exitDialog.showModal){
-          dialogPolyfill.registerDialog(exitDialog);
-        }
+        ListenersHandler.addListener('exitSystem', 'click', function(){
+            exitDialog = document.getElementById('dialog-exit');
+            if (!exitDialog.showModal){
+              dialogPolyfill.registerDialog(exitDialog);
+            }
 
-        var v = document.getElementById('closebtn-exit');
-        v.addEventListener('click', function(){
-          exitDialog.close();
-        });
-
-        document.getElementById('enterbtn-exit').addEventListener('click',function(){
-            signOut(function(status_ok,data){
-                if(status_ok){
-                    destroyHome();
-                }
+            
+            ListenersHandler.addListener('closebtn-exit', 'click', function(){
+              exitDialog.close();
             });
-        });
 
-        exitDialog.showModal();
+            ListenersHandler.addListener('enterbtn-exit', 'click', function(){
+                signOut(function(status_ok,data){
+                    if(status_ok){
+                        try{
+                            setTimeout(function(){return destroyHome();}, 1000);
+                        }catch(err){
+                            window.location = window.location.href;
+                        }
+                    }
+                });
+            });
+
+            exitDialog.showModal();
       });
 
 
      }
 
     function setEditPasswordBisModal() {
-      document.getElementById('enterbtn-editpassword').addEventListener('click', function(){
+        ListenersHandler.addListener('enterbtn-editpassword', 'click', function(){
          editPasswordBis = document.getElementById('dialog-editPasswordBis');
             if (!editPasswordBis.showModal) {
                     dialogPolyfill.registerDialog(recover);
             }
 
                  /** close button function **/
-                  var v = document.getElementById('closebtn-editPasswordBis');
-                  v.addEventListener('click', function() {
+                ListenersHandler.addListener('closebtn-editPasswordBis', 'click', function(){
                      editPasswordBis.close();
                   });
 
@@ -572,15 +579,14 @@ function addLoggedModal(){
 
 
     function setDeleteAccountBisModal() {
-      document.getElementById('enterbtn-deleteaccount').addEventListener('click', function(){
+        ListenersHandler.addListener('enterbtn-deleteaccount', 'click', function(){
          deleteaccountBis = document.getElementById('dialog-deleteaccountBis');
             if (!deleteaccountBis.showModal) {
                     dialogPolyfill.registerDialog(recover);
             }
 
                  /** close button function **/
-                  var v = document.getElementById('closebtn-deleteaccountBis');
-                  v.addEventListener('click', function() {
+                  ListenersHandler.addListener('closebtn-deleteaccountBis', 'click', function(){
                      deleteaccountBis.close();
                   });
 
@@ -594,8 +600,7 @@ function addLoggedModal(){
 
 
     function setMyWifiModal(){
-
-        document.getElementById('show-mywifi').addEventListener('click', function(){
+        ListenersHandler.addListener('show-mywifi', 'click', function(){
 
             mywifi = document.getElementById('dialog-mywifi'); //get dialog element
 
@@ -604,9 +609,7 @@ function addLoggedModal(){
             }
 
             /** close button function **/
-            var v = document.getElementById('closebtn-mywifi');
-            v.addEventListener('click', function() {
-
+            ListenersHandler.addListener('closebtn-mywifi', 'click', function(){
                 mywifi.close();
             });
 
@@ -619,13 +622,14 @@ function addLoggedModal(){
     } //./setMyWifiModal
 
     function setMyNotificationModal() {
-      document.getElementById('show-mynotification').addEventListener('click', function(){
+        ListenersHandler.addListener('show-mynotification', 'click', function(){
             showMyNotificationModal = document.getElementById('dialog-mynotification'); //get dialog element
             if (! showMyNotificationModal.showModal) {
                 showMyNotificationModal.registerDialog(showMyNotificationModal);
             }
-            var v = document.getElementById('closebtn-mynotification');
-            v.addEventListener('click', function() {
+            
+            
+            ListenersHandler.addListener('closebtn-mynotification', 'click', function(){
                 showMyNotificationModal.close();
             });
             showMyNotificationModal.showModal();
