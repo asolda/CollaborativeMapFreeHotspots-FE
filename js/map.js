@@ -391,20 +391,20 @@ USGSOverlay.prototype.draw = function() {
   // We use the south-west and north-east
   // coordinates of the overlay to peg it to the correct position and size.
   // To do this, we need to retrieve the projection from the overlay.
-  var overlayProjection = this.getProjection();
+  var overlayProjection_loc = this.getProjection();
 
   // Retrieve the south-west and north-east coordinates of this overlay
   // in LatLngs and convert them to pixel coordinates.
   // We'll use these coordinates to resize the div.
-  var sw = overlayProjection.fromLatLngToDivPixel(map.getBounds().getSouthWest());
-  var ne = overlayProjection.fromLatLngToDivPixel(map.getBounds().getNorthEast());
+  var sw1 = overlayProjection_loc.fromLatLngToDivPixel(map.getBounds().getSouthWest());
+  var ne1 = overlayProjection_loc.fromLatLngToDivPixel(map.getBounds().getNorthEast());
 
   // Resize the image's div to fit the indicated dimensions.
-  var div = this.div_;
-  div.style.position = 'relative';
+  var div_to_change = this.div_;
+  div_to_change.style.position = 'relative';
 
-  div.style.left = sw.x +100+ 'px';
-  div.style.top = ne.y +100+ 'px';
+  div_to_change.style.left = sw1.x +100+ 'px';
+  div_to_change.style.top = ne1.y +100+ 'px';
 };
 
 // The onRemove() method will be called automatically from the API if
