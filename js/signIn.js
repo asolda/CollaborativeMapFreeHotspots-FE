@@ -22,10 +22,8 @@
 					onclose(true,ret.message.user);
                 }
 				else if(ret.status==1){
-					 $('#result').append(ret.message + '</br>');
-                     if(strcmp(ret.message,'CANNOT_LOGIN')==0){
-                        onclose(false,'CANNOT_LOGIN');
-                     }else if(strcmp(ret.message,'ERROR_GENERATING_SESSION')==0){
+					 
+                      if(strcmp(ret.message,'ERROR_GENERATING_SESSION')==0){
                         onclose(false,'ERROR_GENERATING_SESSION');
                      }else if(strcmp(ret.message,'ERROR_EMAIL_PASSWORD')==0){
                         onclose(false,'ERROR_EMAIL_PASSWORD');
