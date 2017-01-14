@@ -480,7 +480,7 @@ function addLoggedModal(){
 
               mod_insert_pin=true;
               $('#dialog-insertnewwifi p').empty();
-              if(func_handler_maps==null) func_handler_maps=google.maps.event.addListener(map,'click', function(){
+              if(func_handler_maps==null) func_handler_maps=google.maps.event.addListener(map,'click', function(event){
                   if(mod_insert_pin){
                     if(mutex_new_pin  == 0){
                         mutex_new_pin = 1;
