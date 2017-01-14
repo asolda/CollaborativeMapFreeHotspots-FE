@@ -457,7 +457,7 @@ function addLoggedModal(){
              ListenersHandler.addListener('myposition-askinsertwifimode', 'click', function(){
               askInsertWifiMode.close();
               if(mutex_new_pin  == 0){
-                    mutex_new_pin = 1;
+                    //mutex_new_pin = 1;
                     addMarker(event.latLng, 'Click Generated Marker', map);
                 }else{
                     alert("Completa prima l' inserimento di un pin");
@@ -500,6 +500,7 @@ function addLoggedModal(){
                    insertnewwifi.registerDialog(insertnewwifi);
                 }
 
+                current_pin_can_only_select=true;
                 inizializzaValutazione('#insert-quality',null);
                 /** close button function **/
 
@@ -553,6 +554,7 @@ function addLoggedModal(){
                    }
 
                 });
+                mutex_new_pin=0;
 
             });
       }
