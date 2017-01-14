@@ -176,7 +176,7 @@ function addNotLoggedModal(){
 						if (status_ok){ //login ok
 							userID = data;
                             try{
-                                setTimeout(function(){return destroyHome();}, 1000);
+                                setTimeout(function(){destroyHome();}, 1000);
                             }catch(err){
                                 window.location = window.location.href;
                             }
@@ -544,7 +544,7 @@ function addLoggedModal(){
                 signOut(function(status_ok,data){
                     if(status_ok){
                         try{
-                            setTimeout(function(){return destroyHome();}, 1000);
+                            setTimeout(function(){destroyHome();}, 1000);
                         }catch(err){
                             window.location = window.location.href;
                         }
