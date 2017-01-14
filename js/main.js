@@ -535,8 +535,8 @@ function addLoggedModal(){
                 var range = $('#insert-range input').val();
                 var latitudine, longitudine;
                 if(mutex_new_pin == 0){
-                    latitudine = pos.lat();
-                    longitudine = pos.lng();
+                    latitudine = pos.lat;
+                    longitudine = pos.lng;
                 }
                 if(mutex_new_pin == 1){
                     latitudine = new_pin_position.lat();
