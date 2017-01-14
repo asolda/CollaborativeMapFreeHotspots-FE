@@ -434,7 +434,7 @@ function addNotLoggedModal(){
     +Gestione reti (da completare)
 **/
 function addLoggedModal(){
-    var mywifi;
+    var mywifi, func_handler_maps=null;
 
     setExitModal();
     setEditPasswordBisModal();
@@ -452,6 +452,8 @@ function addLoggedModal(){
              /** close button function **/
              ListenersHandler.addListener('closebtn-askinsertwifimode', 'click', function(){
                 askInsertWifiMode.close();
+                mutex_new_pin=0;
+                 if(func_handler_maps) google.maps.event.removeListener(func_handler_maps);
              });
 
              ListenersHandler.addListener('myposition-askinsertwifimode', 'click', function(){
@@ -476,15 +478,20 @@ function addLoggedModal(){
 
               askInsertWifiMode.close();
 
+              mod_insert_pin=true;
               $('#dialog-insertnewwifi p').empty();
-              google.maps.event.addListener(map,'click',function(event) {
-                if(mutex_new_pin  == 0){
-                    mutex_new_pin = 1;
-                    addMarker(event.latLng, 'Click Generated Marker', map);
-                }else{
-                    alert("Completa prima l' inserimento di un pin");
-                }
-});
+              if(func_handler_maps==null) func_handler_maps=google.maps.event.addListener(map,'click', function(){
+                  if(mod_insert_pin){
+                    if(mutex_new_pin  == 0){
+                        mutex_new_pin = 1;
+                        addMarker(event.latLng, 'Click Generated Marker', map);
+                    }else{
+                        alert("Completa prima l' inserimento di un pin");
+                    }
+                  }
+              });
+              
+             
 
 
 
@@ -506,9 +513,11 @@ function addLoggedModal(){
 
                 ListenersHandler.addListener('closebtn-insertnewwifi', 'click', function(){
                    insertnewwifi.close();
+                   
                    if(mutex_new_pin == 1){
                         mutex_new_pin = 0;
                         new_marker.setMap(null);
+                         if(func_handler_maps) google.maps.event.removeListener(func_handler_maps);
                     }
                 });
 
@@ -522,20 +531,24 @@ function addLoggedModal(){
                 if (necessita_login == true)
                     necessita_login = 1;
                 var restrizioni = $('#insert-restrizioni input').val();
-                var altre_informazioni = $('#insert-altreinfo input').val();
+                var altre_informazioni = $('#insert-altreinfo textarea').val();
                 var range = $('#insert-range input').val();
                 var latitudine, longitudine;
                 if(mutex_new_pin == 0){
-                    latitudine = pos.lat;
-                    longitudine = pos.lng;
+                    latitudine = pos.lat();
+                    longitudine = pos.lng();
                 }
                 if(mutex_new_pin == 1){
-                    latitudine = new_pin_position.lat;
-                    longitudine = new_pin_position.lng;
+                    latitudine = new_pin_position.lat();
+                    longitudine = new_pin_position.lng();
                 }
+                console.debug(ssid+","+qualita+","+latitudine+","+longitudine+","+necessita_login+","+restrizioni+","+altre_informazioni+","+range);
                 inseriscipin(ssid,qualita,latitudine,longitudine,necessita_login,restrizioni,altre_informazioni,range,function(status_ok, data){
+                    console.debug(JSON.stringify(data));
                    if(status_ok){
                         showSnackbar({message: 'Rete Wi-Fi aggiunta correttamente.'});
+                        mutex_new_pin=0;
+                        new_marker.setMap(null);
                    }else{
                         if(strcmp(data, 'ERROR_SSID')==0){
                             $('#insert-nomerete-error').show();
@@ -554,7 +567,6 @@ function addLoggedModal(){
                    }
 
                 });
-                mutex_new_pin=0;
 
             });
       }
