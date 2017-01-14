@@ -188,14 +188,7 @@ html, body {
     padding-bottom: 10px !important; /** Le tre regole sovrascrivono quelle di mdl, modificando il padding delle voci */
 }
 
-
-
-
-
-
-
-
-/** ________________4. Dialog custom style________________ */
+/** 4. Dialog custom style  */
 
 .none {
   text-align: center;
@@ -215,7 +208,8 @@ html, body {
   color: #2196F3 !important;
 }
 
-.mdl-dialog__content a {
+
+/** .mdl-dialog__content a {
  text-decoration: none !important;
 }
 
@@ -225,7 +219,7 @@ html, body {
 
 .mdl-dialog__content {
   font-size: medium !important;
-}
+} **/
 
 .mdl-dialog-custom { /** Stile custom per il componente dialog di mdl **/
     padding: 0px !important;
