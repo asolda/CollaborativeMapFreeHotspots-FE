@@ -724,8 +724,9 @@ function inizializzaValutazione(stringselector,valoreiniziale){
 		var selector = this.selector;
 		var newval;
     $.each(stars, function(i,star){
+      $(star).off('click'); // Removes previous listeners on stars if user opened another overlay
       $(star).click(function(event){
-            //vota(i+1);
+            vota(i+1);
 				newval = event.target.id;
         for(var j=0; j < 5; j++){
           if(j<=i){
