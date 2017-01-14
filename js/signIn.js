@@ -60,10 +60,14 @@ function signOut(onclose){
 				withCredentials: true
 			},
             success: function(data) {
-                if(data.status==0){
-					onclose(true,data.message);
-                }else if(data.status==1){
-					onclose(false,"ERROR_SESSION");
+                try{
+                    if(data.status==0){
+                        onclose(true,data.message);
+                    }else if(data.status==1){
+                        onclose(false,"ERROR_SESSION");
+                    }
+                }catch(err){
+                    window.location.href = ".";
                 }
             },
             error: function(xhr, status, error) {
