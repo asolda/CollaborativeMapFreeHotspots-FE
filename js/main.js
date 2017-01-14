@@ -454,6 +454,8 @@ function addLoggedModal(){
                 askInsertWifiMode.close();
                 mutex_new_pin=0;
                  if(func_handler_maps) google.maps.event.removeListener(func_handler_maps);
+                mod_insert_pin=false;
+                current_pin_can_only_select=false;
              });
 
              ListenersHandler.addListener('myposition-askinsertwifimode', 'click', function(){
@@ -498,6 +500,9 @@ function addLoggedModal(){
                 //va fatto comparire il modal dopo aver piazzato il pin
                 //insertnewwifi.showModal();
              });
+             
+              current_pin_can_only_select=true;
+              inizializzaValutazione('#insert-quality',null);
 
              askInsertWifiMode.showModal();
            });
@@ -507,8 +512,7 @@ function addLoggedModal(){
                    insertnewwifi.registerDialog(insertnewwifi);
                 }
 
-                current_pin_can_only_select=true;
-                inizializzaValutazione('#insert-quality',null);
+               
                 /** close button function **/
 
                 ListenersHandler.addListener('closebtn-insertnewwifi', 'click', function(){
@@ -518,6 +522,8 @@ function addLoggedModal(){
                         mutex_new_pin = 0;
                         new_marker.setMap(null);
                          if(func_handler_maps) google.maps.event.removeListener(func_handler_maps);
+                         mod_insert_pin=false;
+                        current_pin_can_only_select=false;
                     }
                 });
 
