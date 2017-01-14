@@ -1,9 +1,14 @@
 function confermaRegistrazione() {
-
-  //TODO creare/attivare effettivamente l'account.
- 
   ListenersHandler.addListener('btnEffettuaLogin', 'click', function(){
-       //TODO reindirizzare l'utente alla home page del sito, dove poi si potrà effettuare il login.
+         try{
+            setTimeout(function(){ 
+                window.location.href='.';
+            }, 1000);
+            
+         }catch(err){
+            window.location = window.location.href;
+         }
+
   });
   
 }
