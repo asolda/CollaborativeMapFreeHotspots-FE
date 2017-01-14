@@ -725,10 +725,10 @@ function inizializzaValutazione(stringselector,valoreiniziale){
 		var newval;
     $.each(stars, function(i,star){
       $(star).off('click'); // Removes previous listeners on stars if user opened another overlay
-      console.debug(current_pin_can_rank);
-      if(current_pin_can_rank){
+      if(current_pin_can_rank || current_pin_can_only_select){
           $(star).click(function(event){
-                vota(i+1);
+              console.debug("Selected star: "+(i+1));
+                if(!current_pin_can_only_select) vota(i+1);
                     newval = event.target.id;
             for(var j=0; j < 5; j++){
               if(j<=i){

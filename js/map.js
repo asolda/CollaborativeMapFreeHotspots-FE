@@ -1,4 +1,4 @@
-﻿var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos, current_pin_id, current_pin_can_rank;
+﻿var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos, current_pin_id, current_pin_can_rank, current_pin_can_only_select=false;
 var pins_info = []; var overlay=null; var user;
 var map_loaded=false;
 var mutex_new_pin = 0;
