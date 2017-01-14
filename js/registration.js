@@ -21,11 +21,14 @@ function registration(email,password,confermapassword,onclose){
            onclose(false,'ERROR_PASSWORD_LENGTH');        
         }else if(strcmp(password,confermapassword)!=0){
            onclose(false,'CAMPI_NON_COINCIDENTI');    
-        }else{    
+        }else{  
+            var tmp= "conferma_registrazione.html";
+            var i_url = window.location.href + tmp;
+            var url = i_url.replace("#","");
             $.ajax({
                 type: 'POST',
                 url: 'http://127.0.0.1:8080/user/new/request/',
-                data: "email="+email+"&password="+password+"&frontend_url="+window.location.href,
+                data: "email="+email+"&password="+password+"&frontend_url="+url,
                 contentType: "application/x-www-form-urlencoded",
                 crossDomain: true,
                 xhrFields: {
@@ -46,6 +49,10 @@ function registration(email,password,confermapassword,onclose){
                                    onclose(false,'ERROR_PASSWORD');  
                                 }else if(strcmp(ret.message,'ERROR_PASSWORD_LENGTH')==0){
                                    onclose(false,'ERROR_PASSWORD_LENGTH');      
+                                }else if(strcmp(ret.message,'ERROR_DB')==0){
+                                   onclose(false,'ERROR_DB');     
+                                }else if(strcmp(ret.message,'ERROR_EMAIL_ALREADY_EXISTS')==0){
+                                   onclose(false,'ERROR_EMAIL_ALREADY_EXISTS');     
                                 }    
                             }
                     }catch(err){
