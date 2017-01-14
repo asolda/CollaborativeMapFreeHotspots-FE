@@ -725,21 +725,24 @@ function inizializzaValutazione(stringselector,valoreiniziale){
 		var newval;
     $.each(stars, function(i,star){
       $(star).off('click'); // Removes previous listeners on stars if user opened another overlay
-      $(star).click(function(event){
-            vota(i+1);
-				newval = event.target.id;
-        for(var j=0; j < 5; j++){
-          if(j<=i){
-            $(stars[j]).addClass('mdl-button--colored');
-          }else{
-            $(stars[j]).removeClass('mdl-button--colored');
-          } //./if
+      console.debug(current_pin_can_rank);
+      if(current_pin_can_rank){
+          $(star).click(function(event){
+                vota(i+1);
+                    newval = event.target.id;
+            for(var j=0; j < 5; j++){
+              if(j<=i){
+                $(stars[j]).addClass('mdl-button--colored');
+              }else{
+                $(stars[j]).removeClass('mdl-button--colored');
+              } //./if
 
-        }//./for
-				$(selector).attr( 'old' , $(input).val() );
-				$(input).val(newval);
+            }//./for
+                    $(selector).attr( 'old' , $(input).val() );
+                    $(input).val(newval);
 
-    });//.click function
+        });//.click function
+    }
   });//./each
 
 }//./setOnclick
@@ -749,8 +752,8 @@ function inizializzaValutazione(stringselector,valoreiniziale){
 
 }
 
-/**function vota(voto){
-    pinranking(jQuery.parseJSON($('#dialog-report').attr('data')).id, voto, function(status_ok, data){
+function vota(voto){
+    pinranking(current_pin_id, voto, function(status_ok, data){
         if(status_ok){
             showSnackbar({message: 'Valutazione effettuata con successo.'});
         }else{
@@ -767,7 +770,7 @@ function inizializzaValutazione(stringselector,valoreiniziale){
             }
         }
     });
-} **/
+}
 
 function showErrorDB(modale, codiceerrore){
   $(modale + ' .mdl-dialog__title').html('<h4 class="mdl-dialog__title"><i id="mdl-title-icon" class="material-icons">error</i>Ops!</h4>');

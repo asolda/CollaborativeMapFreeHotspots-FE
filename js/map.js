@@ -1,4 +1,4 @@
-﻿var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos, current_pin_id;
+﻿var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos, current_pin_id, current_pin_can_rank;
 var pins_info = []; var overlay=null; var user;
 var map_loaded=false;
 var mutex_new_pin = 0;
@@ -188,9 +188,9 @@ function popolateOverlay(marker,data){
     $('#dett_login-necessario').text(a);
     //cambia altre info
     $('#dett_altreinfo').text(data.altre_informazioni);
+    createPinDetailMenu(data);
     //inizializza valutazione
     valutazione = inizializzaValutazione('#wifi-quality',data.qualità);
-    createPinDetailMenu(data);
 
     $('.pin-detail-container').css('visibility','visible');
 }
@@ -255,6 +255,7 @@ function loadMarkers(lat, lng, rad_lat, rad_lng) {
                     getPinInfo(marker.id,function(data){
                         data.id = marker.id;
                         console.log('set data: '+data.id);
+                        current_pin_id = data.id;
                         overlay.setBounds(marker);
                         popolateOverlay(marker,data);
                     });
@@ -436,11 +437,13 @@ google.maps.event.addDomListener(window, 'load', initMap);
 function createPinDetailMenu(marker){
   /** L'utente non è loggato. Nessun menu **/
   if(!user_id){ console.log('utente non loggato');
+  
+    current_pin_can_rank=false;
     $('#pin-detail-action').hide(); //nasconde il div action che contiene il menu
     return;
 
   }else if(marker.utente == user_id){ //utente proprietario della rete
-
+    current_pin_can_rank=false;
     /** Mostra il contenitore del menu, i tasti Modifica e Elimina rete
     /** Associa i listener per chiamare le relative funzioni
     **/ console.log('Utente Loggato, proprietario');
@@ -468,6 +471,7 @@ function createPinDetailMenu(marker){
   /** Mostra il contenitore del menu, i tasti Modifica e Elimina rete
   /** Associa i listener per chiamare le relative funzioni
   **/ console.log('Utente loggato ('+ marker.utente +'), non proprietario');
+    current_pin_can_rank=true;
 
   $('#pin-detail-edit,#pin-detail-delete').hide();
   $('#pin-detail-action, #pin-detail-report').show();
