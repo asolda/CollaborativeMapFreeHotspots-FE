@@ -712,6 +712,7 @@ function addLoggedModal(){
                         ' <span>La rete \''+notification.ssid+'\' &egrave stata segnalata: \''+translateReport(notification.tipo)+'\'.</span>\n'+
                         ' <span id="notifica_rete_'+i+'" hidden>'+notification.rete_wifi+'</span>'+
                         ' <span id="notifica_tipo_'+i+'" hidden>'+notification.tipo+'</span>'+
+                        ' <span id="notifica_dettagli_'+i+'" hidden>'+notification.dettagli+'</span>'+
                         '</a>\n'+
                         ' <span id="span_details_'+i+'" class="mdl-list__item-text-body" '+((notification.visualizzato==0) ? 'hidden' : '')+'>\n'+
                         ((notification.dettagli!=null) ? 'Dettagli: '+notification.dettagli : 'E\' stata segnalata la rete.')+'\n'+
@@ -791,7 +792,7 @@ function handleMouseClick(e){
     
     i=clicked_element.id.split("_")[2];
     
-    notifications_watch($('#notifica_rete_'+i).text(), $('#notifica_tipo_'+i).text(), null);
+    notifications_watch($('#notifica_rete_'+i).text(), $('#notifica_tipo_'+i).text(), $('#notifica_dettagli_'+i).text(), null);
     
     if(clicked_element.hasAttribute("hidden")){
         clicked_element.removeAttribute("hidden");
