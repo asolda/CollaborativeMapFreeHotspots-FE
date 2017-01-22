@@ -500,7 +500,6 @@ function addLoggedModal(){
         });
         
         ListenersHandler.addListener('enterbtn-insertnewwifi', 'click', function(){
-            console.debug(mutex_new_pin);
             var ssid = $('#insert-nomerete input').val();
             var qualita = $('#insert-quality input').val();
             var necessita_login = $('#insert-login').is(':checked');
@@ -634,9 +633,9 @@ function addLoggedModal(){
                         list_dom_networks+='<li id="nomeRete'+i+'" class="mdl-list__item mdl-list__item--three-line">\n'+
                                        ' <span class="mdl-list__item-primary-content">\n'+
                                       '    <i class="material-icons mdl-list__item-avatar">wifi</i>\n'+
-                                      '    <span>Rete '+i+'</span>\n'+
-                                        '  <span class="mdl-list__item-text-body">\n'+
-                                        '    Via prova 123, 84035 Polla, SA, IT\n'+
+                                      '    <span>'+network.ssid+'</span>\n'+
+                                        '  <span id="span_zone_'+i+'" class="mdl-list__item-text-body">\n'+
+                                        '   Caricamento...\n'+
                                         '  </span>\n'+
                                      '   </span>\n'+
                                       '  <span class="mdl-list__item-secondary-content">\n'+
@@ -656,6 +655,10 @@ function addLoggedModal(){
                                      '       </ul>\n'+
                                        ' </span>\n'+
                                      ' </li>\n';
+                        getLocationFromLatLng(network.latitudine, network.longitudine, function(data2){
+                            data2 = data2.results[0].formatted_address;
+                            $('#span_zone_'+i).text(data2);
+                        });
                     });
                     MaterialHelper.setInnerHTML(listwifi, list_dom_networks);
                 }
