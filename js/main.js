@@ -2,18 +2,16 @@ var showReport;
 
 /** Funzione di servizio per ottenere l'id dell'utente la cui sessione è attiva **/
 var userId;
-function getUser() {
+function getUser(){
     return userId;
 }
 
 function destroyHome(){
-    //$('body').empty(); <-- da' errore
     window.location.href='.';
 }
 
 /** Funzione di inizializzazione della pagina per visitatori **/
 function createNotLoggedHome(){
-    
     //setta l'id all'header
     $('.mdl-layout__header-row').attr('id','notlogged-header');
     
@@ -116,7 +114,7 @@ function createLoggedHome(){
 }
 
 
-function gestioneNotifiche() {
+function gestioneNotifiche(){
     //GESTIONE NOTIFICHE
     var badgeHeader = document.getElementById("badgeNotificheHeader");
     var badgeMenu = document.getElementById("badgeNotificheMenu");
@@ -143,7 +141,6 @@ function gestioneNotifiche() {
 +Registrati
 **/
 function addNotLoggedModal(){
-    
     var signup, loginDialog, recover;
     
     setLoginModal();
@@ -154,7 +151,7 @@ function addNotLoggedModal(){
     function setLoginModal(){
         ListenersHandler.addListener('show-login', 'click', function(){
             loginDialog = document.getElementById('dialog-login'); //get dialog element
-            if (!loginDialog.showModal) {
+            if (!loginDialog.showModal){
                 dialogPolyfill.registerDialog(loginDialog);
             }
             
@@ -241,7 +238,7 @@ function addNotLoggedModal(){
     function setRecoverModal(){
         ListenersHandler.addListener('show-recover', 'click', function(){
             recover = document.getElementById('dialog-recover'); //get dialog element
-            if (!recover.showModal) {
+            if (!recover.showModal){
                 dialogPolyfill.registerDialog(recover);
             }
             
@@ -258,10 +255,10 @@ function addNotLoggedModal(){
     }
     
     
-    function setRecoverBisModal() {
+    function setRecoverBisModal(){
         ListenersHandler.addListener('enterbtn-recover', 'click', function(){
             recoverBis = document.getElementById('dialog-recoverBis');
-            if (!recoverBis.showModal) {
+            if (!recoverBis.showModal){
                 dialogPolyfill.registerDialog(recover);
             }
             
@@ -274,7 +271,7 @@ function addNotLoggedModal(){
             // Richiesta di recupero password
             var email = $('#in-re-email').val(); //document.forms["reimposta-form"]["re-email"].value;
             
-            if (!(email === "")) {
+            if (!(email === "")){
                 //  TODO controllo corrispondenza email e visualizza prossimo form
                 recover.close();
                 recoverBis.showModal();
@@ -288,12 +285,12 @@ function addNotLoggedModal(){
     function setSignupModal(){
         ListenersHandler.addListener('show-signup', 'click', function(){
             signup = document.getElementById('dialog-signup'); //get dialog element
-            if (! signup.showModal) {
+            if(!signup.showModal){
                 dialogPolyfill.registerDialog(signup);
             }
             
             /** close button function **/
-            ListenersHandler.addListener('closebtn-signup', 'click', function() {
+            ListenersHandler.addListener('closebtn-signup', 'click', function(){
                 signup.close();
             });
             
@@ -405,9 +402,9 @@ function addNotLoggedModal(){
     }
     
     
-    function setSignupBisModal() {
+    function setSignupBisModal(){
         signupBis = document.getElementById('dialog-signupBis');
-        if (!signupBis.showModal) {
+        if (!signupBis.showModal){
             dialogPolyfill.registerDialog(recover);
         }
         
@@ -444,7 +441,7 @@ function addLoggedModal(){
     function setAskInsertWifiMode(){
         ListenersHandler.addListener('show-addwifi', 'click', function(){
             askInsertWifiMode = document.getElementById('dialog-askinsertwifimode'); //get dialog element
-            if (!askInsertWifiMode.showModal) {
+            if (!askInsertWifiMode.showModal){
                 askInsertWifiMode.registerDialog(askInsertWifiMode);
             }
             
@@ -490,7 +487,7 @@ function addLoggedModal(){
         });
         
         insertnewwifi = document.getElementById('dialog-insertnewwifi'); //get dialog element
-        if (!insertnewwifi.showModal) {
+        if (!insertnewwifi.showModal){
             insertnewwifi.registerDialog(insertnewwifi);
         }
         
@@ -551,7 +548,7 @@ function addLoggedModal(){
         });
     }
     
-    function setExitModal() {
+    function setExitModal(){
         ListenersHandler.addListener('exitSystem', 'click', function(){
             exitDialog = document.getElementById('dialog-exit');
             if (!exitDialog.showModal){
@@ -581,10 +578,10 @@ function addLoggedModal(){
         
     }
     
-    function setEditPasswordBisModal() {
+    function setEditPasswordBisModal(){
         ListenersHandler.addListener('enterbtn-editpassword', 'click', function(){
             editPasswordBis = document.getElementById('dialog-editPasswordBis');
-            if (!editPasswordBis.showModal) {
+            if (!editPasswordBis.showModal){
                 dialogPolyfill.registerDialog(recover);
             }
             
@@ -601,10 +598,10 @@ function addLoggedModal(){
     
     
     
-    function setDeleteAccountBisModal() {
+    function setDeleteAccountBisModal(){
         ListenersHandler.addListener('enterbtn-deleteaccount', 'click', function(){
             deleteaccountBis = document.getElementById('dialog-deleteaccountBis');
-            if (!deleteaccountBis.showModal) {
+            if (!deleteaccountBis.showModal){
                 dialogPolyfill.registerDialog(recover);
             }
             
@@ -627,7 +624,7 @@ function addLoggedModal(){
             
             mywifi = document.getElementById('dialog-mywifi'); //get dialog element
             
-            if (! mywifi.showModal) {
+            if(!mywifi.showModal){
                 dialogPolyfill.registerDialog(mywifi);
             }
             
@@ -644,10 +641,10 @@ function addLoggedModal(){
         
     } //./setMyWifiModal
     
-    function setMyNotificationModal() {
+    function setMyNotificationModal(){
         ListenersHandler.addListener('show-mynotification', 'click', function(){
             showMyNotificationModal = document.getElementById('dialog-mynotification'); //get dialog element
-            if (! showMyNotificationModal.showModal) {
+            if(!showMyNotificationModal.showModal){
                 showMyNotificationModal.registerDialog(showMyNotificationModal);
             }
             
@@ -657,7 +654,7 @@ function addLoggedModal(){
             });
             showMyNotificationModal.showModal();
             
-            function handleMouseClick(e) {
+            function handleMouseClick(e){
                 //TODO Aggiornare il contatore notifiche e i 2 badge
                 var clicked_element = e.target;
                 
@@ -679,7 +676,7 @@ function addLoggedModal(){
                 
             }
             var x = document.getElementsByClassName("toHide");
-            for (i = 0; i < x.length; i++) {
+            for (i = 0; i < x.length; i++){
                 x[i].addEventListener("click", handleMouseClick, false);
             }
             
@@ -837,38 +834,37 @@ function showErrorDB(modale, codiceerrore){
 }
 
 
-function inizializzaSegnalazione() {
-    
+function inizializzaSegnalazione(){
     showReport = document.getElementById('dialog-report'); //get dialog element
-    if (!showReport.showModal) {
+    if (!showReport.showModal){
         showReport.registerDialog(showReport);
     }
-    ListenersHandler.addListener('closebtn-report','click', function() {
+    ListenersHandler.addListener('closebtn-report','click', function(){
         showReport.close();
     });
-    ListenersHandler.addListener('enterbtn-report','click', function() {
-        if(document.getElementById("option-1").checked) {
+    ListenersHandler.addListener('enterbtn-report','click', function(){
+        if(document.getElementById("option-1").checked){
             showReport.close();
             rete = jQuery.parseJSON($('#dialog-report').attr('data'));
             $('#dialog-report-inexistent .mdl-dialog__sub').text('Rete: '+ rete.ssid);
             $('#enterbtn-inexistent').attr('data',rete.id);
             showInexistent.showModal();
         }
-        if(document.getElementById("option-2").checked) {
+        if(document.getElementById("option-2").checked){
             showReport.close();
             rete = jQuery.parseJSON($('#dialog-report').attr('data'));
             $('#dialog-report-range .mdl-dialog__sub').text('Rete: '+ rete.ssid);
             $('#enterbtn-report-range').attr('data',rete.id);
             showRangeErrato.showModal();
         }
-        if(document.getElementById("option-3").checked) {
+        if(document.getElementById("option-3").checked){
             showReport.close();
             rete = jQuery.parseJSON($('#dialog-report').attr('data'));
             $('#dialog-report-restriction .mdl-dialog__sub').text('Rete: '+ rete.ssid);
             $('#enterbtn-report-restriction').attr('data',rete.id);
             showRestrizioni.showModal();
         }
-        if(document.getElementById("option-4").checked) {
+        if(document.getElementById("option-4").checked){
             showReport.close();
             rete = jQuery.parseJSON($('#dialog-report').attr('data'));
             $('#dialog-report-login .mdl-dialog__sub').text('Rete: '+ rete.ssid);
@@ -879,20 +875,20 @@ function inizializzaSegnalazione() {
     
     showInexistent = document.getElementById('dialog-report-inexistent'); //get dialog element
     
-    if (! showInexistent.showModal) {
+    if(!showInexistent.showModal){
         showInexistent.registerDialog(showInexistent);
     }
-    ListenersHandler.addListener('closebtn-inexistent','click', function() {
+    ListenersHandler.addListener('closebtn-inexistent','click', function(){
         showInexistent.close();
         showReport.showModal();
     });
-    ListenersHandler.addListener('enterbtn-inexistent','click', function() {
+    ListenersHandler.addListener('enterbtn-inexistent','click', function(){
         
         segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 0, '', function success(data){
             try {
                 var ret = jQuery.parseJSON(JSON.stringify(data));
                 showSnackbar({message: ret.message});
-            } catch (err) {
+            } catch (err){
                 showSnackbar({message: ret.message});
             }
         });
@@ -900,19 +896,19 @@ function inizializzaSegnalazione() {
     });
     
     showLoginNecessario = document.getElementById('dialog-report-login'); //get dialog element
-    if (! showLoginNecessario.showModal) {
+    if(!showLoginNecessario.showModal){
         showLoginNecessario.registerDialog(showLoginNecessario);
     }
-    ListenersHandler.addListener('closebtn-report-login','click', function() {
+    ListenersHandler.addListener('closebtn-report-login','click', function(){
         showLoginNecessario.close();
         showReport.showModal();
     });
-    ListenersHandler.addListener('enterbtn-report-login','click', function() {
+    ListenersHandler.addListener('enterbtn-report-login','click', function(){
         segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 3, '', function success(data){
             try {
                 var ret = jQuery.parseJSON(JSON.stringify(data));
                 showSnackbar({message: ret.message});
-            } catch (err) {
+            } catch (err){
                 showSnackbar({message: ret.message});
             }
         });
@@ -921,19 +917,19 @@ function inizializzaSegnalazione() {
     });
     
     showRangeErrato = document.getElementById('dialog-report-range'); //get dialog element
-    if (! showRangeErrato.showModal) {
+    if(!showRangeErrato.showModal){
         showRangeErrato.registerDialog(showRangeErrato);
     }
-    ListenersHandler.addListener('closebtn-report-range','click', function() {
+    ListenersHandler.addListener('closebtn-report-range','click', function(){
         showRangeErrato.close();
         showReport.showModal();
     });
-    ListenersHandler.addListener('enterbtn-report-range','click', function() {
+    ListenersHandler.addListener('enterbtn-report-range','click', function(){
         segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 1, $('#re-range textarea').val(), function success(data){
             try {
                 var ret = jQuery.parseJSON(JSON.stringify(data));
                 showSnackbar({message: ret.message});
-            } catch (err) {
+            } catch (err){
                 showSnackbar({message: ret.message});
             }
         });
@@ -942,19 +938,19 @@ function inizializzaSegnalazione() {
     });
     
     showRestrizioni = document.getElementById('dialog-report-restriction'); //get dialog element
-    if (! showRestrizioni.showModal) {
+    if(!showRestrizioni.showModal){
         showRestrizioni.registerDialog(showRestrizioni);
     }
-    ListenersHandler.addListener('closebtn-report-restriction','click', function() {
+    ListenersHandler.addListener('closebtn-report-restriction','click', function(){
         showRestrizioni.close();
         showReport.showModal();
     });
-    ListenersHandler.addListener('enterbtn-report-restriction','click', function() {
+    ListenersHandler.addListener('enterbtn-report-restriction','click', function(){
         segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 2, $('#re-restriction textarea').val(), function success(data){
             try {
                 var ret = jQuery.parseJSON(JSON.stringify(data));
                 showSnackbar({message: ret.message});
-            } catch (err) {
+            } catch (err){
                 showSnackbar({message: ret.message});
             }
         });
@@ -963,16 +959,16 @@ function inizializzaSegnalazione() {
     
     return showReport;
 }
+
 function inizializzaCancellaRete(){
-    
     deletewifi = document.getElementById('dialog-deletewifi'); //get dialog element
-    if (! deletewifi.showModal) {
+    if(!deletewifi.showModal){
         dialogPolyfill.registerDialog(deletewifi);
     }
     var rete = jQuery.parseJSON($('#dialog-deletewifi').attr('data'));
     //console.log($('#toshow span').text());
     $('#dialog-deletewifi .mdl-dialog__content p').text(rete.ssid);
-    ListenersHandler.addListener('closebtn-deletewifi','click', function() {
+    ListenersHandler.addListener('closebtn-deletewifi','click', function(){
         deletewifi.close();
     });
     ListenersHandler.addListener('enterbtn-deletewifi','click', function(){
@@ -981,10 +977,10 @@ function inizializzaCancellaRete(){
     
     return deletewifi;
 }
-function inizializzaModificaRete() {
-    
+
+function inizializzaModificaRete(){
     editwifidialog = document.getElementById('dialog-editwifi'); //get dialog element
-    if (! editwifidialog.showModal) {
+    if(!editwifidialog.showModal){
         dialogPolyfill.registerDialog(editwifidialog);
     }
     var rete = jQuery.parseJSON($('#dialog-editwifi').attr('data'));
@@ -999,7 +995,7 @@ function inizializzaModificaRete() {
     $('#newInfo').addClass('is-dirty');
     $('#newInfo input').val(rete.altre_informazioni);
     
-    ListenersHandler.addListener('closebtn-editwifi','click', function() {
+    ListenersHandler.addListener('closebtn-editwifi','click', function(){
         editwifidialog.close();
     });
     ListenersHandler.addListener('enterbtn-editwifi','click', function(){
@@ -1010,10 +1006,9 @@ function inizializzaModificaRete() {
     return editwifidialog;
 }
 function inizializzaCancellaAccount(){
-    
     deleteaccount = document.getElementById('dialog-deleteaccount'); //get dialog element
     
-    if (! deleteaccount.showModal) {
+    if (!deleteaccount.showModal){
         dialogPolyfill.registerDialog(deleteaccount);
     }
     ListenersHandler.addListener('closebtn-deleteaccount', 'click', function(){
@@ -1025,15 +1020,14 @@ function inizializzaCancellaAccount(){
     return deleteaccount;
 }
 function inizializzaModificaPassword(){
-    
     editpassword = document.getElementById('dialog-editpassword'); //get dialog element
-    if (! editpassword.showModal) {
+    if(!editpassword.showModal){
         dialogPolyfill.registerDialog(editpassword);
     }
-    ListenersHandler.addListener('closebtn-editpassword','click', function() {
+    ListenersHandler.addListener('closebtn-editpassword','click', function(){
         editpassword.close();
     });
-    ListenersHandler.addListener('enterbtn-editpassword','click', function() {
+    ListenersHandler.addListener('enterbtn-editpassword','click', function(){
         console.log('Modifica password per: '+ getUser());
     });
     return editpassword;
@@ -1044,20 +1038,21 @@ function getLocationFromLatLng(lat,lng, onsuccess){
         url: 'http://maps.googleapis.com/maps/api/geocode/json?',
         data: 'latlng='+lat+','+lng,
         success: function(data){
-        onsuccess(data); }
+            onsuccess(data);
+        }
     });
 }
 
 /**
 function setDeleteWifi(){
     var v = document.getElementById('closebtn-deletewifi');
-    v.addEventListener('click', function() {
+    v.addEventListener('click', function(){
         deletewifi.close();
         mywifi.showModal();
     });
 
     var vv = document.getElementById('enterbtn-deletewifi');
-    vv.addEventListener('click', function() {
+    vv.addEventListener('click', function(){
         deletewifi.close();
         'use strict';
         var snackbarContainer = document.querySelector('#sb-confirm-operation');
