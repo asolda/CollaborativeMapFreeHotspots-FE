@@ -627,31 +627,37 @@ function addLoggedModal(){
             get_user_wifi_list(function(status_ok, data){
                 if(status_ok){
                     listwifi = document.getElementById('listWifi');
-                    MaterialHelper.appendInnerHTML(listwifi, '<li id="nomeRete7" class="mdl-list__item mdl-list__item--three-line">\n'+
-                                   ' <span class="mdl-list__item-primary-content">\n'+
-                                  '    <i class="material-icons mdl-list__item-avatar">wifi</i>\n'+
-                                  '    <span>Rete 7</span>\n'+
-                                    '  <span class="mdl-list__item-text-body">\n'+
-                                    '    Via prova 123, 84035 Polla, SA, IT\n'+
-                                    '  </span>\n'+
-                                 '   </span>\n'+
-                                  '  <span class="mdl-list__item-secondary-content">\n'+
-                                   '   <!-- Right aligned menu below button -->\n'+
-                                     '   <button id="7"\n'+
-                                     '           class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">\n'+
-                                     '     <i class="material-icons">more_vert</i>\n'+
-                                     '   </button>\n'+
-                                     '   <div class="mdl-tooltip mdl-tooltip--large" for="7"> <!-- Tooltip -->\n'+
-                                     '       Altro\n'+
-                                '        </div>\n'+
-                                        '\n'+
-                                    '    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"\n'+
-                                   '         for="7">\n'+
-                                  '        <li class="mdl-menu__item show-editwifi">Modifica</li>\n'+
-                                  '        <li class="mdl-menu__item show-deletewifi">Elimina</li>\n'+
-                                 '       </ul>\n'+
-                                   ' </span>\n'+
-                                 ' </li>\n');
+                    list_dom_networks='';
+                    domIDgen=10000+Math.floor((Math.random() * 2000) + 1);
+                    $.each(data, function(i, network){
+                        i+=domIDgen;
+                        list_dom_networks+='<li id="nomeRete'+i+'" class="mdl-list__item mdl-list__item--three-line">\n'+
+                                       ' <span class="mdl-list__item-primary-content">\n'+
+                                      '    <i class="material-icons mdl-list__item-avatar">wifi</i>\n'+
+                                      '    <span>Rete '+i+'</span>\n'+
+                                        '  <span class="mdl-list__item-text-body">\n'+
+                                        '    Via prova 123, 84035 Polla, SA, IT\n'+
+                                        '  </span>\n'+
+                                     '   </span>\n'+
+                                      '  <span class="mdl-list__item-secondary-content">\n'+
+                                       '   <!-- Right aligned menu below button -->\n'+
+                                         '   <button id="'+i+'"\n'+
+                                         '           class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">\n'+
+                                         '     <i class="material-icons">more_vert</i>\n'+
+                                         '   </button>\n'+
+                                         '   <div class="mdl-tooltip mdl-tooltip--large" for="'+i+'"> <!-- Tooltip -->\n'+
+                                         '       Altro\n'+
+                                    '        </div>\n'+
+                                            '\n'+
+                                        '    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"\n'+
+                                       '         for="'+i+'">\n'+
+                                      '        <li class="mdl-menu__item show-editwifi">Modifica</li>\n'+
+                                      '        <li class="mdl-menu__item show-deletewifi">Elimina</li>\n'+
+                                     '       </ul>\n'+
+                                       ' </span>\n'+
+                                     ' </li>\n';
+                    });
+                    MaterialHelper.setInnerHTML(listwifi, list_dom_networks);
                 }
             });
             

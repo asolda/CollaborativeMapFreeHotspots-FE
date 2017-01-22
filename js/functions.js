@@ -32,15 +32,13 @@ var ListenersHandler = new (function(){
 
 var MaterialHelper = new (function(){
     this.setInnerHTML = function(element, new_html){
-        componentHandler.downgradeElements(element);
-        element.innerHTML=new_html;
-        componentHandler.upgradeElement(element);
+        $(element).empty().append(new_html);
+        componentHandler.upgradeDom();
     };
     
     this.appendInnerHTML = function(element, new_html){
-        componentHandler.downgradeElements(element);
         $(element).append(new_html);
-        componentHandler.upgradeElement(element);
+        componentHandler.upgradeDom();
     };
 })();
 
