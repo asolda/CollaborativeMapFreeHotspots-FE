@@ -29,3 +29,18 @@ var ListenersHandler = new (function(){
         }
     };
 })();
+
+var MaterialHelper = new (function(){
+    this.setInnerHTML = function(element, new_html){
+        componentHandler.downgradeElements(element);
+        element.innerHTML=new_html;
+        componentHandler.upgradeElement(element);
+    };
+    
+    this.appendInnerHTML = function(element, new_html){
+        componentHandler.downgradeElements(element);
+        element.innerHTML+=new_html;
+        componentHandler.upgradeElement(element);
+    };
+})();
+
