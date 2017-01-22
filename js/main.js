@@ -623,7 +623,7 @@ function addLoggedModal(){
         ListenersHandler.addListener('show-mywifi', 'click', function(){
             mywifi = document.getElementById('dialog-mywifi'); //get dialog element
             
-            /*
+            
             get_user_wifi_list(function(status_ok, data){
                 if(status_ok){
                     listwifi = document.getElementById('listWifi');
@@ -654,7 +654,7 @@ function addLoggedModal(){
                                  ' </li>\n');
                 }
             });
-            */
+            
             
             if(!mywifi.showModal){
                 dialogPolyfill.registerDialog(mywifi);

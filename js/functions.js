@@ -39,7 +39,7 @@ var MaterialHelper = new (function(){
     
     this.appendInnerHTML = function(element, new_html){
         componentHandler.downgradeElements(element);
-        element.innerHTML+=new_html;
+        $(element).append(new_html);
         componentHandler.upgradeElement(element);
     };
 })();
