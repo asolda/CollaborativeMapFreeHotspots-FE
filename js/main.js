@@ -656,8 +656,10 @@ function addLoggedModal(){
                                        ' </span>\n'+
                                      ' </li>\n';
                         getLocationFromLatLng(network.latitudine, network.longitudine, function(data2){
-                            data2 = data2.results[0].formatted_address;
-                            $('#span_zone_'+i).text(data2);
+                            if(data2!=null){
+                                data2 = data2.results[0].formatted_address;
+                                $('#span_zone_'+i).text(data2);
+                            }
                         });
                     });
                     MaterialHelper.setInnerHTML(listwifi, list_dom_networks);
