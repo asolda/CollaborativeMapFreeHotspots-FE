@@ -31,8 +31,10 @@
                 document.getElementsByTagName('head')[0].appendChild(elem);
             });
             
-            loadJS("https://maps.googleapis.com/maps/api/js?key="+GMAPS_API_KEY+"&libraries=geometry", function(){
-                loadJS("js/map.js", null);
+            loadJS("config.js", function(){
+                loadJS("https://maps.googleapis.com/maps/api/js?key="+GMAPS_API_KEY+"&libraries=geometry", function(){
+                    loadJS("js/map.js", null);
+                });
             });
         </script>
         <script type="text/javascript" src="js/segnalazione.js"></script>
