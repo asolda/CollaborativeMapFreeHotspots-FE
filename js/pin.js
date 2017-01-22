@@ -68,7 +68,7 @@ function getPinInfo(id,onclose){
             withCredentials: true
         },
         success: function(data) {
-            ret = data.message[0];
+            ret = data.message;
             onclose(ret);
         }
     });
