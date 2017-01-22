@@ -5,7 +5,7 @@ function deleteAccount(password,onclose){
             $.ajax({
             type: 'POST',
             url: 'http://127.0.0.1:8080/user/delete/request/',
-            data: "password="+password+"&frontend_url="+window.location.href+"", 
+            data: "password="+password+"&frontend_url="+window.location.href, 
             contentType: "application/x-www-form-urlencoded",
             crossDomain: true,
             xhrFields: {
@@ -14,13 +14,12 @@ function deleteAccount(password,onclose){
             success: function(data){
               try {
                 var ret = data;
-                console.log(JSON.stringify(data));
                 if(ret.status==0){
                     onclose(true,ret.message);
                 }else if(ret.status==1){
-                    if(strcmp(ret.message,'ERROR_SESSION')){
+                    if(strcmp(ret.message,'ERROR_SESSION')==0){
                       onclose(false,'ERROR_SESSION');   
-                    }else if(strcmp(ret.message,'ERROR_PASSWORD')){
+                    }else if(strcmp(ret.message,'ERROR_PASSWORD')==0){
                       onclose(false,'ERROR_PASSWORD');   
                     }
                 }
