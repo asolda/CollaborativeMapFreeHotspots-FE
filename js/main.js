@@ -1106,10 +1106,36 @@ function inizializzaCancellaAccount(){
     ListenersHandler.addListener('closebtn-deleteaccount', 'click', function(){
         deleteaccount.close();
     });
-    ListenersHandler.addListener('enterbtn-deleteaccount','click', function(){
+     ListenersHandler.addListener('enterbtn-deleteaccount','click', function(){
+        var password= $('#in-da-password').val();
+        
+        deleteAccount(password, function(status_ok,data){
+            if(status_ok){
+                /*show modal*/ console.debug('OK');
+                 console.debug('pw='+password);
+            }else{
+                $('#da-password').removeClass("is-invalid");
+                $('#da-password-error').html("");
+                console.debug('NOT OK');
+                
+                if((strcmp(data,'ERROR_SESSION')==0)){
+                  showSnackbar({message: 'Errore nella generazione della sessione.'});
+                  console.debug('pw2='+password);
+                }else if((strcmp(data,"ERROR_PASSWORD")==0)){
+                    console.debug('pw3='+password);
+                  $('#da-password').addClass('is-invalid');
+                  $('#da-password-error').html("Password non valida.");
+                }else if((strcmp(data,"EMPTY_FIELD")==0)){
+                    console.debug('pw4='+password);
+                  $('#da-password').addClass('is-invalid');
+                  $('#da-password-error').html("Campo non compilato.");
+                }
+            }
+        });
         console.log(getUser());
     });
     return deleteaccount;
+
 }
 function inizializzaModificaPassword(){
     editpassword = document.getElementById('dialog-editpassword'); //get dialog element
