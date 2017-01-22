@@ -54,7 +54,7 @@ function notifications_amount(onclose){
 function notifications_watch(rete, tipo, onclose){
     $.ajax({
         type: 'POST',
-        url: 'http://127.0.0.1:8080/segnala/notifications/amount/',
+        url: 'http://127.0.0.1:8080/segnala/notifications/watch/',
         data: "rete_wifi="+rete+"&tipo="+tipo,
         contentType: "application/x-www-form-urlencoded",
         crossDomain: true,
