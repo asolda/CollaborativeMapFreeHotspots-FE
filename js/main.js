@@ -621,8 +621,40 @@ function addLoggedModal(){
     
     function setMyWifiModal(){
         ListenersHandler.addListener('show-mywifi', 'click', function(){
-            
             mywifi = document.getElementById('dialog-mywifi'); //get dialog element
+            
+            /*
+            get_user_wifi_list(function(status_ok, data){
+                if(status_ok){
+                    listwifi = document.getElementById('listWifi');
+                    listwifi.innerHTML+='<li id="nomeReteX" class="mdl-list__item mdl-list__item--three-line">'+
+                '<span class="mdl-list__item-primary-content">'+
+                  '<i class="material-icons mdl-list__item-avatar">wifi</i>'+
+                  '<span>Rete 1</span>'+
+                  '<span class="mdl-list__item-text-body">'+
+                    'Via prova 123, 84035 Polla, SA, IT'+
+                  '</span>'+
+               '</span>'+
+
+                '<span class="mdl-list__item-secondary-content">'+
+                    '<!-- generare stringa "buttonNomeRete" e settardo come ID a button, FOR a div tooltip e FOR a ul menu -->'+
+
+                    '<button id="buttonNomeRete1" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">'+
+                        '<i class="material-icons">more_vert</i>'+
+                    '</button>'+
+                    '<div class="mdl-tooltip mdl-tooltip--large" for="buttonNomeRete1"> <!-- Tooltip -->'+
+                        'Altro'+
+                    '</div>'+
+
+                    '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="buttonNomeRete1">'+
+                        '<li class="mdl-menu__item show-editwifi">Modifica</li>'+
+                        '<li class="mdl-menu__item show-deletewifi">Elimina</li>'+
+                    '</ul>'+
+                '</span>'+
+
+              '</li>';
+                }
+            });*/
             
             if(!mywifi.showModal){
                 dialogPolyfill.registerDialog(mywifi);
@@ -633,9 +665,10 @@ function addLoggedModal(){
                 mywifi.close();
             });
             
-            
-            
             mywifi.showModal();
+            
+           
+            
             
         }); //./document
         
