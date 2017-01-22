@@ -62,7 +62,7 @@ function notifications_watch(rete, tipo, onclose){
             withCredentials: true
         },
         success:  function(data) {
-            onclose(true, data.message);
+            if(onclose!=null) onclose(true, data.message);
         },
         error: function(xhr, status, error) {
             console.log('Error: ' + error.message);

@@ -631,30 +631,30 @@ function addLoggedModal(){
                     $.each(data, function(i, network){
                         i+=domIDgen;
                         list_dom_networks+='<li id="nomeRete'+i+'" class="mdl-list__item mdl-list__item--three-line">\n'+
-                                       ' <span class="mdl-list__item-primary-content">\n'+
-                                      '    <i class="material-icons mdl-list__item-avatar">wifi</i>\n'+
-                                      '    <span>'+network.ssid+'</span>\n'+
-                                        '  <span id="span_zone_'+i+'" class="mdl-list__item-text-body">\n'+
-                                        '   Caricamento...\n'+
-                                        '  </span>\n'+
-                                     '   </span>\n'+
-                                      '  <span class="mdl-list__item-secondary-content">\n'+
-                                       '   <!-- Right aligned menu below button -->\n'+
-                                         '   <button id="'+i+'"\n'+
-                                         '           class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">\n'+
-                                         '     <i class="material-icons">more_vert</i>\n'+
-                                         '   </button>\n'+
-                                         '   <div class="mdl-tooltip mdl-tooltip--large" for="'+i+'"> <!-- Tooltip -->\n'+
-                                         '       Altro\n'+
-                                    '        </div>\n'+
-                                            '\n'+
-                                        '    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"\n'+
-                                       '         for="'+i+'">\n'+
-                                      '        <li class="mdl-menu__item show-editwifi">Modifica</li>\n'+
-                                      '        <li class="mdl-menu__item show-deletewifi">Elimina</li>\n'+
-                                     '       </ul>\n'+
-                                       ' </span>\n'+
-                                     ' </li>\n';
+                        ' <span class="mdl-list__item-primary-content">\n'+
+                        '<i class="material-icons mdl-list__item-avatar">wifi</i>\n'+
+                        '<span>'+network.ssid+'</span>\n'+
+                        '<span id="span_zone_'+i+'" class="mdl-list__item-text-body">\n'+
+                        ' Caricamento...\n'+
+                        '</span>\n'+
+                        ' </span>\n'+
+                        '<span class="mdl-list__item-secondary-content">\n'+
+                        ' <!-- Right aligned menu below button -->\n'+
+                        ' <button id="'+i+'"\n'+
+                        ' class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">\n'+
+                        ' <i class="material-icons">more_vert</i>\n'+
+                        ' </button>\n'+
+                        ' <div class="mdl-tooltip mdl-tooltip--large" for="'+i+'"> <!-- Tooltip -->\n'+
+                        ' Altro\n'+
+                        '</div>\n'+
+                        '\n'+
+                        '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"\n'+
+                        ' for="'+i+'">\n'+
+                        '<li class="mdl-menu__item show-editwifi">Modifica</li>\n'+
+                        '<li class="mdl-menu__item show-deletewifi">Elimina</li>\n'+
+                        ' </ul>\n'+
+                        ' </span>\n'+
+                        ' </li>\n';
                         getLocationFromLatLng(network.latitudine, network.longitudine, function(data2){
                             if(data2!=null){
                                 data2 = data2.results[0].formatted_address;
@@ -678,7 +678,7 @@ function addLoggedModal(){
             
             mywifi.showModal();
             
-           
+            
             
             
         }); //./document
@@ -698,31 +698,42 @@ function addLoggedModal(){
             });
             showMyNotificationModal.showModal();
             
-            function handleMouseClick(e){
-                //TODO Aggiornare il contatore notifiche e i 2 badge
-                var clicked_element = e.target;
-                
-                if (clicked_element.nodeName == "I")
-                    clicked_element.innerHTML = "notifications_none";
-                else if (clicked_element.nodeName == "SPAN")
-                    clicked_element.previousElementSibling.innerHTML = "notifications_none";
-                
-                clicked_element = clicked_element.parentNode.nextElementSibling;
-                
-                if (clicked_element.hasAttribute("hidden"))
-                {
-                    clicked_element.removeAttribute("hidden");
+            notifications(function(status_ok, data){
+                if(status_ok){
+                    listnotifications = document.getElementById('listNotifiche');
+                    list_dom_notif='';
+                    domIDgen=10000+Math.floor((Math.random() * 2000) + 1);
+                    $.each(data, function(i, notification){
+                        i+=domIDgen;
+                        list_dom_notif+='<li id="notifica'+i+'" class="mdl-list__item mdl-list__item--three-line">\n'+
+                        ' <span class="mdl-list__item-primary-content">\n'+
+                        ' <a class="toHide" id="ttt'+i+'" href="#">\n'+
+                        '  <i class="material-icons mdl-list__item-avatar">notifications'+((notification.visualizzato==0) ? '' : '_none')+'</i>\n'+
+                        ' <span>La rete \''+notification.ssid+'\' &egrave stata segnalata: \''+translateReport(notification.tipo)+'\'.</span>\n'+
+                        ' <span id="notifica_rete_'+i+'" hidden>'+notification.rete_wifi+'</span>'+
+                        ' <span id="notifica_tipo_'+i+'" hidden>'+notification.tipo+'</span>'+
+                        '</a>\n'+
+                        ' <span id="span_details_'+i+'" class="mdl-list__item-text-body" '+((notification.visualizzato==0) ? 'hidden' : '')+'>\n'+
+                        ((notification.dettagli!=null) ? 'Dettagli: '+notification.dettagli : 'E\' stata segnalata la rete.')+'\n'+
+                        '</span>\n'+
+                        ' <div class="mdl-tooltip mdl-tooltip--top mdl-tooltip--large" for="ttt'+i+'">\n'+
+                        '  Altro\n'+
+                        '</div>\n'+
+                        '</span>\n'+
+                        '</li>\n';
+                    });
+                    if(list_dom_notif == '') list_dom_notif = '<li>Nessuna segnalazione effettuata sulle tue reti.</li>';
+                    MaterialHelper.setInnerHTML(listnotifications, list_dom_notif);
+                    
+                    
+                    var x = document.getElementsByClassName("toHide");
+                    for (i = 0; i < x.length; i++){
+                        x[i].addEventListener("click", handleMouseClick, false);
+                    }
                 }
-                else
-                {
-                    clicked_element.setAttribute("hidden", "true");
-                }
-                
-            }
-            var x = document.getElementsByClassName("toHide");
-            for (i = 0; i < x.length; i++){
-                x[i].addEventListener("click", handleMouseClick, false);
-            }
+            });
+            
+            
             
         });
         
@@ -751,6 +762,43 @@ function showSnackbar(sb){
     
     //show the snackbar
     snackbar.MaterialSnackbar.showSnackbar(sb);
+}
+
+function translateReport(tipo){
+    if(tipo==0){
+        return "Rete non esistente";
+    }else if(tipo==1){
+        return "Range errato";
+    }else if(tipo==2){
+        return "Restrizioni incoerenti";
+    }else if(tipo==3){
+        return "Login necessario";
+    }else{
+        return "<Errore>";
+    }
+}
+
+function handleMouseClick(e){
+    //TODO Aggiornare il contatore notifiche e i 2 badge
+    var clicked_element = e.target;
+    
+    if(clicked_element.nodeName == "I")
+        clicked_element.innerHTML = "notifications_none";
+    else if(clicked_element.nodeName == "SPAN")
+        clicked_element.previousElementSibling.innerHTML = "notifications_none";
+    
+    clicked_element = clicked_element.parentNode.nextElementSibling;
+    
+    i=clicked_element.id.split("_")[2];
+    
+    notifications_watch($('#notifica_rete_'+i).text(), $('#notifica_tipo_'+i).text(), null);
+    
+    if(clicked_element.hasAttribute("hidden")){
+        clicked_element.removeAttribute("hidden");
+    }else{
+        clicked_element.setAttribute("hidden", "true");
+    }
+    
 }
 
 function insertPinCustomMode(if_enabled){
@@ -1089,31 +1137,31 @@ function getLocationFromLatLng(lat,lng, onsuccess){
 
 /**
 function setDeleteWifi(){
-    var v = document.getElementById('closebtn-deletewifi');
-    v.addEventListener('click', function(){
-        deletewifi.close();
-        mywifi.showModal();
-    });
+var v = document.getElementById('closebtn-deletewifi');
+v.addEventListener('click', function(){
+deletewifi.close();
+mywifi.showModal();
+});
 
-    var vv = document.getElementById('enterbtn-deletewifi');
-    vv.addEventListener('click', function(){
-        deletewifi.close();
-        'use strict';
-        var snackbarContainer = document.querySelector('#sb-confirm-operation');
-        var data;
-        //TODO: send request TRUE o FALSE, delete wifi, delete pin on maps
-        //Se tutto va bene allora
-        //Snackbar
-        data = {message: 'Rete Wi-Fi eliminata con successo.'};
-        snackbarContainer.MaterialSnackbar.showSnackbar(data);
-        //refresh wifi list
-        document.getElementById(idToDelete).parentNode.removeChild(document.getElementById(idToDelete));
-        mywifi.showModal();
-        //Altrimenti
-        //data = {message: 'Rete Wi-Fi non eliminata.'};
-        //snackbarContainer.MaterialSnackbar.showSnackbar(data);
+var vv = document.getElementById('enterbtn-deletewifi');
+vv.addEventListener('click', function(){
+deletewifi.close();
+'use strict';
+var snackbarContainer = document.querySelector('#sb-confirm-operation');
+var data;
+//TODO: send request TRUE o FALSE, delete wifi, delete pin on maps
+//Se tutto va bene allora
+//Snackbar
+data = {message: 'Rete Wi-Fi eliminata con successo.'};
+snackbarContainer.MaterialSnackbar.showSnackbar(data);
+//refresh wifi list
+document.getElementById(idToDelete).parentNode.removeChild(document.getElementById(idToDelete));
+mywifi.showModal();
+//Altrimenti
+//data = {message: 'Rete Wi-Fi non eliminata.'};
+//snackbarContainer.MaterialSnackbar.showSnackbar(data);
 
-    });
+});
 
 }
 
