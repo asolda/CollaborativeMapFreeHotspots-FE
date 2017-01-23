@@ -76,7 +76,7 @@ function createLoggedHome(){
     '<a id="show-mywifi" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">wifi</i><span class="space"/>Le mie reti</a>' +
     '<a id="show-mynotification" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">notifications</i><span class="space"/>Notifiche&nbsp&nbsp&nbsp&nbsp&nbsp<span hidden class="mdl-badge" data-badge="" id="badgeNotificheMenu"></span></a>'+
     '<a id="show-editpassword" onclick="inizializzaModificaPassword().showModal();" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">vpn_key</i><span class="space"/>Modifica Password</a>' +
-    '<a id="show-deleteaccount" onclick="inizializzaCancellaAccount().showModal();" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">delete</i><span class="space"/>Elimina Account</a>' +
+    '<a id="show-deleteaccount" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">delete</i><span class="space"/>Elimina Account</a>' +
     '<a hidden id="test" class="mdl-button mdl-js-button mdl-js-ripple-effect drawerlink" href="#"><span class="space"/><i class="material-icons">warning</i><span class="space"/>TEST FORM SEGNALAZIONI</a>' +
     '</nav>' +
     '</div>' +
@@ -455,6 +455,7 @@ function addLoggedModal(){
     setMyWifiModal();
     setMyNotificationModal();
     setAskInsertWifiMode();
+    setDeleteAccountModal();
     
     function setAskInsertWifiMode(){
         ListenersHandler.addListener('show-addwifi', 'click', function(){
@@ -613,27 +614,55 @@ function addLoggedModal(){
         })
     }
     
-    
-    
-    function setDeleteAccountBisModal(){
-        ListenersHandler.addListener('enterbtn-deleteaccount', 'click', function(){
-            deleteaccountBis = document.getElementById('dialog-deleteaccountBis');
-            if (!deleteaccountBis.showModal){
-                dialogPolyfill.registerDialog(recover);
+    function setDeleteAccountModal(){
+        ListenersHandler.addListener('show-deleteaccount', 'click', function(){
+            deleteaccount = document.getElementById('dialog-deleteaccount'); //get dialog element
+            
+            if (!deleteaccount.showModal){
+                dialogPolyfill.registerDialog(deleteaccount);
             }
-            
-            /** close button function **/
-            ListenersHandler.addListener('closebtn-deleteaccountBis', 'click', function(){
-                deleteaccountBis.close();
+            ListenersHandler.addListener('closebtn-deleteaccount', 'click', function(){
+                deleteaccount.close();
             });
-            
-            //TODO controllo campi
-            deleteaccount.close();
-            deleteaccountBis.showModal();
-        })
+            ListenersHandler.addListener('enterbtn-deleteaccount','click', function(){
+                var password= $('#in-da-password').val();
+                
+                deleteAccount(password, function(status_ok,data){
+                    if(status_ok){
+                        deleteaccountBis = document.getElementById('dialog-deleteaccountBis');
+                        if (!deleteaccountBis.showModal){
+                            dialogPolyfill.registerDialog(recover);
+                        }
+                        
+                        /** close button function **/
+                        ListenersHandler.addListener('closebtn-deleteaccountBis', 'click', function(){
+                            deleteaccountBis.close();
+                        });
+                        
+                        //TODO controllo campi
+                        deleteaccount.close();
+                        deleteaccountBis.showModal();
+                    }else{
+                        $('#da-password').removeClass("is-invalid");
+                        $('#da-password-error').html("");
+                        console.log(JSON.stringify(data));
+                        
+                        if(strcmp(data,'ERROR_SESSION')==0){
+                            showSnackbar({message: 'Errore nella generazione della sessione.'});
+                        }else if(strcmp(data,"ERROR_PASSWORD")==0){
+                            $('#da-password').addClass('is-invalid');
+                            $('#da-password-error').html("Password non valida.");
+                        }else if(strcmp(data,"EMPTY_FIELD")==0){
+                            $('#da-password').addClass('is-invalid');
+                            $('#da-password-error').html("Campo non compilato.");
+                        }
+                    }
+                });
+                console.log(getUser());
+            });
+            deleteaccount.showModal();
+        });
     }
-    
-    
     
     
     function setMyWifiModal(){
@@ -802,9 +831,9 @@ function handleMouseClick(e){
     var clicked_element = e.target;
     
     if(clicked_element.nodeName == "I")
-        clicked_element.innerHTML = "notifications_none";
+    clicked_element.innerHTML = "notifications_none";
     else if(clicked_element.nodeName == "SPAN")
-        clicked_element.previousElementSibling.innerHTML = "notifications_none";
+    clicked_element.previousElementSibling.innerHTML = "notifications_none";
     
     clicked_element = clicked_element.parentNode.nextElementSibling;
     
@@ -1116,43 +1145,44 @@ function inizializzaModificaRete(){
     
     return editwifidialog;
 }
+/*
 function inizializzaCancellaAccount(){
-    deleteaccount = document.getElementById('dialog-deleteaccount'); //get dialog element
-    
-    if (!deleteaccount.showModal){
-        dialogPolyfill.registerDialog(deleteaccount);
-    }
-    ListenersHandler.addListener('closebtn-deleteaccount', 'click', function(){
-        deleteaccount.close();
-    });
-        ListenersHandler.addListener('enterbtn-deleteaccount','click', function(){
-        var password= $('#in-da-password').val();
-        
-        deleteAccount(password, function(status_ok,data){
-            if(status_ok){
-                /*show modal*/ console.log(JSON.stringify(data));
-                 
-            }else{
-                $('#da-password').removeClass("is-invalid");
-                $('#da-password-error').html("");
-                console.log(JSON.stringify(data));
-                
-                if(strcmp(data,'ERROR_SESSION')==0){
-                  showSnackbar({message: 'Errore nella generazione della sessione.'});
-                }else if(strcmp(data,"ERROR_PASSWORD")==0){
-                  $('#da-password').addClass('is-invalid');
-                  $('#da-password-error').html("Password non valida.");
-                }else if(strcmp(data,"EMPTY_FIELD")==0){
-                  $('#da-password').addClass('is-invalid');
-                  $('#da-password-error').html("Campo non compilato.");
-                }
-            }
-        });
-        console.log(getUser());
-    });
-    return deleteaccount;
+deleteaccount = document.getElementById('dialog-deleteaccount'); //get dialog element
+
+if (!deleteaccount.showModal){
+dialogPolyfill.registerDialog(deleteaccount);
+}
+ListenersHandler.addListener('closebtn-deleteaccount', 'click', function(){
+deleteaccount.close();
+});
+ListenersHandler.addListener('enterbtn-deleteaccount','click', function(){
+var password= $('#in-da-password').val();
+
+deleteAccount(password, function(status_ok,data){
+if(status_ok){
+setDeleteAccountBisModal();
+}else{
+$('#da-password').removeClass("is-invalid");
+$('#da-password-error').html("");
+console.log(JSON.stringify(data));
+
+if(strcmp(data,'ERROR_SESSION')==0){
+showSnackbar({message: 'Errore nella generazione della sessione.'});
+}else if(strcmp(data,"ERROR_PASSWORD")==0){
+$('#da-password').addClass('is-invalid');
+$('#da-password-error').html("Password non valida.");
+}else if(strcmp(data,"EMPTY_FIELD")==0){
+$('#da-password').addClass('is-invalid');
+$('#da-password-error').html("Campo non compilato.");
+}
+}
+});
+console.log(getUser());
+});
+return deleteaccount;
 
 }
+*/
 function inizializzaModificaPassword(){
     editpassword = document.getElementById('dialog-editpassword'); //get dialog element
     if(!editpassword.showModal){
