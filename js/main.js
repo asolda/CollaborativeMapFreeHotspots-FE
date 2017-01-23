@@ -114,18 +114,26 @@ function createLoggedHome(){
 
 function notification_badge_refresher(){
     notifications_amount(function(status_ok, data){
-        var badgeHeader = document.getElementById("badgeNotificheHeader");
-        var badgeMenu = document.getElementById("badgeNotificheMenu");
-        if(data==0){
-            badgeHeader.setAttribute("hidden", "true");
-            badgeMenu.setAttribute("hidden", "true");
+        if(status_ok==0){
+            var badgeHeader = document.getElementById("badgeNotificheHeader");
+            var badgeMenu = document.getElementById("badgeNotificheMenu");
+            if(data==0){
+                badgeHeader.setAttribute("hidden", "true");
+                badgeMenu.setAttribute("hidden", "true");
+            }else{
+                badgeHeader.removeAttribute("hidden");
+                badgeMenu.removeAttribute("hidden");
+            }
+            badgeHeader.setAttribute("data-badge", data);
+            badgeMenu.setAttribute("data-badge", data);
+            setTimeout(notification_badge_refresher, 5000);
         }else{
-            badgeHeader.removeAttribute("hidden");
-            badgeMenu.removeAttribute("hidden");
+            try{
+                setTimeout(function(){destroyHome();}, 1000);
+            }catch(err){
+                window.location = window.location.href;
+            }
         }
-        badgeHeader.setAttribute("data-badge", data);
-        badgeMenu.setAttribute("data-badge", data);
-        setTimeout(notification_badge_refresher, 5000);
     });
 }
 
