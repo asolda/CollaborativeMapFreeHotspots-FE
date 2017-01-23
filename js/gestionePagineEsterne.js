@@ -18,6 +18,7 @@ function confermaRegistrazione() {
 
 function confermaEliminazione() {
     ListenersHandler.addListener('btnConfermaEliminazione', 'click', function(){
+        console.log(getParameter("token"));
         deleteAccountDo(getParameter("token"), function(status_ok,data){
             if(status_ok){
                 
