@@ -34,6 +34,7 @@ function resetpassword(email,onclose){
             success: function(data) {
                 try {
                     var ret = data;
+                    console.log(JSON.stringify(ret));
                     if(ret.status==0){
                         onclose(true,ret.message);
                     }else if(ret.status==1){
