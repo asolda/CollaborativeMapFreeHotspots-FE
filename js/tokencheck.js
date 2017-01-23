@@ -21,7 +21,7 @@ function tokencheck(if_redirect){ //incompleta;relativa al primo tokencheck, in 
                     }
                     
                     if(ret.status==0){
-                        if(if_redirect){ //redirect a reimposta_password.html
+                        if(if_redirect){ 
                             window.location.href='./'+tmp+"?action="+action+"&token="+tokenvalue;
                             
                         }

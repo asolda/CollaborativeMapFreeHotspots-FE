@@ -49,40 +49,43 @@ function confermaEliminazione() {
 
 
 function reimpostaPassword() {
-    /*ListenersHandler.addListener('btnReimpostaPassword', 'click', function(){
-        
-        //TODO Reimpostare effettivamente la password.
-        
-        
-    }); */
-    
-
     ListenersHandler.addListener('btnReimpostaPassword', 'click', function(){
-        resetpassword2(password,conf_password,function(status_ok,data){
-            if(satus_ok){
-                var toDelete = document.getElementById("one");
+        resetpassword2($('#reimposta-new input').val(),$('#confermaNuovaPassword').val(),function(status_ok,data){
+            console.log(JSON.stringify(data));
+            if(status_ok){
+                var toDelete = document.getElementById("reimposta-new");
                     toDelete.parentNode.removeChild(toDelete);
                     
-                    toDelete = document.getElementById("two");
+                    toDelete = document.getElementById("reimposta-confirm-new");
                     toDelete.parentNode.removeChild(toDelete);
                     
                     toDelete = document.getElementById("btnReimpostaPassword");
                     toDelete.parentNode.removeChild(toDelete);
                     
-                    document.getElementById("text1").innerHTML = "Password reimpostata correttamente. Ora puoi effettuare il login.";
+                    document.getElementById("text1").innerHTML = "Password reimpostata";
+                    document.getElementById("text2").innerHTML = "Password reimpostata correttamente. Ora puoi effettuare il login.";
+                    setTimeout(function(){destroyHome();}, 2000);
             }else{
+                console.log(JSON.stringify(data));
+                $('#reimposta-new').removeClass('is-invalid');
+                $('#reimposta-confirm-new').removeClass('is-invalid');
+                
+                $('#reimposta-new-error').html("");
+                $('#reimposta-confirm-new-error').html("");
+                
                 if(strcmp(data,"INVALID_PASSWORD")==0){
-                    $('#one').toggleClass('.is-invalid');
-                    $('#reimposta-new-error').show();
+                    $('#reimposta-new').addClass('is-invalid');
+                    $('#reimposta-new-error').html("Password non valida.");
                     
                 }else if(strcmp(data,"INVALID_PASSWORD_LENGTH")==0){
-                    $('#one').toggleClass('.is-invalid');
-                    $('#reimposta-new-error').show();
+                    $('#reimposta-new').addClass('is-invalid');
+                    $('#reimposta-new-error').html("Lunghezza password non valida.");
                     
                 }else if(strcmp(data,"NOT_IDENTICAL_FIELDS")==0){
-                    $('#one').toggleClass('.is-invalid');
-                    $('#two').toggleClass('.is-invalid');
-                    $('#reimposta-confirm-new-error').show();
+                    $('#reimposta-new').addClass('is-invalid');
+                    $('#reimposta-confirm-new').addClass('is-invalid');
+                    $('#reimposta-new-error').html("Campi non identici.");
+                    $('#reimposta-confirm-new-error').html("Campi non identici.");
                     
                 }else if(strcmp(data,"ERROR_TOKEN")==0){
                     showSnackbar({message: 'Token non valido, potrebbe esserci un errore nel sistema.'});
@@ -91,12 +94,12 @@ function reimpostaPassword() {
                     showErrorDB('#conferma', 'ERROR_DB');
                     
                 }else if(strcmp(data,"ERROR_PASSWORD")==0){
-                    $('#one').toggleClass('.is-invalid');
-                    $('#reimposta-new-error').show();
+                    $('#one').addClass('is-invalid');
+                    $('#reimposta-new-error').html("Password non valida.");
                     
                 }else if(strcmp(data,"ERROR_PASSWORD_LENGTH")==0){
-                    $('#one').toggleClass('.is-invalid');
-                    $('#reimposta-new-error').show();
+                    $('#one').addClass('is-invalid');
+                    $('#reimposta-new-error').html("Lunghezza password non valida.");
                 }
             }
         });

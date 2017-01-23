@@ -289,26 +289,28 @@ function addNotLoggedModal(){
                     recover.close();
                     recoverBis.showModal();
                 }else{
+                    $('#re-email').removeClass('is-invalid');
+                    $('re-email-error').html(""); 
+                    
                     if((strcmp(data,"EMPTY_FIELD")==0)){
-                        $('#re-email').toggleClass('.is-invalid');
-                        $('re-email-error').html("Campo non compilato");
-                        $('#re-email-error').show();
+                        $('#re-email').addClass('is-invalid');
+                        $('re-email-error').html("Campo non compilato.")
                         
                     }else if((strcmp(data,"INVALID_EMAIL")==0)){
-                        $('#re-email').toggleClass('.is-invalid');
-                        $('#re-email-error').show();
+                        $('#re-email').addClass('is-invalid');
+                        $('re-email-error').html("Email non valida."); 
+                    
                         
                     }else if((strcmp(data,"ERROR_EMAIL")==0)){
-                        $('#re-email').toggleClass('.is-invalid');
-                        $('#re-email-error').show();
+                        $('#re-email').toggleClass('is-invalid');
+                        $('re-email-error').html("Email non valida.");
                         
                     }else if((strcmp(data,"ERROR_DB")==0)){
                         showErrorDB('#dialog-recover', 'ERROR_DB');
                         
                     }else if((strcmp(data,"ERROR_EMAIL_NOT_FOUND")==0)){
-                        $('#re-email').toggleClass('.is-invalid');
-                        $('#re-email-error').html("Email inesistente");
-                        $('#re-email-error').show();
+                        $('#re-email').addClass('is-invalid');
+                        $('#re-email-error').html("Email inesistente.");
                     }
                 }
             });
