@@ -1139,8 +1139,16 @@ function inizializzaModificaRete(){
         editwifidialog.close();
     });
     ListenersHandler.addListener('enterbtn-editwifi','click', function(){
-        editwifidialog.close();
-        console.log('edit wifi call');
+        editpin(rete.id,$('#newRestrizioni input').val(),$('#newRange input').val(),$('#newInfo input').val(),function(status_ok, data){
+            if(status_ok){
+                showSnackbar({message: 'Modifica effettuata con successo.'});
+                editwifidialog.close();
+                console.log('edit wifi call');
+            }else{
+                showSnackbar({message: 'Problema.'});
+            }
+        });
+        
     });
     
     return editwifidialog;
