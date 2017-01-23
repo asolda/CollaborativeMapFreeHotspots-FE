@@ -108,7 +108,7 @@ function createLoggedHome(){
         $('body').append(data); //Li aggiunge all'index
         addLoggedModal(); //Li inizializza
     });
-     
+    
     gestioneNotifiche();
 }
 
@@ -116,7 +116,6 @@ function notification_badge_refresher(){
     notifications_amount(function(status_ok, data){
         if(status_ok==0){
             badgeHandler(data);
-            setTimeout(notification_badge_refresher, 5000);
         }else{
             if(strcmp(data,'ERROR_SESSION_NOT_FOUND')==0){
                 try{
@@ -126,21 +125,22 @@ function notification_badge_refresher(){
                 }
             }
         }
+        setTimeout(notification_badge_refresher, 5000);
     });
 }
 
 function badgeHandler(data){
     var badgeHeader = document.getElementById("badgeNotificheHeader");
     var badgeMenu = document.getElementById("badgeNotificheMenu");
-            if(data==0){
-                badgeHeader.setAttribute("hidden", "true");
-                badgeMenu.setAttribute("hidden", "true");
-            }else{
-                badgeHeader.removeAttribute("hidden");
-                badgeMenu.removeAttribute("hidden");
-            }
-            badgeHeader.setAttribute("data-badge", data);
-            badgeMenu.setAttribute("data-badge", data);
+    if(data==0){
+        badgeHeader.setAttribute("hidden", "true");
+        badgeMenu.setAttribute("hidden", "true");
+    }else{
+        badgeHeader.removeAttribute("hidden");
+        badgeMenu.removeAttribute("hidden");
+    }
+    badgeHeader.setAttribute("data-badge", data);
+    badgeMenu.setAttribute("data-badge", data);
 }
 
 
@@ -302,7 +302,7 @@ function addNotLoggedModal(){
                     recoverBis.showModal();
                 }else{
                     $('#re-email').removeClass('is-invalid');
-                    $('re-email-error').html(""); 
+                    $('re-email-error').html("");
                     
                     if((strcmp(data,"EMPTY_FIELD")==0)){
                         $('#re-email').addClass('is-invalid');
@@ -310,8 +310,8 @@ function addNotLoggedModal(){
                         
                     }else if((strcmp(data,"INVALID_EMAIL")==0)){
                         $('#re-email').addClass('is-invalid');
-                        $('re-email-error').html("Email non valida."); 
-                    
+                        $('re-email-error').html("Email non valida.");
+                        
                         
                     }else if((strcmp(data,"ERROR_EMAIL")==0)){
                         $('#re-email').toggleClass('is-invalid');
@@ -1249,7 +1249,7 @@ function inizializzaModificaPassword(){
                 ListenersHandler.addListener('closebtn-editPasswordBis', 'click', function(){
                     editPasswordBis.close();
                 });
-            
+                
                 //TODO controllo campi
                 editpassword.close();
                 editPasswordBis.showModal();
