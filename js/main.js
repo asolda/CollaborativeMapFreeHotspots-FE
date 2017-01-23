@@ -1131,7 +1131,14 @@ function inizializzaCancellaRete(){
         deletewifi.close();
     });
     ListenersHandler.addListener('enterbtn-deletewifi','click', function(){
-        console.log('elimina');
+        deletepin(rete,function(status_ok, data){
+            if(status_ok){
+                showSnackbar({message: 'Rete WiFi cancellata con successo.'});
+                deletewifi.close();
+            }else{
+                showSnackbar({message: 'Problema.'});
+            }
+        });
     });
     
     return deletewifi;
@@ -1162,7 +1169,6 @@ function inizializzaModificaRete(){
             if(status_ok){
                 showSnackbar({message: 'Modifica effettuata con successo.'});
                 editwifidialog.close();
-                console.log('edit wifi call');
             }else{
                 showSnackbar({message: 'Problema.'});
             }

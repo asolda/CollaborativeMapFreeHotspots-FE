@@ -118,11 +118,11 @@ function getPinInfo(id,onclose){
 }
 
 //funzione per eliminare un pin
-function deletepin(rete_wifi,utente){
+function deletepin(rete_wifi,onclose){
     $.ajax({
         type: 'POST',
         url: 'http://127.0.0.1:8080/pin/delete/',
-        data: "rete_wifi="+rete_wifi+"&utente="+utente,
+        data: "rete_wifi="+rete_wifi,
         contentType: "application/x-www-form-urlencoded",
         crossDomain: true,
         xhrFields: {
@@ -132,17 +132,18 @@ function deletepin(rete_wifi,utente){
             try {
                 var ret = data;
                 if(ret.status==0){
-                    $('#result').append(ret.message + '</br>');
+                    onclose(true, 'DELETE_OK');
                 }else if(ret.status==1){
-                    $('#result').append(ret.message + '</br>');
                     if(strcmp(ret.message,"ERROR_DB")==0){
-                        //codice per mostrare a frontend l'errore ERROR_DB
+                        onclose(false, 'ERROR_DB');
+                    }else if(strcmp(ret.message,"ERROR_SESSION")==0){
+                        onclose(false, 'ERROR_SESSION');
                     }else if(strcmp(ret.message,"ERROR_IS_NOT_OWNER")==0){
-                        //codice per mostrare a frontend l'errore ERROR_IS_NOT_OWNER
+                        onclose(false, 'ERROR_IS_NOT_OWNER');
                     }
                 }
             } catch (err) {
-                alert('Errore imprevisto: ' + ret.message);
+                alert('Errore imprevisto nella cancellazione del pin: ' + ret.message);
             }
         },
         error: function(xhr, status, error) {
