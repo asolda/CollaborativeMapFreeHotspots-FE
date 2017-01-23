@@ -37,9 +37,9 @@ function confermaEliminazione() {
                 }else if(strcmp(ret.message,'ERROR_DB')==0){
                     document.getElementById("text1").innerHTML = "Errore nel Database.";
                     document.getElementById("text2").innerHTML = "Sarai reindirizzato alla hompage del sito.";
-                }
-                setTimeout(function(){destroyHome();}, 2000);
+                }  
             }
+            setTimeout(function(){destroyHome();}, 2000);
         });
     });
 }
