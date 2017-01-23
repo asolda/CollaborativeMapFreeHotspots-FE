@@ -42,3 +42,7 @@ var MaterialHelper = new (function(){
     };
 })();
 
+
+function destroyHome(){
+    window.location.href='.';
+}

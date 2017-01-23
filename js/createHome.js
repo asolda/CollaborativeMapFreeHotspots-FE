@@ -8,6 +8,7 @@ function createHome() {
 							// SE IL COOKIE E LA SESSIONE ESISTONO E GLI ID CORRISPONDONO
 							//Inizializza la home per l'utente loggato
 							user_id = id_utente;
+                            tokencheck(true);
 							createLoggedHome();
 							//chiude il menù laterale al click sull'icona <<
                             
