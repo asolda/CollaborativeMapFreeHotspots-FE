@@ -1137,7 +1137,7 @@ function inizializzaCancellaRete(){
                 showSnackbar({message: 'Rete WiFi cancellata con successo.'});
                 deletewifi.close();
             }else{
-                showSnackbar({message: 'Problema.'});
+                showSnackbar({message: 'Problema: '+JSON.stringify(data)});
             }
         });
     });
@@ -1171,7 +1171,7 @@ function inizializzaModificaRete(){
                 showSnackbar({message: 'Modifica effettuata con successo.'});
                 editwifidialog.close();
             }else{
-                showSnackbar({message: 'Problema.'});
+                showSnackbar({message: 'Problema: '+JSON.stringify(data)});
             }
         });
         
@@ -1227,12 +1227,13 @@ function inizializzaModificaPassword(){
     });
     ListenersHandler.addListener('enterbtn-editpassword','click', function(){
         changePassword($('#in-ep-newpassword').val(),$('#in-ep-password').val(),$('#in-ep-confermapassword').val(), function(status_ok, data){
+            console.log("status="+status_ok);
             if(status_ok){
                 editPasswordBis = document.getElementById('dialog-editPasswordBis');
                 if (!editPasswordBis.showModal){
                     dialogPolyfill.registerDialog(recover);
                 }
-                    ListenersHandler.addListener('closebtn-editPasswordBis', 'click', function(){
+                ListenersHandler.addListener('closebtn-editPasswordBis', 'click', function(){
                     editPasswordBis.close();
                 });
             
@@ -1240,7 +1241,7 @@ function inizializzaModificaPassword(){
                 editpassword.close();
                 editPasswordBis.showModal();
             }else{
-                showSnackbar({message: 'Problema.'});
+                showSnackbar({message: 'Problema: '+data});
             }
         });
     });

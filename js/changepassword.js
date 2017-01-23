@@ -1,60 +1,59 @@
 function changePassword(password,newpassword,c_newpassword,onclose){
     if((password.length==0 || password==null) && (newpassword.length==0 || newpassword==null) && (c_newpassword.length==0 || c_newpassword==null)){
-           onclose(false,'CAMPI_PASSWORD_NUOVAPASSWORD_CONFERMANUOVAPASSWORD_NON_COMPILATI');   
-        }else if((password.length==0 || password==null) && (newpassword.length==0 || newpassword==null)){
-           onclose(false,'CAMPI_PASSWORD_NUOVAPASSWORD_NON_COMPILATI'); 
-        }else if((password.length==0 || password==null) && (c_newpassword.length==0 || c_newpassword==null)){
-           onclose(false,'CAMPI_PASSWORD_CONFERMANUOVAPASSWORD_NON_COMPILATI');  
-        }else if((newpassword.length==0 || newpassword==null) && (c_newpassword.length==0 || c_newpassword==null)){
-           onclose(false,'CAMPI_NUOVAPASSWORD_CONFERMANUOVAPASSWORD_NON_COMPILATI');
-        }else if((password.length==0 || password==null)){
-           onclose(false,'CAMPO_PASSWORD_NON_COMPILATO');
-        }else if((newpassword.length==0 || newpassword==null)){
-           onclose(false,'CAMPO_NUOVAPASSWORD_NON_COMPILATO'); 
-        }else if((c_newpassword.length==0 || c_newpassword==null)){
-           onclose(false,'CAMPO_CONFERMANUOVAPASSWORD_NON_COMPILATO'); 
-        }
+        onclose(false,'CAMPI_PASSWORD_NUOVAPASSWORD_CONFERMANUOVAPASSWORD_NON_COMPILATI');
+    }else if((password.length==0 || password==null) && (newpassword.length==0 || newpassword==null)){
+        onclose(false,'CAMPI_PASSWORD_NUOVAPASSWORD_NON_COMPILATI');
+    }else if((password.length==0 || password==null) && (c_newpassword.length==0 || c_newpassword==null)){
+        onclose(false,'CAMPI_PASSWORD_CONFERMANUOVAPASSWORD_NON_COMPILATI');
+    }else if((newpassword.length==0 || newpassword==null) && (c_newpassword.length==0 || c_newpassword==null)){
+        onclose(false,'CAMPI_NUOVAPASSWORD_CONFERMANUOVAPASSWORD_NON_COMPILATI');
+    }else if((password.length==0 || password==null)){
+        onclose(false,'CAMPO_PASSWORD_NON_COMPILATO');
+    }else if((newpassword.length==0 || newpassword==null)){
+        onclose(false,'CAMPO_NUOVAPASSWORD_NON_COMPILATO');
+    }else if((c_newpassword.length==0 || c_newpassword==null)){
+        onclose(false,'CAMPO_CONFERMANUOVAPASSWORD_NON_COMPILATO');
+    }
+    
+    
+    /*else if(!validateEmail(email)){
+    onclose(false,'ERROR_EMAIL');
+    }else if(!validatePassword(password)){
+    onclose(false,'ERROR_PASSWORD');
+    }else if(password.length<8){
+    onclose(false,'ERROR_PASSWORD_LENGTH');
+    }*/else if(strcmp(newpassword,c_newpassword)!=0){
+        onclose(false,'CAMPI_NON_COINCIDENTI');
         
         
-        /*else if(!validateEmail(email)){
-           onclose(false,'ERROR_EMAIL');     
-        }else if(!validatePassword(password)){
-           onclose(false,'ERROR_PASSWORD');   
-        }else if(password.length<8){
-           onclose(false,'ERROR_PASSWORD_LENGTH');        
-        }*/else if(strcmp(newpassword,c_newpassword)!=0){
-           onclose(false,'CAMPI_NON_COINCIDENTI');    
-   
-
-
-
-   }else{ 
-            $.ajax({
+        
+        
+    }else{
+        $.ajax({
             type: 'POST',
             url: 'http://127.0.0.1:8080/user/change_password/',
-            data: "password="+password+"&newpassword)"+newpassword+"&frontend_url="+window.location.href, 
+            data: "old_password="+password+"&password="+newpassword,
             contentType: "application/x-www-form-urlencoded",
             crossDomain: true,
             xhrFields: {
                 withCredentials: true
             },
             success: function(data){
-              try {
-                var ret = data;
-                if(ret.status==0){
-                    onclose(true,ret.message);
-                }else if(ret.status==1){
-                    if(strcmp(ret.message,'ERROR_SESSION')){
-                      onclose(false,'ERROR_SESSION');   
+                try {
+                    var ret = data;
+                    console.log(JSON.stringify(ret));
+                    if(ret.status==0){
+                        onclose(true,ret.message);
+                    }else if(ret.status==1){
+                        onclose(false,ret.message);
                     }
-                } 
-              }catch (err){
-                 alert('Errore nella modifica della password: ' + ret.message);
-              }
+                }catch (err){
+                    alert('Errore nella modifica della password: ' + ret.message);
+                }
             },
             error: function(xhr, status, error) {
-               console.log('Error: ' + error.message);
-              }
-            });
-    }                    
-}   
+                console.log('Error: ' + error.message);
+            }
+        });
+    }
+}
