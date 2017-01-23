@@ -108,15 +108,30 @@ function createLoggedHome(){
         $('body').append(data); //Li aggiunge all'index
         addLoggedModal(); //Li inizializza
     });
-    
+     
     gestioneNotifiche();
 }
 
 function notification_badge_refresher(){
     notifications_amount(function(status_ok, data){
         if(status_ok==0){
-            var badgeHeader = document.getElementById("badgeNotificheHeader");
-            var badgeMenu = document.getElementById("badgeNotificheMenu");
+            badgeHandler(data);
+            setTimeout(notification_badge_refresher, 5000);
+        }else{
+            if(strcmp(data,'ERROR_SESSION_NOT_FOUND')==0){
+                try{
+                    setTimeout(function(){destroyHome();}, 1000);
+                }catch(err){
+                    window.location = window.location.href;
+                }
+            }
+        }
+    });
+}
+
+function badgeHandler(data){
+    var badgeHeader = document.getElementById("badgeNotificheHeader");
+    var badgeMenu = document.getElementById("badgeNotificheMenu");
             if(data==0){
                 badgeHeader.setAttribute("hidden", "true");
                 badgeMenu.setAttribute("hidden", "true");
@@ -126,15 +141,6 @@ function notification_badge_refresher(){
             }
             badgeHeader.setAttribute("data-badge", data);
             badgeMenu.setAttribute("data-badge", data);
-            setTimeout(notification_badge_refresher, 5000);
-        }else{
-            try{
-                setTimeout(function(){destroyHome();}, 1000);
-            }catch(err){
-                window.location = window.location.href;
-            }
-        }
-    });
 }
 
 
@@ -143,15 +149,14 @@ function gestioneNotifiche(){
     var badgeHeader = document.getElementById("badgeNotificheHeader");
     var badgeMenu = document.getElementById("badgeNotificheMenu");
     
-    //Se ci sono notifiche rendere visibilei i badge (nell'header e nel menù) eliminando l'attributo hidden (di default è hidden) e settare il numero di notifiche l'attributo data-badge="numero", altrimenti nasconderlo con hidden false
-    badgeHeader.removeAttribute("hidden");
+    badgeHeader.setAttribute("hidden", "true");
+    badgeMenu.setAttribute("hidden", "true");
     
     //apre il menù laterale al click sul badge nell'header
     ListenersHandler.addListener('badgeNotificheHeader', 'click', function(){
         $( 'div[class^="mdl-layout__obfuscator"]' ).trigger( "click" );
     });
     
-    badgeMenu.removeAttribute("hidden");
     
     notification_badge_refresher();
     
