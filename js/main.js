@@ -1,9 +1,8 @@
 var showReport;
 
 /** Funzione di servizio per ottenere l'id dell'utente la cui sessione è attiva **/
-var userId;
 function getUser(){
-    return userId;
+    return user_id;
 }
 
 function destroyHome(){
@@ -473,7 +472,7 @@ function addLoggedModal(){
     var mywifi, func_handler_maps=null;
     
     setExitModal();
-    setEditPasswordBisModal();
+    //setEditPasswordBisModal();
     setMyWifiModal();
     setMyNotificationModal();
     setAskInsertWifiMode();
@@ -1227,8 +1226,25 @@ function inizializzaModificaPassword(){
         editpassword.close();
     });
     ListenersHandler.addListener('enterbtn-editpassword','click', function(){
-        console.log('Modifica password per: '+ getUser());
+        changePassword($('#in-ep-newpassword').val(),$('#in-ep-password').val(),$('#in-ep-confermapassword').val(), function(status_ok, data){
+            if(status_ok){
+                editPasswordBis = document.getElementById('dialog-editPasswordBis');
+                if (!editPasswordBis.showModal){
+                    dialogPolyfill.registerDialog(recover);
+                }
+                    ListenersHandler.addListener('closebtn-editPasswordBis', 'click', function(){
+                    editPasswordBis.close();
+                });
+            
+                //TODO controllo campi
+                editpassword.close();
+                editPasswordBis.showModal();
+            }else{
+                showSnackbar({message: 'Problema.'});
+            }
+        });
     });
+    
     return editpassword;
 }
 

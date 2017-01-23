@@ -46,9 +46,7 @@ function changePassword(password,newpassword,c_newpassword,onclose){
                 }else if(ret.status==1){
                     if(strcmp(ret.message,'ERROR_SESSION')){
                       onclose(false,'ERROR_SESSION');   
-                   /* }else if(strcmp(ret.message,'ERROR_PASSWORD')){
-                      onclose(false,'ERROR_PASSWORD');   
-                    } */
+                    }
                 } 
               }catch (err){
                  alert('Errore nella modifica della password: ' + ret.message);
