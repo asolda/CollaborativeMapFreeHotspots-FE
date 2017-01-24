@@ -708,7 +708,9 @@ function addLoggedModal(){
                     listwifi = document.getElementById('listWifi');
                     list_dom_networks='';
                     domIDgen=10000+Math.floor((Math.random() * 2000) + 1);
+                    array_my_networks=[];
                     $.each(data, function(i, network){
+                        array_my_networks.push(network.id);
                         i+=domIDgen;
                         list_dom_networks+='<li id="nomeRete'+i+'" class="mdl-list__item mdl-list__item--three-line">\n'+
                         ' <span class="mdl-list__item-primary-content">\n'+
@@ -730,8 +732,8 @@ function addLoggedModal(){
                         '\n'+
                         '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"\n'+
                         ' for="'+i+'">\n'+
-                        '<li class="mdl-menu__item show-editwifi">Modifica</li>\n'+
-                        '<li class="mdl-menu__item show-deletewifi">Elimina</li>\n'+
+                        '<li id="button_modifica_rete_'+network.id+'" class="mdl-menu__item show-editwifi">Modifica</li>\n'+
+                        '<li id="button_elimina_rete_'+network.id+'" class="mdl-menu__item show-deletewifi">Elimina</li>\n'+
                         ' </ul>\n'+
                         ' </span>\n'+
                         ' </li>\n';
@@ -742,7 +744,30 @@ function addLoggedModal(){
                             }
                         });
                     });
+                    
                     MaterialHelper.setInnerHTML(listwifi, list_dom_networks);
+                    for(i=0;i<array_my_networks.length;i++){
+                        console.log("i="+array_my_networks[i]);
+                        ListenersHandler.addListener('button_modifica_rete_'+array_my_networks[i], 'click', function(e){
+                            var elem_id= e.target.id;
+                            var elem_arr=elem_id.split("_");
+                            var rete_id = elem_arr[3];
+                            console.log("rete_id="+rete_id);
+                            
+                            getPinInfo(rete_id,function(data){
+                                console.log({id: rete_id, restrizioni: data.restrizioni, range_wifi: data.range_wifi, altre_informazioni: data.altre_informazioni});
+                                $('#pin-detail-edit').show();
+
+                                mywifi.close();
+                                inizializzaModificaRete({id: rete_id, restrizioni: data.restrizioni, range_wifi: data.range_wifi, altre_informazioni: data.altre_informazioni}).showModal();  
+                            });                          
+                        });
+                        ListenersHandler.addListener('button_elimina_rete_'+array_my_networks[i], 'click', function(){
+                                inizializzaCancellaRete()   
+                        });
+                    
+                    }
+                 
                 }
             });
             
@@ -758,7 +783,9 @@ function addLoggedModal(){
             
             mywifi.showModal();
             
-            
+        /*ListenersHandler.addListener('','click', function(){
+             inizializzaModificaRete();   
+        });*/
             
             
         }); //./document
@@ -1158,12 +1185,12 @@ function inizializzaCancellaRete(){
     return deletewifi;
 }
 
-function inizializzaModificaRete(){
+function inizializzaModificaRete(json_data){
     editwifidialog = document.getElementById('dialog-editwifi'); //get dialog element
     if(!editwifidialog.showModal){
         dialogPolyfill.registerDialog(editwifidialog);
     }
-    var rete = jQuery.parseJSON($('#dialog-editwifi').attr('data'));
+    var rete = json_data;//jQuery.parseJSON($('#dialog-editwifi').attr('data'));
     $('#subtitleNomeEditRete').text(rete.ssid);
     
     $('#newRestrizioni').addClass('is-dirty');

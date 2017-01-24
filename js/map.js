@@ -460,7 +460,7 @@ function createPinDetailMenu(marker){
         
         ListenersHandler.addListener('pin-detail-edit', 'click', function(){
             $('#dialog-editwifi').attr('data', JSON.stringify(marker) );
-            editModal = inizializzaModificaRete();
+            editModal = inizializzaModificaRete(jQuery.parseJSON($('#dialog-editwifi').attr('data')));
             editModal.showModal();
         });
         
