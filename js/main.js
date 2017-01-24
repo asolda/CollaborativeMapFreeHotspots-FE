@@ -1091,13 +1091,11 @@ function inizializzaSegnalazione(){
         showReport.showModal();
     });
     ListenersHandler.addListener('enterbtn-inexistent','click', function(){
-        
-        segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 0, '', function success(data){
-            try {
-                var ret = jQuery.parseJSON(JSON.stringify(data));
-                showSnackbar({message: ret.message});
-            } catch (err){
-                showSnackbar({message: ret.message});
+        segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 0, '', function(status_ok, data){
+            if(status_ok){
+                showSnackbar({message: 'Segnalazione effettuata con successo.'});
+            }else{
+                showSnackbar({message: 'Errore: segnalazione già effettuata per questa rete.'});
             }
         });
         showInexistent.close();
@@ -1112,12 +1110,11 @@ function inizializzaSegnalazione(){
         showReport.showModal();
     });
     ListenersHandler.addListener('enterbtn-report-login','click', function(){
-        segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 3, '', function success(data){
-            try {
-                var ret = jQuery.parseJSON(JSON.stringify(data));
-                showSnackbar({message: ret.message});
-            } catch (err){
-                showSnackbar({message: ret.message});
+        segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 3, '', function (status_ok, data){
+            if(status_ok){
+                showSnackbar({message: 'Segnalazione effettuata con successo.'});
+            }else{
+                showSnackbar({message: 'Errore: segnalazione già effettuata per questa rete.'});
             }
         });
         
@@ -1133,12 +1130,11 @@ function inizializzaSegnalazione(){
         showReport.showModal();
     });
     ListenersHandler.addListener('enterbtn-report-range','click', function(){
-        segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 1, $('#re-range textarea').val(), function success(data){
-            try {
-                var ret = jQuery.parseJSON(JSON.stringify(data));
-                showSnackbar({message: ret.message});
-            } catch (err){
-                showSnackbar({message: ret.message});
+        segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 1, $('#re-range textarea').val(), function(status_ok, data){
+            if(status_ok){
+                showSnackbar({message: 'Segnalazione effettuata con successo.'});
+            }else{
+                showSnackbar({message: 'Errore: segnalazione già effettuata per questa rete.'});
             }
         });
         
@@ -1154,12 +1150,11 @@ function inizializzaSegnalazione(){
         showReport.showModal();
     });
     ListenersHandler.addListener('enterbtn-report-restriction','click', function(){
-        segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 2, $('#re-restriction textarea').val(), function success(data){
-            try {
-                var ret = jQuery.parseJSON(JSON.stringify(data));
-                showSnackbar({message: ret.message});
-            } catch (err){
-                showSnackbar({message: ret.message});
+        segnala(jQuery.parseJSON($('#dialog-report').attr('data')).id, 2, $('#re-restriction textarea').val(), function(status_ok, data){
+            if(status_ok){
+                showSnackbar({message: 'Segnalazione effettuata con successo.'});
+            }else{
+                showSnackbar({message: 'Errore: segnalazione già effettuata per questa rete.'});
             }
         });
         showRestrizioni.close();

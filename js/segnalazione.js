@@ -9,7 +9,12 @@ function segnala(rete,tipo,dettagli,onclose){
             withCredentials: true
         },
         success:  function(data) {
-            onclose(data);
+            var ret=data;
+            if(ret.status==0){
+                onclose(true,ret.message);
+            }else{
+                onclose(false,ret.message);
+            }
         },
         error: function(xhr, status, error) {
             console.log('Error: ' + error.message);
