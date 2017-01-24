@@ -37,7 +37,6 @@ function registration(email,password,confermapassword,onclose){
                 success: function(data) {
                     try {
                         var ret = data;
-                        console.debug("data="+JSON.stringify(ret));
                             if(ret.status==0){
                                  onclose(true,ret.message);
                             }else if(ret.status==1){

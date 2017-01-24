@@ -29,3 +29,20 @@ var ListenersHandler = new (function(){
         }
     };
 })();
+
+var MaterialHelper = new (function(){
+    this.setInnerHTML = function(element, new_html){
+        $(element).empty().append(new_html);
+        componentHandler.upgradeDom();
+    };
+    
+    this.appendInnerHTML = function(element, new_html){
+        $(element).append(new_html);
+        componentHandler.upgradeDom();
+    };
+})();
+
+
+function destroyHome(){
+    window.location.href='.';
+}
