@@ -28,5 +28,7 @@
             error: function(xhr, status, error) {
               console.log('Error: ' + error.message);
             }
+          }).fail(function() {
+                $('#page_id').empty().html('<div align="center"><h1>ATTENZIONE!</h1><br/><h6>Il server non risponde; non è possibile utilizzare il sistema finché non verrà riavviato.</h1></div>')
           });
-         }
+}
