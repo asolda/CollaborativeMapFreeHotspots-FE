@@ -36,15 +36,15 @@ function changePassword(password,newpassword,c_newpassword,onclose){
                     if(ret.status==0){
                         onclose(true,ret.message);
                     }else if(ret.status==1){
-                        if(strcmp(data,'ERROR_SESSION')==0){
+                        if(strcmp(ret.message,'ERROR_SESSION')==0){
                             onclose(false,'ERROR_SESSION');  
-                        }else if(strcmp(data,'ERROR_OLD_PASSWORD')==0){
+                        }else if(strcmp(ret.message,'ERROR_OLD_PASSWORD')==0){
                             onclose(false,'ERROR_OLD_PASSWORD');  
-                        }else if(strcmp(data,'ERROR_NOT_FOUND')==0){
+                        }else if(strcmp(ret.message,'ERROR_NOT_FOUND')==0){
                             onclose(false,'ERROR_NOT_FOUND');  
-                        }else if(strcmp(data,'ERROR_PASSWORD_LENGTH')==0){
+                        }else if(strcmp(ret.message,'ERROR_PASSWORD_LENGTH')==0){
                             onclose(false,'ERROR_PASSWORD_LENGTH');  
-                        }else if(strcmp(data,'ERROR_DB')==0){
+                        }else if(strcmp(ret.message,'ERROR_DB')==0){
                             onclose(false,'ERROR_DB');  
                         }    
                     }
