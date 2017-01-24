@@ -1,4 +1,4 @@
-﻿var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos, current_pin_id, current_pin_can_rank, mod_insert_pin=false, current_pin_can_only_select=false;
+﻿var lastCenterNE, lastCenterSW, lastCenter, markers = [], map, pos, current_pin_id, current_pin_can_rank, mod_insert_pin=false, current_pin_can_only_select=false, forceRefresh=false;
 var pins_info = []; var overlay=null; var user;
 var map_loaded=false;
 var mutex_new_pin = 0;
@@ -115,7 +115,8 @@ function initMap() {
         
         //console.debug("cdlat="+Math.abs(lastCenter.lat() - center.lat())+",cdlng="+Math.abs(lastCenter.lng() - center.lng())+",d_lng="+d_lng+", d_lat="+d_lat);
         
-        if(overflow_distance(lastCenter.lat(), lastCenter.lng(), center.lat(), center.lng(), d_lng, d_lat) || overflow_distance(lastCenterNE.lat(), lastCenterNE.lng(), newPosNE.lat(), newPosNE.lng(), d_lng, d_lat) || !map_loaded){
+        if(overflow_distance(lastCenter.lat(), lastCenter.lng(), center.lat(), center.lng(), d_lng, d_lat) || overflow_distance(lastCenterNE.lat(), lastCenterNE.lng(), newPosNE.lat(), newPosNE.lng(), d_lng, d_lat) || !map_loaded || forceRefresh){
+            if(forceRefresh){console.log("lol");forceRefresh=false;}
             //if (calcDistance(center.lat(), center.lng(), lastCenter.lat(), lastCenter.lng()) > activation) {
             //console.debug(map.getBounds().getNorthEast() +" " + map.getBounds().getSouthWest());
             lng_diff = calcDistance(newPosNE.lat(), newPosNE.lng(), newPosNE.lat(), center.lng());

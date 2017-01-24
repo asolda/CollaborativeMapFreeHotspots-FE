@@ -13,21 +13,12 @@ function changePassword(password,newpassword,c_newpassword,onclose){
         onclose(false,'CAMPO_NUOVAPASSWORD_NON_COMPILATO');
     }else if((c_newpassword.length==0 || c_newpassword==null)){
         onclose(false,'CAMPO_CONFERMANUOVAPASSWORD_NON_COMPILATO');
-    }
-    
-    
-    /*else if(!validateEmail(email)){
-    onclose(false,'ERROR_EMAIL');
-    }else if(!validatePassword(password)){
-    onclose(false,'ERROR_PASSWORD');
-    }else if(password.length<8){
-    onclose(false,'ERROR_PASSWORD_LENGTH');
-    }*/else if(strcmp(newpassword,c_newpassword)!=0){
+    }else if(!validatePassword(newpassword)){
+        onclose(false,'ERRORE_NUOVA_PASSWORD');
+    }else if(newpassword.length<8){
+        onclose(false,'ERRORE_LUNGHEZZA_NUOVA_PASSWORD');
+    }else if(strcmp(newpassword,c_newpassword)!=0){
         onclose(false,'CAMPI_NON_COINCIDENTI');
-        
-        
-        
-        
     }else{
         $.ajax({
             type: 'POST',
@@ -45,7 +36,17 @@ function changePassword(password,newpassword,c_newpassword,onclose){
                     if(ret.status==0){
                         onclose(true,ret.message);
                     }else if(ret.status==1){
-                        onclose(false,ret.message);
+                        if(strcmp(data,'ERROR_SESSION')==0){
+                            onclose(false,'ERROR_SESSION');  
+                        }else if(strcmp(data,'ERROR_OLD_PASSWORD')==0){
+                            onclose(false,'ERROR_OLD_PASSWORD');  
+                        }else if(strcmp(data,'ERROR_NOT_FOUND')==0){
+                            onclose(false,'ERROR_NOT_FOUND');  
+                        }else if(strcmp(data,'ERROR_PASSWORD_LENGTH')==0){
+                            onclose(false,'ERROR_PASSWORD_LENGTH');  
+                        }else if(strcmp(data,'ERROR_DB')==0){
+                            onclose(false,'ERROR_DB');  
+                        }    
                     }
                 }catch (err){
                     alert('Errore nella modifica della password: ' + ret.message);

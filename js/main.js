@@ -578,6 +578,8 @@ function addLoggedModal(){
                 if(status_ok){
                     showSnackbar({message: 'Rete Wi-Fi aggiunta correttamente.'});
                     insertPinCustomMode(false);
+                    insertnewwifi.close();
+                    forceRefresh=true;
                 }else{
                     if(strcmp(data, 'ERROR_SSID')==0){
                         $('#insert-nomerete-error').show();
@@ -744,37 +746,40 @@ function addLoggedModal(){
                             }
                         });
                     });
+                    if(list_dom_networks == ''){
+                        list_dom_networks = '<li>Non hai creato ancora nessuna rete.</li>';
+                    }else{
+                        for(i=0;i<array_my_networks.length;i++){
+                            console.log("i="+array_my_networks[i]);
+                            ListenersHandler.addListener('button_modifica_rete_'+array_my_networks[i], 'click', function(e){
+                                var elem_id= e.target.id;
+                                var elem_arr=elem_id.split("_");
+                                var rete_id = elem_arr[3];
+                                console.log("rete_id="+rete_id);
+                                
+                                getPinInfo(rete_id,function(data){
+                                    console.log({id: rete_id, restrizioni: data.restrizioni, range_wifi: data.range_wifi, altre_informazioni: data.altre_informazioni});
+
+                                    mywifi.close();
+                                    inizializzaModificaRete({id: rete_id, restrizioni: data.restrizioni, range_wifi: data.range_wifi, altre_informazioni: data.altre_informazioni}).showModal();  
+                                });                          
+                            });
+                            ListenersHandler.addListener('button_elimina_rete_'+array_my_networks[i], 'click', function(e){
+                                var elem_id= e.target.id;
+                                var elem_arr=elem_id.split("_");
+                                var rete_id = elem_arr[3];
+                                console.log("rete_id="+rete_id);
+                                
+                                getPinInfo(rete_id,function(data){
+                                    
+                                    mywifi.close();
+                                    inizializzaCancellaRete({id: rete_id, ssid: data.ssid}).showModal();  
+                                });
+                            });
+                        }
+                    }
                     
                     MaterialHelper.setInnerHTML(listwifi, list_dom_networks);
-                    for(i=0;i<array_my_networks.length;i++){
-                        console.log("i="+array_my_networks[i]);
-                        ListenersHandler.addListener('button_modifica_rete_'+array_my_networks[i], 'click', function(e){
-                            var elem_id= e.target.id;
-                            var elem_arr=elem_id.split("_");
-                            var rete_id = elem_arr[3];
-                            console.log("rete_id="+rete_id);
-                            
-                            getPinInfo(rete_id,function(data){
-                                console.log({id: rete_id, restrizioni: data.restrizioni, range_wifi: data.range_wifi, altre_informazioni: data.altre_informazioni});
-
-                                mywifi.close();
-                                inizializzaModificaRete({id: rete_id, restrizioni: data.restrizioni, range_wifi: data.range_wifi, altre_informazioni: data.altre_informazioni}).showModal();  
-                            });                          
-                        });
-                        ListenersHandler.addListener('button_elimina_rete_'+array_my_networks[i], 'click', function(e){
-                            var elem_id= e.target.id;
-                            var elem_arr=elem_id.split("_");
-                            var rete_id = elem_arr[3];
-                            console.log("rete_id="+rete_id);
-                            
-                            getPinInfo(rete_id,function(data){
-                                
-                                mywifi.close();
-                                inizializzaCancellaRete({id: rete_id, ssid: data.ssid}).showModal();  
-                            });
-                        });
-                    
-                    }
                  
                 }
             });
@@ -1180,7 +1185,13 @@ function inizializzaCancellaRete(json_data){
                 showSnackbar({message: 'Rete WiFi cancellata con successo.'});
                 deletewifi.close();
             }else{
-                showSnackbar({message: 'Problema: '+JSON.stringify(data)});
+                if(strcmp(data,'ERROR_SESSION_NOT_FOUND')==0){
+                showSnackbar({message: 'Errore: sessione non trovata.'});
+                }else if(strcmp(data,'ERROR_DB')==0){
+                showSnackbar({message: 'Errore: problema del database.'});
+                }else if(strcmp(data,'ERROR_IS_NOT_OWNER')==0){
+                showSnackbar({message: 'Errore: non sei il proprietario della rete.'});
+                }
             }
         });
     });
@@ -1214,7 +1225,15 @@ function inizializzaModificaRete(json_data){
                 showSnackbar({message: 'Modifica effettuata con successo.'});
                 editwifidialog.close();
             }else{
-                showSnackbar({message: 'Problema: '+JSON.stringify(data)});
+                if(strcmp(data,'ERROR_SESSION_NOT_FOUND')==0){
+                showSnackbar({message: 'Errore: sessione non trovata.'});
+                }else if(strcmp(data,'ERROR_RANGE')==0){
+                showSnackbar({message: 'Errore: range non valido.'});
+                }else if(strcmp(data,'ERROR_DB')==0){
+                showSnackbar({message: 'Errore: problema del database.'});
+                }else if(strcmp(data,'ERROR_IS_NOT_OWNER')==0){
+                showSnackbar({message: 'Errore: non sei il proprietario della rete.'});
+                }
             }
         });
         
@@ -1269,8 +1288,7 @@ function inizializzaModificaPassword(){
         editpassword.close();
     });
     ListenersHandler.addListener('enterbtn-editpassword','click', function(){
-        changePassword($('#in-ep-newpassword').val(),$('#in-ep-password').val(),$('#in-ep-confermapassword').val(), function(status_ok, data){
-            console.log("status="+status_ok);
+        changePassword($('#in-ep-password').val(),$('#in-ep-newpassword').val(),$('#in-ep-confermapassword').val(), function(status_ok, data){
             if(status_ok){
                 editPasswordBis = document.getElementById('dialog-editPasswordBis');
                 if (!editPasswordBis.showModal){
@@ -1284,7 +1302,89 @@ function inizializzaModificaPassword(){
                 editpassword.close();
                 editPasswordBis.showModal();
             }else{
-                showSnackbar({message: 'Problema: '+data});
+                    $('#in-ep-password').removeClass("is-invalid");
+                    $('#in-ep-newpassword').removeClass("is-invalid");
+                    $('#in-ep-confermapassword').removeClass("is-invalid");
+                    
+                    $('#ep-password-error').html("");
+                    $('#ep-newpassword-error').html("");
+                    $('#ep-confermapassword-error').html("");
+                    
+                    if((strcmp(data,'CAMPI_PASSWORD_NUOVAPASSWORD_CONFERMANUOVAPASSWORD_NON_COMPILATI'))==0){
+                        $('#in-ep-password').addClass("is-invalid");
+                        $('#ep-password-error').html("Campo non compilato.");
+                        
+                        $('#in-ep-newpassword').addClass("is-invalid");
+                        $('#ep-newpassword-error').html("Campo non compilato.");
+                        
+                        $('#in-ep-confermapassword').addClass("is-invalid");
+                        $('#ep-confermapassword-error').html("Campo non compilato.");
+                        
+                    }else if((strcmp(data,"CAMPI_PASSWORD_NUOVAPASSWORD_NON_COMPILATI"))==0){
+                        $('#in-ep-password').addClass("is-invalid");
+                        $('#ep-password-error').html("Campo non compilato.");
+                        
+                        $('#in-ep-newpassword').addClass("is-invalid");
+                        $('#ep-newpassword-error').html("Campo non compilato.");
+                        
+                    }else if((strcmp(data,"CAMPI_PASSWORD_CONFERMANUOVAPASSWORD_NON_COMPILATI"))==0){
+                        $('#in-ep-password').addClass("is-invalid");
+                        $('#ep-password-error').html("Campo non compilato.");
+                        
+                        $('#in-ep-confermapassword').addClass("is-invalid");
+                        $('#ep-confermapassword-error').html("Campo non compilato.");
+                        
+                    }else if((strcmp(data,"CAMPI_NUOVAPASSWORD_CONFERMANUOVAPASSWORD_NON_COMPILATI"))==0){
+                        $('#in-ep-newpassword').addClass("is-invalid");
+                        $('#ep-newpassword-error').html("Campo non compilato.");
+                        
+                        $('#in-ep-confermapassword').addClass("is-invalid");
+                        $('#ep-confermapassword-error').html("Campo non compilato.");
+                        
+                    }else if((strcmp(data,"CAMPO_PASSWORD_NON_COMPILATO"))==0){
+                        $('#in-ep-password').addClass("is-invalid");
+                        $('#ep-password-error').html("Campo non compilato.");
+                        
+                    }else if((strcmp(data,"CAMPO_NUOVAPASSWORD_NON_COMPILATO"))==0){
+                        $('#in-ep-newpassword').addClass("is-invalid");
+                        $('#ep-newpassword-error').html("Campo non compilato.");
+                        
+                    }else if((strcmp(data,"CAMPO_CONFERMANUOVAPASSWORD_NON_COMPILATO"))==0){
+                        $('#in-ep-confermapassword').addClass("is-invalid");
+                        $('#ep-confermapassword-error').html("Campo non compilato.");
+                        
+                    }else if((strcmp(data,"ERRORE_NUOVA_PASSWORD"))==0){
+                        $('#in-ep-newpassword').addClass("is-invalid");
+                        $('#ep-newpassword-error').html("Password non valida.");
+                        
+                    }else if((strcmp(data,"ERRORE_LUNGHEZZA_NUOVA_PASSWORD"))==0){
+                        $('#in-ep-newpassword').addClass("is-invalid");
+                        $('#ep-newpassword-error').html("Lunghezza password non valida.");
+                        
+                    }else if((strcmp(data,"CAMPI_NON_COINCIDENTI"))==0){
+                        $('#in-ep-newpassword').addClass("is-invalid");
+                        $('#ep-newpassword-error').html("Campi non coincidenti.");
+                        
+                        $('#in-ep-confermapassword').addClass("is-invalid");
+                        $('#ep-confermapassword-error').html("Campi non coincidenti.");
+                        
+                    }else if((strcmp(data,"ERROR_SESSION"))==0){
+                        showSnackbar({message: "Errore di sessione"});
+                        
+                    }else if((strcmp(data,"ERROR_OLD_PASSWORD"))==0){
+                        $('#in-ep-password').addClass("is-invalid");
+                        $('#ep-password-error').html("Password non valida.");
+                        
+                    }else if((strcmp(data,"ERROR_NOT_FOUND"))==0){
+                        showSnackbar({message: "Utente non trovato (potrebbe essere stato eliminato)."});
+                        
+                    }else if((strcmp(data,"ERROR_PASSWORD_LENGTH"))==0){
+                        showSnackbar({message: "Lunghezza password non valida."});
+                        
+                    }else if((strcmp(data,"ERROR_DB"))==0){
+                        showErrorDB('#dialog-signup', 'ERROR_DB');
+                        
+                    }
             }
         });
     });
