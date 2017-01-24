@@ -115,15 +115,7 @@ function initMap() {
         
         //console.debug("cdlat="+Math.abs(lastCenter.lat() - center.lat())+",cdlng="+Math.abs(lastCenter.lng() - center.lng())+",d_lng="+d_lng+", d_lat="+d_lat);
         
-        if(overflow_distance(lastCenter.lat(), lastCenter.lng(),
-        center.lat(),
-        center.lng(),
-        d_lng, d_lat) || overflow_distance(
-        lastCenterNE.lat(),
-        lastCenterNE.lng(),
-        newPosNE.lat(),
-        newPosNE.lng(),
-        d_lng, d_lat) || !map_loaded){
+        if(overflow_distance(lastCenter.lat(), lastCenter.lng(), center.lat(), center.lng(), d_lng, d_lat) || overflow_distance(lastCenterNE.lat(), lastCenterNE.lng(), newPosNE.lat(), newPosNE.lng(), d_lng, d_lat) || !map_loaded){
             //if (calcDistance(center.lat(), center.lng(), lastCenter.lat(), lastCenter.lng()) > activation) {
             //console.debug(map.getBounds().getNorthEast() +" " + map.getBounds().getSouthWest());
             lng_diff = calcDistance(newPosNE.lat(), newPosNE.lng(), newPosNE.lat(), center.lng());
@@ -229,6 +221,14 @@ function hideRads() {
         pins_info[i].rad.setMap(null);
     }
 }
+function deleteAllPins(callback) {
+    for (var i = 0; i < pins_info.length; i++) {
+        pins_info[i].pin.setMap(null);
+        pins_info[i]=null;
+    }
+    pins_info.length=0;
+    callback();
+}
 
 function loadMarkers(lat, lng, rad_lat, rad_lng) {
     var url_request = 'http://127.0.0.1:8080/pin/get_networks/'+lat+'/'+lng+'/'+rad_lat+'/'+rad_lng;
@@ -241,38 +241,40 @@ function loadMarkers(lat, lng, rad_lat, rad_lng) {
             withCredentials: true
         },
         success: function(data) {
-            $.each(data, function(idx, pin){
-                //console.log(pin);
-                var marker = new google.maps.Marker({
-                    position: { lat: pin.latitudine, lng: pin.longitudine },
-                    map: map,
-                    icon: pinColor.getColor(pin.numero_segnalazioni), //attribuisce il colore del pin in base al numero di segnalazioni
-                    id: pin.id,
-                    nsegnalazioni: pin.numero_segnalazioni,
-                });
-                
-                marker.addListener('click', function () {
-                    getPinInfo(marker.id,function(data){
-                        data.id = marker.id;
-                        console.log('set data: '+data.id);
-                        current_pin_id = data.id;
-                        overlay.setBounds(marker);
-                        popolateOverlay(marker,data);
+            deleteAllPins(function(){
+                $.each(data, function(idx, pin){
+                    //console.log(pin);
+                    var marker = new google.maps.Marker({
+                        position: { lat: pin.latitudine, lng: pin.longitudine },
+                        map: map,
+                        icon: pinColor.getColor(pin.numero_segnalazioni), //attribuisce il colore del pin in base al numero di segnalazioni
+                        id: pin.id,
+                        nsegnalazioni: pin.numero_segnalazioni,
                     });
+                    
+                    marker.addListener('click', function () {
+                        getPinInfo(marker.id,function(data){
+                            data.id = marker.id;
+                            console.log('set data: '+data.id);
+                            current_pin_id = data.id;
+                            overlay.setBounds(marker);
+                            popolateOverlay(marker,data);
+                        });
+                    });
+                    
+                    var pinRadius = new google.maps.Circle({
+                        strokeColor: '#1b85b8',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: '#1b85b8',
+                        fillOpacity: 0.0,
+                        map: null,
+                        center: { lat: pin.latitudine, lng: pin.longitudine },
+                        radius: pin.range_wifi
+                    });
+                    
+                    pins_info.push({ pin: marker, rad: pinRadius });
                 });
-                
-                var pinRadius = new google.maps.Circle({
-                    strokeColor: '#1b85b8',
-                    strokeOpacity: 0.8,
-                    strokeWeight: 2,
-                    fillColor: '#1b85b8',
-                    fillOpacity: 0.0,
-                    map: null,
-                    center: { lat: pin.latitudine, lng: pin.longitudine },
-                    radius: pin.range_wifi
-                });
-                
-                pins_info.push({ pin: marker, rad: pinRadius });
             });
         },
         error: function(xhr, status, error) {
