@@ -453,8 +453,9 @@ function createPinDetailMenu(marker){
         ).show();
         
         ListenersHandler.addListener('pin-detail-delete', 'click', function(){
+            console.log(marker);
             $('#dialog-deletewifi').attr('data', JSON.stringify(marker) );
-            deleteModal = inizializzaCancellaRete();
+            deleteModal = inizializzaCancellaRete(jQuery.parseJSON($('#dialog-deletewifi').attr('data')));
             deleteModal.showModal();
         });
         

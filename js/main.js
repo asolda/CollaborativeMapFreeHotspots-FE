@@ -756,14 +756,22 @@ function addLoggedModal(){
                             
                             getPinInfo(rete_id,function(data){
                                 console.log({id: rete_id, restrizioni: data.restrizioni, range_wifi: data.range_wifi, altre_informazioni: data.altre_informazioni});
-                                $('#pin-detail-edit').show();
 
                                 mywifi.close();
                                 inizializzaModificaRete({id: rete_id, restrizioni: data.restrizioni, range_wifi: data.range_wifi, altre_informazioni: data.altre_informazioni}).showModal();  
                             });                          
                         });
-                        ListenersHandler.addListener('button_elimina_rete_'+array_my_networks[i], 'click', function(){
-                                inizializzaCancellaRete()   
+                        ListenersHandler.addListener('button_elimina_rete_'+array_my_networks[i], 'click', function(e){
+                            var elem_id= e.target.id;
+                            var elem_arr=elem_id.split("_");
+                            var rete_id = elem_arr[3];
+                            console.log("rete_id="+rete_id);
+                            
+                            getPinInfo(rete_id,function(data){
+                                
+                                mywifi.close();
+                                inizializzaCancellaRete({id: rete_id, ssid: data.ssid}).showModal();  
+                            });
                         });
                     
                     }
@@ -1160,19 +1168,19 @@ function inizializzaSegnalazione(){
     return showReport;
 }
 
-function inizializzaCancellaRete(){
+function inizializzaCancellaRete(json_data){
     deletewifi = document.getElementById('dialog-deletewifi'); //get dialog element
     if(!deletewifi.showModal){
         dialogPolyfill.registerDialog(deletewifi);
     }
-    var rete = jQuery.parseJSON($('#dialog-deletewifi').attr('data'));
+    var rete = json_data;
     //console.log($('#toshow span').text());
     $('#dialog-deletewifi .mdl-dialog__content p').text(rete.ssid);
     ListenersHandler.addListener('closebtn-deletewifi','click', function(){
         deletewifi.close();
     });
     ListenersHandler.addListener('enterbtn-deletewifi','click', function(){
-        deletepin(rete,function(status_ok, data){
+        deletepin(rete.id,function(status_ok, data){
             if(status_ok){
                 showSnackbar({message: 'Rete WiFi cancellata con successo.'});
                 deletewifi.close();
